@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repositories & Systems Catalog | Sandeep Singh</title>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Engineering Repositories & Systems Catalog — Sandeep Singh">
+  <meta property="og:description" content="Curated open-source components, Shopify Liquid sections, FlutterFlow modules, and EchoMate AI / Supabase architectures.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sandeepsingh-tech.github.io/repositories">
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #fcfbf7;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 220, 206, 0.85);
+    }
+  </style>
+</head>
+<body class="bg-[#fcfbf7] text-stone-800 min-h-screen p-4 sm:p-8 lg:p-12 selection:bg-amber-800 selection:text-white relative overflow-x-hidden">
+
+  <!-- Ambient Warm Glows -->
+  <div class="fixed top-0 left-1/4 w-96 h-96 bg-amber-200/35 rounded-full blur-3xl pointer-events-none -z-10"></div>
+  <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-orange-200/25 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+  <!-- Main Container -->
+  <div class="w-full max-w-5xl mx-auto glass-card rounded-3xl p-6 sm:p-10 shadow-xl shadow-stone-300/40 relative space-y-10">
+
+    <!-- Top Navigation & Header -->
+    <header class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#ded8c9]">
+      <div class="space-y-1">
+        <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-900 hover:text-stone-900 transition mb-1">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Main Profile
+        </a>
+        <h1 class="text-3xl font-extrabold tracking-tight text-stone-900">Engineering & Repositories</h1>
+        <p class="text-xs sm:text-sm text-stone-600">Curated codebases, custom Liquid sections, cross-platform apps, and AI schemas.</p>
+      </div>
+
+      <a 
+        href="https://github.com/sandeepsingh-tech?tab=repositories" 
+        target="_blank" 
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-stone-900 hover:bg-stone-800 text-[#fcfbf7] text-xs font-semibold rounded-xl transition shadow-sm shrink-0"
+      >
+        <i data-lucide="github" class="w-4 h-4"></i> View All on GitHub
+      </a>
+    </header>
+
+    <!-- Category 1: Shopify Custom Sections -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-2.5">
+        <span class="p-2 bg-amber-100 border border-amber-300/70 rounded-xl text-amber-900">
+          <i data-lucide="layout-template" class="w-4 h-4"></i>
+        </span>
+        <div>
+          <h2 class="text-base font-bold text-stone-900">Shopify Custom Sections & Liquid</h2>
+          <p class="text-xs text-stone-500">Drop-in Liquid schema blocks, dynamic collection widgets, and zero-app sections.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Card 1 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">Custom Dynamic Cart Drawer</h3>
+              <span class="text-[10px] px-2 py-0.5 bg-stone-200/80 text-stone-700 rounded-md font-semibold">Liquid • JS</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Standalone AJAX sliding drawer featuring progress bars for free shipping, tier discounts, and 1-click cross-sell upsells.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-amber-900 font-medium">Free Theme Drop-in</span>
+            <a href="https://github.com/sandeepsingh-tech" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-amber-800">
+              Source Code <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">High-Conversion Product Hero Grid</h3>
+              <span class="text-[10px] px-2 py-0.5 bg-stone-200/80 text-stone-700 rounded-md font-semibold">Section Schema</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Configurable split-layout gallery with sticky purchase buttons, live inventory indicators, and custom trust pill badges.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-amber-900 font-medium">Fully Schema-Editable</span>
+            <a href="https://github.com/sandeepsingh-tech" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-amber-800">
+              Source Code <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 2: Shopify Tools & Conversion Tricks -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-2.5">
+        <span class="p-2 bg-emerald-100 border border-emerald-300 rounded-xl text-emerald-800">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </span>
+        <div>
+          <h2 class="text-base font-bold text-stone-900">Shopify Tools & Tricks</h2>
+          <p class="text-xs text-stone-500">Paid-theme feature replications that remove costly monthly apps and boost Lighthouse speed.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Card 1 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">Paid-Theme Replicator: Sticky ATC</h3>
+              <span class="text-[10px] px-2.5 py-0.5 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-md font-semibold">Budget Optimizer</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Zero-dependency Sticky Add-to-Cart bar that syncs dynamically with selected variant options without recurring third-party apps.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-stone-500 font-medium">99+ Mobile Performance</span>
+            <a href="https://github.com/sandeepsingh-tech" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-amber-800">
+              Source Code <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">Smart Postal Code & COD Checker</h3>
+              <span class="text-[10px] px-2.5 py-0.5 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-md font-semibold">Conversion Tool</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Instant pincode verification snippet checking serviceability and estimated delivery times using client-side cache & custom metaobjects.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-stone-500 font-medium">Metaobject Powered</span>
+            <a href="https://github.com/sandeepsingh-tech" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-amber-800">
+              Source Code <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 3: FlutterFlow & Mobile Architectures -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-2.5">
+        <span class="p-2 bg-indigo-100 border border-indigo-300 rounded-xl text-indigo-900">
+          <i data-lucide="smartphone" class="w-4 h-4"></i>
+        </span>
+        <div>
+          <h2 class="text-base font-bold text-stone-900">FlutterFlow & Mobile Architectures</h2>
+          <p class="text-xs text-stone-500">Cross-platform iOS and Android retail applications built with GraphQL & Storefront APIs.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Card 1 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">Shopify Native App Shell</h3>
+              <span class="text-[10px] px-2.5 py-0.5 bg-indigo-100 text-indigo-800 border border-indigo-200 rounded-md font-semibold">FlutterFlow 5.0</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Custom FlutterFlow boilerplate wired to Shopify Storefront GraphQL, featuring persistent cart tokens, push notification triggers, and guest checkout pipelines.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-indigo-900 font-medium">iOS + Android</span>
+            <a href="https://github.com/sandeepsingh-tech" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-amber-800">
+              Source Code <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">Push & Order Tracking Pipeline</h3>
+              <span class="text-[10px] px-2.5 py-0.5 bg-stone-200/80 text-stone-700 rounded-md font-semibold">FCM • Webhooks</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Event-driven notification dispatcher notifying mobile customers on fulfillment milestones and delivery dispatch statuses.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-stone-500 font-medium">High Delivery Rate</span>
+            <a href="https://github.com/sandeepsingh-tech" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-amber-800">
+              Source Code <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 4: EchoMate & Supabase AI Systems -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-2.5">
+        <span class="p-2 bg-amber-100/90 border border-amber-300 rounded-xl text-amber-900">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+        </span>
+        <div>
+          <h2 class="text-base font-bold text-stone-900">EchoMate & Supabase Backend Ecosystem</h2>
+          <p class="text-xs text-stone-500">Voice AI pipelines, multimodal LLM orchestration, and hardened PostgreSQL database patterns.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Card 1 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">EchoMate Voice-First Engine</h3>
+              <span class="text-[10px] px-2.5 py-0.5 bg-amber-100 text-amber-900 border border-amber-300 rounded-md font-semibold">Multi-Model AI</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Bilingual STT/TTS routing pipeline with low-latency audio packet processing, conversational intent classification, and continuous feedback states.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-amber-900 font-medium">English & Hinglish STT</span>
+            <span class="text-xs font-semibold text-stone-400">Documentation & Repo</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="p-5 bg-[#f7f5ed] hover:bg-[#f3efdf] border border-[#e4decb] rounded-2xl transition space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-bold text-stone-900">Supabase RLS & Episodic Context Memory</h3>
+              <span class="text-[10px] px-2.5 py-0.5 bg-stone-200/80 text-stone-700 rounded-md font-semibold">Postgres • RLS</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              PostgreSQL schema implementing strict Row Level Security (RLS) policies, RPC session handlers, and dual-layer episodic memory for conversational privacy.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-[11px] text-stone-500 font-medium">Privacy-First Architecture</span>
+            <span class="text-xs font-semibold text-stone-400">Schema Template</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-6 border-t border-[#ded8c9] flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-3">
+      <div>© 2026 Sandeep Singh • Surat, India</div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-stone-800 transition">Profile Home</a>
+        <span>•</span>
+        <a href="https://github.com/sandeepsingh-tech" target="_blank" class="hover:text-stone-800 flex items-center gap-1.5 transition">
+          <i data-lucide="github" class="w-4 h-4"></i> github.com/sandeepsingh-tech
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
