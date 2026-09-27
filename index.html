@@ -39,64 +39,62 @@
   <div class="w-full max-w-5xl glass-card rounded-3xl p-6 sm:p-10 shadow-xl shadow-stone-300/40 relative">
 
     <!-- Responsive Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
 
-      <!-- Left Column: Profile & Actions (stretches to balance right column) -->
-      <div class="lg:col-span-5 flex flex-col justify-between gap-6">
+      <!-- Left Column: Profile & Actions -->
+      <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
         
-        <!-- Top Section: Avatar + Bio -->
-        <div class="space-y-5">
-          <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
-            <div class="relative shrink-0">
-              <img 
-                src="https://github.com/sandeepsingh-tech.png" 
-                alt="Sandeep Singh" 
-                class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover ring-2 ring-amber-700/20 shadow-md"
-              />
-              <span class="absolute -bottom-1 -right-1 bg-emerald-500 w-4 h-4 rounded-full border-2 border-[#fcfbf7]" title="Open to Opportunities"></span>
-            </div>
-
-            <div class="space-y-1.5 min-w-0">
-              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100/80 border border-amber-300/70 text-amber-900 text-[11px] font-semibold tracking-wide">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-800"></i> Operations & Systems Architect
-              </div>
-              <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900 leading-tight">Sandeep Singh</h1>
-              <p class="text-xs sm:text-sm text-amber-950 font-medium leading-snug">
-                10+ Yrs Operations Leadership • Cross-Platform Mobile Engineer
-              </p>
-              <p class="text-xs text-stone-500 flex items-center justify-center sm:justify-start gap-1 pt-0.5">
-                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-stone-400"></i> Surat, Gujarat, India
-              </p>
-            </div>
+        <!-- Profile Header: Centered & Uncluttered -->
+        <div class="flex flex-col items-center text-center space-y-3 pt-1">
+          <div class="relative">
+            <img 
+              src="https://github.com/sandeepsingh-tech.png" 
+              alt="Sandeep Singh" 
+              class="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl object-cover ring-2 ring-amber-700/20 shadow-md"
+            />
+            <span class="absolute bottom-1 right-1 bg-emerald-500 w-4 h-4 rounded-full border-2 border-[#fcfbf7]" title="Open to Opportunities"></span>
           </div>
 
-          <!-- Value Proposition Summary -->
-          <div class="bg-[#f5f2e9] border border-[#e5dfd2] rounded-2xl p-4 text-xs sm:text-sm text-stone-700 space-y-2.5">
-            <div class="flex items-start gap-2.5">
-              <span class="text-amber-800 mt-0.5 text-xs">◆</span>
-              <p class="leading-relaxed"><strong>Operations:</strong> 10+ years managing 24/7 global support teams (up to 45 members).</p>
+          <div class="space-y-1.5 max-w-sm">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/70 text-amber-900 text-xs font-semibold tracking-wide">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-800"></i> Operations & Systems Architect
             </div>
-            <div class="flex items-start gap-2.5">
-              <span class="text-amber-800 mt-0.5 text-xs">◆</span>
-              <p class="leading-relaxed"><strong>Development:</strong> Building native iOS & Android shopping apps using FlutterFlow & Shopify.</p>
-            </div>
-          </div>
-
-          <!-- Key Metrics Strip -->
-          <div class="grid grid-cols-2 gap-3">
-            <div class="bg-[#f5f2e9]/80 border border-[#e5dfd2] rounded-xl p-3 text-center">
-              <div class="text-2xl font-bold text-stone-900">10+ Yrs</div>
-              <div class="text-[10px] text-stone-500 uppercase tracking-wider font-semibold mt-0.5">Ops Leadership</div>
-            </div>
-            <div class="bg-[#f5f2e9]/80 border border-[#e5dfd2] rounded-xl p-3 text-center">
-              <div class="text-2xl font-bold text-amber-900">24×7</div>
-              <div class="text-[10px] text-stone-500 uppercase tracking-wider font-semibold mt-0.5">High Availability</div>
-            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">Sandeep Singh</h1>
+            <p class="text-xs sm:text-sm text-amber-950 font-medium leading-relaxed">
+              10+ Yrs Operations Leadership • Cross-Platform Mobile Engineer
+            </p>
+            <p class="text-xs text-stone-500 flex items-center justify-center gap-1 pt-0.5">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-stone-400"></i> Surat, Gujarat, India
+            </p>
           </div>
         </div>
 
-        <!-- Bottom Section: Direct Action Buttons (Anchored cleanly at bottom) -->
-        <div class="space-y-2.5 pt-2">
+        <!-- Value Proposition Summary -->
+        <div class="bg-[#f5f2e9] border border-[#e5dfd2] rounded-2xl p-4 text-xs sm:text-sm text-stone-700 space-y-2.5">
+          <div class="flex items-start gap-2.5">
+            <span class="text-amber-800 mt-0.5 text-xs">◆</span>
+            <p class="leading-relaxed"><strong>Operations:</strong> 10+ years managing 24/7 global support teams (up to 45 members).</p>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <span class="text-amber-800 mt-0.5 text-xs">◆</span>
+            <p class="leading-relaxed"><strong>Development:</strong> Building native iOS & Android shopping apps using FlutterFlow & Shopify.</p>
+          </div>
+        </div>
+
+        <!-- Key Metrics Strip -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-[#f5f2e9]/80 border border-[#e5dfd2] rounded-xl p-3 text-center">
+            <div class="text-xl font-bold text-stone-900">10+ Yrs</div>
+            <div class="text-[11px] text-stone-500 uppercase tracking-wider font-semibold mt-0.5">Ops Leadership</div>
+          </div>
+          <div class="bg-[#f5f2e9]/80 border border-[#e5dfd2] rounded-xl p-3 text-center">
+            <div class="text-xl font-bold text-amber-900">24×7</div>
+            <div class="text-[11px] text-stone-500 uppercase tracking-wider font-semibold mt-0.5">High Availability</div>
+          </div>
+        </div>
+
+        <!-- Direct Action Buttons -->
+        <div class="space-y-2.5 pt-1">
           <a href="https://linkedin.com/in/sandeepsingh-vision" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-stone-900 hover:bg-stone-800 text-[#fcfbf7] text-xs font-semibold rounded-xl transition shadow-sm">
             <i data-lucide="linkedin" class="w-4 h-4"></i> Connect on LinkedIn
           </a>
@@ -113,7 +111,7 @@
       </div>
 
       <!-- Right Column: Architectures & Competencies -->
-      <div class="lg:col-span-7 space-y-6">
+      <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
 
         <!-- Featured Architectures -->
         <div class="space-y-3">
