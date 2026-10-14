@@ -21,12 +21,14 @@
   <meta property="og:title" content="EchoMate — Speak English with Natural Confidence">
   <meta property="og:description" content="Talk naturally with an AI coach that never interrupts mid-sentence. Features real-world conversation modes, speech modeling, and interactive fluency tracking.">
   <meta property="og:image" content="https://sandeepsingh-tech.github.io/Echomate_Transparent_1024.png">
+  <meta property="og:image:secure_url" content="https://sandeepsingh-tech.github.io/Echomate_Transparent_1024.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
+  <meta property="og:site_name" content="EchoMate">
 
   <!-- Twitter / X Card Preview -->
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:url" content="https://sandeepsingh-tech.github.io/echomate.html">
   <meta name="twitter:title" content="EchoMate — Speak English with Natural Confidence">
   <meta name="twitter:description" content="Practice spoken English without judgment. Context-driven talk modes, instant speech modeling, and persistent learner memory.">
@@ -40,7 +42,7 @@
   <style>
     :root {
       --bg-deep: #06050C;
-      --card-bg: rgba(22, 17, 43, 0.55);
+      --card-bg: rgba(22, 17, 43, 0.58);
       --card-border: rgba(255, 255, 255, 0.12);
       --card-hover-border: rgba(56, 189, 248, 0.45);
       --neon-cyan: #38BDF8;
@@ -83,14 +85,14 @@
 
     /* Navbar */
     header {
-      padding: 14px 0;
+      padding: 16px 0;
       border-bottom: 1px solid var(--card-border);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(6, 5, 12, 0.8);
+      background: rgba(6, 5, 12, 0.82);
     }
 
     .nav-wrap {
@@ -103,68 +105,92 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       color: var(--text);
       font-weight: 800;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-family: 'Space Grotesk', sans-serif;
       letter-spacing: -0.02em;
       flex-shrink: 0;
     }
 
+    .brand-logo-wrap {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+    }
+
     .brand-logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 9px;
-      object-fit: cover;
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .brand-badge {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       background: rgba(232, 121, 249, 0.16);
       color: var(--neon-magenta);
-      padding: 3px 8px;
+      padding: 3px 10px;
       border-radius: 99px;
       border: 1px solid rgba(232, 121, 249, 0.35);
       font-weight: 600;
       white-space: nowrap;
     }
 
-    .nav-links a {
-      color: var(--text-muted);
+    .nav-creator-btn {
+      color: var(--text);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.88rem;
-      transition: color 0.2s;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
       white-space: nowrap;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .nav-links a:hover {
+    .nav-creator-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--neon-cyan);
       color: var(--neon-cyan);
-      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+      transform: translateY(-1px);
     }
 
     /* Hero Section */
     .hero {
-      padding: 55px 0 35px;
+      padding: 60px 0 35px;
       text-align: center;
     }
 
-    .hero-glow-logo {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 20px;
-      display: block;
-      filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.55)) drop-shadow(0 0 55px rgba(232, 121, 249, 0.35));
-      border-radius: 24px;
-      object-fit: cover;
+    .hero-logo-box {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-glow-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.6)) drop-shadow(0 0 50px rgba(232, 121, 249, 0.4));
     }
 
     @keyframes float {
@@ -203,62 +229,69 @@
 
     .subtitle {
       max-width: 660px;
-      margin: 0 auto 30px;
-      font-size: 1.08rem;
+      margin: 0 auto 32px;
+      font-size: 1.1rem;
       color: var(--text-muted);
       font-weight: 400;
       padding: 0 8px;
     }
 
+    /* Modernized High-End Buttons */
     .cta-group {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 13px 24px;
-      border-radius: 12px;
+      padding: 14px 28px;
+      border-radius: 14px;
       font-weight: 700;
-      font-size: 0.94rem;
+      font-size: 0.96rem;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: all 0.25s ease;
+      gap: 10px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #0284C7, #9333EA);
+      background: linear-gradient(135deg, #0284C7 0%, #6366F1 50%, #A855F7 100%);
       color: #fff;
-      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(232, 121, 249, 0.45);
+      box-shadow: 0 12px 32px rgba(168, 85, 247, 0.5), 0 0 20px rgba(56, 189, 248, 0.5);
     }
 
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.06);
+    .btn-showcase {
+      background: linear-gradient(135deg, rgba(30, 24, 56, 0.8) 0%, rgba(18, 14, 36, 0.9) 100%);
       color: var(--text);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(10px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
+    .btn-showcase:hover {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(232, 121, 249, 0.15) 100%);
+      border-color: var(--neon-cyan);
+      color: #FFF;
       transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(56, 189, 248, 0.25);
     }
 
-    /* Metrics Strip - Uniform Equal Sizing */
+    /* Metrics Strip */
     .metrics-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      margin: 36px auto 55px;
+      margin: 40px auto 60px;
       max-width: 900px;
     }
 
@@ -317,7 +350,7 @@
       font-size: 1rem;
     }
 
-    /* Cards Grid - Fully Centered Content */
+    /* Centered Feature Cards */
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -462,7 +495,7 @@
       font-weight: 600;
     }
 
-    /* Responsive Mobile Breakpoints */
+    /* Mobile Breakpoints */
     @media (max-width: 768px) {
       .nav-wrap {
         gap: 8px;
@@ -473,9 +506,9 @@
         gap: 8px;
       }
 
-      .brand-logo {
-        width: 32px;
-        height: 32px;
+      .brand-logo-wrap {
+        width: 36px;
+        height: 36px;
       }
 
       .brand-badge {
@@ -483,18 +516,18 @@
         padding: 2px 6px;
       }
 
-      .nav-links a {
-        font-size: 0.8rem;
-        padding: 5px 8px;
+      .nav-creator-btn {
+        font-size: 0.82rem;
+        padding: 6px 12px;
       }
 
       .hero {
         padding: 40px 0 25px;
       }
 
-      .hero-glow-logo {
-        width: 100px;
-        height: 100px;
+      .hero-logo-box {
+        width: 120px;
+        height: 120px;
         margin-bottom: 16px;
       }
 
@@ -506,7 +539,7 @@
         font-size: 0.98rem;
       }
 
-      /* Stack Metric Pills into a 2x2 grid with exact equal sizes */
+      /* Stack Metric Pills into an equal-sized 2x2 grid */
       .metrics-row {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -547,12 +580,16 @@
   <header>
     <div class="container nav-wrap">
       <a href="#" class="brand">
-        <img src="Echomate_Transparent_1024.png" alt="EchoMate Logo" class="brand-logo">
+        <div class="brand-logo-wrap">
+          <img src="Echomate_Transparent_1024.png" alt="EchoMate Logo" class="brand-logo">
+        </div>
         <span>EchoMate</span>
         <span class="brand-badge">Voice AI</span>
       </a>
       <div class="nav-links">
-        <a href="https://github.com/sandeepsingh-tech" target="_blank">Creator Profile ↗</a>
+        <a href="https://sandeepsingh-tech.github.io/" class="nav-creator-btn">
+          Creator Profile ↗
+        </a>
       </div>
     </div>
   </header>
@@ -561,7 +598,9 @@
 
     <!-- Hero Section -->
     <section class="hero">
-      <img src="Echomate_Transparent_1024.png" alt="EchoMate Glowing Infinity Audio Logo" class="hero-glow-logo">
+      <div class="hero-logo-box">
+        <img src="Echomate_Transparent_1024.png" alt="EchoMate Glowing Infinity Audio Logo" class="hero-glow-logo">
+      </div>
       <div class="pill">✨ Practice real-world English without fear of judgment</div>
       <h1>
         Speak English with <br>
@@ -572,11 +611,13 @@
       </p>
       <div class="cta-group">
         <a href="#demo" class="btn btn-primary">See Speech Modeling Demo ↓</a>
-        <a href="https://github.com/sandeepsingh-tech" target="_blank" class="btn btn-secondary">Explore GitHub Repository</a>
+        <a href="https://sandeepsingh-tech.github.io/showcase.html" class="btn btn-showcase">
+          Explore Systems & Showcase ↗
+        </a>
       </div>
     </section>
 
-    <!-- Metrics Strip (Equal Size 2x2 on Mobile, 4x1 on Desktop) -->
+    <!-- Metrics Strip -->
     <div class="metrics-row">
       <div class="metric-pill">
         <div class="metric-val">10+</div>
@@ -596,7 +637,7 @@
       </div>
     </div>
 
-    <!-- Core Pillars (Fully Centered Cards with Matching Glass Background) -->
+    <!-- Core Pillars -->
     <section>
       <div class="section-title">
         <h2>Why EchoMate Feels Completely Different</h2>
@@ -656,7 +697,7 @@
   <!-- Clean Aligned Footer -->
   <footer>
     <div class="container footer-content">
-      <p>EchoMate • Designed & Developed by <a href="https://github.com/sandeepsingh-tech" target="_blank">Sandeep Singh</a></p>
+      <p>EchoMate • Designed & Developed by <a href="https://sandeepsingh-tech.github.io/" target="_blank">Sandeep Singh</a></p>
       <p style="font-size: 0.8rem; color: #64748B;">Hosted on GitHub Pages</p>
     </div>
   </footer>
