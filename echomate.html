@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EchoMate — AI Spoken English Fluency & Confidence Coach</title>
+
+  <!-- Primary Meta Tags for Google Search -->
+  <meta name="title" content="EchoMate — AI Spoken English Fluency & Confidence Coach">
+  <meta name="description" content="EchoMate is a judgment-free AI voice companion designed to build real-world spoken English fluency through dynamic conversation modes, speech modeling, and smart post-session reports.">
+  <meta name="keywords" content="EchoMate, Spoken English AI, English Fluency Coach, Indian English Practice, Spoken English App, AI Voice Coach, Sandeep Singh">
+  <meta name="author" content="Sandeep Singh">
+  <link rel="canonical" href="https://sandeepsingh-tech.github.io/echomate.html">
+
+  <!-- Open Graph / LinkedIn / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sandeepsingh-tech.github.io/echomate.html">
+  <meta property="og:title" content="EchoMate — Speak English with Natural Confidence">
+  <meta property="og:description" content="Talk naturally with an AI coach that never interrupts mid-sentence. Features real-world conversation modes, speech modeling, and interactive fluency tracking.">
+  <meta property="og:site_name" content="Sandeep Singh Showcase">
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0B0A14;
+      --card-bg: rgba(26, 23, 48, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #6366F1;
+      --primary-glow: rgba(99, 102, 241, 0.35);
+      --accent: #22D3EE;
+      --success: #10B981;
+      --danger: #EF4444;
+      --text: #F3F4F6;
+      --text-muted: #9CA3AF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(34, 211, 238, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 10, 20, 0.75);
+    }
+
+    .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.3rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .brand-badge {
+      font-size: 0.72rem;
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 90px 0 60px;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #FFF 20%, #A5B4FC 60%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      margin: 0 auto 36px;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #4F46E5);
+      color: #fff;
+      box-shadow: 0 8px 24px var(--primary-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px var(--primary-glow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Feature Grid */
+    .section-title {
+      text-align: center;
+      margin: 80px 0 40px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      font-family: 'Space Grotesk', sans-serif;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(14px);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Live Speech Modeling Demo Card */
+    .demo-section {
+      background: linear-gradient(180deg, rgba(30, 27, 56, 0.7) 0%, rgba(18, 15, 36, 0.9) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 48px;
+      margin: 40px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .speech-box {
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .speech-box.original {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .speech-box.polish {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .box-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .box-badge.red { color: #F87171; }
+    .box-badge.green { color: #34D399; }
+
+    .speech-box p {
+      font-size: 1.05rem;
+      color: #F3F4F6;
+      font-weight: 500;
+    }
+
+    /* Scoreboard Mockup */
+    .metrics-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .metric-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 24px;
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .metric-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--accent);
+    }
+
+    .metric-lbl {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="brand">
+        🎙️ EchoMate <span class="brand-badge">Spoken English AI</span>
+      </a>
+      <div class="nav-links">
+        <a href="https://github.com/sandeepsingh-tech" target="_blank">Creator Profile ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="pill">✨ Built for natural confidence, not boring exams</div>
+      <h1>
+        Speak Fluent English Without <br>
+        <span class="gradient-text">Hesitation or Fear of Judgment.</span>
+      </h1>
+      <p class="subtitle">
+        EchoMate is your supportive AI voice companion. Practice casual banter, technical meetings, or high-stakes interviews with delayed feedback that helps you sound your best.
+      </p>
+      <div class="cta-group">
+        <a href="#demo" class="btn btn-primary">See Speech Modeling Demo ↓</a>
+        <a href="https://github.com/sandeepsingh-tech" class="btn btn-secondary">Explore GitHub Repository</a>
+      </div>
+    </section>
+
+    <!-- Metrics Banner -->
+    <div class="metrics-row">
+      <div class="metric-pill">
+        <div class="metric-val">10+</div>
+        <div class="metric-lbl">Session Modes</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-val">0</div>
+        <div class="metric-lbl">Mid-Sentence Interrupts</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-val">100%</div>
+        <div class="metric-lbl">Judgment Free</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-val">&lt;800ms</div>
+        <div class="metric-lbl">Real-Time Flow</div>
+      </div>
+    </div>
+
+    <!-- Core Pillars -->
+    <section>
+      <div class="section-title">
+        <h2>Why EchoMate Feels Completely Different</h2>
+        <p>Engineered to solve spoken hesitation for Indian learners & professionals.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🗣️</div>
+          <h3>Zero Mid-Thought Corrections</h3>
+          <p>Grammar interruptions destroy confidence. EchoMate lets you complete your thoughts and subtly models proper phrasing in its own replies so conversation flows naturally.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🎭</div>
+          <h3>10+ Dedicated Talk Modes</h3>
+          <p>Fluency is contextual. Switch between casual peer banter, technical software drills, salary negotiations, or create your own custom scenarios tailored to your goals.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>A Memory That Grows With You</h3>
+          <p>EchoMate remembers your recurring phrasing habits, phonetic slips, and professional background across sessions so every drill feels personalized and relevant.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Speech Modeling Demo Section -->
+    <section id="demo" class="demo-section">
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <span class="box-badge green">Concrete Over Abstract</span>
+        <h2 style="font-size: 2rem; margin-bottom: 8px;">The Post-Session Speech Modeling</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Instead of vague reports like "your grammar was okay," EchoMate selects your most upgrade-worthy sentence and shows you how to express that exact thought with executive polish.
+        </p>
+      </div>
+
+      <div class="demo-grid">
+        <div class="speech-box original">
+          <span class="box-badge red">🔴 What The User Said (Raw)</span>
+          <p>"first day change the handle so our soup if I inventory didn't update properly"</p>
+        </div>
+
+        <div class="speech-box polish">
+          <span class="box-badge green">🟢 Executive Polish (EchoMate)</span>
+          <p>"On the first day, they changed the handle, so our Shopify inventory didn't update properly."</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px; text-align: center;">
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ⚡ Analyzed using Google Gemini, Supabase session memory, and high-frequency model fallback pipelines.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>EchoMate • Designed & Developed by <a href="https://github.com/sandeepsingh-tech" target="_blank">Sandeep Singh</a></p>
+      <p style="margin-top: 8px; font-size: 0.8rem; color: #6B7280;">Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+</body>
+</html>
