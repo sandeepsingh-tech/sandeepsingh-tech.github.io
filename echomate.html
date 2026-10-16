@@ -233,7 +233,7 @@
     }
 
     .subtitle {
-      max-width: 660px;
+      max-width: 720px;
       margin: 0 auto 32px;
       font-size: 1.1rem;
       color: var(--text-muted);
@@ -412,7 +412,69 @@
       text-align: center;
     }
 
-    /* Speech Modeling Section */
+    /* Philosophy / Flight Simulator Section */
+    .flight-sim-section {
+      background: linear-gradient(135deg, rgba(30, 24, 56, 0.65) 0%, rgba(14, 11, 28, 0.75) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px 28px;
+      margin: 45px 0 65px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 26px;
+    }
+
+    .sim-box {
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .sim-box.traditional {
+      background: rgba(248, 113, 113, 0.06);
+      border: 1px solid rgba(248, 113, 113, 0.22);
+    }
+
+    .sim-box.echomate {
+      background: rgba(56, 189, 248, 0.07);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.08);
+    }
+
+    .sim-box h4 {
+      font-size: 1.15rem;
+      font-family: 'Space Grotesk', sans-serif;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sim-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      space-y: 10px;
+    }
+
+    .sim-box li {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    /* Speech Modeling Demo Section */
     .demo-section {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -425,49 +487,73 @@
       position: relative;
     }
 
+    .example-block {
+      margin-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+    }
+
+    .example-block:first-of-type {
+      margin-top: 24px;
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .example-header {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .demo-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 28px;
+      gap: 18px;
     }
 
     .speech-box {
       border-radius: 18px;
-      padding: 22px;
-      text-align: center;
+      padding: 20px;
+      text-align: left;
     }
 
     .speech-box.original {
-      background: rgba(248, 113, 113, 0.09);
-      border: 1px solid rgba(248, 113, 113, 0.28);
+      background: rgba(248, 113, 113, 0.08);
+      border: 1px solid rgba(248, 113, 113, 0.25);
     }
 
     .speech-box.polish {
-      background: rgba(52, 211, 153, 0.09);
+      background: rgba(52, 211, 153, 0.08);
       border: 1px solid rgba(52, 211, 153, 0.28);
     }
 
     .box-badge {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       display: inline-block;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .box-badge.red { color: var(--danger); }
     .box-badge.green { color: var(--success); }
 
     .speech-box p {
-      font-size: 1.02rem;
+      font-size: 0.98rem;
       color: #F8FAFC;
       font-weight: 500;
+      line-height: 1.5;
     }
 
     .demo-footer-note {
-      margin-top: 30px;
+      margin-top: 35px;
       text-align: center;
       padding: 0 10px;
       font-size: 0.88rem;
@@ -564,13 +650,18 @@
         font-size: 0.7rem;
       }
 
+      .sim-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
       .demo-section {
-        padding: 30px 18px;
+        padding: 28px 16px;
       }
 
       .demo-grid {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 12px;
       }
 
       .demo-footer-note {
@@ -606,16 +697,16 @@
       <div class="hero-logo-box">
         <img src="Echomate_Transparent_1024.png" alt="Project EchoMate Glowing Infinity Audio Logo" class="hero-glow-logo">
       </div>
-      <div class="pill">✨ Practice real-world English without fear of judgment</div>
+      <div class="pill">✨ Stop studying grammar rules. Start speaking out loud.</div>
       <h1>
         Speak English with <br>
         <span class="gradient-text">Effortless Natural Confidence.</span>
       </h1>
       <p class="subtitle">
-        EchoMate is your supportive AI voice companion. Talk freely in 10+ real-world modes with zero awkward interruptions, and get instant post-session speech upgrades.
+        EchoMate is your judgment-free conversational flight simulator. Practice real-world scenarios on any topic you care about with zero mid-thought interruptions, natural speech recasting, and instant executive polish.
       </p>
       <div class="cta-group">
-        <a href="#demo" class="btn btn-primary">See Speech Modeling Demo ↓</a>
+        <a href="#demo" class="btn btn-primary">See Speech Modeling Demos ↓</a>
         <a href="https://sandeepsingh-tech.github.io/showcase.html" class="btn btn-showcase">
           Explore Systems & Showcase ↗
         </a>
@@ -626,7 +717,7 @@
     <div class="metrics-row">
       <div class="metric-pill">
         <div class="metric-val">10+</div>
-        <div class="metric-lbl">Session Modes</div>
+        <div class="metric-lbl">Session Modes + Custom</div>
       </div>
       <div class="metric-pill">
         <div class="metric-val">0</div>
@@ -634,7 +725,7 @@
       </div>
       <div class="metric-pill">
         <div class="metric-val">100%</div>
-        <div class="metric-lbl">Judgment Free</div>
+        <div class="metric-lbl">Zero Judgment Flow</div>
       </div>
       <div class="metric-pill">
         <div class="metric-val">&lt;800ms</div>
@@ -646,54 +737,128 @@
     <section>
       <div class="section-title">
         <h2>Why Project EchoMate Feels Completely Different</h2>
-        <p>Designed specifically to overcome spoken hesitation and self-doubt.</p>
+        <p>Built as a conversational arena, not an academic testing ground.</p>
       </div>
 
       <div class="grid-3">
         <div class="card">
           <div class="card-icon">🎙️</div>
           <h3>Zero Mid-Thought Interruptions</h3>
-          <p>Being interrupted destroys speaking flow. EchoMate listens to your complete thought and subtly recasts proper grammar directly in its conversational replies.</p>
+          <p>Being interrupted destroys flow. EchoMate never buzzes you for misplaced prepositions. It listens to your full thought and mirrors natural phrasing organically inside its reply.</p>
         </div>
 
         <div class="card">
           <div class="card-icon">🎭</div>
-          <h3>10+ Talk Modes (Plus Custom)</h3>
-          <p>Fluency is contextual. Practice casual banter, technical architectural problem-solving, or job interviews—and soon create custom scenarios for any meeting.</p>
+          <h3>10+ Modes & Custom Sandboxes</h3>
+          <p>Fluency is contextual. Jump into technical architecture defense, salary negotiations, or casual banter—or build your own custom sandbox for tomorrow's exact client meeting.</p>
         </div>
 
         <div class="card">
           <div class="card-icon">🧠</div>
-          <h3>A Coach That Remembers You</h3>
-          <p>EchoMate remembers your recurring phrasing habits, phonetic slips, and professional background across sessions so every drill feels personalized and fun.</p>
+          <h3>Episodic Diagnostic Memory</h3>
+          <p>A coach that actually remembers you. Tracks your recurring phrasing habits, phonetic slips, and crutch words across sessions to build genuine long-term articulation muscle.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Disruption / The Flight Simulator Concept -->
+    <section class="flight-sim-section">
+      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+        <span class="box-badge green" style="background: rgba(52, 211, 153, 0.15); padding: 4px 12px; border-radius: 99px;">The Flight Simulator Philosophy</span>
+        <h2 style="font-size: 2rem; margin: 12px 0 10px; font-family: 'Space Grotesk', sans-serif;">
+          A Conversation Simulator, Not a Grammar Quiz
+        </h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+          Pilots don't learn to fly by reading textbooks about aerodynamics; they log hours in a flight simulator. EchoMate lets you log speaking hours on topics you actually care about—cricket, distributed systems, or startup ideas—so English becomes an automatic muscle response.
+        </p>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-box traditional">
+          <h4 style="color: var(--danger);">❌ Traditional Language Apps</h4>
+          <ul>
+            <li><span>•</span> <strong>Study First, Speak Later:</strong> Forces users through repetitive flashcards, spelling tests, and grammar drills.</li>
+            <li><span>•</span> <strong>Penalty & Fear:</strong> Red X marks and buzzer sounds trigger performance anxiety and speaking hesitation.</li>
+            <li><span>•</span> <strong>Rigid Pre-Made Scripts:</strong> Locked to uninspired textbook scenarios ("Order coffee in London").</li>
+          </ul>
+        </div>
+
+        <div class="sim-box echomate">
+          <h4 style="color: var(--neon-cyan);">⚡ Project EchoMate Approach</h4>
+          <ul>
+            <li><span>•</span> <strong>Speak Freely First:</strong> Pure conversational immersion on whatever topics interest you. No grammar placement tests.</li>
+            <li><span>•</span> <strong>Zero-Judgment Flow State:</strong> Express complete thoughts without fear of sudden corrections or public embarrassment.</li>
+            <li><span>•</span> <strong>Total Scenario Freedom:</strong> Rehearse real workplace conversations, standups, or debate custom ideas out loud.</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- Interactive Speech Modeling Demo Section -->
     <section id="demo" class="demo-section">
-      <div style="text-align: center; max-width: 620px; margin: 0 auto;">
+      <div style="text-align: center; max-width: 660px; margin: 0 auto 10px;">
         <span class="box-badge green">Concrete Over Abstract</span>
-        <h2 style="font-size: 2rem; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif;">The Post-Session Speech Modeling</h2>
+        <h2 style="font-size: 2.1rem; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif;">
+          The Post-Session Speech Modeling
+        </h2>
         <p style="color: var(--text-muted); font-size: 0.96rem;">
-          Instead of vague reports like "your grammar was okay," EchoMate isolates your key sentence and shows you how to express that exact idea with executive polish.
+          Instead of unhelpful generic grades like "Grammar: 72%," EchoMate isolates key sentences from your conversation and demonstrates how a native speaker or senior leader would express that exact thought with executive polish.
         </p>
       </div>
 
-      <div class="demo-grid">
-        <div class="speech-box original">
-          <span class="box-badge red">🔴 What The User Said (Raw)</span>
-          <p>"first day change the handle so our soup if I inventory didn't update properly"</p>
+      <!-- Example 1: E-Commerce / Technical Operations -->
+      <div class="example-block">
+        <div class="example-header">
+          <span>📦 Example 1: Technical & E-Commerce Operations</span>
         </div>
+        <div class="demo-grid">
+          <div class="speech-box original">
+            <span class="box-badge red">🔴 Raw Spoken Input</span>
+            <p>"first day change the handle so our soup if I inventory didn't update properly"</p>
+          </div>
+          <div class="speech-box polish">
+            <span class="box-badge green">🟢 Executive Polish</span>
+            <p>"On the first day, they changed the handle, so our Shopify inventory didn't update properly."</p>
+          </div>
+        </div>
+      </div>
 
-        <div class="speech-box polish">
-          <span class="box-badge green">🟢 Executive Polish (EchoMate)</span>
-          <p>"On the first day, they changed the handle, so our Shopify inventory didn't update properly."</p>
+      <!-- Example 2: Agile / Project Timeline Proposal -->
+      <div class="example-block">
+        <div class="example-header">
+          <span>💼 Example 2: Workplace Standup & Timeline Adjustment</span>
+        </div>
+        <div class="demo-grid">
+          <div class="speech-box original">
+            <span class="box-badge red">🔴 Raw Spoken Input</span>
+            <p>"Uh, I think we should, like, maybe move the deadline to next Tuesday?"</p>
+          </div>
+          <div class="speech-box polish">
+            <span class="box-badge green">🟢 Executive Polish</span>
+            <p>"I propose we adjust the project timeline to next Tuesday to ensure quality."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 3: Descriptive Discussion & History -->
+      <div class="example-block">
+        <div class="example-header">
+          <span>🏛️ Example 3: Narrative Explanation & Architecture</span>
+        </div>
+        <div class="demo-grid">
+          <div class="speech-box original">
+            <span class="box-badge red">🔴 Raw Spoken Input</span>
+            <p>"in starting they are start using stones"</p>
+          </div>
+          <div class="speech-box polish">
+            <span class="box-badge green">🟢 Executive Polish</span>
+            <p>"Initially, they began using heavy stones to construct them."</p>
+          </div>
         </div>
       </div>
 
       <div class="demo-footer-note">
-        ⚡ Powered by Google Gemini cascades, Supabase long-term session memory, and FlutterFlow.
+        ⚡ Powered by Google Gemini cascades, Supabase episodic learner memory, and FlutterFlow.
       </div>
     </section>
 
