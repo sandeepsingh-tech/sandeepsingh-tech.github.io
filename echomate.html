@@ -451,7 +451,7 @@
     .sim-box h4 {
       font-size: 1.15rem;
       font-family: 'Space Grotesk', sans-serif;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -461,17 +461,47 @@
       list-style: none;
       padding: 0;
       margin: 0;
-      space-y: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .sim-box li {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
+    .sim-item {
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sim-item-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
       gap: 8px;
-      line-height: 1.5;
+    }
+
+    .sim-box.traditional .sim-item-title {
+      color: #FECACA;
+    }
+
+    .sim-box.echomate .sim-item-title {
+      color: #BAE6FD;
+    }
+
+    .sim-bullet {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .sim-box.traditional .sim-bullet { color: var(--danger); }
+    .sim-box.echomate .sim-bullet { color: var(--neon-cyan); }
+
+    .sim-item-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      padding-left: 18px;
+      margin: 0;
     }
 
     /* Speech Modeling Demo Section */
@@ -774,21 +804,57 @@
       </div>
 
       <div class="sim-grid">
+        <!-- Traditional Card -->
         <div class="sim-box traditional">
-          <h4 style="color: var(--danger);">❌ Traditional Language Apps</h4>
+          <h4 style="color: var(--danger); margin-bottom: 18px;">❌ Traditional Language Apps</h4>
           <ul>
-            <li><span>•</span> <strong>Study First, Speak Later:</strong> Forces users through repetitive flashcards, spelling tests, and grammar drills.</li>
-            <li><span>•</span> <strong>Penalty & Fear:</strong> Red X marks and buzzer sounds trigger performance anxiety and speaking hesitation.</li>
-            <li><span>•</span> <strong>Rigid Pre-Made Scripts:</strong> Locked to uninspired textbook scenarios ("Order coffee in London").</li>
+            <li class="sim-item">
+              <div class="sim-item-title">
+                <span class="sim-bullet">•</span> Study First, Speak Later:
+              </div>
+              <p class="sim-item-desc">Forces users through repetitive flashcards, spelling tests, and grammar drills.</p>
+            </li>
+
+            <li class="sim-item">
+              <div class="sim-item-title">
+                <span class="sim-bullet">•</span> Penalty & Fear:
+              </div>
+              <p class="sim-item-desc">Red X marks and buzzer sounds trigger performance anxiety and speaking hesitation.</p>
+            </li>
+
+            <li class="sim-item">
+              <div class="sim-item-title">
+                <span class="sim-bullet">•</span> Rigid Pre-Made Scripts:
+              </div>
+              <p class="sim-item-desc">Locked to uninspired textbook scenarios ("Order coffee in London").</p>
+            </li>
           </ul>
         </div>
 
+        <!-- Project EchoMate Approach Card -->
         <div class="sim-box echomate">
-          <h4 style="color: var(--neon-cyan);">⚡ Project EchoMate Approach</h4>
+          <h4 style="color: var(--neon-cyan); margin-bottom: 18px;">⚡ Project EchoMate Approach</h4>
           <ul>
-            <li><span>•</span> <strong>Speak Freely First:</strong> Pure conversational immersion on whatever topics interest you. No grammar placement tests.</li>
-            <li><span>•</span> <strong>Zero-Judgment Flow State:</strong> Express complete thoughts without fear of sudden corrections or public embarrassment.</li>
-            <li><span>•</span> <strong>Total Scenario Freedom:</strong> Rehearse real workplace conversations, standups, or debate custom ideas out loud.</li>
+            <li class="sim-item">
+              <div class="sim-item-title">
+                <span class="sim-bullet">•</span> Speak Freely First:
+              </div>
+              <p class="sim-item-desc">Pure conversational immersion on whatever topics interest you. No grammar placement tests.</p>
+            </li>
+
+            <li class="sim-item">
+              <div class="sim-item-title">
+                <span class="sim-bullet">•</span> Zero-Judgment Flow State:
+              </div>
+              <p class="sim-item-desc">Express complete thoughts without fear of sudden corrections or public embarrassment.</p>
+            </li>
+
+            <li class="sim-item">
+              <div class="sim-item-title">
+                <span class="sim-bullet">•</span> Total Scenario Freedom:
+              </div>
+              <p class="sim-item-desc">Rehearse real workplace conversations, standups, or debate custom ideas out loud.</p>
+            </li>
           </ul>
         </div>
       </div>
