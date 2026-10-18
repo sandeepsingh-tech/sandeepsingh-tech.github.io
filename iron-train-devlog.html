@@ -147,59 +147,32 @@
     .media-slot figcaption { padding: 9px 13px; background: rgba(0,0,0,.28); color: var(--muted); font-size: .78rem; }
 
     /* ============================================================
-       HEADER / NAVIGATION — sticky desktop nav; horizontally scrolls
-       on small screens so it remains usable without a JS menu.
+       HEADER / SINGLE NAVIGATION BAR
+       The GitHub avatar sits in this same navbar; there is no second
+       profile strip. At smaller widths, section links scroll horizontally.
        ============================================================ */
-    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(13,22,42,.84); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
-    .topbar-inner { display: flex; align-items: center; gap: 24px; min-height: 64px; }
-    .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 900; white-space: nowrap; letter-spacing: -.02em; }
+    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(13,22,42,.88); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+    .topbar-inner { display: flex; align-items: center; gap: 15px; min-height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 900; white-space: nowrap; letter-spacing: -.02em; flex: 0 0 auto; }
     .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--orange), var(--orange-hot)); color: #17110b; }
-    .nav { display: flex; align-items: center; gap: 18px; overflow-x: auto; margin-left: auto; scrollbar-width: thin; }
-    .nav a { white-space: nowrap; color: var(--muted); font-size: .84rem; font-weight: 700; padding: 8px 0; }
+    .nav { display: flex; align-items: center; gap: clamp(8px, 1.05vw, 16px); overflow-x: auto; margin-left: auto; scrollbar-width: thin; min-width: 0; }
+    .nav a { white-space: nowrap; color: var(--muted); font-size: .82rem; font-weight: 700; padding: 8px 0; }
     .nav a:hover { color: var(--text); text-decoration: none; }
+    .nav-avatar { display: block; flex: 0 0 36px; width: 36px; height: 36px; border: 2px solid rgba(232,161,107,.8); border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 3px rgba(255,255,255,.035); }
+    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
     /* ============================================================
-       CREATOR PROFILE BAR — GitHub avatar, short bio, and portfolio links.
-       Update the avatar URL or destinations here if your profiles change.
+       DEVELOPER PROFILE CARD — profile bio and external links live in
+       the origin story instead of occupying a second navigation bar.
        ============================================================ */
-    .creator-strip {
-      border-top: 1px solid rgba(255,255,255,.07);
-      border-bottom: 1px solid var(--line);
-      background: rgba(7, 14, 25, .34);
-    }
-    .creator-strip-inner {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      min-height: 66px;
-      padding: 9px 0;
-    }
-    .creator-avatar-link {
-      display: block;
-      flex: 0 0 44px;
-      width: 44px;
-      height: 44px;
-      border: 2px solid rgba(232,161,107,.75);
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 0 0 3px rgba(255,255,255,.04);
-    }
-    .creator-avatar-link img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    .creator-copy { min-width: 190px; flex: 1 1 260px; display: grid; gap: 1px; }
-    .creator-name { color: var(--text); font-size: .94rem; line-height: 1.3; font-weight: 850; }
-    .creator-note { color: var(--muted); font-size: .76rem; line-height: 1.45; }
-    .creator-links { display: flex; align-items: center; justify-content: flex-end; gap: 7px; flex-wrap: wrap; }
-    .creator-links a {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 32px; padding: 6px 10px; border: 1px solid var(--line);
-      border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.035);
-      font-size: .76rem; line-height: 1.2; font-weight: 750; white-space: nowrap;
-    }
+    .creator-card { display: flex; align-items: flex-start; gap: 18px; margin: 28px 0; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), var(--panel); box-shadow: var(--shadow); }
+    .creator-card-avatar { display: block; flex: 0 0 68px; width: 68px; height: 68px; border: 2px solid rgba(232,161,107,.8); border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 3px rgba(255,255,255,.035); }
+    .creator-card-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .creator-card-content { flex: 1; min-width: 0; }
+    .creator-card-content h3 { margin: 2px 0 5px; font-size: 1.18rem; line-height: 1.35; }
+    .creator-card-content p { color: var(--muted); margin: 0; }
+    .creator-links { display: flex; align-items: center; justify-content: flex-start; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
+    .creator-links a { display: inline-flex; align-items: center; justify-content: center; min-height: 33px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.035); font-size: .76rem; line-height: 1.2; font-weight: 750; white-space: nowrap; }
     .creator-links a:hover { color: var(--text); border-color: rgba(86,217,232,.45); text-decoration: none; background: rgba(86,217,232,.08); }
 
     /* ============================================================
@@ -256,11 +229,10 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero-art { max-width: 760px; transform: none; }
       .grid.three { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .topbar-inner { align-items: flex-start; flex-direction: column; gap: 4px; padding: 12px 0 8px; }
-      .nav { margin-left: 0; width: 100%; gap: 16px; }
-      .creator-strip-inner { align-items: flex-start; }
-      .creator-copy { min-width: 0; }
-      .creator-links { justify-content: flex-start; }
+      .topbar-inner { align-items: center; flex-wrap: wrap; gap: 7px 13px; padding: 10px 0 8px; }
+      .nav-avatar { order: 2; margin-left: auto; }
+      .nav { order: 3; flex: 1 0 100%; width: 100%; margin-left: 0; gap: 16px; padding-bottom: 2px; }
+      .creator-card { gap: 14px; }
     }
     @media (max-width: 600px) {
       body { font-size: 15px; }
@@ -279,13 +251,17 @@
       .hero-stats { gap: 13px 22px; }
       .hero-art .media-slot, .hero-art .media-slot img { min-height: 190px; }
       .media-slot, .media-slot img, .media-placeholder { min-height: 160px; }
-      .creator-strip-inner { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 9px 11px; }
-      .creator-avatar-link { width: 40px; height: 40px; flex-basis: 40px; }
-      .creator-copy { align-self: center; }
-      .creator-name { font-size: .88rem; }
-      .creator-note { font-size: .72rem; }
-      .creator-links { grid-column: 1 / -1; width: 100%; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding: 2px 0 5px; scrollbar-width: thin; }
-      .creator-links a { min-height: 34px; }
+      .topbar-inner { gap: 6px 10px; }
+      .brand { font-size: .9rem; }
+      .brand-mark { width: 31px; height: 31px; }
+      .nav-avatar { width: 33px; height: 33px; flex-basis: 33px; }
+      .nav { gap: 15px; }
+      .nav a { font-size: .78rem; }
+      .creator-card { padding: 16px; gap: 12px; }
+      .creator-card-avatar { width: 52px; height: 52px; flex-basis: 52px; }
+      .creator-card-content h3 { font-size: 1.05rem; }
+      .creator-links { gap: 6px; }
+      .creator-links a { min-height: 32px; padding: 6px 8px; font-size: .72rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -313,29 +289,10 @@
         <a href="#youtube">YouTube</a>
         <a href="#next">What’s Next</a>
       </nav>
-    </div>
-    <!-- ============================================================
-         SECTION: CREATOR PROFILE BAR
-         GitHub avatar links to the GitHub profile; buttons link to the
-         personal site, EchoMate, repository showcase, and LinkedIn.
-         ============================================================ -->
-    <div class="creator-strip">
-      <div class="wrap creator-strip-inner">
-        <a class="creator-avatar-link" href="https://github.com/sandeepsingh-tech" target="_blank" rel="noopener noreferrer" aria-label="Open Sandeep Singh's GitHub profile">
-          <img src="https://github.com/sandeepsingh-tech.png" alt="Sandeep Singh's GitHub profile photo" width="44" height="44" loading="eager">
-        </a>
-        <div class="creator-copy">
-          <span class="creator-name">Sandeep Singh</span>
-          <span class="creator-note">Computer Science Engineering background · building with Unity, C#, experimentation, and AI-assisted learning.</span>
-        </div>
-        <nav class="creator-links" aria-label="Sandeep Singh's profile and projects">
-          <a href="https://github.com/sandeepsingh-tech" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://sandeepsingh-tech.github.io/" target="_blank" rel="noopener noreferrer">Personal site</a>
-          <a href="https://sandeepsingh-tech.github.io/echomate.html" target="_blank" rel="noopener noreferrer">EchoMate</a>
-          <a href="https://sandeepsingh-tech.github.io/showcase.html" target="_blank" rel="noopener noreferrer">Projects</a>
-          <a href="https://www.linkedin.com/in/sandeepsingh-vision/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-        </nav>
-      </div>
+      <!-- PROFILE AVATAR: click to open the developer's GitHub profile. -->
+      <a class="nav-avatar" href="https://github.com/sandeepsingh-tech" target="_blank" rel="noopener noreferrer" aria-label="Open Sandeep Singh's GitHub profile">
+        <img src="https://github.com/sandeepsingh-tech.png" alt="Sandeep Singh's GitHub profile photo" width="36" height="36" loading="eager">
+      </a>
     </div>
   </header>
 
@@ -391,6 +348,28 @@
           <p>Because I had been interested in game development since college and already had some practice with Unity and C#, I decided to try building a game.</p>
           <div class="callout"><strong>The goal:</strong> make a real, playable project while learning how the framework and scripting work together.</div>
         </div>
+        <!-- ============================================================
+             SECTION: ABOUT THE DEVELOPER / PORTFOLIO LINKS
+             Edit the short bio and link destinations here. The GitHub
+             avatar stays in the top navbar; this card holds the full intro.
+             ============================================================ -->
+        <aside class="creator-card" aria-labelledby="creator-card-title">
+          <a class="creator-card-avatar" href="https://github.com/sandeepsingh-tech" target="_blank" rel="noopener noreferrer" aria-label="Open Sandeep Singh's GitHub profile">
+            <img src="https://github.com/sandeepsingh-tech.png" alt="Sandeep Singh's GitHub profile photo" width="68" height="68" loading="lazy">
+          </a>
+          <div class="creator-card-content">
+            <span class="eyebrow">👋 A little about the developer</span>
+            <h3 id="creator-card-title">Sandeep Singh</h3>
+            <p>With a Computer Science Engineering background, I'm exploring game development through hands-on Unity and C# experiments. I use AI as a learning partner while focusing on understanding, testing, and improving the systems I build.</p>
+            <nav class="creator-links" aria-label="Sandeep Singh's profile and projects">
+              <a href="https://github.com/sandeepsingh-tech" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a href="https://sandeepsingh-tech.github.io/" target="_blank" rel="noopener noreferrer">Personal site ↗</a>
+              <a href="https://www.linkedin.com/in/sandeepsingh-vision/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <a href="https://sandeepsingh-tech.github.io/echomate.html" target="_blank" rel="noopener noreferrer">EchoMate ↗</a>
+              <a href="https://sandeepsingh-tech.github.io/showcase.html" target="_blank" rel="noopener noreferrer">Project showcase ↗</a>
+            </nav>
+          </div>
+        </aside>
         <figure class="media-slot">
           <img src="assets/iron-train/early.jpg" alt="Early Unity editor screenshot or a photo showing the start of the project" loading="lazy">
           <div class="media-placeholder"><strong>🖼️ Add an early-development screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/dev-journey.jpg</span></div>
