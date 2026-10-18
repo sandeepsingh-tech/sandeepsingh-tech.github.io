@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c1727">
+  <meta name="description" content="The development journey of IRON TRAIN: THE LAST DEFENCE — a Unity and C# 2D action game built through experimentation, AI-assisted learning, debugging, and publishing.">
+  <title>IRON TRAIN: THE LAST DEFENCE | Game Development Journey</title>
+
+  <!-- ============================================================
+       QUICK EDIT GUIDE
+       1. Save this file as index.html in your GitHub Pages repository.
+       2. Create an assets folder next to index.html for your images.
+       3. Search for "IMAGE SLOT" or "assets/" to replace image paths.
+       4. Search for "REPLACE href" to find YouTube link edit notes.
+       5. Each section starts with a named HTML comment for easy editing.
+       6. YouTube buttons currently use channel/topic search links and the
+          channel Shorts page because specific published video IDs were not
+          confirmed. Replace these href values with direct video/Short URLs
+          when you have them. Direct video: youtube.com/watch?v=VIDEO_ID
+          Direct Short: youtube.com/shorts/SHORT_ID
+       ============================================================ -->
+
+  <style>
+    /* ============================================================
+       GLOBAL STYLES — colours, typography, layout, and shared UI
+       Edit these CSS variables to quickly change the visual theme.
+       ============================================================ */
+    :root {
+      /* MUTED CINEMATIC SUNSET — deep blue, smoky dusk, subdued copper. */
+      --bg: #0c1727; /* fallback sky colour behind the gradient */
+      --panel: #111c29;
+      --panel-soft: #1a2938;
+      --text: #eef4fb;
+      --muted: #b3bfcc;
+      --line: rgba(255,255,255,.13);
+      --orange: #e8a16b;
+      --orange-hot: #c97855;
+      --cyan: #56d9e8;
+      --green: #9be2b1;
+      --radius: 18px;
+      --max: 1120px;
+      --shadow: 0 18px 55px rgba(0,0,0,.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    /* ============================================================
+       MUTED CINEMATIC SUNSET — deep navy, smoky blue-grey clouds,
+       muted mauve and a subdued copper horizon. CSS-only; no image needed.
+       The dark content surfaces preserve readable contrast.
+       ============================================================ */
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image:
+        /* subdued blue-grey cloud banks */
+        radial-gradient(ellipse 34% 10% at 12% 22%, rgba(175, 195, 220, .12), transparent 72%),
+        radial-gradient(ellipse 28% 8% at 78% 18%, rgba(150, 171, 198, .10), transparent 72%),
+        /* restrained copper light near the horizon — avoid bright orange behind text */
+        radial-gradient(ellipse 42% 11% at 88% 43%, rgba(190, 130, 105, .10), transparent 72%),
+        radial-gradient(ellipse 36% 9% at 18% 58%, rgba(180, 125, 98, .08), transparent 72%),
+        /* muted cinematic sunset colour ramp */
+        linear-gradient(180deg,
+          #0c1727 0%,
+          #1b2f47 30%,
+          #394454 55%,
+          #584b4b 78%,
+          #795844 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      color: var(--text);
+      font: 16px/1.72 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { color: #b3f5ff; text-decoration: underline; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--orange); font-size: .76rem; font-weight: 800;
+      letter-spacing: .15em; text-transform: uppercase;
+    }
+    .muted { color: var(--muted); }
+    .accent { color: var(--orange); }
+    .cyan { color: var(--cyan); }
+    .section { padding: 76px 0; border-top: 1px solid var(--line); }
+    .section-heading { max-width: 800px; margin-bottom: 28px; }
+    .section-heading h2 { font-size: clamp(1.8rem, 4vw, 2.65rem); line-height: 1.14; letter-spacing: -.035em; margin: 12px 0; }
+    .section-heading p { color: var(--muted); margin: 0; font-size: 1.03rem; }
+    .prose { max-width: 820px; }
+    .prose p { margin: 0 0 1rem; }
+    .prose h3 { margin: 2rem 0 .65rem; font-size: 1.25rem; }
+    .prose ul, .prose ol { padding-left: 1.35rem; }
+    .prose li { margin: .42rem 0; }
+    .callout {
+      border-left: 3px solid var(--orange); background: rgba(255,155,66,.08);
+      padding: 18px 20px; border-radius: 0 12px 12px 0; margin: 24px 0;
+    }
+    .grid { display: grid; gap: 18px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .card {
+      background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), var(--panel);
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 22px;
+      box-shadow: var(--shadow); min-width: 0;
+    }
+    .card h3 { margin: .1rem 0 .6rem; font-size: 1.08rem; line-height: 1.35; }
+    .card p { color: var(--muted); margin: 0; }
+    .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .tag { padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: .78rem; }
+    .btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 18px; }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+      padding: 10px 15px; min-height: 42px; border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(255,255,255,.045); color: var(--text); font-size: .9rem; font-weight: 750;
+      text-decoration: none; transition: transform .18s ease, background .18s ease;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-2px); background: rgba(255,255,255,.09); color: white; }
+    .btn.primary { background: linear-gradient(135deg, var(--orange), var(--orange-hot)); color: #16110c; border-color: transparent; }
+    .btn.primary:hover { color: #16110c; filter: brightness(1.06); }
+    .section-links { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 18px; margin-top: 24px; border-top: 1px solid var(--line); }
+
+    /* ============================================================
+       IMAGE SLOT STYLES — every image can be replaced with your own.
+       Put files in an /assets/ folder beside this HTML file, then
+       change each img src to the matching filename.
+       ============================================================ */
+    .media-slot {
+      position: relative; overflow: hidden; border-radius: var(--radius);
+      border: 1px dashed rgba(86,217,232,.42); background:
+        radial-gradient(circle at 20% 25%, rgba(86,217,232,.15), transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(255,155,66,.14), transparent 34%), #101a26;
+      min-height: 190px; margin: 24px 0;
+    }
+    .media-slot img { width: 100%; height: auto; min-height: 190px; max-height: 560px; object-fit: cover; }
+    .media-slot img[hidden] { display: none; }
+    .media-placeholder {
+      display: none; min-height: 190px; padding: 25px; place-content: center; text-align: center;
+      color: var(--muted); gap: 8px;
+    }
+    .media-placeholder strong { color: var(--text); font-size: 1rem; }
+    .media-placeholder span { font-size: .85rem; }
+    .media-slot.is-empty .media-placeholder { display: grid; }
+    .media-slot figcaption { padding: 9px 13px; background: rgba(0,0,0,.28); color: var(--muted); font-size: .78rem; }
+
+    /* ============================================================
+       HEADER / NAVIGATION — sticky desktop nav; horizontally scrolls
+       on small screens so it remains usable without a JS menu.
+       ============================================================ */
+    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(13,22,42,.84); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+    .topbar-inner { display: flex; align-items: center; gap: 24px; min-height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 900; white-space: nowrap; letter-spacing: -.02em; }
+    .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--orange), var(--orange-hot)); color: #17110b; }
+    .nav { display: flex; align-items: center; gap: 18px; overflow-x: auto; margin-left: auto; scrollbar-width: thin; }
+    .nav a { white-space: nowrap; color: var(--muted); font-size: .84rem; font-weight: 700; padding: 8px 0; }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+
+    /* ============================================================
+       HERO SECTION — replace the optional hero image with gameplay art.
+       ============================================================ */
+    .hero { padding: 64px 0 60px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; align-items: center; gap: 38px; }
+    .hero h1 { font-size: clamp(2.6rem, 6.5vw, 5rem); line-height: .99; letter-spacing: -.065em; margin: 18px 0; max-width: 720px; }
+    .hero h1 span { color: var(--orange); }
+    .hero .lead { color: #cad6e3; font-size: clamp(1.05rem, 2vw, 1.23rem); max-width: 650px; }
+    .hero-art { border-radius: 24px; border: 1px solid var(--line); padding: 8px; background: rgba(255,255,255,.035); box-shadow: 0 25px 80px rgba(0,0,0,.42); transform: rotate(1deg); }
+    .hero-art .media-slot { margin: 0; min-height: 260px; }
+    .hero-art .media-slot img { min-height: 260px; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 16px 24px; margin-top: 25px; }
+    .hero-stat { display: grid; gap: 0; }
+    .hero-stat strong { font-size: 1.05rem; }
+    .hero-stat span { color: var(--muted); font-size: .8rem; }
+
+    /* ============================================================
+       TIMELINE / PROGRESSION TABLE / VIDEO FEATURE COMPONENTS
+       ============================================================ */
+    .timeline { display: grid; gap: 14px; margin-top: 26px; }
+    .timeline-item { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; }
+    .timeline-number { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: rgba(255,155,66,.14); color: var(--orange); font-weight: 900; border: 1px solid rgba(255,155,66,.25); }
+    .timeline-content { padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.025); }
+    .timeline-content h3 { margin: 0 0 5px; }
+    .timeline-content p { margin: 0; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; margin: 22px 0; }
+    table { width: 100%; border-collapse: collapse; min-width: 420px; background: var(--panel); }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    th { background: rgba(255,155,66,.1); color: #ffd6af; font-size: .86rem; }
+    tr:last-child td { border-bottom: none; }
+    .video-card { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .video-card small { color: var(--muted); display: block; }
+
+    /* ============================================================
+       FOOTER — update the social links if your destinations change.
+       ============================================================ */
+    footer { padding: 40px 0 55px; border-top: 1px solid var(--line); background: rgba(0,0,0,.16); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 25px; flex-wrap: wrap; }
+    .footer-inner p { color: var(--muted); max-width: 620px; margin: 8px 0 0; }
+    .backtop { color: var(--text); font-weight: 750; }
+
+    /* ============================================================
+       RESPONSIVE LAYOUT — tablet and phone styles.
+       ============================================================ */
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-art { max-width: 760px; transform: none; }
+      .grid.three { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .topbar-inner { align-items: flex-start; flex-direction: column; gap: 4px; padding: 12px 0 8px; }
+      .nav { margin-left: 0; width: 100%; gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 15px; }
+      .wrap { width: min(100% - 26px, var(--max)); }
+      .section { padding: 54px 0; }
+      .hero { padding: 44px 0 45px; }
+      .hero h1 { font-size: clamp(2.45rem, 13vw, 3.8rem); }
+      .grid.two, .grid.three { grid-template-columns: 1fr; }
+      .card { padding: 18px; }
+      .timeline-item { grid-template-columns: 38px 1fr; gap: 10px; }
+      .timeline-number { width: 34px; height: 34px; border-radius: 11px; }
+      .timeline-content { padding: 15px; }
+      .btn-row .btn { flex: 1 1 auto; }
+      .section-links .btn { flex: 1 1 100%; }
+      .hero-stats { gap: 13px 22px; }
+      .hero-art .media-slot, .hero-art .media-slot img { min-height: 190px; }
+      .media-slot, .media-slot img, .media-placeholder { min-height: 160px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============================================================
+       SECTION: TOP NAVIGATION
+       Change the labels/anchors here if you add or rename sections.
+       ============================================================ -->
+  <header class="topbar" id="top">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="Iron Train development journal home">
+        <span class="brand-mark">🚂</span><span>IRON TRAIN <span class="accent">DEVLOG</span></span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#origin">My Story</a>
+        <a href="#foundation">Foundation</a>
+        <a href="#concept">Gameplay</a>
+        <a href="#progression">Progression</a>
+        <a href="#art">Art & FX</a>
+        <a href="#testing">Testing & Builds</a>
+        <a href="#youtube">YouTube</a>
+        <a href="#next">What’s Next</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         SECTION: HERO / GAME INTRO
+         IMAGE SLOT: assets/iron-train-hero.jpg
+         Replace the src with the path to your own key art or screenshot.
+         ============================================================ -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">🎮 Independent game development · Unity · C#</span>
+          <h1>IRON TRAIN:<br><span>THE LAST DEFENCE</span></h1>
+          <p class="lead">A personal development journal about turning an idea into a playable 2D action shooter—one experiment, system, bug, and build at a time.</p>
+          <p class="muted">I started with tutorials, got tired of copying steps, and began learning by building. AI helped me move faster, but testing and understanding the systems made the game work.</p>
+          <div class="btn-row">
+            <a class="btn primary" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">▶ Play on itch.io</a>
+            <a class="btn" href="https://www.youtube.com/@MakeGames4Fun" target="_blank" rel="noopener">▶ MakeGames4Fun</a>
+            <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ YouTube Shorts</a>
+          </div>
+          <div class="hero-stats" aria-label="Project details">
+            <div class="hero-stat"><strong>Unity + C#</strong><span>Game engine & scripting</span></div>
+            <div class="hero-stat"><strong>6,000 m</strong><span>Distance per loop</span></div>
+            <div class="hero-stat"><strong>WebGL + Windows</strong><span>Published on itch.io</span></div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <figure class="media-slot">
+            <img src="assets/iron-train/hero.jpg" alt="IRON TRAIN: THE LAST DEFENCE key art or gameplay screenshot" loading="lazy">
+            <div class="media-placeholder"><strong>🖼️ Add your hero image</strong><span>Upload an image to assets/iron-train-hero.jpg<br>or change the image src in this section.</span></div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: ORIGIN STORY
+         IMAGE SLOT: assets/dev-journey.jpg
+         YOUTUBE: Topic-specific channel search + Shorts archive below.
+         Replace the video href with a direct video URL when available.
+         ============================================================ -->
+    <section class="section" id="origin">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">01 · The beginning</span>
+          <h2>From digital operations to building a game of my own</h2>
+          <p>The project began with a simple feeling: I wanted to build something, not just operate existing systems.</p>
+        </div>
+        <div class="prose">
+          <p>I started my professional journey in digital operations at Techstream Services, supporting operations for LOVOO and the ParshipMeet Group. It was challenging work and gave me experience, but something still felt missing.</p>
+          <p>My academic background was in Computer Science Engineering, and I had been interested in programming and technology since college. In my spare time, I experimented with different technologies, including JavaScript, CSS, and React. Eventually, I wanted to build something functional and fun—not another demo I would abandon after a few days.</p>
+          <p>Because I had been interested in game development since college and already had some practice with Unity and C#, I decided to try building a game.</p>
+          <div class="callout"><strong>The goal:</strong> make a real, playable project while learning how the framework and scripting work together.</div>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/dev-journey.jpg" alt="Early Unity editor screenshot or a photo showing the start of the project" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add an early-development screenshot</strong><span>Suggested filename: assets/dev-journey.jpg</span></div>
+          <figcaption>Optional: show your early Unity scene, first prototype, or project workspace.</figcaption>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=game%20development%20journey" target="_blank" rel="noopener">▶ Videos: Game Development Journey</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: TUTORIAL HELL / LEARNING APPROACH
+         IMAGE SLOT: assets/tutorial-to-experiment.jpg
+         ============================================================ -->
+    <section class="section" id="learning">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">02 · The mindset shift</span>
+          <h2>Leaving tutorial hell behind</h2>
+          <p>I stopped measuring progress by how many tutorial steps I could copy and started asking what I could understand and build myself.</p>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>📺 The tutorial loop</h3>
+            <p>Following a tutorial can produce a working result, but it can be hard to extend the project if you do not understand why each piece exists or how the pieces connect.</p>
+          </article>
+          <article class="card">
+            <h3>🧪 The experiment loop</h3>
+            <p>Open Unity, try an idea, observe the result, inspect the code, fix the issue, and repeat. This made each bug an opportunity to learn how the engine behaves.</p>
+          </article>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/tutorial-to-experiment.jpg" alt="Unity editor showing the project while experimenting with scripts" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a Unity editor screenshot</strong><span>Suggested filename: assets/tutorial-to-experiment.jpg</span></div>
+        </figure>
+        <div class="prose">
+          <h3>🤝 How I used ChatGPT</h3>
+          <p>I used ChatGPT heavily to understand Unity concepts, explore C# approaches, write and improve scripts, and investigate errors. I am not ashamed of that. AI was part of my learning workflow.</p>
+          <p>But blindly pasting generated code often creates more uncertainty. I increasingly focused on what each script is responsible for, which components it depends on, and what I needed to test after changing it.</p>
+          <p><strong>AI accelerated the experiments; understanding and testing helped me turn them into a game.</strong></p>
+        </div>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20C%23%20scripting" target="_blank" rel="noopener">▶ Videos: Unity & C# Scripting</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: GAME CONCEPT
+         IMAGE SLOT: assets/game-concept.jpg
+         ============================================================ -->
+    <section class="section" id="concept">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">03 · The concept</span>
+          <h2>A shooter where the train is the thing worth protecting</h2>
+          <p>IRON TRAIN: THE LAST DEFENCE is a 2D action shooter built around a moving, armored train travelling through a hostile world.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/game-concept.jpg" alt="Concept art or gameplay scene showing the train and incoming enemies" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add concept art or gameplay</strong><span>Suggested filename: assets/game-concept.jpg</span></div>
+        </figure>
+        <div class="grid three">
+          <article class="card"><h3>🚂 Defend the engine</h3><p>The train is the centre of the experience. Enemies threaten it while the world scrolls past.</p></article>
+          <article class="card"><h3>🔫 Fight back</h3><p>The player aims and shoots, using different weapons to handle different threats.</p></article>
+          <article class="card"><h3>📈 Keep progressing</h3><p>Distance, levels, weapon unlocks, and repeatable difficulty loops give the game a progression structure.</p></article>
+        </div>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=IRON%20TRAIN" target="_blank" rel="noopener">▶ Videos: IRON TRAIN</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+          <a class="btn" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">🎮 Play on itch.io</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: CORE FOUNDATION / WORLD SCROLLING
+         IMAGE SLOT: assets/world-scrolling.jpg
+         ============================================================ -->
+    <section class="section" id="foundation">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">04 · Core systems</span>
+          <h2>Building the foundation: player, train, and scrolling world</h2>
+          <p>The game needed a stable foundation before enemies, progression, and effects could be layered on top.</p>
+        </div>
+        <div class="prose">
+          <h3>🌍 A world that moves</h3>
+          <p>Rather than moving the player across a large traditional level, I designed the experience so the player stays in the combat area while the train environment and world movement create the feeling of forward travel.</p>
+          <p>The <code>WorldScroller</code> script helps drive this movement. Background layers use parallax behaviours, including <code>ParallaxEffect</code> and <code>SimpleParallax</code>, to create a sense of depth without making every environmental object complicated.</p>
+          <h3>🧍 The player system</h3>
+          <p>The player setup grew to include movement, jumping, ground checks, character flipping, animation changes, aiming, and weapon integration. These responsibilities needed to work together without competing for control of the character.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/world-scrolling.jpg" alt="Unity scene with the train, player and parallax background layers" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a scene or hierarchy screenshot</strong><span>Suggested filename: assets/world-scrolling.jpg</span></div>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=player%20system%20Unity" target="_blank" rel="noopener">▶ Videos: Player System</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: MOVEMENT / AIMING / ANIMATION
+         IMAGE SLOT: assets/player-aiming.jpg
+         ============================================================ -->
+    <section class="section" id="player-system">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">05 · Player controls</span>
+          <h2>Movement, aiming, flipping, and animation states</h2>
+          <p>The player system became a collection of connected behaviours rather than one oversized script.</p>
+        </div>
+        <div class="prose">
+          <ul>
+            <li><strong><code>PlayerController</code>:</strong> handles core movement, jumping, and ground checking.</li>
+            <li><strong><code>GunAimRight</code> and <code>GunAimLeft</code>:</strong> handle aiming from either side, including angle limits and visual orientation.</li>
+            <li><strong><code>HybridController</code>:</strong> coordinates the character's gun-equipped and no-gun visual states.</li>
+          </ul>
+          <p>Mouse-based aiming introduced a useful maths lesson. Unity's <code>Atan2</code> helps calculate the angle of a direction vector, but the final behaviour also depends on coordinate conventions, angle limits, character facing, and sprite orientation.</p>
+          <p>When aiming to the left, simply using the same visual setup as the right side did not always produce the result I wanted. Separating the aiming behaviour made the system easier to reason about and adjust.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/player-aiming.jpg" alt="Player character aiming a gun in Unity gameplay" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a player aiming screenshot or clip thumbnail</strong><span>Suggested filename: assets/player-aiming.jpg</span></div>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=player%20movement%20aiming%20animation" target="_blank" rel="noopener">▶ Videos: Movement & Aiming</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: WEAPON SYSTEM
+         IMAGE SLOT: assets/weapon-system.jpg
+         ============================================================ -->
+    <section class="section" id="weapons">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">06 · Combat</span>
+          <h2>One firing system, multiple weapon behaviours</h2>
+          <p>Different weapons should feel different while still sharing a useful amount of underlying logic.</p>
+        </div>
+        <div class="grid three">
+          <article class="card"><h3>🔫 Pistol</h3><p>A straightforward single-shot weapon.</p></article>
+          <article class="card"><h3>⚡ Rifle</h3><p>A burst-fire weapon configured to shoot three rounds.</p></article>
+          <article class="card"><h3>🎯 Sniper</h3><p>A heavier shot intended to offer a different combat feel.</p></article>
+        </div>
+        <div class="prose">
+          <p>The <code>GunFire</code> script coordinates firing points, the bullet prefab, muzzle flashes, and audio. The projectile prefab uses a <code>BulletSimple</code> script.</p>
+          <p>The learning was in separating shared behaviour from weapon-specific differences. It is easier to maintain a system when common firing responsibilities are reusable and each weapon only needs to define what makes it different.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/weapon-system.jpg" alt="Weapon selection or firing effects from IRON TRAIN" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a weapons screenshot</strong><span>Suggested filename: assets/weapon-system.jpg</span></div>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20gun%20system" target="_blank" rel="noopener">▶ Videos: Gun System</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: ENEMY AI / BEHAVIOURS
+         IMAGE SLOT: assets/enemy-behaviours.jpg
+         ============================================================ -->
+    <section class="section" id="enemies">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">07 · Enemy behaviours</span>
+          <h2>Turning enemy sprites into gameplay systems</h2>
+          <p>Enemies needed movement, targeting, health, and readable feedback—not just an attractive sprite.</p>
+        </div>
+        <div class="grid two">
+          <article class="card"><h3>👾 Smaller enemies</h3><p>Movement experiments included straight movement, parallel movement, sine-wave patterns, zigzag-style paths, and behaviours that transition into attacks. Scripts included <code>EnemySimple</code>, <code>EnemySineWave</code>, and <code>EnemyParallelAttack</code>.</p></article>
+          <article class="card"><h3>🦾 Heavier enemies</h3><p>Larger enemies had higher hit counts and focused more directly on threatening the train engine. The <code>HealthWithSmoke</code> component changed smoke emission as the enemy took damage.</p></article>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/enemy-behaviours.jpg" alt="Different enemy types attacking the armoured train" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add enemy types or behaviour screenshot</strong><span>Suggested filename: assets/enemy-behaviours.jpg</span></div>
+        </figure>
+        <div class="prose">
+          <p>Each movement pattern raised a different question. How does an enemy follow a target? How should a sine wave change its position over time? How does an enemy switch from travelling to attacking?</p>
+          <p>The key was to keep behaviours understandable and make them work with the health, spawning, and game-state systems.</p>
+        </div>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=EnemySimple" target="_blank" rel="noopener">▶ Videos: EnemySimple</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=enemy%20AI%20Unity" target="_blank" rel="noopener">▶ Videos: Enemy AI</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: SPAWNER ARCHITECTURE
+         IMAGE SLOT: assets/enemy-spawner.jpg
+         ============================================================ -->
+    <section class="section" id="spawning">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">08 · Spawn management</span>
+          <h2>Connecting enemy spawning to level and game state</h2>
+          <p>Once there were multiple enemy types, the game needed a coordinated way to decide when and what to spawn.</p>
+        </div>
+        <div class="prose">
+          <p><code>EnemySpawnerBasic</code> and <code>EnemySpawnerManager</code> helped separate enemy creation from the enemy behaviour itself. The spawner could coordinate timing and enemy types while considering the wider progression system.</p>
+          <p>The important dependencies included current distance, active level, loop difficulty, game state, and which enemy types should be available. A spawner should not keep creating enemies when gameplay is paused or over, and it should respond to the right progression stage.</p>
+          <div class="callout"><strong>Architecture lesson:</strong> a manager becomes valuable when it coordinates shared rules instead of letting every object invent its own version of the game state.</div>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/enemy-spawner.jpg" alt="Unity inspector or gameplay view showing spawned enemies" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a spawner or Inspector screenshot</strong><span>Suggested filename: assets/enemy-spawner.jpg</span></div>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=EnemySpawnerManager" target="_blank" rel="noopener">▶ Videos: EnemySpawnerManager</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=enemy%20spawner%20Unity" target="_blank" rel="noopener">▶ Videos: Spawner System</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: DISTANCE / LEVEL / LOOP PROGRESSION
+         IMAGE SLOT: assets/progression-ui.jpg
+         ============================================================ -->
+    <section class="section" id="progression">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">09 · Progression architecture</span>
+          <h2>A 6,000-metre loop with six levels</h2>
+          <p>Progression is driven by distance travelled, with each loop acting as another difficulty tier.</p>
+        </div>
+        <div class="prose">
+          <p>The game tracks distance and maps it to a current level. <code>DistanceManager</code>, <code>TotalDistanceManager</code>, and <code>LevelManager</code> help coordinate distance tracking, overall progression, and level transitions.</p>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Level distance ranges" tabindex="0">
+          <table>
+            <thead><tr><th>Level</th><th>Distance range</th></tr></thead>
+            <tbody>
+              <tr><td>Level 1</td><td>0–500 m</td></tr>
+              <tr><td>Level 2</td><td>500–1,200 m</td></tr>
+              <tr><td>Level 3</td><td>1,200–2,000 m</td></tr>
+              <tr><td>Level 4</td><td>2,000–3,000 m</td></tr>
+              <tr><td>Level 5</td><td>3,000–4,200 m</td></tr>
+              <tr><td>Level 6</td><td>4,200–6,000 m</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose">
+          <h3>🔁 Difficulty across loops</h3>
+          <p>Completing 6,000 metres advances the player into the next loop. Loops can increase difficulty and change train-bogie visuals, while the level structure remains tied to the same overall distance model.</p>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Loop difficulty multipliers" tabindex="0">
+          <table><thead><tr><th>Loop</th><th>Planned difficulty multiplier</th></tr></thead><tbody>
+            <tr><td>Loop 1</td><td>1.00×</td></tr><tr><td>Loop 2</td><td>1.15×</td></tr><tr><td>Loop 3</td><td>1.30×</td></tr><tr><td>Loop 4</td><td>1.50×</td></tr><tr><td>Loop 5</td><td>1.70×</td></tr>
+          </tbody></table>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/progression-ui.jpg" alt="Distance meter and level progress UI during gameplay" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a progression UI screenshot</strong><span>Suggested filename: assets/progression-ui.jpg</span></div>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20level%20system" target="_blank" rel="noopener">▶ Videos: Level System</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: GAME STATE / UI / UNLOCKS
+         IMAGE SLOT: assets/game-ui.jpg
+         ============================================================ -->
+    <section class="section" id="game-state">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">10 · UI and game flow</span>
+          <h2>Making the game state understandable</h2>
+          <p>Gameplay, pause menus, popups, unlocks, and the game-over screen all need to agree about what is happening.</p>
+        </div>
+        <div class="prose">
+          <p><code>GameFlowManager</code> and the <code>GameState</code> enum centralize important states such as <code>Intro</code>, <code>Playing</code>, <code>Paused</code>, <code>Popup</code>, and <code>GameOver</code>.</p>
+          <p>The UI grew to include distance text, a level progress slider, weapon-unlock notifications, loop-completion popups, a death popup, an intro screen, and settings for sound, reset, and credits.</p>
+          <p>Components such as <code>UIGunUnlockPopup</code>, <code>UILoopCompletePopup</code>, <code>UIDeathPopup</code>, and <code>UIIntroScreen</code> needed to reflect the real game state. A visual notification is only useful if it appears at the right moment and represents the actual state of the game.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/game-ui.jpg" alt="IRON TRAIN pause menu, progress display, or popup UI" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add your game UI screenshot</strong><span>Suggested filename: assets/game-ui.jpg</span></div>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20game%20state%20UI" target="_blank" rel="noopener">▶ Videos: Game State & UI</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: AI ASSETS / ANIMATION / PARTICLES
+         IMAGE SLOT: assets/art-and-effects.jpg
+         ============================================================ -->
+    <section class="section" id="art">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">11 · Visuals and atmosphere</span>
+          <h2>AI-assisted assets, animation frames, and effects</h2>
+          <p>Generating an asset is only the beginning. It must be processed, imported, animated, positioned, and integrated into gameplay.</p>
+        </div>
+        <div class="prose">
+          <p>I experimented with AI-generated visual concepts for the train, enemies, and environments. Blender helped with tasks such as background keying and working with animation frames, while Unity handled the actual integration into scenes, prefabs, and animation systems.</p>
+          <p>Layered backgrounds and parallax movement helped create depth. Steam, smoke, sparks, and vibration helped make the train feel active rather than static.</p>
+          <p>Scripts such as <code>WheelSparkAuto</code> and <code>EngineVibration</code> formed part of the visual-effects work. The effects still required practical tuning so that they behaved properly with the moving environment.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/art-and-effects.jpg" alt="Steam, smoke, sparks, parallax layers, or AI-assisted game art" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add an art or effects comparison</strong><span>Suggested filename: assets/art-and-effects.jpg</span></div>
+          <figcaption>Good options: an original asset beside the Unity result, animation frames, or a before/after effects screenshot.</figcaption>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20particle%20system" target="_blank" rel="noopener">▶ Videos: Particle Effects</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=parallax%20Unity" target="_blank" rel="noopener">▶ Videos: Parallax</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: TESTING / INPUT / SAVING
+         IMAGE SLOT: assets/testing-builds.jpg
+         ============================================================ -->
+    <section class="section" id="testing">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">12 · Testing the whole product</span>
+          <h2>From Unity Play Mode to real builds</h2>
+          <p>A project working in the Editor does not automatically mean it will behave the same way when packaged for another platform.</p>
+        </div>
+        <div class="grid two">
+          <article class="card"><h3>🖥️ Windows and WebGL</h3><p>I built a Windows executable and a WebGL version. The WebGL build was uploaded to itch.io, making the game playable through a browser as well as downloadable.</p></article>
+          <article class="card"><h3>📱 Android APK</h3><p>I also built an Android APK and worked through mobile input considerations. The first Android build was not published on Google Play.</p></article>
+        </div>
+        <div class="prose">
+          <h3>🕹️ Desktop and touch controls</h3>
+          <p>The project moved to Unity's New Input System. The fire input used a static <code>FireInput</code> approach, while <code>TouchAimHandler</code> supported aiming for mobile touch and Editor simulation.</p>
+          <h3>💾 Save and progression behaviour</h3>
+          <p>Progression data used PlayerPrefs keys for version, level, loop, and guns. During testing, I compared behaviour in the Editor, WebGL, and Android. The WebGL build preserved progression as expected in our tests, while Android retained an arcade-style restart behaviour that could return the game to the first level and loop after quitting.</p>
+          <p>This reinforced a practical lesson: validate behaviour in the actual target build. A successful compile or an Editor test is not a substitute for testing the complete experience on the platform where people will play.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/testing-builds.jpg" alt="Game running in browser, Windows, or Android build" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add screenshots from your published builds</strong><span>Suggested filename: assets/testing-builds.jpg</span></div>
+        </figure>
+        <div class="section-links">
+          <a class="btn" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">🎮 Open the itch.io release</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=IRON%20TRAIN%20gameplay" target="_blank" rel="noopener">▶ Videos: Gameplay Builds</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: PROBLEMS / LESSONS
+         Optional image: assets/debugging.jpg
+         ============================================================ -->
+    <section class="section" id="lessons">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">13 · Things I learned the hard way</span>
+          <h2>The real work was in the connections</h2>
+          <p>Individual features could work in isolation and still fail when combined. Debugging the connections became one of the most valuable parts of the process.</p>
+        </div>
+        <div class="grid two">
+          <article class="card"><h3>🧭 Coordinate systems and aiming</h3><p>Angles, direction vectors, angle limits, and sprite orientation all mattered. A correct formula alone could not guarantee a correct-looking aim.</p></article>
+          <article class="card"><h3>🔄 Progression and synchronization</h3><p>Distance tracking, level boundaries, spawning, popups, and difficulty changes needed a consistent view of game progress.</p></article>
+          <article class="card"><h3>📱 Platform-specific input</h3><p>Mouse and touch input required different handling, but both needed to drive the same intended gameplay actions.</p></article>
+          <article class="card"><h3>🧩 Integration regressions</h3><p>A change to one controller, prefab, or game state could affect another system. Regression checks became important after each meaningful change.</p></article>
+        </div>
+        <div class="callout"><strong>What changed in my approach?</strong><br>I began asking not only “Does this script work?” but also “What does it depend on, when should it run, and what might break if I change it?”</div>
+        <div class="section-links">
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20debugging" target="_blank" rel="noopener">▶ Videos: Debugging & Lessons</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Browse Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: YOUTUBE / VIDEO JOURNAL
+         HOW TO ADD A DIRECT VIDEO:
+         1) Copy the actual URL from YouTube Studio or your published video.
+         2) Replace the href of the matching video button below.
+         3) For a Short, use its direct https://www.youtube.com/shorts/VIDEO_ID URL.
+         Current links use channel/topic search because individual published
+         URLs were not confirmed during page preparation.
+         ============================================================ -->
+    <section class="section" id="youtube">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">14 · Learning in public</span>
+          <h2>Following the journey on MakeGames4Fun</h2>
+          <p>I want the channel to show not only the finished game, but also the thinking and practical concepts behind its systems.</p>
+        </div>
+        <div class="prose">
+          <p>The tutorial topics we planned alongside the game include the player system, aiming, character flipping, enemy behaviour, and the manager that connects enemy spawning to game progression. As new videos are published, this page can link directly to the relevant episode.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item"><div class="timeline-number">01</div><div class="timeline-content"><h3>🧍 Player System — Part 1</h3><p>Player movement, jumping, animations, character setup, and a mouse-based gun system.</p><div class="btn-row"><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Player%20System%20Part%201" target="_blank" rel="noopener">▶ Find the video</a><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Related Shorts</a><!-- REPLACE href values above with direct published video / Short URLs when available. --></div></div></article>
+          <article class="timeline-item"><div class="timeline-number">02</div><div class="timeline-content"><h3>🎯 Player System — Part 2</h3><p>Understanding PlayerController, HybridController, GunAimLeft, GunAimRight, character flipping, ground checks, and visual switching.</p><div class="btn-row"><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Player%20System%20Part%202" target="_blank" rel="noopener">▶ Find the video</a><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Related Shorts</a><!-- REPLACE href values above with direct published video / Short URLs when available. --></div></div></article>
+          <article class="timeline-item"><div class="timeline-number">03</div><div class="timeline-content"><h3>👾 EnemySimple — Making an Enemy Follow the Player</h3><p>A visual and practical starting point for explaining enemy behaviour before moving into more complex spawning and management systems.</p><div class="btn-row"><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=EnemySimple" target="_blank" rel="noopener">▶ Find the video</a><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Related Shorts</a><!-- REPLACE href values above with direct published video / Short URLs when available. --></div></div></article>
+          <article class="timeline-item"><div class="timeline-number">04</div><div class="timeline-content"><h3>⚙️ EnemySpawnerManager — Connecting the Systems</h3><p>Level systems, game states, events, difficulty loops, and coordinated enemy spawning.</p><div class="btn-row"><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=EnemySpawnerManager" target="_blank" rel="noopener">▶ Find the video</a><a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Related Shorts</a><!-- REPLACE href values above with direct published video / Short URLs when available. --></div></div></article>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://www.youtube.com/@MakeGames4Fun/videos" target="_blank" rel="noopener">▶ View all channel videos</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ View all Shorts</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun" target="_blank" rel="noopener">＋ Subscribe to MakeGames4Fun</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: CURRENT STATUS / NEXT VERSION
+         IMAGE SLOT: assets/part-two-preview.jpg
+         Update this section as Part 2 features and release plans change.
+         ============================================================ -->
+    <section class="section" id="next">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">15 · What's next</span>
+          <h2>Part 2 is on the horizon</h2>
+          <p>The first release gave me a foundation. The next version is the next chapter—not the end of the learning process.</p>
+        </div>
+        <div class="prose">
+          <p>Most of the core components for Part 2 are ready, but I have also been busy with other projects, including Hivemart and EchoMate. I plan to return to the game soon and continue the work with the time and focus it deserves.</p>
+          <p>Expanding the game further and making the next version available on Android and iOS are goals for the upcoming stage. The distribution plan includes itch.io, with the exact release arrangements to be worked through as development continues.</p>
+          <p>I'll use this page to share new milestones, screenshots, technical discoveries, and links to videos as they become available.</p>
+        </div>
+        <figure class="media-slot">
+          <img src="assets/part-two-preview.jpg" alt="Preview screenshot or concept art for the next version of IRON TRAIN" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Reserve this slot for Part 2</strong><span>Suggested filename: assets/part-two-preview.jpg</span></div>
+        </figure>
+        <div class="btn-row">
+          <a class="btn primary" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">🎮 Play Part 1</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/videos" target="_blank" rel="noopener">▶ Future devlogs</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Future Shorts</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: FINAL THOUGHTS / THANK YOU
+         ============================================================ -->
+    <section class="section" id="closing">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">16 · Final thoughts</span>
+          <h2>You don't need to know everything before you start building.</h2>
+          <p>You need to start building, stay curious, and learn from what breaks.</p>
+        </div>
+        <div class="prose">
+          <p>I started this project because I wanted to build something of my own. I began with tutorials, found myself stuck in tutorial hell, and changed my approach to learn through experimentation.</p>
+          <p>I used AI as part of my workflow, built gameplay systems one by one, worked through bugs and platform differences, and eventually released a playable game.</p>
+          <p>I'm still learning Unity. I'm still learning C#. And I'm still using AI as one of the tools in my development workflow. But now I have a game I built, a better understanding of how its systems work together, and a foundation I can continue improving.</p>
+          <div class="callout"><strong>Build. Test. Debug. Learn. Repeat.</strong><br>That's the development loop behind IRON TRAIN: THE LAST DEFENCE.</div>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">🚂 Play the game</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun" target="_blank" rel="noopener">▶ YouTube: MakeGames4Fun</a>
+          <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ YouTube Shorts</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       SECTION: FOOTER
+       Update links here if your game or channel URLs change.
+       ============================================================ -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark">🚂</span><span>IRON TRAIN <span class="accent">DEVLOG</span></span></a>
+        <p>A living record of the experiments, systems, bugs, and decisions behind IRON TRAIN: THE LAST DEFENCE. I'll update this page as development continues.</p>
+      </div>
+      <div class="btn-row" style="margin-top:0">
+        <a class="btn" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">🎮 itch.io</a>
+        <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/videos" target="_blank" rel="noopener">▶ Videos</a>
+        <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/shorts" target="_blank" rel="noopener">▣ Shorts</a>
+        <a class="backtop" href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       IMAGE FALLBACK SCRIPT
+       If an image path is missing, the page displays the styled
+       placeholder instead of a broken-image icon. This keeps the page
+       presentable before you add your screenshots and game art.
+       ============================================================ -->
+  <script>
+    document.querySelectorAll('.media-slot').forEach(function (slot) {
+      const image = slot.querySelector('img');
+      if (!image) return;
+      image.addEventListener('error', function () {
+        slot.classList.add('is-empty');
+        image.hidden = true;
+      });
+      image.addEventListener('load', function () {
+        slot.classList.remove('is-empty');
+        image.hidden = false;
+      });
+      if (image.complete && image.naturalWidth === 0) {
+        slot.classList.add('is-empty');
+        image.hidden = true;
+      }
+    });
+  </script>
+</body>
+</html>
