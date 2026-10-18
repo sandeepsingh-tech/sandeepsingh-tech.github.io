@@ -9,8 +9,9 @@
 
   <!-- ============================================================
        QUICK EDIT GUIDE
-       1. Save this file as index.html in your GitHub Pages repository.
-       2. Create an assets folder next to index.html for your images.
+       1. Save this file as iron-train-devlog.html in your GitHub Pages repository.
+       2. Keep your existing index.html (personal homepage) unchanged.
+       3. Upload game images into assets/iron-train/.
        3. Search for "IMAGE SLOT" or "assets/" to replace image paths.
        4. Search for "REPLACE href" to find YouTube link edit notes.
        5. Each section starts with a named HTML comment for easy editing.
@@ -124,7 +125,7 @@
 
     /* ============================================================
        IMAGE SLOT STYLES — every image can be replaced with your own.
-       Put files in an /assets/ folder beside this HTML file, then
+       Put files in /assets/iron-train/ beside this HTML file, then
        change each img src to the matching filename.
        ============================================================ */
     .media-slot {
@@ -163,7 +164,13 @@
     .hero { padding: 64px 0 60px; overflow: hidden; }
     .hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; align-items: center; gap: 38px; }
     .hero h1 { font-size: clamp(2.6rem, 6.5vw, 5rem); line-height: .99; letter-spacing: -.065em; margin: 18px 0; max-width: 720px; }
-    .hero h1 span { color: var(--orange); }
+    /* HERO TITLE — keep IRON TRAIN large and fit THE LAST DEFENCE on one line. */
+    .hero h1 .title-main { display: block; color: var(--text); white-space: nowrap; }
+    .hero h1 .title-sub {
+      display: block; color: var(--orange);
+      font-size: clamp(1.55rem, 4.25vw, 3.45rem);
+      line-height: 1.08; letter-spacing: -.045em; white-space: nowrap;
+    }
     .hero .lead { color: #cad6e3; font-size: clamp(1.05rem, 2vw, 1.23rem); max-width: 650px; }
     .hero-art { border-radius: 24px; border: 1px solid var(--line); padding: 8px; background: rgba(255,255,255,.035); box-shadow: 0 25px 80px rgba(0,0,0,.42); transform: rotate(1deg); }
     .hero-art .media-slot { margin: 0; min-height: 260px; }
@@ -213,7 +220,8 @@
       .wrap { width: min(100% - 26px, var(--max)); }
       .section { padding: 54px 0; }
       .hero { padding: 44px 0 45px; }
-      .hero h1 { font-size: clamp(2.45rem, 13vw, 3.8rem); }
+      .hero h1 { font-size: clamp(2rem, 9vw, 3.1rem); }
+      .hero h1 .title-sub { font-size: clamp(1.55rem, 6.8vw, 2.7rem); }
       .grid.two, .grid.three { grid-template-columns: 1fr; }
       .card { padding: 18px; }
       .timeline-item { grid-template-columns: 38px 1fr; gap: 10px; }
@@ -257,14 +265,14 @@
   <main>
     <!-- ============================================================
          SECTION: HERO / GAME INTRO
-         IMAGE SLOT: assets/iron-train-hero.jpg
+         IMAGE SLOT: assets/iron-train/iron-train-hero.jpg
          Replace the src with the path to your own key art or screenshot.
          ============================================================ -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
           <span class="eyebrow">🎮 Independent game development · Unity · C#</span>
-          <h1>IRON TRAIN:<br><span>THE LAST DEFENCE</span></h1>
+          <h1><span class="title-main">IRON TRAIN:</span><span class="title-sub">THE LAST DEFENCE</span></h1>
           <p class="lead">A personal development journal about turning an idea into a playable 2D action shooter—one experiment, system, bug, and build at a time.</p>
           <p class="muted">I started with tutorials, got tired of copying steps, and began learning by building. AI helped me move faster, but testing and understanding the systems made the game work.</p>
           <div class="btn-row">
@@ -281,7 +289,7 @@
         <div class="hero-art">
           <figure class="media-slot">
             <img src="assets/iron-train/hero.jpg" alt="IRON TRAIN: THE LAST DEFENCE key art or gameplay screenshot" loading="lazy">
-            <div class="media-placeholder"><strong>🖼️ Add your hero image</strong><span>Upload an image to assets/iron-train-hero.jpg<br>or change the image src in this section.</span></div>
+            <div class="media-placeholder"><strong>🖼️ Add your hero image</strong><span>Upload an image to assets/iron-train/iron-train-hero.jpg<br>or change the image src in this section.</span></div>
           </figure>
         </div>
       </div>
@@ -289,7 +297,7 @@
 
     <!-- ============================================================
          SECTION: ORIGIN STORY
-         IMAGE SLOT: assets/dev-journey.jpg
+         IMAGE SLOT: assets/iron-train/dev-journey.jpg
          YOUTUBE: Topic-specific channel search + Shorts archive below.
          Replace the video href with a direct video URL when available.
          ============================================================ -->
@@ -308,8 +316,7 @@
         </div>
         <figure class="media-slot">
           <img src="assets/iron-train/early.jpg" alt="Early Unity editor screenshot or a photo showing the start of the project" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add an early-development screenshot</strong><span>Suggested filename: assets/dev-journey.jpg</span></div>
-          <figcaption>Optional: show your early Unity scene, first prototype, or project workspace.</figcaption>
+          <div class="media-placeholder"><strong>🖼️ Add an early-development screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/dev-journey.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=game%20development%20journey" target="_blank" rel="noopener">▶ Videos: Game Development Journey</a>
@@ -320,7 +327,7 @@
 
     <!-- ============================================================
          SECTION: TUTORIAL HELL / LEARNING APPROACH
-         IMAGE SLOT: assets/tutorial-to-experiment.jpg
+         IMAGE SLOT: assets/iron-train/tutorial-to-experiment.jpg
          ============================================================ -->
     <section class="section" id="learning">
       <div class="wrap">
@@ -340,8 +347,8 @@
           </article>
         </div>
         <figure class="media-slot">
-          <img src="assets/tutorial-to-experiment.jpg" alt="Unity editor showing the project while experimenting with scripts" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add a Unity editor screenshot</strong><span>Suggested filename: assets/tutorial-to-experiment.jpg</span></div>
+          <img src="assets/iron-train/tutorial-to-experiment.jpg" alt="Unity editor showing the project while experimenting with scripts" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a Unity editor screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/tutorial-to-experiment.jpg</span></div>
         </figure>
         <div class="prose">
           <h3>🤝 How I used ChatGPT</h3>
@@ -358,7 +365,7 @@
 
     <!-- ============================================================
          SECTION: GAME CONCEPT
-         IMAGE SLOT: assets/game-concept.jpg
+         IMAGE SLOT: assets/iron-train/game-concept.jpg
          ============================================================ -->
     <section class="section" id="concept">
       <div class="wrap">
@@ -368,8 +375,8 @@
           <p>IRON TRAIN: THE LAST DEFENCE is a 2D action shooter built around a moving, armored train travelling through a hostile world.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/game-concept.jpg" alt="Concept art or gameplay scene showing the train and incoming enemies" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add concept art or gameplay</strong><span>Suggested filename: assets/game-concept.jpg</span></div>
+          <img src="assets/iron-train/game-concept.jpg" alt="Concept art or gameplay scene showing the train and incoming enemies" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add concept art or gameplay</strong><span>Suggested filename: assets/iron-train/iron-train/game-concept.jpg</span></div>
         </figure>
         <div class="grid three">
           <article class="card"><h3>🚂 Defend the engine</h3><p>The train is the centre of the experience. Enemies threaten it while the world scrolls past.</p></article>
@@ -386,7 +393,7 @@
 
     <!-- ============================================================
          SECTION: CORE FOUNDATION / WORLD SCROLLING
-         IMAGE SLOT: assets/world-scrolling.jpg
+         IMAGE SLOT: assets/iron-train/world-scrolling.jpg
          ============================================================ -->
     <section class="section" id="foundation">
       <div class="wrap">
@@ -403,8 +410,8 @@
           <p>The player setup grew to include movement, jumping, ground checks, character flipping, animation changes, aiming, and weapon integration. These responsibilities needed to work together without competing for control of the character.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/world-scrolling.jpg" alt="Unity scene with the train, player and parallax background layers" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add a scene or hierarchy screenshot</strong><span>Suggested filename: assets/world-scrolling.jpg</span></div>
+          <img src="assets/iron-train/world-scrolling.jpg" alt="Unity scene with the train, player and parallax background layers" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a scene or hierarchy screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/world-scrolling.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=player%20system%20Unity" target="_blank" rel="noopener">▶ Videos: Player System</a>
@@ -415,7 +422,7 @@
 
     <!-- ============================================================
          SECTION: MOVEMENT / AIMING / ANIMATION
-         IMAGE SLOT: assets/player-aiming.jpg
+         IMAGE SLOT: assets/iron-train/player-aiming.jpg
          ============================================================ -->
     <section class="section" id="player-system">
       <div class="wrap">
@@ -434,8 +441,8 @@
           <p>When aiming to the left, simply using the same visual setup as the right side did not always produce the result I wanted. Separating the aiming behaviour made the system easier to reason about and adjust.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/player-aiming.jpg" alt="Player character aiming a gun in Unity gameplay" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add a player aiming screenshot or clip thumbnail</strong><span>Suggested filename: assets/player-aiming.jpg</span></div>
+          <img src="assets/iron-train/player-aiming.jpg" alt="Player character aiming a gun in Unity gameplay" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a player aiming screenshot or clip thumbnail</strong><span>Suggested filename: assets/iron-train/iron-train/player-aiming.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=player%20movement%20aiming%20animation" target="_blank" rel="noopener">▶ Videos: Movement & Aiming</a>
@@ -446,7 +453,7 @@
 
     <!-- ============================================================
          SECTION: WEAPON SYSTEM
-         IMAGE SLOT: assets/weapon-system.jpg
+         IMAGE SLOT: assets/iron-train/weapon-system.jpg
          ============================================================ -->
     <section class="section" id="weapons">
       <div class="wrap">
@@ -465,8 +472,8 @@
           <p>The learning was in separating shared behaviour from weapon-specific differences. It is easier to maintain a system when common firing responsibilities are reusable and each weapon only needs to define what makes it different.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/weapon-system.jpg" alt="Weapon selection or firing effects from IRON TRAIN" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add a weapons screenshot</strong><span>Suggested filename: assets/weapon-system.jpg</span></div>
+          <img src="assets/iron-train/weapon-system.jpg" alt="Weapon selection or firing effects from IRON TRAIN" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a weapons screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/weapon-system.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20gun%20system" target="_blank" rel="noopener">▶ Videos: Gun System</a>
@@ -477,7 +484,7 @@
 
     <!-- ============================================================
          SECTION: ENEMY AI / BEHAVIOURS
-         IMAGE SLOT: assets/enemy-behaviours.jpg
+         IMAGE SLOT: assets/iron-train/enemy-behaviours.jpg
          ============================================================ -->
     <section class="section" id="enemies">
       <div class="wrap">
@@ -491,8 +498,8 @@
           <article class="card"><h3>🦾 Heavier enemies</h3><p>Larger enemies had higher hit counts and focused more directly on threatening the train engine. The <code>HealthWithSmoke</code> component changed smoke emission as the enemy took damage.</p></article>
         </div>
         <figure class="media-slot">
-          <img src="assets/enemy-behaviours.jpg" alt="Different enemy types attacking the armoured train" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add enemy types or behaviour screenshot</strong><span>Suggested filename: assets/enemy-behaviours.jpg</span></div>
+          <img src="assets/iron-train/enemy-behaviours.jpg" alt="Different enemy types attacking the armoured train" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add enemy types or behaviour screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/enemy-behaviours.jpg</span></div>
         </figure>
         <div class="prose">
           <p>Each movement pattern raised a different question. How does an enemy follow a target? How should a sine wave change its position over time? How does an enemy switch from travelling to attacking?</p>
@@ -508,7 +515,7 @@
 
     <!-- ============================================================
          SECTION: SPAWNER ARCHITECTURE
-         IMAGE SLOT: assets/enemy-spawner.jpg
+         IMAGE SLOT: assets/iron-train/enemy-spawner.jpg
          ============================================================ -->
     <section class="section" id="spawning">
       <div class="wrap">
@@ -523,8 +530,8 @@
           <div class="callout"><strong>Architecture lesson:</strong> a manager becomes valuable when it coordinates shared rules instead of letting every object invent its own version of the game state.</div>
         </div>
         <figure class="media-slot">
-          <img src="assets/enemy-spawner.jpg" alt="Unity inspector or gameplay view showing spawned enemies" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add a spawner or Inspector screenshot</strong><span>Suggested filename: assets/enemy-spawner.jpg</span></div>
+          <img src="assets/iron-train/enemy-spawner.jpg" alt="Unity inspector or gameplay view showing spawned enemies" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a spawner or Inspector screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/enemy-spawner.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=EnemySpawnerManager" target="_blank" rel="noopener">▶ Videos: EnemySpawnerManager</a>
@@ -536,7 +543,7 @@
 
     <!-- ============================================================
          SECTION: DISTANCE / LEVEL / LOOP PROGRESSION
-         IMAGE SLOT: assets/progression-ui.jpg
+         IMAGE SLOT: assets/iron-train/progression-ui.jpg
          ============================================================ -->
     <section class="section" id="progression">
       <div class="wrap">
@@ -571,8 +578,8 @@
           </tbody></table>
         </div>
         <figure class="media-slot">
-          <img src="assets/progression-ui.jpg" alt="Distance meter and level progress UI during gameplay" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add a progression UI screenshot</strong><span>Suggested filename: assets/progression-ui.jpg</span></div>
+          <img src="assets/iron-train/progression-ui.jpg" alt="Distance meter and level progress UI during gameplay" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add a progression UI screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/progression-ui.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20level%20system" target="_blank" rel="noopener">▶ Videos: Level System</a>
@@ -583,7 +590,7 @@
 
     <!-- ============================================================
          SECTION: GAME STATE / UI / UNLOCKS
-         IMAGE SLOT: assets/game-ui.jpg
+         IMAGE SLOT: assets/iron-train/game-ui.jpg
          ============================================================ -->
     <section class="section" id="game-state">
       <div class="wrap">
@@ -598,8 +605,8 @@
           <p>Components such as <code>UIGunUnlockPopup</code>, <code>UILoopCompletePopup</code>, <code>UIDeathPopup</code>, and <code>UIIntroScreen</code> needed to reflect the real game state. A visual notification is only useful if it appears at the right moment and represents the actual state of the game.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/game-ui.jpg" alt="IRON TRAIN pause menu, progress display, or popup UI" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add your game UI screenshot</strong><span>Suggested filename: assets/game-ui.jpg</span></div>
+          <img src="assets/iron-train/game-ui.jpg" alt="IRON TRAIN pause menu, progress display, or popup UI" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add your game UI screenshot</strong><span>Suggested filename: assets/iron-train/iron-train/game-ui.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://www.youtube.com/@MakeGames4Fun/search?query=Unity%20game%20state%20UI" target="_blank" rel="noopener">▶ Videos: Game State & UI</a>
@@ -610,7 +617,7 @@
 
     <!-- ============================================================
          SECTION: AI ASSETS / ANIMATION / PARTICLES
-         IMAGE SLOT: assets/art-and-effects.jpg
+         IMAGE SLOT: assets/iron-train/art-and-effects.jpg
          ============================================================ -->
     <section class="section" id="art">
       <div class="wrap">
@@ -625,8 +632,8 @@
           <p>Scripts such as <code>WheelSparkAuto</code> and <code>EngineVibration</code> formed part of the visual-effects work. The effects still required practical tuning so that they behaved properly with the moving environment.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/art-and-effects.jpg" alt="Steam, smoke, sparks, parallax layers, or AI-assisted game art" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add an art or effects comparison</strong><span>Suggested filename: assets/art-and-effects.jpg</span></div>
+          <img src="assets/iron-train/art-and-effects.jpg" alt="Steam, smoke, sparks, parallax layers, or AI-assisted game art" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add an art or effects comparison</strong><span>Suggested filename: assets/iron-train/iron-train/art-and-effects.jpg</span></div>
           <figcaption>Good options: an original asset beside the Unity result, animation frames, or a before/after effects screenshot.</figcaption>
         </figure>
         <div class="section-links">
@@ -639,7 +646,7 @@
 
     <!-- ============================================================
          SECTION: TESTING / INPUT / SAVING
-         IMAGE SLOT: assets/testing-builds.jpg
+         IMAGE SLOT: assets/iron-train/testing-builds.jpg
          ============================================================ -->
     <section class="section" id="testing">
       <div class="wrap">
@@ -660,8 +667,8 @@
           <p>This reinforced a practical lesson: validate behaviour in the actual target build. A successful compile or an Editor test is not a substitute for testing the complete experience on the platform where people will play.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/testing-builds.jpg" alt="Game running in browser, Windows, or Android build" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Add screenshots from your published builds</strong><span>Suggested filename: assets/testing-builds.jpg</span></div>
+          <img src="assets/iron-train/testing-builds.jpg" alt="Game running in browser, Windows, or Android build" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Add screenshots from your published builds</strong><span>Suggested filename: assets/iron-train/iron-train/testing-builds.jpg</span></div>
         </figure>
         <div class="section-links">
           <a class="btn" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">🎮 Open the itch.io release</a>
@@ -673,7 +680,7 @@
 
     <!-- ============================================================
          SECTION: PROBLEMS / LESSONS
-         Optional image: assets/debugging.jpg
+         Optional image: assets/iron-train/debugging.jpg
          ============================================================ -->
     <section class="section" id="lessons">
       <div class="wrap">
@@ -731,7 +738,7 @@
 
     <!-- ============================================================
          SECTION: CURRENT STATUS / NEXT VERSION
-         IMAGE SLOT: assets/part-two-preview.jpg
+         IMAGE SLOT: assets/iron-train/part-two-preview.jpg
          Update this section as Part 2 features and release plans change.
          ============================================================ -->
     <section class="section" id="next">
@@ -747,8 +754,8 @@
           <p>I'll use this page to share new milestones, screenshots, technical discoveries, and links to videos as they become available.</p>
         </div>
         <figure class="media-slot">
-          <img src="assets/part-two-preview.jpg" alt="Preview screenshot or concept art for the next version of IRON TRAIN" loading="lazy">
-          <div class="media-placeholder"><strong>🖼️ Reserve this slot for Part 2</strong><span>Suggested filename: assets/part-two-preview.jpg</span></div>
+          <img src="assets/iron-train/part-two-preview.jpg" alt="Preview screenshot or concept art for the next version of IRON TRAIN" loading="lazy">
+          <div class="media-placeholder"><strong>🖼️ Reserve this slot for Part 2</strong><span>Suggested filename: assets/iron-train/iron-train/part-two-preview.jpg</span></div>
         </figure>
         <div class="btn-row">
           <a class="btn primary" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener">🎮 Play Part 1</a>
