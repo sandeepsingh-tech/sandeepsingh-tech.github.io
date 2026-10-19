@@ -607,15 +607,73 @@
     }
 
     /* Vertical Flow Connector Arrow */
-    .arch-arrow {
-      text-align: center;
-      font-size: 1.15rem;
-      font-weight: 600;
+    /* Tactile Dropdown-style Flow Connectors */
+    .arch-connector-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .arch-connector-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(30, 24, 58, 0.92) 0%, rgba(14, 11, 30, 0.95) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
       color: var(--neon-cyan);
-      margin: -6px 0;
-      opacity: 0.85;
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
       user-select: none;
+    }
+
+    .arch-connector-btn:hover {
+      border-color: var(--neon-cyan);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18) 0%, rgba(30, 24, 58, 0.95) 100%);
+      color: #fff;
+      transform: translateY(1px);
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
+    }
+
+    .arch-connector-btn .dropdown-caret {
+      font-size: 0.68rem;
+      color: var(--neon-cyan);
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .arch-connector-btn:hover .dropdown-caret {
+      transform: translateY(2px);
+      color: #fff;
+    }
+
+    /* Mobile Single-Line Optimization */
+    @media (max-width: 640px) {
+      .arch-connector-wrap {
+        margin: 0;
+      }
+      .arch-connector-btn {
+        font-size: clamp(0.68rem, 2.7vw, 0.80rem);
+        padding: 5px 11px;
+        gap: 5px;
+        letter-spacing: 0.01em;
+      }
+      .arch-connector-btn .dropdown-caret {
+        font-size: 0.62rem;
+      }
     }
 
     /* Multi-Model Grid */
@@ -1087,7 +1145,13 @@
           <p>You speak into the EchoMate mobile app just like you would to a friend or colleague. Your voice is captured cleanly and encrypted instantly, ready for real-time conversation with zero lag.</p>
         </div>
 
-        <div class="arch-arrow">▼ &nbsp; Instant Lightning-Fast Connection &nbsp; ▼</div>
+        <!-- Dropdown Button Connector 1 -->
+        <div class="arch-connector-wrap">
+          <div class="arch-connector-btn">
+            <span>Instant Lightning-Fast Connection</span>
+            <span class="dropdown-caret">▼</span>
+          </div>
+        </div>
 
         <!-- Step 2: Smart Coordinator -->
         <div class="arch-card" style="border-color: rgba(129, 140, 248, 0.45);">
@@ -1099,7 +1163,13 @@
           <p>Before responding, our coordinator pulls your background (your career goal, your speaking style, and past speech habits) and dynamically loads the ideal instructions for your session.</p>
         </div>
 
-        <div class="arch-arrow">▼ &nbsp; Direct to Core Engine & Fallbacks &nbsp; ▼</div>
+        <!-- Dropdown Button Connector 2 -->
+        <div class="arch-connector-wrap">
+          <div class="arch-connector-btn">
+            <span>Direct to Core Engine & Fallbacks</span>
+            <span class="dropdown-caret">▼</span>
+          </div>
+        </div>
 
         <!-- Step 3: Adaptive AI Engine & Smart Fallbacks -->
         <div class="arch-card" style="border-color: rgba(96, 165, 250, 0.45);">
@@ -1135,7 +1205,13 @@
           </div>
         </div>
 
-        <div class="arch-arrow">▼ &nbsp; Learning What Makes You Unique &nbsp; ▼</div>
+        <!-- Dropdown Button Connector 3 -->
+        <div class="arch-connector-wrap">
+          <div class="arch-connector-btn">
+            <span>Learning What Makes You Unique</span>
+            <span class="dropdown-caret">▼</span>
+          </div>
+        </div>
 
         <!-- Step 4: Long-Term Memory -->
         <div class="arch-card" style="border-color: rgba(52, 211, 153, 0.45);">
@@ -1168,7 +1244,6 @@
 
       </div>
     </section>
-
     <!-- Interactive Speech Modeling Demo Section -->
     <section id="demo" class="demo-section">
       <div style="text-align: center; max-width: 660px; margin: 0 auto 10px;">
