@@ -1071,7 +1071,7 @@
           How EchoMate Works Behind the Mic
         </h2>
         <p style="color: var(--text-muted); font-size: 0.96rem; line-height: 1.6;">
-          You simply press speak. Behind the screen, an ensemble of specialized AIs and an adaptive memory system work together to make your conversation feel completely natural.
+          You simply press speak. Behind the screen, our primary Gemini engine, smart availability mesh, and long-term memory work together to make your practice effortless.
         </p>
       </div>
 
@@ -1096,40 +1096,41 @@
             <span class="arch-tier-tech">Supabase & Cloudflare Gateway</span>
           </div>
           <h3>🧠 The Intelligent Brain Orchestrator</h3>
-          <p>Before responding, our coordinator pulls your background (your career goal, your speaking style, and past speech habits) and hands your turn to the AI best equipped to handle that exact moment.</p>
+          <p>Before responding, our coordinator pulls your background (your career goal, your speaking style, and past speech habits) and dynamically loads the ideal instructions for your session.</p>
         </div>
 
-        <div class="arch-arrow">▼ &nbsp; Routed to the Right Specialized AI &nbsp; ▼</div>
+        <div class="arch-arrow">▼ &nbsp; Direct to Core Engine & Fallbacks &nbsp; ▼</div>
 
-        <!-- Step 3: Multi-AI Team -->
+        <!-- Step 3: Adaptive AI Engine & Smart Fallbacks -->
         <div class="arch-card" style="border-color: rgba(96, 165, 250, 0.45);">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(96, 165, 250, 0.15); color: #93C5FD; border-color: rgba(96, 165, 250, 0.4);">Step 3: The AI Specialist Team</span>
-            <span class="arch-tier-tech">Multi-Model Engine</span>
+            <span class="arch-tier-tag" style="background: rgba(96, 165, 250, 0.15); color: #93C5FD; border-color: rgba(96, 165, 250, 0.4);">Step 3: Adaptive AI Engine</span>
+            <span class="arch-tier-tech">Gemini Core • Smart Availability Mesh</span>
           </div>
-          <h3>🤝 Different AIs for Different Jobs</h3>
-          <p>No single AI does everything. We route different parts of your practice to specialized models that excel at specific tasks:</p>
+          <h3>⚡ Powered by Google Gemini with Dynamic Smart Fallbacks</h3>
+          <p>
+            <strong>🟣 Google Gemini</strong> serves as EchoMate's primary conversational brain—delivering natural spoken rhythm, real-time speech recasting, and instant fluency guidance without interruptions.
+          </p>
+          <p style="margin-top: 10px;">
+            To ensure zero downtime, minimal latency, and optimal conversational pacing, our smart system continuously monitors provider health. When instant casual banter, rapid turnarounds, or load balancing are required, it automatically selects and routes requests to the fastest available engine:
+          </p>
 
-          <div class="models-grid">
-            <div class="model-box">
-              <span class="model-name">🟣 Google Gemini</span>
-              <span class="model-role"><strong>The Natural Conversationalist:</strong> Listens to tone and responds in smooth real-time speech without awkward pauses.</span>
+          <div class="models-grid" style="margin-top: 14px;">
+            <div class="model-box" style="border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.07);">
+              <span class="model-name">🟣 Google Gemini (Primary Core)</span>
+              <span class="model-role">Native multimodal real-time voice, natural tone handling, and fluid English coaching.</span>
             </div>
             <div class="model-box">
-              <span class="model-name">⚡ Groq Cloud</span>
-              <span class="model-role"><strong>The Speed Engine:</strong> Turns your voice into text in a fraction of a second so conversations feel instant.</span>
+              <span class="model-name">⚡ Groq Cloud (Speed Engine)</span>
+              <span class="model-role">Ultra-low latency inference fallback for instant casual chatter and lightning-fast voice turnaround.</span>
             </div>
             <div class="model-box">
-              <span class="model-name">✖️ Grok (xAI)</span>
-              <span class="model-role"><strong>The Tough Interviewer:</strong> Simulates realistic, challenging workplace questions and debates.</span>
+              <span class="model-name">🧠 Mistral AI & ✖️ Grok (Specialized Fallbacks)</span>
+              <span class="model-role">High-resilience reasoning layers ready to step in for structured breakdowns or challenging scenarios.</span>
             </div>
             <div class="model-box">
-              <span class="model-name">🧠 Mistral AI</span>
-              <span class="model-role"><strong>The Analytical Coach:</strong> Reviews your whole session quietly to identify vocabulary opportunities and grammar patterns.</span>
-            </div>
-            <div class="model-box">
-              <span class="model-name">☁️ Cloudflare Workers AI</span>
-              <span class="model-role"><strong>The Fast Guardian:</strong> Protects your session privacy and handles rapid safety checks right near your location.</span>
+              <span class="model-name">☁️ Cloudflare Workers AI (Edge Safety & Routing)</span>
+              <span class="model-role">Runs lightning-fast edge checks and keeps your session uninterrupted if external APIs face slowdowns.</span>
             </div>
           </div>
         </div>
@@ -1232,7 +1233,7 @@
       </div>
 
       <div class="demo-footer-note">
-        ⚡ Multi-model architecture orchestrated by Supabase with Google Gemini, Groq, Mistral, Grok, and Cloudflare Workers AI.
+        ⚡ Powered by Google Gemini with smart fallback orchestration via Supabase and Cloudflare.
       </div>
     </section>
 
