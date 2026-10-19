@@ -524,7 +524,7 @@
     }
 
     /* ==========================================================
-       NEW: VERTICAL ARCHITECTURE & MULTI-MODEL ENGINE SECTION
+       USER-FRIENDLY "BEHIND THE SCENES" ARCHITECTURE STYLES
        ========================================================== */
     .arch-section {
       background: linear-gradient(135deg, rgba(25, 20, 48, 0.7) 0%, rgba(10, 8, 22, 0.85) 100%);
@@ -609,10 +609,11 @@
     /* Vertical Flow Connector Arrow */
     .arch-arrow {
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.15rem;
+      font-weight: 600;
       color: var(--neon-cyan);
       margin: -6px 0;
-      opacity: 0.75;
+      opacity: 0.85;
       text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
       user-select: none;
     }
@@ -633,10 +634,11 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+      text-align: left;
     }
 
     .model-name {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       font-weight: 700;
       color: #fff;
       display: flex;
@@ -645,17 +647,22 @@
     }
 
     .model-role {
-      font-size: 0.82rem;
-      color: var(--text-dim);
+      font-size: 0.84rem;
+      color: var(--text-muted);
       line-height: 1.45;
+    }
+
+    .model-role strong {
+      color: #F8FAFC;
     }
 
     /* Supabase Specific Breakdown Grid */
     .supabase-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
       margin-top: 16px;
+      text-align: left;
     }
 
     .sub-box {
@@ -666,25 +673,16 @@
     }
 
     .sub-box h4 {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       color: var(--success);
       margin-bottom: 6px;
       font-family: 'Space Grotesk', sans-serif;
     }
 
     .sub-box p {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
       line-height: 1.45;
-    }
-
-    .sub-box code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      background: rgba(0, 0, 0, 0.35);
-      padding: 1px 5px;
-      border-radius: 4px;
-      color: #A7F3D0;
     }
 
     /* Speech Modeling Demo Section */
@@ -939,7 +937,7 @@
         EchoMate is your judgment-free conversational flight simulator. Practice real-world scenarios on any topic you care about with zero mid-thought interruptions, natural speech recasting, and instant executive polish.
       </p>
       <div class="cta-group">
-        <a href="#architecture" class="btn btn-primary">Explore System Architecture ↓</a>
+        <a href="#how-it-works" class="btn btn-primary">See How EchoMate Works ↓</a>
         <a href="https://sandeepsingh-tech.github.io/showcase.html" class="btn btn-showcase">
           Explore Systems & Showcase ↗
         </a>
@@ -1064,128 +1062,105 @@
     </section>
 
     <!-- ==========================================================
-         ARCHITECTURE & MULTI-MODEL ENGINE SECTION (INSERTION)
+         USER-FRIENDLY "BEHIND THE SCENES" ARCHITECTURE SECTION
          ========================================================== -->
-    <section id="architecture" class="arch-section">
+    <section id="how-it-works" class="arch-section">
       <div style="text-align: center; max-width: 720px; margin: 0 auto;">
-        <span class="box-badge green" style="background: rgba(56, 189, 248, 0.15); color: var(--neon-cyan); padding: 4px 14px; border-radius: 99px;">Engineering Deep-Dive</span>
+        <span class="box-badge green" style="background: rgba(56, 189, 248, 0.15); color: var(--neon-cyan); padding: 4px 14px; border-radius: 99px;">Behind the Scenes</span>
         <h2 style="font-size: 2.1rem; margin: 12px 0 10px; font-family: 'Space Grotesk', sans-serif;">
-          End-to-End Vertical AI Architecture
+          How EchoMate Works Behind the Mic
         </h2>
         <p style="color: var(--text-muted); font-size: 0.96rem; line-height: 1.6;">
-          How EchoMate coordinates ultra-low latency voice streams, dynamic system prompt synthesis, multi-LLM specialized routing, and persistent episodic memory.
+          You simply press speak. Behind the screen, an ensemble of specialized AIs and an adaptive memory system work together to make your conversation feel completely natural.
         </p>
       </div>
 
       <div class="arch-stack">
 
-        <!-- Tier 1: Client -->
+        <!-- Step 1: Voice Input -->
         <div class="arch-card">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag">Tier 1: Client Application</span>
-            <span class="arch-tier-tech">Flutter / FlutterFlow • Opus Audio</span>
+            <span class="arch-tier-tag">Step 1: Your Voice In</span>
+            <span class="arch-tier-tech">Flutter App • Audio Capture</span>
           </div>
-          <h3>Cross-Platform Mobile Interface</h3>
-          <p>Captures bidirectional streaming audio with real-time waveform visualization, renders low-latency conversational transcripts, and displays interactive post-session diagnostic cards without blocking the voice loop.</p>
+          <h3>🎙️ You Speak Naturally & Freely</h3>
+          <p>You speak into the EchoMate mobile app just like you would to a friend or colleague. Your voice is captured cleanly and encrypted instantly, ready for real-time conversation with zero lag.</p>
         </div>
 
-        <div class="arch-arrow">▼ &nbsp; WSS / HTTPS (Supabase JWT Auth) &nbsp; ▼</div>
+        <div class="arch-arrow">▼ &nbsp; Instant Lightning-Fast Connection &nbsp; ▼</div>
 
-        <!-- Tier 2: Edge Gateway -->
-        <div class="arch-card">
-          <div class="arch-badge-header">
-            <span class="arch-tier-tag">Tier 2: Edge Network & Gateway</span>
-            <span class="arch-tier-tech">Cloudflare Workers • WSS Proxy</span>
-          </div>
-          <h3>Global Edge Routing & Rate Limiting</h3>
-          <p>Proxies bidirectional audio WebSockets, verifies JSON Web Tokens, terminates TLS close to the user in South Asia, and applies DDoS protection and intelligent session caching.</p>
-        </div>
-
-        <div class="arch-arrow">▼ &nbsp; Authorized Session Handshake &nbsp; ▼</div>
-
-        <!-- Tier 3: Supabase Edge Functions -->
+        <!-- Step 2: Smart Coordinator -->
         <div class="arch-card" style="border-color: rgba(129, 140, 248, 0.45);">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(129, 140, 248, 0.15); color: #A5B4FC; border-color: rgba(129, 140, 248, 0.4);">Tier 3: Backend Orchestration</span>
-            <span class="arch-tier-tech">Supabase Edge Functions • Deno TypeScript</span>
+            <span class="arch-tier-tag" style="background: rgba(129, 140, 248, 0.15); color: #A5B4FC; border-color: rgba(129, 140, 248, 0.4);">Step 2: Smart Coordinator</span>
+            <span class="arch-tier-tech">Supabase & Cloudflare Gateway</span>
           </div>
-          <h3>Micro-Orchestration & Dynamic Prompt Engine</h3>
-          <p>Serverless Deno workers that inject user memory into system prompts and route queries to the optimal specialized AI model:</p>
-          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 14px;">
-            <div style="font-size: 0.85rem; color: var(--text-muted);">
-              <code style="color: var(--neon-cyan); font-family: 'JetBrains Mono', monospace;">/session-init</code> — Reads user target role and last 5 recurring errors to synthesize runtime prompts.
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">
-              <code style="color: var(--neon-cyan); font-family: 'JetBrains Mono', monospace;">/ai-orchestrator</code> — Dispatches voice frames and analytical workloads based on latency budgets.
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">
-              <code style="color: var(--neon-cyan); font-family: 'JetBrains Mono', monospace;">/diagnostic-distill</code> — Asynchronous post-session worker calculating CEFR, WPM, and error vectors.
-            </div>
-          </div>
+          <h3>🧠 The Intelligent Brain Orchestrator</h3>
+          <p>Before responding, our coordinator pulls your background (your career goal, your speaking style, and past speech habits) and hands your turn to the AI best equipped to handle that exact moment.</p>
         </div>
 
-        <div class="arch-arrow">▼ &nbsp; Smart Dynamic Task Dispatch &nbsp; ▼</div>
+        <div class="arch-arrow">▼ &nbsp; Routed to the Right Specialized AI &nbsp; ▼</div>
 
-        <!-- Tier 4: Multi-Model Inference Mesh -->
+        <!-- Step 3: Multi-AI Team -->
         <div class="arch-card" style="border-color: rgba(96, 165, 250, 0.45);">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(96, 165, 250, 0.15); color: #93C5FD; border-color: rgba(96, 165, 250, 0.4);">Tier 4: Multi-LLM Inference Mesh</span>
-            <span class="arch-tier-tech">Specialized Model Routing</span>
+            <span class="arch-tier-tag" style="background: rgba(96, 165, 250, 0.15); color: #93C5FD; border-color: rgba(96, 165, 250, 0.4);">Step 3: The AI Specialist Team</span>
+            <span class="arch-tier-tech">Multi-Model Engine</span>
           </div>
-          <h3>Hybrid Model Allocation Matrix</h3>
-          <p>EchoMate does not rely on a single model. We route conversational turns, mock interviews, and evaluation pipelines to specialized engines based on their respective strengths:</p>
+          <h3>🤝 Different AIs for Different Jobs</h3>
+          <p>No single AI does everything. We route different parts of your practice to specialized models that excel at specific tasks:</p>
 
           <div class="models-grid">
             <div class="model-box">
               <span class="model-name">🟣 Google Gemini</span>
-              <span class="model-role">Primary real-time conversational streaming, multimodal audio processing, and implicit speech recasting.</span>
+              <span class="model-role"><strong>The Natural Conversationalist:</strong> Listens to tone and responds in smooth real-time speech without awkward pauses.</span>
             </div>
             <div class="model-box">
               <span class="model-name">⚡ Groq Cloud</span>
-              <span class="model-role">Sub-150ms TTFT LPU inference with Whisper & Llama 3 for instant transcription & grammar validation.</span>
-            </div>
-            <div class="model-box">
-              <span class="model-name">🧠 Mistral AI</span>
-              <span class="model-role">Deep grammatical distillation, CEFR-aligned scoring, and structured JSON diagnostics.</span>
+              <span class="model-role"><strong>The Speed Engine:</strong> Turns your voice into text in a fraction of a second so conversations feel instant.</span>
             </div>
             <div class="model-box">
               <span class="model-name">✖️ Grok (xAI)</span>
-              <span class="model-role">Candid technical mock interviews, tough cross-examination questions, and realistic banter.</span>
+              <span class="model-role"><strong>The Tough Interviewer:</strong> Simulates realistic, challenging workplace questions and debates.</span>
+            </div>
+            <div class="model-box">
+              <span class="model-name">🧠 Mistral AI</span>
+              <span class="model-role"><strong>The Analytical Coach:</strong> Reviews your whole session quietly to identify vocabulary opportunities and grammar patterns.</span>
             </div>
             <div class="model-box">
               <span class="model-name">☁️ Cloudflare Workers AI</span>
-              <span class="model-role">Edge-level embeddings generation, fast offline fallbacks, and real-time safety & tone evaluation.</span>
+              <span class="model-role"><strong>The Fast Guardian:</strong> Protects your session privacy and handles rapid safety checks right near your location.</span>
             </div>
           </div>
         </div>
 
-        <div class="arch-arrow">▼ &nbsp; Persistent Memory & Context Ingestion &nbsp; ▼</div>
+        <div class="arch-arrow">▼ &nbsp; Learning What Makes You Unique &nbsp; ▼</div>
 
-        <!-- Tier 5: Supabase Data Layer -->
+        <!-- Step 4: Long-Term Memory -->
         <div class="arch-card" style="border-color: rgba(52, 211, 153, 0.45);">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(52, 211, 153, 0.15); color: #6EE7B7; border-color: rgba(52, 211, 153, 0.4);">Tier 5: Data & Memory Layer</span>
-            <span class="arch-tier-tech">Supabase • PostgreSQL • pgvector</span>
+            <span class="arch-tier-tag" style="background: rgba(52, 211, 153, 0.15); color: #6EE7B7; border-color: rgba(52, 211, 153, 0.4);">Step 4: Long-Term Memory</span>
+            <span class="arch-tier-tech">Supabase Secure Cloud Storage</span>
           </div>
-          <h3>Long-Term Episodic Learner Memory</h3>
-          <p>Our database architecture records session trajectories and semantic error patterns with Row Level Security (RLS) enforcement:</p>
+          <h3>📈 A Coach That Never Forgets Your Progress</h3>
+          <p>Every time you finish talking, your progress is saved securely so each session picks up where you left off:</p>
 
           <div class="supabase-grid">
             <div class="sub-box">
-              <h4>🧠 learner_memory (pgvector)</h4>
-              <p>Stores recurring speech slips with HNSW vector indexing for semantic similarity lookup across sessions.</p>
+              <h4>🎯 Your Personal Profile</h4>
+              <p>Remembers what you're working toward—like preparing for a tech interview, leadership role, or team presentations.</p>
             </div>
             <div class="sub-box">
-              <h4>📝 system_prompts</h4>
-              <p>Versioned prompt catalog containing baseline personas and dynamic parameter injection schemas.</p>
+              <h4>🔁 Habit Tracker</h4>
+              <p>Quietly notes words or phrases you stumble on frequently so your coach can help you master them over time.</p>
             </div>
             <div class="sub-box">
-              <h4>👤 user_profiles</h4>
-              <p>Maintains target career roles (e.g., Software Engineer, PM), current fluency stage, and MTI tendencies.</p>
+              <h4>📊 Growth Dashboard</h4>
+              <p>Shows how your speaking pace, confidence, and vocabulary variety improve week after week.</p>
             </div>
             <div class="sub-box">
-              <h4>📊 performance_diagnostics</h4>
-              <p>Stores post-session scores: Words Per Minute (WPM), filler frequency, coherence, and executive summaries.</p>
+              <h4>🔒 Private & Secure</h4>
+              <p>Your audio and conversations remain strictly yours with end-to-end privacy controls.</p>
             </div>
           </div>
         </div>
@@ -1257,7 +1232,7 @@
       </div>
 
       <div class="demo-footer-note">
-        ⚡ Multi-model architecture orchestrated by Supabase Edge Functions with Google Gemini, Groq, Mistral, Grok, and Cloudflare Workers AI.
+        ⚡ Multi-model architecture orchestrated by Supabase with Google Gemini, Groq, Mistral, Grok, and Cloudflare Workers AI.
       </div>
     </section>
 
