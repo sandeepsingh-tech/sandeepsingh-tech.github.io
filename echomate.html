@@ -662,6 +662,53 @@
 
     /* Mobile Single-Line Optimization */
     @media (max-width: 640px) {
+      @media (max-width: 640px) {
+  /* Center the badges and stack them cleanly in the middle */
+  .arch-badge-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .arch-tier-tag,
+  .arch-tier-tech {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* Center the card headings, paragraphs, and contents */
+  .arch-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .arch-card h3,
+  .arch-card p {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Center AI model cards content */
+  .model-box {
+    text-align: center;
+    align-items: center;
+  }
+
+  .model-name {
+    justify-content: center;
+  }
+
+  /* Center Supabase detail boxes */
+  .supabase-grid,
+  .sub-box {
+    text-align: center;
+  }
+}
       .arch-connector-wrap {
         margin: 0;
       }
