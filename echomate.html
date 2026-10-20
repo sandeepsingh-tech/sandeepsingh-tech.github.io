@@ -69,7 +69,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 85px;
+      scroll-padding-top: 84px;
     }
 
     html, body {
@@ -103,14 +103,23 @@
     /* Fixed Glass Header */
     header {
       width: 100%;
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
       background: var(--header-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(232, 121, 249, 0.18);
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Reserves the header's initial height so page content starts below it. */
+    .header-spacer {
+      display: block;
+      width: 100%;
+      height: 66px;
     }
 
     .nav-wrap {
@@ -1152,31 +1161,75 @@
     }
 
     /* ==========================================================
-       MOBILE ONLY SLIDER HEADER & CLEAN DESKTOP INTEGRATION
+       RESPONSIVE FIXED HEADER + MOBILE COLLAPSE ON SCROLL
        ========================================================== */
     @media (max-width: 768px) {
-      /* Scroll offset matches the compact slider height on mobile */
+      /* The menu remains fixed and visible even after the header collapses. */
       html {
-        scroll-padding-top: 60px;
+        scroll-padding-top: 64px;
+      }
+
+      .header-spacer {
+        height: 104px; /* recalculated by JavaScript to match the real initial header height */
       }
 
       header {
-        padding: 6px 0;
-      }
-
-      /* HIDE top branding and creator button completely on mobile */
-      .brand,
-      .nav-links {
-        display: none !important;
-      }
-
-      /* MAKE nav slider the ONLY visible element on mobile */
-      .nav-wrap {
         padding: 0;
-        justify-content: center;
+      }
+
+      .nav-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px 10px;
+        padding: 8px 0 9px;
+      }
+
+      /* Branding and creator link are visible at the top, then collapse on scroll. */
+      .brand {
+        order: 1;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        max-width: calc(100% - 125px);
+        min-width: 0;
+      }
+
+      .brand-logo-wrap {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+      }
+
+      .brand-meta {
+        gap: 5px;
+      }
+
+      .brand-name {
+        font-size: 0.88rem;
+      }
+
+      .brand-badge {
+        font-size: 0.52rem;
+        padding: 1px 5px;
+      }
+
+      .nav-links {
+        order: 2;
+        display: block;
+        flex-shrink: 0;
+      }
+
+      .nav-creator-btn {
+        font-size: 0.7rem;
+        padding: 6px 8px;
+        border-radius: 9px;
       }
 
       nav {
+        order: 3;
+        flex: 0 0 100%;
         width: 100%;
         overflow: hidden;
         position: relative;
@@ -1205,6 +1258,17 @@
         padding: 6px 14px;
         border-radius: 999px;
         flex-shrink: 0;
+      }
+
+      /* On scroll, keep only the horizontal section menu visible on mobile. */
+      header.is-scrolled .brand,
+      header.is-scrolled .nav-links {
+        display: none !important;
+      }
+
+      header.is-scrolled .nav-wrap {
+        padding-top: 6px;
+        padding-bottom: 6px;
       }
     }
 
@@ -1377,6 +1441,7 @@
       </div>
     </div>
   </header>
+  <div class="header-spacer" aria-hidden="true"></div>
 
   <main class="container">
 
@@ -1857,66 +1922,96 @@
     </div>
   </footer>
 
-  <!-- Controller Script: Back-to-Top & Glitch-Free Active Scroll-Spy -->
+  <!-- Controller Script: Fixed Header, Back-to-Top & Active Section Navigation -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Back-to-Top Controller
+      const header = document.querySelector('header');
+      const headerSpacer = document.querySelector('.header-spacer');
       const backToTopBtn = document.getElementById('backToTop');
-      window.addEventListener('scroll', () => {
+      const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item-link'));
+      const navMenuContainer = document.querySelector('.nav-menu');
+      const navTargets = navLinks
+        .map((link) => ({ link, section: document.querySelector(link.getAttribute('href')) }))
+        .filter((item) => item.section);
+
+      let lastActiveId = null;
+
+      // Measure the expanded header so content never begins underneath it.
+      function syncHeaderSpacer() {
+        const shouldBeCollapsed = window.scrollY > 35;
+        header.classList.remove('is-scrolled');
+        const initialHeight = header.offsetHeight;
+        headerSpacer.style.height = `${initialHeight}px`;
+        if (shouldBeCollapsed) header.classList.add('is-scrolled');
+      }
+
+      function centerActiveMobileLink(link) {
+        if (!navMenuContainer || window.innerWidth > 768) return;
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = navMenuContainer.getBoundingClientRect();
+        const targetScrollLeft = navMenuContainer.scrollLeft
+          + (linkRect.left - containerRect.left)
+          - (containerRect.width / 2)
+          + (linkRect.width / 2);
+
+        navMenuContainer.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+      }
+
+      // Select the last linked section whose top has reached the active reading line.
+      function updateActiveSection() {
+        const activationLine = window.scrollY + header.offsetHeight + 24;
+        let activeItem = null;
+
+        for (const item of navTargets) {
+          const sectionTop = item.section.getBoundingClientRect().top + window.scrollY;
+          if (sectionTop <= activationLine) activeItem = item;
+        }
+
+        navLinks.forEach((link) => link.classList.remove('active'));
+        if (activeItem) {
+          activeItem.link.classList.add('active');
+          const activeId = activeItem.section.id;
+          if (activeId !== lastActiveId) {
+            centerActiveMobileLink(activeItem.link);
+            lastActiveId = activeId;
+          }
+        } else {
+          lastActiveId = null;
+        }
+      }
+
+      function handleScroll() {
+        const shouldCollapse = window.innerWidth <= 768 && window.scrollY > 35;
+        header.classList.toggle('is-scrolled', shouldCollapse);
+
         if (window.scrollY > 350) {
           backToTopBtn.classList.add('visible');
         } else {
           backToTopBtn.classList.remove('visible');
         }
-      }, { passive: true });
+
+        updateActiveSection();
+      }
 
       backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // 2. Glitch-Free Active Scroll-Spy (IntersectionObserver)
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.nav-menu .nav-item-link');
-      const navMenuContainer = document.querySelector('.nav-menu');
+      // Measure on startup and resize; update active navigation as the page moves.
+      syncHeaderSpacer();
+      handleScroll();
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('resize', () => {
+        syncHeaderSpacer();
+        handleScroll();
+      });
 
-      const observerOptions = {
-        root: null,
-        // Active detection line sits in the upper half of viewport
-        rootMargin: '-20% 0px -70% 0px',
-        threshold: 0
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const currentId = entry.target.getAttribute('id');
-            
-            navLinks.forEach((link) => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === `#${currentId}`) {
-                link.classList.add('active');
-                
-                // Safely adjust horizontal menu scroll ONLY on mobile WITHOUT triggering window scroll jumps
-                if (navMenuContainer && window.innerWidth <= 768) {
-                  const linkRect = link.getBoundingClientRect();
-                  const containerRect = navMenuContainer.getBoundingClientRect();
-                  const targetScrollLeft = navMenuContainer.scrollLeft + (linkRect.left - containerRect.left) - (containerRect.width / 2) + (linkRect.width / 2);
-                  
-                  navMenuContainer.scrollTo({
-                    left: targetScrollLeft,
-                    behavior: 'smooth'
-                  });
-                }
-              }
-            });
-          }
+      // Recalculate the active section after a nav click has completed its anchor movement.
+      navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          window.setTimeout(updateActiveSection, 250);
         });
-      }, observerOptions);
-
-      sections.forEach((section) => observer.observe(section));
+      });
     });
   </script>
 
