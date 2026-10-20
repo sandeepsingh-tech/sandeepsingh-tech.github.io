@@ -523,9 +523,7 @@
       margin: 0;
     }
 
-    /* ==========================================================
-       USER-FRIENDLY "BEHIND THE SCENES" ARCHITECTURE STYLES
-       ========================================================== */
+    /* Architecture Section Styles */
     .arch-section {
       background: linear-gradient(135deg, rgba(25, 20, 48, 0.7) 0%, rgba(10, 8, 22, 0.85) 100%);
       border: 1px solid var(--card-border);
@@ -607,7 +605,6 @@
     }
 
     /* Vertical Flow Connector Arrow */
-    /* Tactile Dropdown-style Flow Connectors */
     .arch-connector-wrap {
       display: flex;
       justify-content: center;
@@ -658,69 +655,6 @@
     .arch-connector-btn:hover .dropdown-caret {
       transform: translateY(2px);
       color: #fff;
-    }
-
-    /* Mobile Single-Line Optimization */
-    @media (max-width: 640px) {
-      @media (max-width: 640px) {
-  /* Center the badges and stack them cleanly in the middle */
-  .arch-badge-header {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .arch-tier-tag,
-  .arch-tier-tech {
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  /* Center the card headings, paragraphs, and contents */
-  .arch-card {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .arch-card h3,
-  .arch-card p {
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Center AI model cards content */
-  .model-box {
-    text-align: center;
-    align-items: center;
-  }
-
-  .model-name {
-    justify-content: center;
-  }
-
-  /* Center Supabase detail boxes */
-  .supabase-grid,
-  .sub-box {
-    text-align: center;
-  }
-}
-      .arch-connector-wrap {
-        margin: 0;
-      }
-      .arch-connector-btn {
-        font-size: clamp(0.68rem, 2.7vw, 0.80rem);
-        padding: 5px 11px;
-        gap: 5px;
-        letter-spacing: 0.01em;
-      }
-      .arch-connector-btn .dropdown-caret {
-        font-size: 0.62rem;
-      }
     }
 
     /* Multi-Model Grid */
@@ -788,6 +722,206 @@
       font-size: 0.84rem;
       color: var(--text-muted);
       line-height: 1.45;
+    }
+
+    /* ==========================================================
+       NEW: VOICE STUDIO & STORY MODE (FUTURE VISION) STYLES
+       ========================================================== */
+    .studio-future-section {
+      background: linear-gradient(135deg, rgba(28, 18, 52, 0.75) 0%, rgba(12, 9, 26, 0.9) 100%);
+      border: 1px solid rgba(232, 121, 249, 0.3);
+      border-radius: 26px;
+      padding: 44px 26px;
+      margin: 50px 0 75px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 32px rgba(232, 121, 249, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .studio-future-section::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(232, 121, 249, 0.18) 0%, rgba(56, 189, 248, 0) 70%);
+      pointer-events: none;
+    }
+
+    .studio-future-section::after {
+      content: "";
+      position: absolute;
+      bottom: -100px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(232, 121, 249, 0) 70%);
+      pointer-events: none;
+    }
+
+    .studio-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(232, 121, 249, 0.15);
+      color: var(--neon-magenta);
+      border: 1px solid rgba(232, 121, 249, 0.45);
+      margin-bottom: 14px;
+    }
+
+    .studio-intro-wrap {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 36px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .studio-intro-wrap h2 {
+      font-size: clamp(1.9rem, 4.5vw, 2.5rem);
+      font-family: 'Space Grotesk', sans-serif;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .studio-intro-wrap p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Studio Pillars Layout */
+    .studio-category-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.28rem;
+      color: #fff;
+      margin: 32px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .studio-category-title .cat-badge {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .studio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .studio-card {
+      background: rgba(18, 14, 38, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 20px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .studio-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(232, 121, 249, 0.45);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .studio-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .studio-card-icon {
+      font-size: 1.6rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .studio-card h4 {
+      font-size: 1.05rem;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #fff;
+    }
+
+    .studio-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .studio-card-meta {
+      margin-top: auto;
+      padding-top: 10px;
+      font-size: 0.76rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--neon-cyan);
+    }
+
+    /* Output Deliverable Banner */
+    .studio-output-banner {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.09) 0%, rgba(232, 121, 249, 0.09) 100%);
+      border: 1px dashed rgba(56, 189, 248, 0.4);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .output-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .output-box h5 {
+      font-size: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .output-box p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
     /* Speech Modeling Demo Section */
@@ -985,8 +1119,15 @@
 
       .flight-sim-section,
       .arch-section,
+      .studio-future-section,
       .demo-section {
         padding: 26px 16px;
+      }
+
+      .studio-output-banner {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 18px;
       }
 
       .demo-grid {
@@ -1000,6 +1141,62 @@
 
       .speech-box p {
         font-size: 0.9rem;
+      }
+
+      /* Architecture Section Center Alignment on Mobile */
+      .arch-badge-header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .arch-tier-tag,
+      .arch-tier-tech {
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .arch-card {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .arch-card h3,
+      .arch-card p {
+        text-align: center;
+        width: 100%;
+      }
+
+      .model-box {
+        text-align: center;
+        align-items: center;
+      }
+
+      .model-name {
+        justify-content: center;
+      }
+
+      .supabase-grid,
+      .sub-box {
+        text-align: center;
+      }
+
+      .arch-connector-wrap {
+        margin: 0;
+      }
+      .arch-connector-btn {
+        font-size: clamp(0.68rem, 2.7vw, 0.80rem);
+        padding: 5px 11px;
+        gap: 5px;
+        letter-spacing: 0.01em;
+      }
+      .arch-connector-btn .dropdown-caret {
+        font-size: 0.62rem;
       }
     }
   </style>
@@ -1291,6 +1488,141 @@
 
       </div>
     </section>
+
+    <!-- ==========================================================
+         IN THE NEAR FUTURE: ECHOMATE VOICE STUDIO & STORY MODE
+         ========================================================== -->
+    <section id="near-future" class="studio-future-section">
+      <div class="studio-intro-wrap">
+        <span class="studio-badge">✨ In the Near Future • Advanced &amp; Paid Tier</span>
+        <h2>
+          EchoMate Voice Studio: <br>
+          <span class="gradient-text">Real Conversations. Tangible Creations.</span>
+        </h2>
+        <p>
+          Move beyond endless grammar drills. In Voice Studio, you test your spoken English by producing real, shareable audio assets. Just talk naturally—EchoMate structures your ideas step by step, challenges your arguments in character, and masters your session into a broadcast-quality English audio production.
+        </p>
+      </div>
+
+      <!-- Pillar 1: Entertainment & Drama Tracks -->
+      <div class="studio-category-title">
+        <span>🎭 Entertainment &amp; Interactive Roleplay</span>
+        <span class="cat-badge" style="background: rgba(232, 121, 249, 0.2); color: var(--neon-magenta);">High Immersion</span>
+      </div>
+
+      <div class="studio-grid">
+        <!-- Detective Mystery -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">🕵️</div>
+            <h4>Detective Murder Mystery</h4>
+          </div>
+          <p>Step into the shoes of the lead investigator. Interrogate suspects who push back, notice inconsistencies in their alibis, and deliver your grand final deduction.</p>
+          <div class="studio-card-meta">• Deductive phrasing &amp; suspense</div>
+        </div>
+
+        <!-- The Roasting Show -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">🔥</div>
+            <h4>The Unpopular Opinion &amp; Roasting Show</h4>
+          </div>
+          <p>Defend your boldest hot takes—from movies to everyday pet peeves—against an argumentative, witty AI co-host who demands fast verbal rebuttals.</p>
+          <div class="studio-card-meta">• Spontaneous counterarguments &amp; wit</div>
+        </div>
+
+        <!-- What If History -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">⏳</div>
+            <h4>"What If" Alternate History</h4>
+          </div>
+          <p>Alter a major turning point in history or pop culture. Talk through how society and technology shift in a collaborative world-building sandbox.</p>
+          <div class="studio-card-meta">• Conditional reasoning &amp; storytelling</div>
+        </div>
+
+        <!-- Campfire Ghost Story -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">🕯️</div>
+            <h4>Campfire Ghost Stories</h4>
+          </div>
+          <p>Co-create spine-chilling urban legends. Master descriptive atmosphere, sudden twists, and dramatic pauses under the guidance of a dark narrative host.</p>
+          <div class="studio-card-meta">• Sensory adjectives &amp; dramatic pacing</div>
+        </div>
+
+        <!-- Ridiculous Shark Tank -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">🦈</div>
+            <h4>The Ridiculous Shark Tank Pitch</h4>
+          </div>
+          <p>Pitch absurd inventions with straight-faced corporate seriousness. Defend unit economics and handle tough investor grilling with executive flair.</p>
+          <div class="studio-card-meta">• Persuasive rhetoric &amp; business confidence</div>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Productive Creator Tracks -->
+      <div class="studio-category-title" style="margin-top: 40px;">
+        <span>🎙️ Productive Creator &amp; Story Crafting</span>
+        <span class="cat-badge" style="background: rgba(56, 189, 248, 0.2); color: var(--neon-cyan);">Portfolio Ready</span>
+      </div>
+
+      <div class="studio-grid">
+        <!-- Story Maker & Refiner -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">✍️</div>
+            <h4>Story Maker &amp; Narrative Refiner</h4>
+          </div>
+          <p>Speak your raw book, script, or episode concepts aloud. EchoMate organizes your spoken thoughts into structured plot beats and scene outlines without interrupting your flow.</p>
+          <div class="studio-card-meta">• Narrative architecture &amp; character arcs</div>
+        </div>
+
+        <!-- Industry Insider -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">💼</div>
+            <h4>"Industry Insider" Explainer</h4>
+          </div>
+          <p>Turn your professional field expertise into an engaging 3-minute audio explainer. Practice framing complex technical topics with clear real-world analogies.</p>
+          <div class="studio-card-meta">• Executive communication &amp; clarity</div>
+        </div>
+
+        <!-- Critical Review -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">🎬</div>
+            <h4>Critical Review &amp; Deep-Dive Essay</h4>
+          </div>
+          <p>Analyze a recent film, book, product design, or tech tool. Move beyond simple descriptors like "good" into nuanced, intellectual cultural critique.</p>
+          <div class="studio-card-meta">• Evaluative vocabulary &amp; thesis flow</div>
+        </div>
+
+        <!-- Cultural & Travel Guide -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-card-icon">🗺️</div>
+            <h4>"Local Insider" Cultural &amp; Travel Guide</h4>
+          </div>
+          <p>Narrate insider travel recommendations and culinary traditions from your home region, crafting a voiceover script suitable for global audiences.</p>
+          <div class="studio-card-meta">• Evocative descriptions &amp; cultural voice</div>
+        </div>
+      </div>
+
+      <!-- The Studio Deliverable Banner -->
+      <div class="studio-output-banner">
+        <div class="output-box">
+          <h5>📄 Clean Formatted Script</h5>
+          <p>Receive your completed, step-by-step spoken transcript refined with natural sentence cadence—ready to publish as a Substack article, LinkedIn post, or YouTube script.</p>
+        </div>
+        <div class="output-box">
+          <h5>🎧 Studio-Grade Audio Master</h5>
+          <p>Render your finished piece using on-device mobile voice synthesis for fast proof-listening, or upgrade to neural cinematic voices (via ElevenLabs API) for a broadcast-ready MP3 export.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Interactive Speech Modeling Demo Section -->
     <section id="demo" class="demo-section">
       <div style="text-align: center; max-width: 660px; margin: 0 auto 10px;">
