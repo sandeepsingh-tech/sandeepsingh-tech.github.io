@@ -50,7 +50,7 @@
       --card-bg: rgba(22, 17, 43, 0.62);
       --card-border: rgba(255, 255, 255, 0.12);
       --card-hover-border: rgba(56, 189, 248, 0.45);
-      --header-bg: rgba(14, 10, 28, 0.90);
+      --header-bg: rgba(14, 10, 28, 0.92);
       --neon-cyan: #38BDF8;
       --neon-magenta: #E879F9;
       --peach-accent: #FB923C;
@@ -181,7 +181,6 @@
       white-space: nowrap;
     }
 
-    /* Nav Container & Menu Links */
     nav {
       min-width: 0;
     }
@@ -200,7 +199,7 @@
       text-decoration: none;
       font-size: 0.85rem;
       font-weight: 600;
-      padding: 7px 12px;
+      padding: 7px 14px;
       border-radius: 10px;
       transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-flex;
@@ -220,7 +219,7 @@
     /* Active Scroll-Spy State */
     .nav-item-link.active {
       color: #fff;
-      background: rgba(56, 189, 248, 0.18);
+      background: rgba(56, 189, 248, 0.2);
       border-color: var(--neon-cyan);
       box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
     }
@@ -1152,35 +1151,37 @@
       font-weight: 600;
     }
 
-    /* Responsive Mobile Navigation */
+    /* ==========================================================
+       MOBILE ONLY SLIDER HEADER & CLEAN DESKTOP INTEGRATION
+       ========================================================== */
     @media (max-width: 768px) {
+      /* Scroll offset matches the compact slider height on mobile */
       html {
-        scroll-padding-top: 110px;
+        scroll-padding-top: 60px;
       }
 
-      .nav-wrap {
-        flex-wrap: wrap;
-        padding: 10px 0 8px;
-        gap: 8px 12px;
+      header {
+        padding: 6px 0;
       }
 
-      .brand {
-        order: 1;
-      }
-
+      /* HIDE top branding and creator button completely on mobile */
+      .brand,
       .nav-links {
-        order: 2;
+        display: none !important;
+      }
+
+      /* MAKE nav slider the ONLY visible element on mobile */
+      .nav-wrap {
+        padding: 0;
+        justify-content: center;
       }
 
       nav {
-        order: 3;
         width: 100%;
         overflow: hidden;
         position: relative;
         mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
         -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
-        padding: 4px 0 2px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .nav-menu {
@@ -1192,7 +1193,7 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        padding: 4px 10px;
+        padding: 2px 14px;
       }
 
       .nav-menu::-webkit-scrollbar {
@@ -1200,43 +1201,16 @@
       }
 
       .nav-item-link {
-        font-size: 0.78rem;
-        padding: 6px 12px;
+        font-size: 0.80rem;
+        padding: 6px 14px;
         border-radius: 999px;
         flex-shrink: 0;
-      }
-
-      .nav-creator-btn {
-        font-size: 0.78rem;
-        padding: 6px 12px;
-        border-radius: 9px;
       }
     }
 
     @media (max-width: 640px) {
       .container {
         padding: 0 16px;
-      }
-
-      .brand-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-      }
-
-      .brand-name {
-        font-size: 1.05rem;
-        line-height: 1.15;
-      }
-
-      .brand-badge {
-        font-size: 0.6rem;
-        padding: 2px 6px;
-      }
-
-      .brand-logo-wrap {
-        width: 36px;
-        height: 36px;
       }
 
       .hero {
@@ -1373,7 +1347,7 @@
 </head>
 <body>
 
-  <!-- Navigation Bar with Section Links (Glass Translucent Cosmic Theme) -->
+  <!-- Navigation Bar (On desktop: Brand + Slider + Profile; On mobile: Clean Slider Only) -->
   <header>
     <div class="container nav-wrap">
       <a href="#" class="brand">
@@ -1386,7 +1360,7 @@
         </div>
       </a>
 
-      <!-- Smooth Anchor Navigation Links (Horizontally Scrollable Pill Track on Mobile) -->
+      <!-- Smooth Anchor Navigation Links (Horizontally Scrollable Pill Track on Mobile & Desktop) -->
       <nav>
         <ul class="nav-menu">
           <li><a href="#philosophy" class="nav-item-link">Philosophy</a></li>
@@ -1883,7 +1857,7 @@
     </div>
   </footer>
 
-  <!-- Controller Script: Back-to-Top & Active Scroll-Spy -->
+  <!-- Controller Script: Back-to-Top & Glitch-Free Active Scroll-Spy -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Back-to-Top Controller
@@ -1903,15 +1877,15 @@
         });
       });
 
-      // 2. Active Scroll-Spy (IntersectionObserver)
+      // 2. Glitch-Free Active Scroll-Spy (IntersectionObserver)
       const sections = document.querySelectorAll('section[id]');
       const navLinks = document.querySelectorAll('.nav-menu .nav-item-link');
       const navMenuContainer = document.querySelector('.nav-menu');
 
       const observerOptions = {
         root: null,
-        // Highlights the section when its top crosses the upper third of the viewport
-        rootMargin: '-25% 0px -65% 0px',
+        // Active detection line sits in the upper half of viewport
+        rootMargin: '-20% 0px -70% 0px',
         threshold: 0
       };
 
@@ -1925,12 +1899,15 @@
               if (link.getAttribute('href') === `#${currentId}`) {
                 link.classList.add('active');
                 
-                // Auto-center the active pill inside mobile scroll track
+                // Safely adjust horizontal menu scroll ONLY on mobile WITHOUT triggering window scroll jumps
                 if (navMenuContainer && window.innerWidth <= 768) {
-                  link.scrollIntoView({
-                    behavior: 'smooth',
-                    inline: 'center',
-                    block: 'nearest'
+                  const linkRect = link.getBoundingClientRect();
+                  const containerRect = navMenuContainer.getBoundingClientRect();
+                  const targetScrollLeft = navMenuContainer.scrollLeft + (linkRect.left - containerRect.left) - (containerRect.width / 2) + (linkRect.width / 2);
+                  
+                  navMenuContainer.scrollTo({
+                    left: targetScrollLeft,
+                    behavior: 'smooth'
                   });
                 }
               }
