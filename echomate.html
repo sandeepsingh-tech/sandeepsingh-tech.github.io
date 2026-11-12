@@ -115,7 +115,6 @@
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
     }
 
-    /* Reserves the header's initial height so page content starts below it. */
     .header-spacer {
       display: block;
       width: 100%;
@@ -225,7 +224,6 @@
       border-color: rgba(255, 255, 255, 0.18);
     }
 
-    /* Active Scroll-Spy State */
     .nav-item-link.active {
       color: #fff;
       background: rgba(56, 189, 248, 0.2);
@@ -612,25 +610,32 @@
     }
 
     /* ==========================================================
-       DYNAMIC 8-STEP ARCHITECTURE FLOWCHART (GLOWING ARROWS)
+       DYNAMIC S-CURVE ARCHITECTURE FLOWCHART (1->2->3->4->5->6->7->8)
        ========================================================== */
     .flow-diagram-wrap {
-      margin: 34px auto 42px;
-      max-width: 940px;
-      padding-bottom: 34px;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+      margin: 34px auto 46px;
+      max-width: 960px;
+      padding-bottom: 38px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.14);
     }
 
     .flow-row {
       display: grid;
-      gap: 14px;
+      gap: 12px;
       align-items: stretch;
-      margin-bottom: 12px;
     }
 
     .flow-row-3 { grid-template-columns: 1fr auto 1fr auto 1fr; }
-    .flow-row-3-plain { grid-template-columns: repeat(3, 1fr); }
     .flow-row-2 { grid-template-columns: 1fr auto 1fr; }
+
+    /* Desktop Snake Ordering: Row 2 displays 6 <- 5 <- 4 so 4 sits directly under 3 */
+    @media (min-width: 821px) {
+      .snake-row-2 .step-6 { order: 1; }
+      .snake-row-2 .arr-5  { order: 2; }
+      .snake-row-2 .step-5 { order: 3; }
+      .snake-row-2 .arr-4  { order: 4; }
+      .snake-row-2 .step-4 { order: 5; }
+    }
 
     .flow-node {
       background: rgba(16, 12, 34, 0.88);
@@ -644,7 +649,7 @@
       align-items: center;
       position: relative;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      animation: nodePulse 6.4s infinite;
+      animation: nodePulse 8s infinite;
     }
 
     .flow-node.magenta {
@@ -659,25 +664,25 @@
 
     .flow-node-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #fff;
       background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(232, 121, 249, 0.18));
       border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 5px 12px;
+      padding: 5px 11px;
       border-radius: 99px;
       margin-bottom: 12px;
       width: 100%;
     }
 
     .flow-node-icon {
-      font-size: 1.75rem;
+      font-size: 1.7rem;
       margin-bottom: 8px;
       filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
     }
 
     .flow-node p, .flow-node ul {
-      font-size: 0.81rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       line-height: 1.45;
       width: 100%;
@@ -708,14 +713,14 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       margin: 4px 0 8px;
     }
 
     .provider-pill {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      padding: 3px 8px;
+      font-size: 0.68rem;
+      padding: 3px 7px;
       border-radius: 6px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.14);
@@ -729,59 +734,94 @@
       justify-content: center;
       font-size: 1.45rem;
       font-weight: 800;
-      color: rgba(56, 189, 248, 0.35);
-      animation: arrowGlow 6.4s infinite;
+      color: rgba(56, 189, 248, 0.32);
+      animation: arrowGlow 8s infinite;
       user-select: none;
     }
 
-    .flow-arrow-down-row {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin: -2px 0 10px;
-      font-size: 1.35rem;
-      color: rgba(232, 121, 249, 0.35);
+    /* Vertical Drop Connectors positioned directly under Step 3 (right) and Step 6 (left) */
+    .flow-drop-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 12px;
+      margin: 6px 0;
+      font-size: 1.45rem;
+      font-weight: 800;
       user-select: none;
+    }
+
+    .drop-slot-right {
+      grid-column: 5;
+      text-align: center;
+    }
+
+    .drop-slot-left {
+      grid-column: 1;
+      text-align: center;
     }
 
     .flow-arrow-v {
-      animation: arrowGlowMagenta 6.4s infinite;
+      display: inline-block;
+      color: rgba(232, 121, 249, 0.32);
+      animation: arrowGlowMagenta 8s infinite;
     }
 
-    /* Sequential Pipeline Timing (8 Steps Loop = 6.4s) */
+    /* Sequential Snake Pipeline Timing (8s Loop: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8) */
     .step-1 { animation-delay: 0.0s; }
-    .arr-1  { animation-delay: 0.4s; }
-    .step-2 { animation-delay: 0.8s; }
-    .arr-2  { animation-delay: 1.2s; }
-    .step-3 { animation-delay: 1.6s; }
-    .arr-3  { animation-delay: 2.0s; }
-    .step-4 { animation-delay: 2.4s; }
-    .step-5 { animation-delay: 3.0s; }
-    .step-6 { animation-delay: 3.6s; }
-    .arr-4  { animation-delay: 4.2s; }
-    .step-7 { animation-delay: 4.6s; }
-    .arr-5  { animation-delay: 5.2s; }
-    .step-8 { animation-delay: 5.6s; }
+    .arr-1  { animation-delay: 0.5s; }
+    .step-2 { animation-delay: 1.0s; }
+    .arr-2  { animation-delay: 1.5s; }
+    .step-3 { animation-delay: 2.0s; }
+    .arr-3  { animation-delay: 2.5s; }
+    .step-4 { animation-delay: 3.0s; }
+    .arr-4  { animation-delay: 3.5s; }
+    .step-5 { animation-delay: 4.0s; }
+    .arr-5  { animation-delay: 4.5s; }
+    .step-6 { animation-delay: 5.0s; }
+    .arr-6  { animation-delay: 5.5s; }
+    .step-7 { animation-delay: 6.0s; }
+    .arr-7  { animation-delay: 6.5s; }
+    .step-8 { animation-delay: 7.0s; }
 
     @keyframes arrowGlow {
-      0%, 100% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: scale(1); }
-      12% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: scale(1.24); }
-      25% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: scale(1); }
+      0%, 100% { color: rgba(56, 189, 248, 0.28); text-shadow: none; transform: scale(1); }
+      10% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: scale(1.26); }
+      22% { color: rgba(56, 189, 248, 0.28); text-shadow: none; transform: scale(1); }
     }
 
     @keyframes arrowGlowMagenta {
-      0%, 100% { color: rgba(232, 121, 249, 0.3); text-shadow: none; transform: translateY(0); }
-      12% { color: #E879F9; text-shadow: 0 0 12px #E879F9, 0 0 24px #38BDF8; transform: translateY(3px); }
-      25% { color: rgba(232, 121, 249, 0.3); text-shadow: none; transform: translateY(0); }
+      0%, 100% { color: rgba(232, 121, 249, 0.28); text-shadow: none; transform: translateY(0) scale(1); }
+      10% { color: #E879F9; text-shadow: 0 0 12px #E879F9, 0 0 24px #38BDF8; transform: translateY(3px) scale(1.26); }
+      22% { color: rgba(232, 121, 249, 0.28); text-shadow: none; transform: translateY(0) scale(1); }
     }
 
     @keyframes nodePulse {
       0%, 100% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
-      12% { box-shadow: 0 0 22px rgba(56, 189, 248, 0.35), inset 0 0 12px rgba(232, 121, 249, 0.15); border-color: rgba(56, 189, 248, 0.75); }
-      25% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+      10% { box-shadow: 0 0 24px rgba(56, 189, 248, 0.4), inset 0 0 12px rgba(232, 121, 249, 0.18); border-color: rgba(56, 189, 248, 0.8); }
+      22% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
     }
 
-    /* Detailed Vertical Stack Below Flowchart */
+    /* Step-Wise Features Sub-Header inside Architecture Section */
+    .features-stepwise-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 28px;
+    }
+
+    .features-stepwise-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      color: #fff;
+      margin: 10px 0 8px;
+    }
+
+    .features-stepwise-header p {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Detailed Step-by-Step Features Stack */
     .arch-stack {
       display: flex;
       flex-direction: column;
@@ -838,7 +878,7 @@
       border: 1px solid rgba(232, 121, 249, 0.25);
     }
 
-    .arch-card h3 {
+    .arch-card h4 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.25rem;
       margin-bottom: 8px;
@@ -938,10 +978,6 @@
       line-height: 1.45;
     }
 
-    .model-role strong {
-      color: #F8FAFC;
-    }
-
     /* Supabase Specific Breakdown Grid */
     .supabase-grid {
       display: grid;
@@ -958,7 +994,7 @@
       padding: 14px;
     }
 
-    .sub-box h4 {
+    .sub-box h5 {
       font-size: 0.94rem;
       color: var(--success);
       margin-bottom: 6px;
@@ -1332,28 +1368,35 @@
     }
 
     /* ==========================================================
-       RESPONSIVE FLOWCHART & MOBILE COLLAPSE ON SCROLL
+       RESPONSIVE FLOWCHART (LINEAR TOP-TO-BOTTOM ON MOBILE)
        ========================================================== */
     @media (max-width: 820px) {
       .flow-row-3,
-      .flow-row-3-plain,
       .flow-row-2 {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 6px;
       }
 
-      .flow-arrow-h {
+      /* Rotate right-pointing arrows down on mobile */
+      .flow-arrow-h.dir-right {
         transform: rotate(90deg);
         padding: 2px 0;
       }
 
-      .flow-arrow-down-row {
-        justify-content: center;
-        margin: 2px 0 8px;
+      /* Rotate left-pointing arrows down on mobile so 4 -> 5 -> 6 flows downward */
+      .flow-arrow-h.dir-left {
+        transform: rotate(-90deg);
+        padding: 2px 0;
       }
 
-      .flow-arrow-down-row .hide-mobile {
-        display: none;
+      .flow-drop-row {
+        grid-template-columns: 1fr;
+        margin: 4px 0;
+      }
+
+      .drop-slot-right,
+      .drop-slot-left {
+        grid-column: 1;
       }
 
       .flow-node ul {
@@ -1361,21 +1404,29 @@
         padding-left: 0;
       }
 
-      @keyframes arrowGlow {
-        0%, 100% { color: rgba(56, 189, 248, 0.35); text-shadow: none; transform: rotate(90deg) scale(1); }
-        12% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: rotate(90deg) scale(1.2); }
-        25% { color: rgba(56, 189, 248, 0.35); text-shadow: none; transform: rotate(90deg) scale(1); }
+      @keyframes arrowGlowRight {
+        0%, 100% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(90deg) scale(1); }
+        10% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: rotate(90deg) scale(1.22); }
+        22% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(90deg) scale(1); }
       }
+
+      @keyframes arrowGlowLeft {
+        0%, 100% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(-90deg) scale(1); }
+        10% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: rotate(-90deg) scale(1.22); }
+        22% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(-90deg) scale(1); }
+      }
+
+      .flow-arrow-h.dir-right { animation-name: arrowGlowRight; }
+      .flow-arrow-h.dir-left  { animation-name: arrowGlowLeft; }
     }
 
     @media (max-width: 768px) {
-      /* The menu remains fixed and visible even after the header collapses. */
       html {
         scroll-padding-top: 64px;
       }
 
       .header-spacer {
-        height: 104px; /* recalculated by JavaScript to match the real initial header height */
+        height: 104px;
       }
 
       header {
@@ -1391,7 +1442,6 @@
         padding: 8px 0 9px;
       }
 
-      /* Branding and creator link are visible at the top, then collapse on scroll. */
       .brand {
         order: 1;
         display: flex;
@@ -1465,7 +1515,6 @@
         flex-shrink: 0;
       }
 
-      /* On scroll, keep only the horizontal section menu visible on mobile. */
       header.is-scrolled .brand,
       header.is-scrolled .nav-links {
         display: none !important;
@@ -1579,7 +1628,7 @@
         align-items: center;
       }
 
-      .arch-card h3,
+      .arch-card h4,
       .arch-card p {
         text-align: center;
         width: 100%;
@@ -1791,19 +1840,19 @@
     <!-- Behind The Scenes Architecture Section (id="how-it-works") -->
     <section id="how-it-works" class="arch-section">
       <div style="text-align: center; max-width: 720px; margin: 0 auto;">
-        <span class="box-badge green" style="background: rgba(56, 189, 248, 0.15); color: var(--neon-cyan); padding: 4px 14px; border-radius: 99px;">Behind the Scenes</span>
+        <span class="box-badge green" style="background: rgba(56, 189, 248, 0.15); color: var(--neon-cyan); padding: 4px 14px; border-radius: 99px;">System Architecture</span>
         <h2 style="font-size: 2.1rem; margin: 12px 0 10px; font-family: 'Space Grotesk', sans-serif;">
           How EchoMate Works Behind the Mic
         </h2>
         <p style="color: var(--text-muted); font-size: 0.96rem; line-height: 1.6;">
-          You simply press speak. Behind the screen, our primary Gemini engine, smart availability mesh, and long-term memory work together to make your practice effortless.
+          Follow the live S-curve pipeline of a single spoken turn—from your voice entering the app to sub-second AI response generation and background memory distillation.
         </p>
       </div>
 
-      <!-- Dynamic 8-Step Architecture Pipeline (Glowing Sequential Arrows) -->
+      <!-- Dynamic 8-Step S-Curve Architecture Pipeline -->
       <div class="flow-diagram-wrap">
 
-        <!-- Row 1: Steps 1 -> 2 -> 3 -->
+        <!-- Row 1: 1 ➔ 2 ➔ 3 (Left to Right) -->
         <div class="flow-row flow-row-3">
           <div class="flow-node magenta step-1">
             <div class="flow-node-title">1. User Audio / Voice</div>
@@ -1811,7 +1860,7 @@
             <p>User speaks naturally in English through the app.</p>
           </div>
 
-          <div class="flow-arrow-h arr-1">➔</div>
+          <div class="flow-arrow-h dir-right arr-1">➔</div>
 
           <div class="flow-node step-2">
             <div class="flow-node-title">2. FlutterFlow Client</div>
@@ -1819,7 +1868,7 @@
             <p>Streams encrypted voice request from the mobile app.</p>
           </div>
 
-          <div class="flow-arrow-h arr-2">➔</div>
+          <div class="flow-arrow-h dir-right arr-2">➔</div>
 
           <div class="flow-node magenta step-3">
             <div class="flow-node-title">3. Supabase Edge Functions</div>
@@ -1828,15 +1877,15 @@
           </div>
         </div>
 
-        <!-- Downward Connectors -->
-        <div class="flow-arrow-down-row">
-          <span class="flow-arrow-v arr-3">⬇</span>
-          <span class="flow-arrow-v arr-3 hide-mobile">⬇</span>
-          <span class="flow-arrow-v arr-3 hide-mobile">⬇</span>
+        <!-- Drop Connector: 3 ⬇ 4 (Directly under Step 3 on Desktop) -->
+        <div class="flow-drop-row">
+          <div class="drop-slot-right">
+            <span class="flow-arrow-v arr-3">⬇</span>
+          </div>
         </div>
 
-        <!-- Row 2: Steps 4, 5, 6 -->
-        <div class="flow-row flow-row-3-plain">
+        <!-- Row 2: 6 ⬅ 5 ⬅ 4 (Right to Left Snake on Desktop, 4 -> 5 -> 6 on Mobile) -->
+        <div class="flow-row flow-row-3 snake-row-2">
           <div class="flow-node step-4">
             <div class="flow-node-title">4. Query Vector &amp; State Store</div>
             <div class="flow-node-icon">🗄️🧠</div>
@@ -1847,6 +1896,8 @@
             </ul>
           </div>
 
+          <div class="flow-arrow-h dir-left arr-4">⬅</div>
+
           <div class="flow-node magenta step-5">
             <div class="flow-node-title">5. Dynamic Prompt Synthesizer</div>
             <div class="flow-node-icon">📝⚙️</div>
@@ -1855,6 +1906,8 @@
               <li>Keep context lightweight &amp; relevant</li>
             </ul>
           </div>
+
+          <div class="flow-arrow-h dir-left arr-5">⬅</div>
 
           <div class="flow-node step-6">
             <div class="flow-node-title">6. Cascading LLM Router</div>
@@ -1871,13 +1924,14 @@
           </div>
         </div>
 
-        <!-- Downward Connectors -->
-        <div class="flow-arrow-down-row">
-          <span class="flow-arrow-v arr-4">⬇</span>
-          <span class="flow-arrow-v arr-4 hide-mobile">⬇</span>
+        <!-- Drop Connector: 6 ⬇ 7 (Directly under Step 6 on Desktop) -->
+        <div class="flow-drop-row">
+          <div class="drop-slot-left">
+            <span class="flow-arrow-v arr-6">⬇</span>
+          </div>
         </div>
 
-        <!-- Row 3: Steps 7 -> 8 -->
+        <!-- Row 3: 7 ➔ 8 (Left to Right) -->
         <div class="flow-row flow-row-2">
           <div class="flow-node magenta step-7">
             <div class="flow-node-title">7. Return Streamed Audio / Text</div>
@@ -1885,7 +1939,7 @@
             <p>Streamed audio &amp; text delivered back to the client with &lt;800ms turnaround.</p>
           </div>
 
-          <div class="flow-arrow-h arr-5">➔</div>
+          <div class="flow-arrow-h dir-right arr-7">➔</div>
 
           <div class="flow-node step-8">
             <div class="flow-node-title">8. Async Memory Distillation Worker</div>
@@ -1900,112 +1954,119 @@
 
       </div>
 
-      <!-- Detailed Architecture Breakdown Stack -->
+      <!-- Step-Wise Core Features Header -->
+      <div class="features-stepwise-header">
+        <span class="box-badge green" style="background: rgba(232, 121, 249, 0.15); color: var(--neon-magenta); padding: 4px 14px; border-radius: 99px;">Step-by-Step Experience</span>
+        <h3>EchoMate Features: Step-Wise</h3>
+        <p>How each stage of the pipeline translates into a smoother, smarter, and stress-free English speaking session for you.</p>
+      </div>
+
+      <!-- Step-by-Step Features Stack -->
       <div class="arch-stack">
 
-        <!-- Step 1: Voice Input -->
+        <!-- Feature Step 1 -->
         <div class="arch-card">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag">Step 1: Your Voice In</span>
-            <span class="arch-tier-tech">Flutter App • Audio Capture</span>
+            <span class="arch-tier-tag">Step 1: Natural Voice Capture</span>
+            <span class="arch-tier-tech">Zero Interruption Mic • Full-Thought Listening</span>
           </div>
-          <h3>🎙️ You Speak Naturally & Freely</h3>
-          <p>You speak into the EchoMate mobile app just like you would to a friend or colleague. Your voice is captured cleanly and encrypted instantly, ready for real-time conversation with zero lag.</p>
+          <h4>🎙️ Speak at Your Own Pace Without Being Cut Off</h4>
+          <p>Pause to think, search for a word, or self-correct mid-sentence—EchoMate waits patiently until you finish your complete thought. Your audio is captured cleanly on mobile and streamed securely without awkward timers or sudden buzzers.</p>
         </div>
 
-        <!-- Dropdown Button Connector 1 -->
+        <!-- Dropdown Connector 1 -->
         <div class="arch-connector-wrap">
           <div class="arch-connector-btn">
-            <span>Instant Lightning-Fast Connection</span>
+            <span>Personalizes Every Turn Automatically</span>
             <span class="dropdown-caret">▼</span>
           </div>
         </div>
 
-        <!-- Step 2: Smart Coordinator -->
+        <!-- Feature Step 2 -->
         <div class="arch-card" style="border-color: rgba(129, 140, 248, 0.45);">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(129, 140, 248, 0.15); color: #A5B4FC; border-color: rgba(129, 140, 248, 0.4);">Step 2: Smart Coordinator</span>
-            <span class="arch-tier-tech">Supabase & Cloudflare Gateway</span>
+            <span class="arch-tier-tag" style="background: rgba(129, 140, 248, 0.15); color: #A5B4FC; border-color: rgba(129, 140, 248, 0.4);">Step 2: Context-Aware Coaching</span>
+            <span class="arch-tier-tech">Dynamic Scenario Framing • Goal Alignment</span>
           </div>
-          <h3>🧠 The Intelligent Brain Orchestrator</h3>
-          <p>Before responding, our coordinator pulls your background (your career goal, your speaking style, and past speech habits) and dynamically loads the ideal instructions for your session.</p>
+          <h4>🧠 Tailored to Your Role, Scenario &amp; Speaking Level</h4>
+          <p>Before replying, EchoMate combines your chosen mode (e.g., job interview, client negotiation, or casual debate) with your personal learning history—adjusting vocabulary complexity, tone, and follow-up questions in real time.</p>
         </div>
 
-        <!-- Dropdown Button Connector 2 -->
+        <!-- Dropdown Connector 2 -->
         <div class="arch-connector-wrap">
           <div class="arch-connector-btn">
-            <span>Direct to Core Engine & Fallbacks</span>
+            <span>Sub-Second Conversational Reply</span>
             <span class="dropdown-caret">▼</span>
           </div>
         </div>
 
-        <!-- Step 3: Adaptive AI Engine & Smart Fallbacks -->
+        <!-- Feature Step 3 -->
         <div class="arch-card" style="border-color: rgba(96, 165, 250, 0.45);">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(96, 165, 250, 0.15); color: #93C5FD; border-color: rgba(96, 165, 250, 0.4);">Step 3: Adaptive AI Engine</span>
+            <span class="arch-tier-tag" style="background: rgba(96, 165, 250, 0.15); color: #93C5FD; border-color: rgba(96, 165, 250, 0.4);">Step 3: Multi-Engine Voice &amp; Reliability</span>
             <span class="arch-tier-tech">Gemini Core • Smart Availability Mesh</span>
           </div>
-          <h3>⚡ Powered by Google Gemini with Dynamic Smart Fallbacks</h3>
+          <h4>⚡ Natural Speech Recasting with Zero Downtime</h4>
           <p>
-            <strong>🟣 Google Gemini</strong> serves as EchoMate's primary conversational brain—delivering natural spoken rhythm, real-time speech recasting, and instant fluency guidance without interruptions.
+            <strong>🟣 Google Gemini</strong> powers EchoMate's core voice—mirroring the natural, native version of what you just said organically inside its reply so you absorb better phrasing effortlessly.
           </p>
           <p style="margin-top: 10px;">
-            To ensure zero downtime, minimal latency, and optimal conversational pacing, our smart system continuously monitors provider health. When instant casual banter, rapid turnarounds, or load balancing are required, it automatically selects and routes requests to the fastest available engine:
+            To guarantee uninterrupted practice sessions at any hour, our smart availability mesh automatically balances traffic across specialized AI engines:
           </p>
 
           <div class="models-grid" style="margin-top: 14px;">
             <div class="model-box" style="border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.07);">
-              <span class="model-name">🟣 Google Gemini (Primary Core)</span>
-              <span class="model-role">Native multimodal real-time voice, natural tone handling, and fluid English coaching.</span>
+              <span class="model-name">🟣 Google Gemini (Primary Coach)</span>
+              <span class="model-role">Natural conversational cadence, empathetic tone, and organic speech recasting.</span>
             </div>
             <div class="model-box">
-              <span class="model-name">⚡ Groq Cloud (Speed Engine)</span>
-              <span class="model-role">Ultra-low latency inference fallback for instant casual chatter and lightning-fast voice turnaround.</span>
+              <span class="model-name">⚡ Groq Cloud (Rapid Banter)</span>
+              <span class="model-role">Ultra-fast response fallback for snappy back-and-forth casual discussions.</span>
             </div>
             <div class="model-box">
-              <span class="model-name">🧠 Mistral AI & ✖️ Grok (Specialized Fallbacks)</span>
-              <span class="model-role">High-resilience reasoning layers ready to step in for structured breakdowns or challenging scenarios.</span>
+              <span class="model-name">🧠 Mistral AI &amp; ✖️ Grok (Deep Scenarios)</span>
+              <span class="model-role">High-resilience engines for structured debates, roleplay twists, and complex topics.</span>
             </div>
             <div class="model-box">
-              <span class="model-name">☁️ Cloudflare Workers AI (Edge Safety & Routing)</span>
-              <span class="model-role">Runs lightning-fast edge checks and keeps your session uninterrupted if external APIs face slowdowns.</span>
+              <span class="model-name">☁️ Cloudflare Workers AI (Edge Shield)</span>
+              <span class="model-role">Instant edge routing that prevents timeouts and keeps your conversation flowing smoothly.</span>
             </div>
           </div>
         </div>
 
-        <!-- Dropdown Button Connector 3 -->
+        <!-- Dropdown Connector 3 -->
         <div class="arch-connector-wrap">
           <div class="arch-connector-btn">
-            <span>Learning What Makes You Unique</span>
+            <span>Builds Long-Term Fluency Muscle</span>
             <span class="dropdown-caret">▼</span>
           </div>
         </div>
 
-        <!-- Step 4: Long-Term Memory -->
+        <!-- Feature Step 4 -->
         <div class="arch-card" style="border-color: rgba(52, 211, 153, 0.45);">
           <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(52, 211, 153, 0.15); color: #6EE7B7; border-color: rgba(52, 211, 153, 0.4);">Step 4: Long-Term Memory</span>
-            <span class="arch-tier-tech">Supabase Secure Cloud Storage</span>
+            <span class="arch-tier-tag" style="background: rgba(52, 211, 153, 0.15); color: #6EE7B7; border-color: rgba(52, 211, 153, 0.4);">Step 4: Post-Session Growth &amp; Memory</span>
+            <span class="arch-tier-tech">Async Distillation • Actionable Reports</span>
           </div>
-          <h3>📈 A Coach That Never Forgets Your Progress</h3>
-          <p>Every time you finish talking, your progress is saved securely so each session picks up where you left off:</p>
+          <h4>📈 Executive Polish &amp; Persistent Learner Memory</h4>
+          <p>After every conversation, EchoMate distills your session in the background—turning raw spoken moments into clear takeaways without slowing down your chat:</p>
 
           <div class="supabase-grid">
             <div class="sub-box">
-              <h4>🎯 Your Personal Profile</h4>
-              <p>Remembers what you're working toward—like preparing for a tech interview, leadership role, or team presentations.</p>
+              <h5>🎯 Evolving Learner Profile</h5>
+              <p>Remembers your career goals, favorite discussion topics, and target fluency milestones across weeks.</p>
             </div>
             <div class="sub-box">
-              <h4>🔁 Habit Tracker</h4>
-              <p>Quietly notes words or phrases you stumble on frequently so your coach can help you master them over time.</p>
+              <h5>🔁 Crutch-Word &amp; Habit Tracker</h5>
+              <p>Identifies recurring tense slips, filler words, or awkward phrasing so future sessions gently reinforce better habits.</p>
             </div>
             <div class="sub-box">
-              <h4>📊 Growth Dashboard</h4>
-              <p>Shows how your speaking pace, confidence, and vocabulary variety improve week after week.</p>
+              <h5>✨ Sentence Upgrade Cards</h5>
+              <p>Shows side-by-side comparisons of your exact spoken sentences alongside confident, executive-ready alternatives.</p>
             </div>
             <div class="sub-box">
-              <h4>🔒 Private & Secure</h4>
-              <p>Your audio and conversations remain strictly yours with end-to-end privacy controls.</p>
+              <h5>🔒 Private Judgment-Free Space</h5>
+              <p>Your voice transcripts and diagnostic insights stay private to your account—practice freely without social pressure.</p>
             </div>
           </div>
         </div>
@@ -2033,7 +2094,6 @@
       </div>
 
       <div class="studio-grid">
-        <!-- Detective Mystery -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">🕵️</div>
@@ -2043,7 +2103,6 @@
           <div class="studio-card-meta">• Deductive phrasing &amp; suspense</div>
         </div>
 
-        <!-- The Roasting Show -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">🔥</div>
@@ -2053,7 +2112,6 @@
           <div class="studio-card-meta">• Spontaneous counterarguments &amp; wit</div>
         </div>
 
-        <!-- What If History -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">⏳</div>
@@ -2063,7 +2121,6 @@
           <div class="studio-card-meta">• Conditional reasoning &amp; storytelling</div>
         </div>
 
-        <!-- Campfire Ghost Story -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">🕯️</div>
@@ -2073,7 +2130,6 @@
           <div class="studio-card-meta">• Sensory adjectives &amp; dramatic pacing</div>
         </div>
 
-        <!-- Ridiculous Shark Tank -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">🦈</div>
@@ -2091,7 +2147,6 @@
       </div>
 
       <div class="studio-grid">
-        <!-- Story Maker & Refiner -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">✍️</div>
@@ -2101,7 +2156,6 @@
           <div class="studio-card-meta">• Narrative architecture &amp; character arcs</div>
         </div>
 
-        <!-- Industry Insider -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">💼</div>
@@ -2111,7 +2165,6 @@
           <div class="studio-card-meta">• Executive communication &amp; clarity</div>
         </div>
 
-        <!-- Critical Review -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">🎬</div>
@@ -2121,7 +2174,6 @@
           <div class="studio-card-meta">• Evaluative vocabulary &amp; thesis flow</div>
         </div>
 
-        <!-- Cultural & Travel Guide -->
         <div class="studio-card">
           <div class="studio-card-header">
             <div class="studio-card-icon">🗺️</div>
@@ -2157,7 +2209,7 @@
         </p>
       </div>
 
-      <!-- Example 1: E-Commerce / Technical Operations -->
+      <!-- Example 1 -->
       <div class="example-block">
         <div class="example-header">
           <span>📦 Example 1: Technical & E-Commerce Operations</span>
@@ -2174,7 +2226,7 @@
         </div>
       </div>
 
-      <!-- Example 2: Agile / Project Timeline Proposal -->
+      <!-- Example 2 -->
       <div class="example-block">
         <div class="example-header">
           <span>💼 Example 2: Workplace Standup & Timeline Adjustment</span>
@@ -2191,7 +2243,7 @@
         </div>
       </div>
 
-      <!-- Example 3: Descriptive Discussion & History -->
+      <!-- Example 3 -->
       <div class="example-block">
         <div class="example-header">
           <span>🏛️ Example 3: Narrative Explanation & Architecture</span>
@@ -2242,7 +2294,6 @@
 
       let lastActiveId = null;
 
-      // Measure the expanded header so content never begins underneath it.
       function syncHeaderSpacer() {
         const shouldBeCollapsed = window.scrollY > 35;
         header.classList.remove('is-scrolled');
@@ -2263,7 +2314,6 @@
         navMenuContainer.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
       }
 
-      // Select the last linked section whose top has reached the active reading line.
       function updateActiveSection() {
         const activationLine = window.scrollY + header.offsetHeight + 24;
         let activeItem = null;
@@ -2303,7 +2353,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // Measure on startup and resize; update active navigation as the page moves.
       syncHeaderSpacer();
       handleScroll();
       window.addEventListener('scroll', handleScroll, { passive: true });
@@ -2312,7 +2361,6 @@
         handleScroll();
       });
 
-      // Recalculate the active section after a nav click has completed its anchor movement.
       navLinks.forEach((link) => {
         link.addEventListener('click', () => {
           window.setTimeout(updateActiveSection, 250);
