@@ -611,12 +611,183 @@
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
     }
 
+    /* ==========================================================
+       DYNAMIC 8-STEP ARCHITECTURE FLOWCHART (GLOWING ARROWS)
+       ========================================================== */
+    .flow-diagram-wrap {
+      margin: 34px auto 42px;
+      max-width: 940px;
+      padding-bottom: 34px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+    }
+
+    .flow-row {
+      display: grid;
+      gap: 14px;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+
+    .flow-row-3 { grid-template-columns: 1fr auto 1fr auto 1fr; }
+    .flow-row-3-plain { grid-template-columns: repeat(3, 1fr); }
+    .flow-row-2 { grid-template-columns: 1fr auto 1fr; }
+
+    .flow-node {
+      background: rgba(16, 12, 34, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      border-radius: 16px;
+      padding: 16px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      animation: nodePulse 6.4s infinite;
+    }
+
+    .flow-node.magenta {
+      border-color: rgba(232, 121, 249, 0.35);
+    }
+
+    .flow-node:hover {
+      transform: translateY(-3px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
+    }
+
+    .flow-node-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(232, 121, 249, 0.18));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 5px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+
+    .flow-node-icon {
+      font-size: 1.75rem;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+    }
+
+    .flow-node p, .flow-node ul {
+      font-size: 0.81rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      width: 100%;
+    }
+
+    .flow-node p {
+      text-align: center;
+    }
+
+    .flow-node ul {
+      list-style: none;
+      padding-left: 4px;
+      margin-top: 6px;
+      text-align: left;
+    }
+
+    .flow-node ul li {
+      margin-bottom: 3px;
+    }
+
+    .flow-node ul li::before {
+      content: "• ";
+      color: var(--neon-cyan);
+      font-weight: bold;
+    }
+
+    .provider-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin: 4px 0 8px;
+    }
+
+    .provider-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+
+    /* Glowing Animated Arrows */
+    .flow-arrow-h {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: rgba(56, 189, 248, 0.35);
+      animation: arrowGlow 6.4s infinite;
+      user-select: none;
+    }
+
+    .flow-arrow-down-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: -2px 0 10px;
+      font-size: 1.35rem;
+      color: rgba(232, 121, 249, 0.35);
+      user-select: none;
+    }
+
+    .flow-arrow-v {
+      animation: arrowGlowMagenta 6.4s infinite;
+    }
+
+    /* Sequential Pipeline Timing (8 Steps Loop = 6.4s) */
+    .step-1 { animation-delay: 0.0s; }
+    .arr-1  { animation-delay: 0.4s; }
+    .step-2 { animation-delay: 0.8s; }
+    .arr-2  { animation-delay: 1.2s; }
+    .step-3 { animation-delay: 1.6s; }
+    .arr-3  { animation-delay: 2.0s; }
+    .step-4 { animation-delay: 2.4s; }
+    .step-5 { animation-delay: 3.0s; }
+    .step-6 { animation-delay: 3.6s; }
+    .arr-4  { animation-delay: 4.2s; }
+    .step-7 { animation-delay: 4.6s; }
+    .arr-5  { animation-delay: 5.2s; }
+    .step-8 { animation-delay: 5.6s; }
+
+    @keyframes arrowGlow {
+      0%, 100% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: scale(1); }
+      12% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: scale(1.24); }
+      25% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: scale(1); }
+    }
+
+    @keyframes arrowGlowMagenta {
+      0%, 100% { color: rgba(232, 121, 249, 0.3); text-shadow: none; transform: translateY(0); }
+      12% { color: #E879F9; text-shadow: 0 0 12px #E879F9, 0 0 24px #38BDF8; transform: translateY(3px); }
+      25% { color: rgba(232, 121, 249, 0.3); text-shadow: none; transform: translateY(0); }
+    }
+
+    @keyframes nodePulse {
+      0%, 100% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+      12% { box-shadow: 0 0 22px rgba(56, 189, 248, 0.35), inset 0 0 12px rgba(232, 121, 249, 0.15); border-color: rgba(56, 189, 248, 0.75); }
+      25% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+    }
+
+    /* Detailed Vertical Stack Below Flowchart */
     .arch-stack {
       display: flex;
       flex-direction: column;
       gap: 16px;
       max-width: 880px;
-      margin: 32px auto 0;
+      margin: 0 auto;
       position: relative;
     }
 
@@ -1161,8 +1332,42 @@
     }
 
     /* ==========================================================
-       RESPONSIVE FIXED HEADER + MOBILE COLLAPSE ON SCROLL
+       RESPONSIVE FLOWCHART & MOBILE COLLAPSE ON SCROLL
        ========================================================== */
+    @media (max-width: 820px) {
+      .flow-row-3,
+      .flow-row-3-plain,
+      .flow-row-2 {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .flow-arrow-h {
+        transform: rotate(90deg);
+        padding: 2px 0;
+      }
+
+      .flow-arrow-down-row {
+        justify-content: center;
+        margin: 2px 0 8px;
+      }
+
+      .flow-arrow-down-row .hide-mobile {
+        display: none;
+      }
+
+      .flow-node ul {
+        text-align: center;
+        padding-left: 0;
+      }
+
+      @keyframes arrowGlow {
+        0%, 100% { color: rgba(56, 189, 248, 0.35); text-shadow: none; transform: rotate(90deg) scale(1); }
+        12% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: rotate(90deg) scale(1.2); }
+        25% { color: rgba(56, 189, 248, 0.35); text-shadow: none; transform: rotate(90deg) scale(1); }
+      }
+    }
+
     @media (max-width: 768px) {
       /* The menu remains fixed and visible even after the header collapses. */
       html {
@@ -1411,7 +1616,7 @@
 </head>
 <body>
 
-  <!-- Navigation Bar (On desktop: Brand + Slider + Profile; On mobile: Clean Slider Only) -->
+  <!-- Navigation Bar -->
   <header>
     <div class="container nav-wrap">
       <a href="#" class="brand">
@@ -1424,7 +1629,7 @@
         </div>
       </a>
 
-      <!-- Smooth Anchor Navigation Links (Horizontally Scrollable Pill Track on Mobile & Desktop) -->
+      <!-- Smooth Anchor Navigation Links -->
       <nav>
         <ul class="nav-menu">
           <li><a href="#philosophy" class="nav-item-link">Philosophy</a></li>
@@ -1595,6 +1800,107 @@
         </p>
       </div>
 
+      <!-- Dynamic 8-Step Architecture Pipeline (Glowing Sequential Arrows) -->
+      <div class="flow-diagram-wrap">
+
+        <!-- Row 1: Steps 1 -> 2 -> 3 -->
+        <div class="flow-row flow-row-3">
+          <div class="flow-node magenta step-1">
+            <div class="flow-node-title">1. User Audio / Voice</div>
+            <div class="flow-node-icon">🗣️🎙️</div>
+            <p>User speaks naturally in English through the app.</p>
+          </div>
+
+          <div class="flow-arrow-h arr-1">➔</div>
+
+          <div class="flow-node step-2">
+            <div class="flow-node-title">2. FlutterFlow Client</div>
+            <div class="flow-node-icon">📱〰️</div>
+            <p>Streams encrypted voice request from the mobile app.</p>
+          </div>
+
+          <div class="flow-arrow-h arr-2">➔</div>
+
+          <div class="flow-node magenta step-3">
+            <div class="flow-node-title">3. Supabase Edge Functions</div>
+            <div class="flow-node-icon">⚡💻</div>
+            <p><strong>Deno / TypeScript</strong><br>Handles requests, manages context &amp; orchestrates AI.</p>
+          </div>
+        </div>
+
+        <!-- Downward Connectors -->
+        <div class="flow-arrow-down-row">
+          <span class="flow-arrow-v arr-3">⬇</span>
+          <span class="flow-arrow-v arr-3 hide-mobile">⬇</span>
+          <span class="flow-arrow-v arr-3 hide-mobile">⬇</span>
+        </div>
+
+        <!-- Row 2: Steps 4, 5, 6 -->
+        <div class="flow-row flow-row-3-plain">
+          <div class="flow-node step-4">
+            <div class="flow-node-title">4. Query Vector &amp; State Store</div>
+            <div class="flow-node-icon">🗄️🧠</div>
+            <p><strong>PostgreSQL + Vector Search</strong></p>
+            <ul>
+              <li>Fetch user memory profile</li>
+              <li>Get skill trajectory &amp; fluency history</li>
+            </ul>
+          </div>
+
+          <div class="flow-node magenta step-5">
+            <div class="flow-node-title">5. Dynamic Prompt Synthesizer</div>
+            <div class="flow-node-icon">📝⚙️</div>
+            <ul>
+              <li>Generate turn-specific system prompt</li>
+              <li>Keep context lightweight &amp; relevant</li>
+            </ul>
+          </div>
+
+          <div class="flow-node step-6">
+            <div class="flow-node-title">6. Cascading LLM Router</div>
+            <div class="provider-pills">
+              <span class="provider-pill">🟣 Gemini</span>
+              <span class="provider-pill">⚡ Groq</span>
+              <span class="provider-pill">🟠 Mistral</span>
+              <span class="provider-pill">✖️ xAI</span>
+            </div>
+            <ul>
+              <li>Route to best available model</li>
+              <li>Sub-second response generation</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Downward Connectors -->
+        <div class="flow-arrow-down-row">
+          <span class="flow-arrow-v arr-4">⬇</span>
+          <span class="flow-arrow-v arr-4 hide-mobile">⬇</span>
+        </div>
+
+        <!-- Row 3: Steps 7 -> 8 -->
+        <div class="flow-row flow-row-2">
+          <div class="flow-node magenta step-7">
+            <div class="flow-node-title">7. Return Streamed Audio / Text</div>
+            <div class="flow-node-icon">💬🔊</div>
+            <p>Streamed audio &amp; text delivered back to the client with &lt;800ms turnaround.</p>
+          </div>
+
+          <div class="flow-arrow-h arr-5">➔</div>
+
+          <div class="flow-node step-8">
+            <div class="flow-node-title">8. Async Memory Distillation Worker</div>
+            <div class="flow-node-icon">🔄📈</div>
+            <ul>
+              <li>Runs after each turn (zero user wait time)</li>
+              <li>Extracts grammar habits &amp; fluency metrics</li>
+              <li>Updates Supabase user coaching profile</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Detailed Architecture Breakdown Stack -->
       <div class="arch-stack">
 
         <!-- Step 1: Voice Input -->
