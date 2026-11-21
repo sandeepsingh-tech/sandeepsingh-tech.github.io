@@ -7,9 +7,9 @@
 
   <title>High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems. | Sandeep Singh</title>
   <meta name="title" content="High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems. | Sandeep Singh">
-  <meta name="description" content="A practical breakdown of systems architecture behind Hivemart and EchoMate: Shopify, FlutterFlow, Supabase, PostgreSQL, APIs, automation, contextual memory, data contracts, and AI-assisted engineering.">
+  <meta name="description" content="A detailed look at Hivemart e-commerce architecture, its FlutterFlow mobile app connected to Shopify APIs, EchoMate conversational AI and memory systems, and IRON TRAIN Unity game development.">
   <meta name="author" content="Sandeep Singh">
-  <meta name="keywords" content="Systems Architecture, High Performance Apps, Software Engineering, Shopify, Shopify GraphQL, Shopify Liquid, FlutterFlow, Dart, Supabase, Edge Functions, Deno, TypeScript, PostgreSQL, AI Engineering, Conversational AI, Contextual Memory, E-commerce Infrastructure, Hivemart, EchoMate, Sandeep Singh">
+  <meta name="keywords" content="Systems Architecture, High Performance Apps, Software Engineering, Shopify, Shopify GraphQL, Shopify Liquid, FlutterFlow, Dart, Supabase, Edge Functions, Deno, TypeScript, PostgreSQL, AI Engineering, Conversational AI, Contextual Memory, E-commerce Infrastructure, Hivemart, EchoMate, Unity, C#, Game Development, IRON TRAIN, Sandeep Singh">
   <link rel="canonical" href="https://sandeepsingh-tech.github.io/articles.html">
 
   <!-- Social preview metadata. Replace the image with a 1200x630 article banner when one is published. -->
@@ -46,7 +46,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems.",
-    "description": "A practical breakdown of the systems architecture behind Hivemart and EchoMate, covering Shopify e-commerce infrastructure, FlutterFlow, Supabase Edge Functions, PostgreSQL, automation, conversational AI, and contextual memory.",
+    "description": "A detailed breakdown of Hivemart e-commerce architecture and FlutterFlow mobile integration with Shopify, EchoMate conversational AI and contextual memory, and the Unity systems behind IRON TRAIN.",
     "image": "https://github.com/sandeepsingh-tech.png",
     "author": {
       "@type": "Person",
@@ -60,7 +60,7 @@
     },
     "datePublished": "2026-10-17",
     "mainEntityOfPage": "https://sandeepsingh-tech.github.io/articles.html",
-    "keywords": ["Systems Architecture", "Shopify", "FlutterFlow", "Supabase", "PostgreSQL", "AI Engineering", "E-commerce Infrastructure", "Conversational AI"]
+    "keywords": ["Systems Architecture", "Shopify", "FlutterFlow", "Supabase", "PostgreSQL", "AI Engineering", "E-commerce Infrastructure", "Conversational AI", "Unity", "C#", "Game Development", "IRON TRAIN"]
   }
   </script>
 
@@ -102,7 +102,7 @@
         <div class="inline-flex items-center gap-2 rounded-full border border-amber-300/70 bg-amber-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-900">
           <i data-lucide="workflow" class="h-3.5 w-3.5"></i> Systems Architecture · Applied Engineering
         </div>
-        <h1 class="heading-font max-w-4xl text-3xl font-bold leading-[1.12] tracking-tight text-stone-950 sm:text-4xl lg:text-[3.35rem]">
+        <h1 class="heading-font max-w-4xl text-3xl font-bold leading-[1.2] tracking-tight text-stone-950 sm:text-4xl sm:leading-[1.18] lg:text-[3.2rem] lg:leading-[1.16]">
           High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems.
         </h1>
         <p class="max-w-3xl text-base leading-relaxed text-stone-600 sm:text-lg">
@@ -124,7 +124,7 @@
           <p>The leverage, however, does not come from generating code alone. It comes from understanding the system around that code: who owns the data, how components communicate, what happens when an API fails, and how a change in one layer affects every other layer.</p>
         </section>
 
-        <p>That shift in thinking has shaped two of my current product-building journeys:</p>
+        <p>That shift in thinking has shaped my work across three projects. Hivemart and EchoMate are the two product-building journeys at the centre of my current engineering focus; IRON TRAIN is a separate game-development project that helped strengthen the same systems-thinking approach:</p>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="soft-card group rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
             <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🛒</span><span class="tag">E-commerce infrastructure</span></div>
@@ -138,6 +138,12 @@
             <p class="mt-2 text-sm leading-relaxed text-stone-600">Connecting a voice-first mobile experience with backend orchestration, language models, and contextual memory.</p>
             <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-900">Explore EchoMate <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
           </a>
+          <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="soft-card group rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
+            <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🚂</span><span class="tag">Unity game development</span></div>
+            <h2 class="heading-font text-xl font-bold text-stone-950">IRON TRAIN: THE LAST DEFENCE</h2>
+            <p class="mt-2 text-sm leading-relaxed text-stone-600">A 2D action shooter built around a moving armored train, interconnected gameplay systems, and distance-based progression.</p>
+            <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-900">View the game <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
+          </a>
         </div>
         <p class="font-medium text-stone-800">Different products. Different requirements. One engineering principle: <span class="rounded bg-amber-100/70 px-1 font-bold text-amber-950">the quality of an application depends on how well its systems work together.</span></p>
 
@@ -150,24 +156,28 @@
           <p>Hivemart started with a practical operational problem: managing products and supplier inventory without forcing vendors to navigate another complicated dashboard or pay for another layer of software they barely use.</p>
           <blockquote class="rounded-r-xl border-l-2 border-amber-600 bg-amber-50/70 p-4 text-base font-semibold italic text-stone-900">“If a supplier only needs to change inventory from 12 units to 10, why should they need an entire vendor management platform to do it?”</blockquote>
           <p>The product direction is deliberately lightweight: give suppliers a simple way to update what they actually need to update, while keeping the store’s product and inventory data connected to the systems that already run the business.</p>
+          <p>Hivemart also includes a mobile application built with <strong>FlutterFlow</strong>. The app is connected to Shopify through APIs and fetches the relevant store data—such as the product catalogue and associated commerce information—from Shopify. <strong>Shopify remains the primary source of truth</strong> for the store’s product and commerce records; the mobile app is the customer-facing experience, not a separate catalogue that can drift away from the store.</p>
 
           <div class="space-y-3">
             <h3 class="heading-font text-lg font-bold text-stone-950">The architecture at a glance</h3>
-            <div class="grid grid-cols-1 items-stretch gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr]">
-              <div class="architecture-node"><div class="text-lg">📱</div><div class="mt-1 font-bold text-stone-900">Supplier interface</div><p class="mt-1 text-xs leading-relaxed text-stone-600">A branded, lightweight link and simple inventory controls.</p></div>
+            <div class="grid grid-cols-1 items-stretch gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr]">
+              <div class="architecture-node"><div class="text-lg">📱</div><div class="mt-1 font-bold text-stone-900">Supplier workflow</div><p class="mt-1 text-xs leading-relaxed text-stone-600">A branded, lightweight link and simple inventory controls.</p></div>
               <div class="architecture-arrow flex items-center justify-center">→</div>
-              <div class="architecture-node"><div class="text-lg">📊</div><div class="mt-1 font-bold text-stone-900">Operational data layer</div><p class="mt-1 text-xs leading-relaxed text-stone-600">Google Forms and Google Sheets workflows for capturing updates.</p></div>
+              <div class="architecture-node"><div class="text-lg">📊</div><div class="mt-1 font-bold text-stone-900">Operations layer</div><p class="mt-1 text-xs leading-relaxed text-stone-600">Google Forms, Sheets, and automation capture and process operational updates.</p></div>
               <div class="architecture-arrow flex items-center justify-center">→</div>
-              <div class="architecture-node"><div class="text-lg">🛍️</div><div class="mt-1 font-bold text-stone-900">Shopify platform</div><p class="mt-1 text-xs leading-relaxed text-stone-600">Product catalog and inventory operations through Shopify APIs.</p></div>
+              <div class="architecture-node border-amber-300 bg-amber-50"><div class="text-lg">🛍️</div><div class="mt-1 font-bold text-stone-900">Shopify · source of truth</div><p class="mt-1 text-xs leading-relaxed text-stone-600">Authoritative product catalogue and commerce data, accessed through APIs.</p></div>
+              <div class="architecture-arrow flex items-center justify-center">⇄</div>
+              <div class="architecture-node"><div class="text-lg">📲</div><div class="mt-1 font-bold text-stone-900">FlutterFlow app</div><p class="mt-1 text-xs leading-relaxed text-stone-600">Mobile experience fetches Shopify data through REST / GraphQL API integration.</p></div>
             </div>
-            <p class="text-xs text-stone-500">Conceptual flow of the supplier-update and catalog workflow; individual automation steps may run asynchronously.</p>
+            <p class="text-xs text-stone-500">Conceptual view of the connected Hivemart ecosystem. Shopify remains the source of truth; the FlutterFlow app retrieves store data through APIs, while supplier operations use a separate lightweight update workflow.</p>
           </div>
 
           <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">01. Shopify as the commerce core</h3><p class="text-sm">Shopify remains responsible for the storefront commerce domain—products, SKUs, inventory, and store operations. The integration layer communicates with Shopify through Admin GraphQL and REST APIs where appropriate.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Shopify Admin API</span><span class="tag">GraphQL</span><span class="tag">REST</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">01. Shopify as the commerce core</h3><p class="text-sm">Shopify is the primary source of truth for the commerce domain—products, SKUs, inventory, and store operations. The FlutterFlow mobile app fetches the relevant store data through API integrations, while backend and automation workflows communicate with Shopify through Admin GraphQL and REST APIs where appropriate.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Shopify Admin API</span><span class="tag">GraphQL</span><span class="tag">REST</span></div></div>
             <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">02. Custom storefront engineering</h3><p class="text-sm">Reusable Shopify Liquid sections and focused HTML, CSS, and JavaScript keep storefront experiences tailored without making every requirement dependent on a third-party app.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Liquid</span><span class="tag">HTML / CSS</span><span class="tag">JavaScript</span></div></div>
             <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">03. Supplier-first update workflow</h3><p class="text-sm">The supplier experience is intentionally narrow: access a branded link, find the relevant product, and submit an inventory change through a simple workflow. The goal is to reduce training and login friction.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Secure supplier links</span><span class="tag">Simple controls</span><span class="tag">Forms</span></div></div>
-            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">04. Automation and reconciliation</h3><p class="text-sm">Google Sheets acts as an operational data layer. Python workflows help reconcile SKUs and handles, process catalog data, prepare bulk updates, and communicate with Shopify APIs.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Google Sheets</span><span class="tag">Python</span><span class="tag">CSV</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">04. FlutterFlow mobile application</h3><p class="text-sm">The Hivemart mobile app is built with FlutterFlow. It fetches store data from Shopify through API integrations, so the app presents the live commerce catalogue from the platform that owns the underlying records rather than maintaining an unrelated product database.</p><div class="flex flex-wrap gap-1.5"><span class="tag">FlutterFlow</span><span class="tag">REST API</span><span class="tag">GraphQL API</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">05. Automation and reconciliation</h3><p class="text-sm">Google Sheets acts as an operational data layer. Python workflows help reconcile SKUs and handles, process catalog data, prepare bulk updates, and communicate with Shopify APIs.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Google Sheets</span><span class="tag">Python</span><span class="tag">CSV</span></div></div>
           </div>
 
           <div class="rounded-2xl bg-stone-950 p-5 text-stone-100 sm:p-6">
@@ -248,7 +258,7 @@
           <div class="overflow-hidden rounded-2xl border border-[#e8e2d5]">
             <div class="grid grid-cols-[1fr_1fr_1fr] bg-stone-900 text-xs font-bold text-white"><div class="p-3">Engineering concern</div><div class="p-3">Hivemart</div><div class="p-3">EchoMate</div></div>
             <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Data ownership</div><div class="p-3">Supplier updates and live store inventory</div><div class="p-3">User profile, messages, and retained memory</div></div>
-            <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Integration boundary</div><div class="p-3">Sheets, Python workflows, Shopify APIs</div><div class="p-3">FlutterFlow, Edge Functions, model APIs</div></div>
+            <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Integration boundary</div><div class="p-3">FlutterFlow app, Shopify APIs, Sheets, Python</div><div class="p-3">FlutterFlow, Edge Functions, model APIs</div></div>
             <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Failure modes</div><div class="p-3">Stale updates, SKU mismatch, API limits</div><div class="p-3">Null payloads, provider errors, context drift</div></div>
             <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Consistency goal</div><div class="p-3">Keep catalog and inventory aligned</div><div class="p-3">Keep client, backend, and memory state aligned</div></div>
           </div>
@@ -277,12 +287,44 @@
           </div>
         </section>
 
+        <!-- IRON TRAIN: game development project -->
+        <section id="iron-train" class="section-rule space-y-5 pt-8">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div><p class="eyebrow text-[10px] font-bold uppercase text-amber-800">06 / Game development · Unity</p><h2 class="heading-font mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">🚂 IRON TRAIN: THE LAST DEFENCE — From AI-Assisted Assets to a Playable Unity Game</h2></div>
+            <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Play on itch.io <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+          </div>
+          <p>Alongside my work on e-commerce infrastructure and conversational AI, I also brought the same systems-thinking approach into game development. <strong>IRON TRAIN: THE LAST DEFENCE</strong> is my Unity-based 2D action shooter built around a moving, armored train.</p>
+          <p>The player's mission is straightforward: defend the engine against waves of enemies while the train advances through a hostile world. But underneath that simple gameplay loop is a collection of interconnected systems.</p>
+
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div class="soft-card rounded-xl p-4"><h3 class="heading-font text-lg font-bold text-stone-950">🎯 Gameplay architecture</h3><ul class="mt-2 list-disc space-y-1 pl-5 text-sm"><li><strong>Player controller:</strong> movement, jumping, shooting, and aiming.</li><li><strong>Weapon system:</strong> pistol, rifle, and sniper weapon types.</li><li><strong>Enemy behaviour:</strong> straight movement, sine-wave movement, zigzag patterns, and attack-oriented movement.</li><li><strong>Heavy enemies:</strong> stronger enemies that pose a greater threat to the train.</li><li><strong>Animation systems:</strong> character visuals and weapon-related animations respond to gameplay state.</li></ul></div>
+            <div class="soft-card rounded-xl p-4"><h3 class="heading-font text-lg font-bold text-stone-950">📈 Progression and difficulty</h3><p class="mt-2 text-sm">The game uses distance-based progression rather than relying only on traditional stage transitions.</p><ul class="mt-2 list-disc space-y-1 pl-5 text-sm"><li>Six levels across each 6,000-metre loop.</li><li>Level management determines when progression boundaries are crossed.</li><li>Difficulty increases across successive loops.</li><li>Weapon unlocks, progression UI, and loop-completion popups.</li><li>Different train-bogie visuals as the player advances through loops.</li></ul></div>
+            <div class="soft-card rounded-xl p-4"><h3 class="heading-font text-lg font-bold text-stone-950">⚙️ Game state and runtime systems</h3><ul class="mt-2 list-disc space-y-1 pl-5 text-sm"><li>Centralized game-state management for intro, gameplay, pause, popups, and game-over states.</li><li>Reusable prefabs and scripts that separate gameplay responsibilities.</li><li>Particle effects for steam, smoke, and wheel sparks.</li><li>Input handling designed for desktop and mobile gameplay.</li><li>World-scrolling systems that create the sensation of continuous travel.</li></ul></div>
+            <div class="soft-card rounded-xl p-4"><h3 class="heading-font text-lg font-bold text-stone-950">🎨 AI-assisted asset workflow</h3><p class="mt-2 text-sm">I experimented with AI-assisted asset creation, animation frames, background removal, and integrating generated visual assets into Unity.</p><p class="mt-3 rounded-lg bg-white p-3 text-xs font-semibold text-stone-800">Game concept → AI-assisted asset creation → asset processing → Unity integration → gameplay systems → playable build</p></div>
+          </div>
+
+          <div class="rounded-2xl border border-amber-200 bg-amber-50/70 p-5 space-y-3">
+            <h3 class="heading-font text-lg font-bold text-stone-950">The lesson: a collection of assets and scripts is not a game.</h3>
+            <p class="text-sm">An enemy sprite is not an enemy system. A shooting animation is not a shooting mechanic. A collection of scripts is not a complete gameplay loop. Those components need to work together under real gameplay conditions.</p>
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="heading-font text-lg font-bold text-stone-950">🚀 The journey continues: Part 2 is coming soon</h3>
+            <p class="text-sm">The first version of IRON TRAIN: THE LAST DEFENCE is available on itch.io, where players can try the browser build or download the Windows version.</p>
+            <p class="text-sm"><strong>Play the game:</strong> <a class="anchor-link" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer">makegames4funyt.itch.io/iron-train-the-last-defence</a></p>
+            <p class="text-sm">I'm continuing to develop Part 2. Most of its core components are ready, and I'm working toward expanding the experience further. The plan is to make the next part available on Android and iOS, with distribution through itch.io as well.</p>
+            <p class="text-sm">For me, this project is more than a game. It is another opportunity to understand how a complete interactive system behaves—from input and animation to progression, state management, and performance.</p>
+          </div>
+          <p class="text-sm font-medium text-stone-800">Building a game reinforced the same lesson I learned from Hivemart and EchoMate: the real work isn't just creating individual components. It's making them work together as one coherent product.</p>
+        </section>
+
         <section class="section-rule space-y-4 pt-8">
-          <p class="eyebrow text-[10px] font-bold uppercase text-amber-800">06 / Explore the work</p>
+          <p class="eyebrow text-[10px] font-bold uppercase text-amber-800">07 / Explore the work</p>
           <h2 class="heading-font text-2xl font-bold text-stone-950">See the Systems in Context</h2>
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Hivemart</div><div class="text-xs text-stone-500">E-commerce infrastructure</div></div><i data-lucide="external-link" class="h-4 w-4 text-amber-800"></i></a>
             <a href="echomate.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">EchoMate</div><div class="text-xs text-stone-500">Voice-first AI architecture</div></div><i data-lucide="arrow-up-right" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">IRON TRAIN: THE LAST DEFENCE</div><div class="text-xs text-stone-500">Unity 2D action shooter</div></div><i data-lucide="external-link" class="h-4 w-4 text-amber-800"></i></a>
             <a href="showcase.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">GitHub Project Showcase</div><div class="text-xs text-stone-500">Repositories and experiments</div></div><i data-lucide="github" class="h-4 w-4 text-amber-800"></i></a>
             <a href="https://sandeepsingh-tech.github.io/" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Personal Portfolio</div><div class="text-xs text-stone-500">Projects and profile</div></div><i data-lucide="user-round" class="h-4 w-4 text-amber-800"></i></a>
           </div>
