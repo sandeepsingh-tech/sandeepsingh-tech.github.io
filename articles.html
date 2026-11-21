@@ -3,54 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beyond Syntax: Building Across Three Different Runtimes with AI | Sandeep Singh</title>
+  <meta name="theme-color" content="#f8f7f2">
 
-  <!-- Primary SEO Meta Tags -->
-  <meta name="title" content="Beyond Syntax: Building Across Three Different Runtimes with AI | Sandeep Singh">
-  <meta name="description" content="Why systems thinking matters more than memorizing syntax. How one developer leverages AI to ship across e-commerce (Hivemart), voice AI (EchoMate), and Unity game development (Iron Train).">
+  <title>High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems. | Sandeep Singh</title>
+  <meta name="title" content="High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems. | Sandeep Singh">
+  <meta name="description" content="A practical breakdown of systems architecture behind Hivemart and EchoMate: Shopify, FlutterFlow, Supabase, PostgreSQL, APIs, automation, contextual memory, data contracts, and AI-assisted engineering.">
   <meta name="author" content="Sandeep Singh">
-  <meta name="keywords" content="AI Software Engineering, Systems Architecture, FlutterFlow, Supabase, Unity Game Development, Shopify GraphQL, Full Stack Developer, Sandeep Singh">
+  <meta name="keywords" content="Systems Architecture, High Performance Apps, Software Engineering, Shopify, Shopify GraphQL, Shopify Liquid, FlutterFlow, Dart, Supabase, Edge Functions, Deno, TypeScript, PostgreSQL, AI Engineering, Conversational AI, Contextual Memory, E-commerce Infrastructure, Hivemart, EchoMate, Sandeep Singh">
   <link rel="canonical" href="https://sandeepsingh-tech.github.io/articles.html">
 
-  <!-- Schema.org tags (Crucial for WhatsApp and Cliq previews) -->
-  <meta itemprop="name" content="Beyond Syntax: Building Across Three Different Runtimes with AI">
-  <meta itemprop="description" content="AI hasn’t replaced me. It gave me architectural leverage to build across composable e-commerce, real-time voice AI, and Unity physics.">
-  <meta itemprop="image" content="https://github.com/sandeepsingh-tech.png">
-
-  <!-- Open Graph / WhatsApp / Zoho Cliq / LinkedIn / Facebook -->
+  <!-- Social preview metadata. Replace the image with a 1200x630 article banner when one is published. -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://sandeepsingh-tech.github.io/articles.html">
-  <meta property="og:title" content="Beyond Syntax: Building Across Three Different Runtimes with AI">
-  <meta property="og:description" content="AI hasn’t replaced me. It gave me architectural leverage to build across composable e-commerce, real-time voice AI, and Unity physics.">
+  <meta property="og:title" content="High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems.">
+  <meta property="og:description" content="Inside the architecture behind Hivemart and EchoMate—and why reliable products depend on connected systems, clear data contracts, and engineering beyond syntax.">
   <meta property="og:image" content="https://github.com/sandeepsingh-tech.png">
   <meta property="og:image:secure_url" content="https://github.com/sandeepsingh-tech.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="460">
   <meta property="og:image:height" content="460">
   <meta property="og:site_name" content="Sandeep Singh | Engineering Articles">
+  <meta property="article:author" content="Sandeep Singh">
+  <meta property="article:published_time" content="2026-10-17">
 
-  <!-- Twitter / X Card Meta Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:url" content="https://sandeepsingh-tech.github.io/articles.html">
-  <meta name="twitter:title" content="Beyond Syntax: Building Across Three Different Runtimes with AI">
-  <meta name="twitter:description" content="AI hasn’t replaced me. It gave me architectural leverage to build across composable e-commerce, real-time voice AI, and Unity physics.">
+  <meta name="twitter:title" content="High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems.">
+  <meta name="twitter:description" content="A detailed look at the connected architecture behind Hivemart and EchoMate.">
   <meta name="twitter:image" content="https://github.com/sandeepsingh-tech.png">
 
-  <!-- Favicon -->
+  <meta itemprop="name" content="High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems.">
+  <meta itemprop="description" content="A practical breakdown of the systems architecture behind Hivemart and EchoMate, from e-commerce data synchronization to conversational AI memory.">
+  <meta itemprop="image" content="https://github.com/sandeepsingh-tech.png">
+
   <link rel="icon" type="image/png" href="https://github.com/sandeepsingh-tech.png">
   <link rel="apple-touch-icon" href="https://github.com/sandeepsingh-tech.png">
 
-  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Google Structured Data (JSON-LD Article Schema) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "Beyond Syntax: Building Across Three Different Runtimes with AI as a Systems Partner",
-    "description": "How systems thinking enables one engineer to build across e-commerce (Hivemart), conversational AI (EchoMate), and 2D action games (Iron Train) using AI as an architectural partner.",
+    "headline": "High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems.",
+    "description": "A practical breakdown of the systems architecture behind Hivemart and EchoMate, covering Shopify e-commerce infrastructure, FlutterFlow, Supabase Edge Functions, PostgreSQL, automation, conversational AI, and contextual memory.",
     "image": "https://github.com/sandeepsingh-tech.png",
     "author": {
       "@type": "Person",
@@ -59,350 +55,259 @@
     },
     "publisher": {
       "@type": "Person",
-      "name": "Sandeep Singh"
+      "name": "Sandeep Singh",
+      "url": "https://sandeepsingh-tech.github.io/"
     },
     "datePublished": "2026-10-17",
-    "url": "https://sandeepsingh-tech.github.io/articles.html"
+    "mainEntityOfPage": "https://sandeepsingh-tech.github.io/articles.html",
+    "keywords": ["Systems Architecture", "Shopify", "FlutterFlow", "Supabase", "PostgreSQL", "AI Engineering", "E-commerce Infrastructure", "Conversational AI"]
   }
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap');
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fcfbf7;
-    }
-    h1, h2, h3, .heading-font {
-      font-family: 'Space Grotesk', sans-serif;
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(226, 220, 206, 0.85);
-    }
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+    :root { color-scheme: light; }
+    body { font-family: 'DM Sans', sans-serif; background: #f8f7f2; }
+    h1,h2,h3,h4,.heading-font { font-family: 'Space Grotesk', sans-serif; }
+    .paper { background: rgba(255,255,255,.94); border: 1px solid #e8e2d5; box-shadow: 0 24px 70px rgba(65,55,35,.08); }
+    .eyebrow { letter-spacing: .13em; }
+    .section-rule { border-top: 1px solid #e9e4d9; }
+    .soft-card { background: #fbfaf6; border: 1px solid #e9e4d9; }
+    .architecture-node { background: #fff; border: 1px solid #e7dfcf; border-radius: 14px; padding: 14px; min-width: 0; }
+    .architecture-arrow { color: #a16207; font-size: 22px; line-height: 1; }
+    .tag { display:inline-flex; align-items:center; border:1px solid #e7dfcf; background:#fff; border-radius:999px; padding:4px 9px; font-size:11px; color:#57534e; }
+    .prose-copy p { margin-top: 13px; }
+    .prose-copy ul { margin-top: 10px; padding-left: 20px; list-style: disc; }
+    .prose-copy li { margin-top: 6px; }
+    .anchor-link { color:#92400e; text-decoration: underline; text-decoration-color:#d6b98a; text-underline-offset:3px; }
+    @media (max-width: 640px) { .architecture-arrow { transform: rotate(90deg); } }
   </style>
 </head>
-<body class="bg-[#fcfbf7] text-stone-800 min-h-screen p-3 sm:p-8 lg:p-12 selection:bg-amber-800 selection:text-white relative overflow-x-hidden">
+<body class="min-h-screen text-stone-800 selection:bg-amber-200 selection:text-stone-900 overflow-x-hidden">
+  <div class="fixed -top-32 left-1/4 h-96 w-96 rounded-full bg-amber-200/30 blur-3xl pointer-events-none"></div>
+  <div class="fixed -bottom-32 right-1/4 h-96 w-96 rounded-full bg-orange-200/20 blur-3xl pointer-events-none"></div>
 
-  <!-- Ambient Background Warm Glows -->
-  <div class="fixed top-0 left-1/4 w-96 h-96 bg-amber-200/35 rounded-full blur-3xl pointer-events-none -z-10"></div>
-  <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-orange-200/25 rounded-full blur-3xl pointer-events-none -z-10"></div>
-
-  <!-- Main Container -->
-  <article class="w-full max-w-4xl mx-auto glass-card rounded-3xl p-5 sm:p-10 shadow-xl shadow-stone-300/40 relative space-y-8">
-
-    <!-- Top Navigation Bar -->
-    <nav class="flex items-center justify-between border-b border-[#e5dfd2] pb-5">
-      <a 
-        href="index.html" 
-        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white hover:bg-stone-50 border border-[#ded8c9] text-stone-700 text-xs font-semibold tracking-wide transition shadow-2xs hover:border-amber-700/40"
-      >
-        <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-amber-800"></i> Back to Profile
-      </a>
-
-      <div class="flex items-center gap-2">
-        <a 
-          href="showcase.html" 
-          class="text-xs font-semibold text-stone-600 hover:text-amber-900 transition flex items-center gap-1"
-        >
-          <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i> Code Repositories
+  <main class="relative px-3 py-5 sm:px-6 sm:py-10 lg:px-8">
+    <article class="paper mx-auto w-full max-w-5xl rounded-3xl p-5 sm:p-9 lg:p-12 space-y-10">
+      <nav class="flex items-center justify-between gap-3 border-b border-[#e8e2d5] pb-5">
+        <a href="index.html" class="inline-flex items-center gap-2 rounded-full border border-[#ded8c9] bg-white px-3.5 py-2 text-xs font-semibold text-stone-700 hover:border-amber-700/50 hover:text-amber-900 transition">
+          <i data-lucide="arrow-left" class="h-4 w-4"></i> Back to Profile
         </a>
-      </div>
-    </nav>
+        <a href="showcase.html" class="inline-flex items-center gap-2 text-xs font-semibold text-stone-600 hover:text-amber-900 transition">
+          <i data-lucide="folder-git-2" class="h-4 w-4"></i><span class="hidden sm:inline">Explore Code Repositories</span><span class="sm:hidden">Repositories</span>
+        </a>
+      </nav>
 
-    <!-- Article Header -->
-    <header class="space-y-4">
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300/70 text-amber-900 text-xs font-semibold tracking-wide">
-        <i data-lucide="cpu" class="w-3.5 h-3.5 text-amber-800"></i> Systems Architecture & Real-World Engineering
-      </div>
-
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900 leading-[1.15]">
-        Beyond Syntax: Building Across Three Different Runtimes with AI as a Systems Partner
-      </h1>
-
-      <p class="text-sm sm:text-base text-stone-600 leading-relaxed max-w-3xl">
-        Why understanding system failure modes, data contracts, and architectural flow matters exponentially more than memorizing syntax in the AI era.
-      </p>
-
-      <div class="flex items-center gap-3 pt-2 text-xs text-stone-500 border-t border-[#eee9dc]">
-        <span class="font-semibold text-stone-800">Sandeep Singh</span>
-        <span>•</span>
-        <span>October 2026</span>
-        <span>•</span>
-        <span>8 min read</span>
-      </div>
-    </header>
-
-    <!-- Showcase Banner Image -->
-    <div class="rounded-2xl overflow-hidden border border-[#ded7c4] shadow-md bg-stone-950">
-      <img 
-        src="ai-systems-architecture-banner.png" 
-        alt="Hivemart e-commerce, EchoMate Voice AI, and Iron Train Unity game showcases" 
-        class="w-full h-auto object-cover"
-      />
-    </div>
-
-    <!-- Article Body Content -->
-    <div class="space-y-8 text-stone-700 text-sm sm:text-base leading-relaxed">
-
-      <!-- Intro Callout Box -->
-      <div class="p-5 sm:p-6 bg-[#f7f5ed] border-l-4 border-amber-700 rounded-r-2xl space-y-3">
-        <p class="font-semibold text-stone-900 text-base sm:text-lg">
-          “AI is going to take our jobs.” I hear this take almost every week. I see it differently.
+      <header class="space-y-5">
+        <div class="inline-flex items-center gap-2 rounded-full border border-amber-300/70 bg-amber-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-900">
+          <i data-lucide="workflow" class="h-3.5 w-3.5"></i> Systems Architecture · Applied Engineering
+        </div>
+        <h1 class="heading-font max-w-4xl text-3xl font-bold leading-[1.12] tracking-tight text-stone-950 sm:text-4xl lg:text-[3.35rem]">
+          High-Performance Apps Aren’t Built by Writing More Code. They’re Built by Connecting the Right Systems.
+        </h1>
+        <p class="max-w-3xl text-base leading-relaxed text-stone-600 sm:text-lg">
+          A practical breakdown of two different engineering challenges—Hivemart’s e-commerce operations and EchoMate’s conversational AI—and the architecture, data flow, and decisions that make them work as complete products.
         </p>
-        <p class="text-stone-700 leading-relaxed">
-          AI hasn’t replaced me. It has given me the architectural leverage to build, experiment with, and ship products that traditionally demanded a much larger engineering team.
-        </p>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-[#eee9dc] pt-4 text-xs text-stone-500">
+          <span class="font-bold text-stone-800">Sandeep Singh</span><span>•</span><span>October 2026</span><span>•</span><span>Detailed technical breakdown</span>
+        </div>
+      </header>
+
+      <div class="overflow-hidden rounded-2xl border border-[#ded7c4] bg-stone-950 shadow-md">
+        <img src="ai-systems-architecture-banner.png" alt="Systems architecture concepts behind Hivemart e-commerce and EchoMate conversational AI" class="h-auto w-full object-cover" onerror="this.style.display='none'" />
       </div>
 
-      <p>
-        Over the past few months, I’ve worked across three very different projects: <strong>Hivemart</strong>, <strong>EchoMate</strong>, and <strong>IRON TRAIN: THE LAST DEFENCE</strong>.
-      </p>
+      <div class="space-y-8 text-sm leading-7 text-stone-700 sm:text-base">
+        <section class="rounded-2xl border-l-4 border-amber-700 bg-[#f7f5ed] p-5 sm:p-7 space-y-3">
+          <p class="heading-font text-lg font-bold leading-snug text-stone-950 sm:text-xl">“AI is going to take our jobs.” I hear this take almost every week. I see it differently.</p>
+          <p>AI hasn’t replaced me. It has given me architectural leverage—the ability to explore unfamiliar technologies, connect services, test ideas, and build products that would traditionally require a much larger engineering team.</p>
+          <p>The leverage, however, does not come from generating code alone. It comes from understanding the system around that code: who owns the data, how components communicate, what happens when an API fails, and how a change in one layer affects every other layer.</p>
+        </section>
 
-      <!-- Three Pillars Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-        <div class="p-4 bg-[#f8f6f0] border border-[#e4decb] rounded-xl text-xs space-y-1">
-          <div class="font-bold text-stone-900 flex items-center gap-1.5 text-sm">
-            🛒 Hivemart
-          </div>
-          <p class="text-stone-600">Composable, serverless e-commerce infrastructure without costly SaaS bloat.</p>
-        </div>
-
-        <div class="p-4 bg-[#f8f6f0] border border-[#e4decb] rounded-xl text-xs space-y-1">
-          <div class="font-bold text-stone-900 flex items-center gap-1.5 text-sm">
-            🎙️ EchoMate
-          </div>
-          <p class="text-stone-600">Voice-first AI conversation, low-latency audio, and episodic memory distillation.</p>
-        </div>
-
-        <div class="p-4 bg-[#f8f6f0] border border-[#e4decb] rounded-xl text-xs space-y-1">
-          <div class="font-bold text-stone-900 flex items-center gap-1.5 text-sm">
-            🎮 IRON TRAIN
-          </div>
-          <p class="text-stone-600">Unity-based 2D action shooter built with distance-based game state machines.</p>
-        </div>
-      </div>
-
-      <p class="font-medium text-stone-800">
-        Different products. Different runtimes. Different engineering challenges. But one principle connects all three: <br>
-        <span class="text-amber-950 font-bold bg-amber-100/60 px-1 py-0.5 rounded">Understanding how systems work matters more than memorizing every line of syntax.</span>
-      </p>
-
-      <!-- Section 1 -->
-      <section class="space-y-4 pt-4 border-t border-[#eee9dc]">
-        <h2 class="text-xl sm:text-2xl font-bold text-stone-900 flex items-center gap-2">
-          <span>🧩</span> 1. The Technical Ecosystem: One Developer, Multiple Runtimes
-        </h2>
-        <p>
-          Rather than treating every technology as an isolated skill, I started thinking about each runtime as a specialized component inside a larger distributed system:
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm">
-          <div class="p-4 bg-[#fbf9f4] border border-[#e8e2d2] rounded-xl space-y-2">
-            <h3 class="font-bold text-stone-900 flex items-center gap-1.5">
-              <i data-lucide="smartphone" class="w-4 h-4 text-amber-800"></i> Mobile Runtimes (Dart & FlutterFlow)
-            </h3>
-            <ul class="space-y-1 text-stone-600 list-disc list-inside">
-              <li>Custom widgets, actions, and application state.</li>
-              <li>Defensive JSON parsing for dynamic AI payload resilience.</li>
-              <li>Debugging client runtimes (e.g., <code>NoSuchMethodError</code>).</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-[#fbf9f4] border border-[#e8e2d2] rounded-xl space-y-2">
-            <h3 class="font-bold text-stone-900 flex items-center gap-1.5">
-              <i data-lucide="server" class="w-4 h-4 text-emerald-800"></i> Backend Orchestration (TypeScript & Deno)
-            </h3>
-            <ul class="space-y-1 text-stone-600 list-disc list-inside">
-              <li>Supabase Edge Functions for secure API routing.</li>
-              <li>Dynamic prompt injection and context window management.</li>
-              <li>Upstream AI failure graceful fallback pipelines.</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-[#fbf9f4] border border-[#e8e2d2] rounded-xl space-y-2">
-            <h3 class="font-bold text-stone-900 flex items-center gap-1.5">
-              <i data-lucide="database" class="w-4 h-4 text-indigo-800"></i> Event Processing (PostgreSQL & PL/pgSQL)
-            </h3>
-            <ul class="space-y-1 text-stone-600 list-disc list-inside">
-              <li>Relational modeling for profiles, chats, and vector memory.</li>
-              <li>Database triggers for event-driven updates.</li>
-              <li>JSONB transformations keeping state strictly consistent.</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-[#fbf9f4] border border-[#e8e2d2] rounded-xl space-y-2">
-            <h3 class="font-bold text-stone-900 flex items-center gap-1.5">
-              <i data-lucide="gamepad-2" class="w-4 h-4 text-rose-800"></i> Game Systems (Unity & C#)
-            </h3>
-            <ul class="space-y-1 text-stone-600 list-disc list-inside">
-              <li>Player controllers, dynamic aiming, and firing physics.</li>
-              <li>Distance-based difficulty scaling across 6,000-metre loops.</li>
-              <li>Centralized state managers for gameplay, popups, and audio.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 2 -->
-      <section class="space-y-4 pt-4 border-t border-[#eee9dc]">
-        <h2 class="text-xl sm:text-2xl font-bold text-stone-900 flex items-center justify-between flex-wrap gap-2">
-          <span>🛒 2. Hivemart: E-Commerce Beyond Traditional Apps</span>
-          <a href="https://hivemart.in/" target="_blank" class="text-xs font-semibold px-3 py-1 bg-stone-900 text-white rounded-lg hover:bg-amber-900 transition flex items-center gap-1">
-            Visit Hivemart ↗
+        <p>That shift in thinking has shaped two of my current product-building journeys:</p>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="soft-card group rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
+            <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🛒</span><span class="tag">E-commerce infrastructure</span></div>
+            <h2 class="heading-font text-xl font-bold text-stone-950">Hivemart</h2>
+            <p class="mt-2 text-sm leading-relaxed text-stone-600">Connecting Shopify, lightweight supplier workflows, Google Sheets, and automation to simplify multi-vendor inventory operations.</p>
+            <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-900">Explore Hivemart <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
           </a>
-        </h2>
-        <p>
-          Hivemart started with a practical operational problem: managing products and supplier inventory without forcing small suppliers to navigate bloated, complex SaaS dashboards.
-        </p>
-        <blockquote class="italic p-3 bg-amber-50/70 border-l-2 border-amber-600 text-stone-800 text-sm">
-          "If a supplier only needs to change inventory from 12 units to 10, why should they need an entire vendor management platform to do it?"
-        </blockquote>
-        <p>
-          We engineered a composable architecture uniting Shopify GraphQL APIs, lightweight Liquid sections, and Google Sheets as an operational data layer. The deep challenge wasn't writing code—it was <strong>data ownership and concurrency</strong>. An inventory update cannot blindly overwrite newer changes caused by live store checkouts.
-        </p>
-      </section>
-
-      <!-- Section 3 -->
-      <section class="space-y-4 pt-4 border-t border-[#eee9dc]">
-        <h2 class="text-xl sm:text-2xl font-bold text-stone-900 flex items-center justify-between flex-wrap gap-2">
-          <span>🎙️ 3. EchoMate: Building a Voice-First AI Companion</span>
-          <a href="echomate.html" target="_blank" class="text-xs font-semibold px-3 py-1 bg-stone-900 text-white rounded-lg hover:bg-amber-900 transition flex items-center gap-1">
-            EchoMate Architecture ↗
-          </a>
-        </h2>
-        <p>
-          EchoMate took me into conversational AI engineering. The goal: a supportive speaking partner that helps Indian professionals overcome hesitation without awkward mid-sentence interruptions.
-        </p>
-        <p>
-          One of the biggest technical challenges was <strong>context distillation</strong>: Sending the entire chat history wastes tokens and adds latency. Retaining too little makes conversation feel disconnected. EchoMate pairs a compact rolling message window with structured long-term memory distilled in PostgreSQL.
-        </p>
-      </section>
-
-      <!-- Section 4 -->
-      <section class="space-y-4 pt-4 border-t border-[#eee9dc]">
-        <h2 class="text-xl sm:text-2xl font-bold text-stone-900 flex items-center justify-between flex-wrap gap-2">
-          <span>🚂 4. IRON TRAIN: THE LAST DEFENCE</span>
-          <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" class="text-xs font-semibold px-3 py-1 bg-stone-900 text-white rounded-lg hover:bg-amber-900 transition flex items-center gap-1">
-            Play on itch.io ↗
-          </a>
-        </h2>
-        <p>
-          In game development, generating an asset or script is only 5% of the battle. An enemy sprite is not an enemy system; a shooting animation is not a shooting mechanic.
-        </p>
-        <p>
-          Across 6,000-metre looping tracks, distance-based state machines dictate enemy movement (sine waves, zig-zags), weapon unlocking, and difficulty escalation. Building this project reinforced that the real job of an engineer is making disparate subsystems interact harmoniously under real runtime stress.
-        </p>
-      </section>
-
-      <!-- Section 5 -->
-      <section class="space-y-4 pt-4 border-t border-[#eee9dc]">
-        <h2 class="text-xl sm:text-2xl font-bold text-stone-900 flex items-center gap-2">
-          <span>🧪 5. The Reality Check: AI Is Not Magic</span>
-        </h2>
-        <p>
-          Generating code is often the easiest part. The difficult part begins when that code meets the rest of your production system:
-        </p>
-
-        <div class="space-y-3">
-          <div class="p-3.5 bg-[#fbf9f4] border border-[#e8e2d2] rounded-xl text-xs sm:text-sm">
-            <strong class="text-stone-900">1. Dynamic Data & Null Collisions:</strong> AI generates models fast, but unannounced upstream null fields crash clients without defensive parsing.
-          </div>
-          <div class="p-3.5 bg-[#fbf9f4] border border-[#e8e2d2] rounded-xl text-xs sm:text-sm">
-            <strong class="text-stone-900">2. Fragile Dependency Cascades:</strong> Optimizing a SQL trigger or Edge Function can silently strip required CORS headers or break game state popups.
-          </div>
-          <div class="p-3.5 bg-[#fbf9f4] border border-[#e8e2d2] rounded-xl text-xs sm:text-sm">
-            <strong class="text-stone-900">3. Scaling Beyond the Happy Path:</strong> A prompt or API script that works for 10 records breaks down when handling thousands of SKUs or multi-turn conversational trees.
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 6: Key Principles -->
-      <section class="space-y-4 pt-4 border-t border-[#eee9dc]">
-        <h2 class="text-xl sm:text-2xl font-bold text-stone-900">
-          🧠 Three Principles This Journey Has Reinforced
-        </h2>
-
-        <div class="grid grid-cols-1 gap-3">
-          <div class="p-4 bg-amber-50/70 border border-amber-200/90 rounded-xl space-y-1 text-xs sm:text-sm">
-            <div class="font-bold text-stone-900">1. Syntax Is Useful. Systems Thinking Is the Multiplier.</div>
-            <p class="text-stone-600">AI can generate code in seconds. Knowing where it belongs, what depends on it, and how it fails is the human differentiator.</p>
-          </div>
-
-          <div class="p-4 bg-emerald-50/70 border border-emerald-200/90 rounded-xl space-y-1 text-xs sm:text-sm">
-            <div class="font-bold text-stone-900">2. Languages Are Specialized Tools, Not Competing Identities.</div>
-            <p class="text-stone-600">Dart, TypeScript, Python, SQL, Liquid, and C# solve distinct problems in distinct environments. Connect them as a unified engine.</p>
-          </div>
-
-          <div class="p-4 bg-indigo-50/70 border border-indigo-200/90 rounded-xl space-y-1 text-xs sm:text-sm">
-            <div class="font-bold text-stone-900">3. Real Projects Teach What Tutorials Cannot.</div>
-            <p class="text-stone-600">Handling partial batch failures, memory token limits, and game loop timing builds the intuition required to question and refine AI output.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Bottom Line Conclusion -->
-      <div class="p-6 bg-stone-900 text-stone-100 rounded-2xl space-y-3 text-center sm:text-left">
-        <h3 class="text-lg sm:text-xl font-bold text-white heading-font">
-          The Bottom Line
-        </h3>
-        <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
-          The advantage isn’t merely knowing how to prompt an AI for syntax. It’s knowing what to architect, how the pieces fit together, where the runtime will break, and how to deliver a reliable product.
-        </p>
-        <p class="text-xs sm:text-sm text-amber-300 font-semibold pt-1">
-          Don’t just generate code. Understand the system. Build the product. Debug the reality.
-        </p>
-      </div>
-
-    </div>
-
-    <!-- Article Footer / Author Bio -->
-    <footer class="pt-8 border-t border-[#ded8c9] space-y-4">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3 text-left">
-          <img 
-            src="https://github.com/sandeepsingh-tech.png" 
-            alt="Sandeep Singh" 
-            class="w-12 h-12 rounded-xl object-cover ring-1 ring-amber-700/20"
-          />
-          <div>
-            <div class="text-sm font-bold text-stone-900">Sandeep Singh</div>
-            <div class="text-xs text-stone-500">Operations Leader & Systems Architect • Surat, India</div>
-          </div>
-        </div>
-
-        <!-- Symmetrically Centered Action Buttons -->
-        <div class="flex items-center gap-2.5">
-          <a 
-            href="https://linkedin.com/in/sandeepsingh-vision" 
-            target="_blank" 
-            class="inline-flex items-center justify-center text-center gap-2 px-4 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold rounded-xl transition-all shadow-xs leading-none"
-          >
-            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-            <span class="inline-block">Connect on LinkedIn</span>
-          </a>
-
-          <a 
-            href="index.html" 
-            class="inline-flex items-center justify-center text-center px-4 py-2.5 bg-white hover:bg-stone-50 border border-[#ded8c9] text-stone-800 text-xs font-semibold rounded-xl transition-all shadow-xs leading-none"
-          >
-            <span class="inline-block">View Portfolio</span>
+          <a href="echomate.html" class="soft-card group rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
+            <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🎙️</span><span class="tag">Conversational AI</span></div>
+            <h2 class="heading-font text-xl font-bold text-stone-950">EchoMate</h2>
+            <p class="mt-2 text-sm leading-relaxed text-stone-600">Connecting a voice-first mobile experience with backend orchestration, language models, and contextual memory.</p>
+            <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-900">Explore EchoMate <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
           </a>
         </div>
+        <p class="font-medium text-stone-800">Different products. Different requirements. One engineering principle: <span class="rounded bg-amber-100/70 px-1 font-bold text-amber-950">the quality of an application depends on how well its systems work together.</span></p>
+
+        <!-- Hivemart -->
+        <section id="hivemart" class="section-rule space-y-5 pt-8">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div><p class="eyebrow text-[10px] font-bold uppercase text-amber-800">01 / E-commerce systems</p><h2 class="heading-font mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">Hivemart: E-Commerce Beyond Traditional Apps</h2></div>
+            <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Visit Hivemart <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+          </div>
+          <p>Hivemart started with a practical operational problem: managing products and supplier inventory without forcing vendors to navigate another complicated dashboard or pay for another layer of software they barely use.</p>
+          <blockquote class="rounded-r-xl border-l-2 border-amber-600 bg-amber-50/70 p-4 text-base font-semibold italic text-stone-900">“If a supplier only needs to change inventory from 12 units to 10, why should they need an entire vendor management platform to do it?”</blockquote>
+          <p>The product direction is deliberately lightweight: give suppliers a simple way to update what they actually need to update, while keeping the store’s product and inventory data connected to the systems that already run the business.</p>
+
+          <div class="space-y-3">
+            <h3 class="heading-font text-lg font-bold text-stone-950">The architecture at a glance</h3>
+            <div class="grid grid-cols-1 items-stretch gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr]">
+              <div class="architecture-node"><div class="text-lg">📱</div><div class="mt-1 font-bold text-stone-900">Supplier interface</div><p class="mt-1 text-xs leading-relaxed text-stone-600">A branded, lightweight link and simple inventory controls.</p></div>
+              <div class="architecture-arrow flex items-center justify-center">→</div>
+              <div class="architecture-node"><div class="text-lg">📊</div><div class="mt-1 font-bold text-stone-900">Operational data layer</div><p class="mt-1 text-xs leading-relaxed text-stone-600">Google Forms and Google Sheets workflows for capturing updates.</p></div>
+              <div class="architecture-arrow flex items-center justify-center">→</div>
+              <div class="architecture-node"><div class="text-lg">🛍️</div><div class="mt-1 font-bold text-stone-900">Shopify platform</div><p class="mt-1 text-xs leading-relaxed text-stone-600">Product catalog and inventory operations through Shopify APIs.</p></div>
+            </div>
+            <p class="text-xs text-stone-500">Conceptual flow of the supplier-update and catalog workflow; individual automation steps may run asynchronously.</p>
+          </div>
+
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">01. Shopify as the commerce core</h3><p class="text-sm">Shopify remains responsible for the storefront commerce domain—products, SKUs, inventory, and store operations. The integration layer communicates with Shopify through Admin GraphQL and REST APIs where appropriate.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Shopify Admin API</span><span class="tag">GraphQL</span><span class="tag">REST</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">02. Custom storefront engineering</h3><p class="text-sm">Reusable Shopify Liquid sections and focused HTML, CSS, and JavaScript keep storefront experiences tailored without making every requirement dependent on a third-party app.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Liquid</span><span class="tag">HTML / CSS</span><span class="tag">JavaScript</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">03. Supplier-first update workflow</h3><p class="text-sm">The supplier experience is intentionally narrow: access a branded link, find the relevant product, and submit an inventory change through a simple workflow. The goal is to reduce training and login friction.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Secure supplier links</span><span class="tag">Simple controls</span><span class="tag">Forms</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">04. Automation and reconciliation</h3><p class="text-sm">Google Sheets acts as an operational data layer. Python workflows help reconcile SKUs and handles, process catalog data, prepare bulk updates, and communicate with Shopify APIs.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Google Sheets</span><span class="tag">Python</span><span class="tag">CSV</span></div></div>
+          </div>
+
+          <div class="rounded-2xl bg-stone-950 p-5 text-stone-100 sm:p-6">
+            <p class="eyebrow text-[10px] font-bold uppercase text-amber-300">The hard engineering problem</p>
+            <h3 class="heading-font mt-2 text-xl font-bold text-white">Inventory is not just a number. It is shared, changing state.</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-300">A supplier update and a customer checkout can happen close together. If a delayed supplier update blindly replaces a newer store quantity, the system can reintroduce stale stock. That is a data-ownership and concurrency problem—not a UI problem.</p>
+            <div class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3">
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3"><div class="text-xs font-bold text-amber-300">Supplier event</div><p class="mt-1 text-xs text-stone-300">A vendor submits a quantity change.</p></div>
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3"><div class="text-xs font-bold text-amber-300">Store event</div><p class="mt-1 text-xs text-stone-300">A customer order changes available inventory.</p></div>
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3"><div class="text-xs font-bold text-amber-300">Sync responsibility</div><p class="mt-1 text-xs text-stone-300">The update process must account for freshness and ownership before applying changes.</p></div>
+            </div>
+          </div>
+
+          <h3 class="heading-font text-lg font-bold text-stone-950">What this project has to get right</h3>
+          <ul class="list-disc space-y-2 pl-5 text-sm">
+            <li><strong>Product identity:</strong> match records reliably using SKU and product identifiers rather than assuming every source uses the same handle.</li>
+            <li><strong>Data freshness:</strong> avoid allowing an older supplier or sheet update to overwrite a more recent store-side change.</li>
+            <li><strong>API behaviour:</strong> account for pagination, rate limits, partial failures, and the size of bulk catalog operations.</li>
+            <li><strong>Operational simplicity:</strong> make the supplier action easy while keeping the underlying synchronization process controlled.</li>
+            <li><strong>Cost discipline:</strong> use the existing platform and lightweight automation where they meet the requirement, instead of adding recurring app dependencies by default.</li>
+          </ul>
+          <p>That is the difference between building a form that accepts a number and engineering an inventory workflow that has to coexist with a live commerce system.</p>
+        </section>
+
+        <!-- EchoMate -->
+        <section id="echomate" class="section-rule space-y-5 pt-8">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div><p class="eyebrow text-[10px] font-bold uppercase text-amber-800">02 / Conversational AI systems</p><h2 class="heading-font mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">EchoMate: Building a Voice-First AI Companion</h2></div>
+            <a href="echomate.html" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Explore architecture <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+          </div>
+          <p>EchoMate explores a different kind of system: a voice-first AI experience where users can practise conversations, speak naturally, receive responses, and build continuity across sessions. Its first application is focused on spoken English fluency and confidence—not simply translating a sentence or returning a generic chatbot response.</p>
+          <p>The challenge is not just connecting a microphone to a language model. The product needs to manage the conversation lifecycle: capture input, process it, retrieve relevant context, orchestrate an AI response, return it to the client, and preserve useful memory for later interactions.</p>
+
+          <h3 class="heading-font text-lg font-bold text-stone-950">The request and response pipeline</h3>
+          <div class="grid grid-cols-1 gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr]">
+            <div class="architecture-node"><div class="text-lg">🎙️</div><div class="font-bold text-stone-900">Voice / mobile client</div><p class="mt-1 text-xs text-stone-600">FlutterFlow UI, custom Dart actions, app state, and user interaction.</p></div>
+            <div class="architecture-arrow flex items-center justify-center">→</div>
+            <div class="architecture-node"><div class="text-lg">⚙️</div><div class="font-bold text-stone-900">Backend orchestration</div><p class="mt-1 text-xs text-stone-600">Supabase Edge Functions using TypeScript and Deno.</p></div>
+            <div class="architecture-arrow flex items-center justify-center">→</div>
+            <div class="architecture-node"><div class="text-lg">🧠</div><div class="font-bold text-stone-900">AI + memory layer</div><p class="mt-1 text-xs text-stone-600">Context assembly, model communication, and PostgreSQL-backed state.</p></div>
+          </div>
+          <div class="flex justify-center"><div class="rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-xs font-semibold text-amber-900">Response returns to the mobile experience · Useful context is retained asynchronously</div></div>
+
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">01. Mobile experience — FlutterFlow and Dart</h3><p class="text-sm">The client manages the user-facing conversation experience, application state, and communication with backend services. Custom Dart actions help handle API responses and client-side behaviour.</p><div class="flex flex-wrap gap-1.5"><span class="tag">FlutterFlow</span><span class="tag">Dart</span><span class="tag">Custom actions</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">02. Backend orchestration — Supabase Edge Functions</h3><p class="text-sm">TypeScript running on Deno provides a server-side boundary for request processing, prompt construction, context handling, and communication with external AI services.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Supabase</span><span class="tag">Edge Functions</span><span class="tag">TypeScript</span><span class="tag">Deno</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">03. Data layer — PostgreSQL</h3><p class="text-sm">PostgreSQL stores structured application data such as user profiles, messages, and conversation memories. SQL functions and triggers can support event-driven processing and consistent data operations.</p><div class="flex flex-wrap gap-1.5"><span class="tag">PostgreSQL</span><span class="tag">SQL</span><span class="tag">PL/pgSQL</span><span class="tag">JSONB</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">04. AI service integration</h3><p class="text-sm">The backend manages communication with language-model providers and keeps provider-specific calls away from the mobile UI. This creates a place to manage prompts, response handling, errors, and fallback behaviour.</p><div class="flex flex-wrap gap-1.5"><span class="tag">LLM APIs</span><span class="tag">Prompt orchestration</span><span class="tag">Fallback handling</span></div></div>
+          </div>
+
+          <div class="rounded-2xl border border-indigo-100 bg-indigo-50/60 p-5 sm:p-6 space-y-3">
+            <p class="eyebrow text-[10px] font-bold uppercase text-indigo-800">The core architecture decision</p>
+            <h3 class="heading-font text-xl font-bold text-stone-950">The model should not need the entire conversation every time.</h3>
+            <p class="text-sm">One of the most important challenges is context distillation. Sending the complete conversation history with every request can increase token usage, add latency, and bring irrelevant details into the next response. Retaining too little context, however, makes the experience feel disconnected.</p>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div class="rounded-xl border border-indigo-100 bg-white p-4"><div class="font-bold text-indigo-950">Recent conversation window</div><p class="mt-1 text-sm text-stone-600">A compact set of recent messages provides immediate conversational continuity.</p></div>
+              <div class="rounded-xl border border-indigo-100 bg-white p-4"><div class="font-bold text-indigo-950">Structured long-term memory</div><p class="mt-1 text-sm text-stone-600">Useful information is distilled and stored so it can inform future sessions without replaying every message.</p></div>
+            </div>
+            <p class="text-sm">The design goal is to retrieve relevant context, not indiscriminately replay history. That makes memory an application-level system with rules and data structures—not just a larger prompt.</p>
+          </div>
+
+          <h3 class="heading-font text-lg font-bold text-stone-950">Questions the memory and orchestration layers must answer</h3>
+          <ul class="list-disc space-y-2 pl-5 text-sm">
+            <li>Which information is useful enough to preserve beyond the current conversation?</li>
+            <li>How should stored context be updated when new information changes an earlier understanding?</li>
+            <li>How should the backend handle null, incomplete, or unexpected provider responses?</li>
+            <li>What should happen when an AI provider is slow, unavailable, or returns an error?</li>
+            <li>How can the client and backend evolve without silently breaking their request and response contract?</li>
+          </ul>
+          <p>EchoMate has pushed me to think about conversational AI as a stateful application with latency constraints, data contracts, memory policies, and failure modes—not simply as a prompt connected to an API.</p>
+        </section>
+
+        <!-- Cross-project engineering -->
+        <section class="section-rule space-y-5 pt-8">
+          <p class="eyebrow text-[10px] font-bold uppercase text-amber-800">03 / Engineering lessons</p>
+          <h2 class="heading-font text-2xl font-bold text-stone-950 sm:text-3xl">What Connects These Two Systems?</h2>
+          <p>Hivemart and EchoMate solve very different user problems. But the underlying engineering questions are surprisingly similar.</p>
+          <div class="overflow-hidden rounded-2xl border border-[#e8e2d5]">
+            <div class="grid grid-cols-[1fr_1fr_1fr] bg-stone-900 text-xs font-bold text-white"><div class="p-3">Engineering concern</div><div class="p-3">Hivemart</div><div class="p-3">EchoMate</div></div>
+            <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Data ownership</div><div class="p-3">Supplier updates and live store inventory</div><div class="p-3">User profile, messages, and retained memory</div></div>
+            <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Integration boundary</div><div class="p-3">Sheets, Python workflows, Shopify APIs</div><div class="p-3">FlutterFlow, Edge Functions, model APIs</div></div>
+            <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Failure modes</div><div class="p-3">Stale updates, SKU mismatch, API limits</div><div class="p-3">Null payloads, provider errors, context drift</div></div>
+            <div class="grid grid-cols-[1fr_1fr_1fr] border-t border-[#e8e2d5] text-xs sm:text-sm"><div class="bg-[#fbfaf6] p-3 font-semibold text-stone-800">Consistency goal</div><div class="p-3">Keep catalog and inventory aligned</div><div class="p-3">Keep client, backend, and memory state aligned</div></div>
+          </div>
+          <p>The technology changes, but the discipline remains the same: define boundaries, make data contracts explicit, validate assumptions, and test the complete flow—not just the individual function.</p>
+        </section>
+
+        <section class="section-rule space-y-5 pt-8">
+          <p class="eyebrow text-[10px] font-bold uppercase text-amber-800">04 / Reality of AI-assisted development</p>
+          <h2 class="heading-font text-2xl font-bold text-stone-950 sm:text-3xl">AI Is a Development Partner. It Is Not a Substitute for Engineering Judgment.</h2>
+          <p>Generating a component, SQL query, API call, or automation script is often the fastest part. The difficult work starts when that output interacts with existing systems.</p>
+          <div class="space-y-3">
+            <div class="soft-card rounded-xl p-4"><div class="flex items-start gap-3"><span class="rounded-lg bg-amber-100 p-2 text-amber-900"><i data-lucide="braces" class="h-4 w-4"></i></span><div><h3 class="font-bold text-stone-900">1. Dynamic data and null collisions</h3><p class="mt-1 text-sm">A generated client model may assume a field is always present. An API can return null or a different shape. Without defensive parsing and a clear contract, the failure appears at runtime—often far away from the original change.</p></div></div></div>
+            <div class="soft-card rounded-xl p-4"><div class="flex items-start gap-3"><span class="rounded-lg bg-amber-100 p-2 text-amber-900"><i data-lucide="git-branch" class="h-4 w-4"></i></span><div><h3 class="font-bold text-stone-900">2. Dependency cascades</h3><p class="mt-1 text-sm">An optimization to an Edge Function, SQL trigger, or client action can unintentionally remove a required header, alter a response shape, or break a downstream state transition. A local fix is not proof that the system still works.</p></div></div></div>
+            <div class="soft-card rounded-xl p-4"><div class="flex items-start gap-3"><span class="rounded-lg bg-amber-100 p-2 text-amber-900"><i data-lucide="layers-3" class="h-4 w-4"></i></span><div><h3 class="font-bold text-stone-900">3. Scaling beyond the happy path</h3><p class="mt-1 text-sm">A script that handles ten products may behave differently with thousands. A prompt that works for one exchange may become inefficient over a long conversation. Pagination, rate limits, token budgets, and partial failures need to be part of the design.</p></div></div></div>
+            <div class="soft-card rounded-xl p-4"><div class="flex items-start gap-3"><span class="rounded-lg bg-amber-100 p-2 text-amber-900"><i data-lucide="shield-check" class="h-4 w-4"></i></span><div><h3 class="font-bold text-stone-900">4. Reliability across the complete flow</h3><p class="mt-1 text-sm">The application is only as dependable as the interactions between its UI, APIs, databases, external services, and operational workflows. Integration testing and observability matter because failures rarely respect architectural boundaries.</p></div></div></div>
+          </div>
+        </section>
+
+        <section class="section-rule space-y-5 pt-8">
+          <p class="eyebrow text-[10px] font-bold uppercase text-amber-800">05 / Principles</p>
+          <h2 class="heading-font text-2xl font-bold text-stone-950 sm:text-3xl">Three Principles I Keep Coming Back To</h2>
+          <div class="grid grid-cols-1 gap-3">
+            <div class="rounded-xl border border-amber-200 bg-amber-50/60 p-5"><div class="text-xs font-bold uppercase tracking-wider text-amber-900">Principle 01</div><h3 class="heading-font mt-1 text-lg font-bold text-stone-950">Syntax is useful. Systems thinking is the multiplier.</h3><p class="mt-2 text-sm">AI can generate code quickly. Knowing where that code belongs, what depends on it, and how it can fail is what turns generated output into a reliable product.</p></div>
+            <div class="rounded-xl border border-emerald-200 bg-emerald-50/60 p-5"><div class="text-xs font-bold uppercase tracking-wider text-emerald-900">Principle 02</div><h3 class="heading-font mt-1 text-lg font-bold text-stone-950">Languages are tools, not separate identities.</h3><p class="mt-2 text-sm">Dart, TypeScript, Python, SQL, and Shopify Liquid solve different problems in different environments. The valuable skill is understanding their responsibilities and connecting them through clear interfaces.</p></div>
+            <div class="rounded-xl border border-indigo-200 bg-indigo-50/60 p-5"><div class="text-xs font-bold uppercase tracking-wider text-indigo-900">Principle 03</div><h3 class="heading-font mt-1 text-lg font-bold text-stone-950">Real products teach what isolated tutorials cannot.</h3><p class="mt-2 text-sm">Reconciling product records, handling concurrent inventory changes, managing conversation memory, and recovering from API failures create engineering intuition that isolated examples rarely provide.</p></div>
+          </div>
+        </section>
+
+        <section class="section-rule space-y-4 pt-8">
+          <p class="eyebrow text-[10px] font-bold uppercase text-amber-800">06 / Explore the work</p>
+          <h2 class="heading-font text-2xl font-bold text-stone-950">See the Systems in Context</h2>
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Hivemart</div><div class="text-xs text-stone-500">E-commerce infrastructure</div></div><i data-lucide="external-link" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="echomate.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">EchoMate</div><div class="text-xs text-stone-500">Voice-first AI architecture</div></div><i data-lucide="arrow-up-right" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="showcase.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">GitHub Project Showcase</div><div class="text-xs text-stone-500">Repositories and experiments</div></div><i data-lucide="github" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://sandeepsingh-tech.github.io/" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Personal Portfolio</div><div class="text-xs text-stone-500">Projects and profile</div></div><i data-lucide="user-round" class="h-4 w-4 text-amber-800"></i></a>
+          </div>
+        </section>
+
+        <section class="rounded-2xl bg-stone-950 p-6 text-center text-white sm:p-8">
+          <p class="eyebrow text-[10px] font-bold uppercase text-amber-300">The bottom line</p>
+          <h2 class="heading-font mt-2 text-2xl font-bold sm:text-3xl">Don’t just write more code. Connect the right systems.</h2>
+          <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-stone-300">The advantage in AI-assisted engineering is not simply knowing how to ask for code. It is knowing what to build, how the pieces fit together, where the architecture can fail, and how to make the complete system work reliably.</p>
+          <p class="mt-5 font-bold text-amber-300">Understand the system. Build the product. Debug the reality.</p>
+        </section>
       </div>
 
-      <div class="text-center text-[11px] text-stone-400 pt-3">
-        © 2026 Sandeep Singh • Built with GitHub Pages & Tailwind CSS
-      </div>
-    </footer>
-
-  </article>
-
-  <script>
-    lucide.createIcons();
-  </script>
+      <footer class="border-t border-[#ded8c9] pt-7">
+        <div class="flex flex-col items-center justify-between gap-5 sm:flex-row">
+          <div class="flex items-center gap-3"><img src="https://github.com/sandeepsingh-tech.png" alt="Sandeep Singh" class="h-12 w-12 rounded-xl object-cover ring-1 ring-amber-700/20"><div><div class="font-bold text-stone-900">Sandeep Singh</div><div class="text-xs text-stone-500">Systems Architecture · E-commerce · AI Engineering</div></div></div>
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            <a href="https://www.linkedin.com/in/sandeepsingh-vision/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-stone-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-stone-700 transition"><i data-lucide="linkedin" class="h-4 w-4"></i> Connect on LinkedIn</a>
+            <a href="index.html" class="rounded-xl border border-[#ded8c9] bg-white px-4 py-2.5 text-xs font-semibold text-stone-800 hover:bg-stone-50 transition">View Portfolio</a>
+          </div>
+        </div>
+        <div class="pt-6 text-center text-[11px] text-stone-400">© 2026 Sandeep Singh · Built with GitHub Pages and Tailwind CSS</div>
+      </footer>
+    </article>
+  </main>
+  <script>lucide.createIcons();</script>
 </body>
 </html>
