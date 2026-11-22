@@ -364,6 +364,8 @@
       gap: 8px;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      cursor: pointer;
+      font-family: inherit;
     }
 
     .btn-primary {
@@ -393,7 +395,7 @@
     }
 
     /* ==========================================================
-       MODERN VOICE CHAT DEMO LAYOUT (COMING SOON PREVIEW)
+       MODERN VOICE CHAT DEMO LAYOUT
        ========================================================== */
     .voice-demo-section {
       margin: 42px auto 60px;
@@ -574,7 +576,7 @@
       max-width: 220px;
     }
 
-    /* Right Panel: Chat Stream + Coming Soon Glass Overlay */
+    /* Right Panel: Chat Stream + Demo Launch Overlay */
     .vc-chat-area {
       position: relative;
       display: flex;
@@ -661,7 +663,7 @@
       flex-shrink: 0;
     }
 
-    /* Coming Soon Glass Overlay Card */
+    /* Demo Launch Glass Overlay Card */
     .vc-coming-soon-overlay {
       position: absolute;
       inset: 16px;
@@ -695,31 +697,13 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .vc-coming-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(232, 121, 249, 0.22));
-      border: 1px solid rgba(56, 189, 248, 0.55);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.86rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #fff;
-      box-shadow: 0 0 22px rgba(56, 189, 248, 0.28);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .vc-overlay-desc {
       font-size: 0.88rem;
       color: var(--text-muted);
-      max-width: 400px;
+      max-width: 410px;
       line-height: 1.5;
     }
 
@@ -959,7 +943,6 @@
     .flow-row-3 { grid-template-columns: 1fr auto 1fr auto 1fr; }
     .flow-row-2 { grid-template-columns: 1fr auto 1fr; }
 
-    /* Desktop Snake Ordering: Row 2 displays 6 <- 5 <- 4 so 4 sits directly under 3 */
     @media (min-width: 821px) {
       .snake-row-2 .step-6 { order: 1; }
       .snake-row-2 .arr-5  { order: 2; }
@@ -1058,7 +1041,6 @@
       color: #fff;
     }
 
-    /* Glowing Animated Arrows */
     .flow-arrow-h {
       display: flex;
       align-items: center;
@@ -1070,7 +1052,6 @@
       user-select: none;
     }
 
-    /* Vertical Drop Connectors positioned directly under Step 3 (right) and Step 6 (left) */
     .flow-drop-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -1097,7 +1078,6 @@
       animation: arrowGlowMagenta 8s infinite;
     }
 
-    /* Sequential Snake Pipeline Timing (8s Loop: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8) */
     .step-1 { animation-delay: 0.0s; }
     .arr-1  { animation-delay: 0.5s; }
     .step-2 { animation-delay: 1.0s; }
@@ -1132,7 +1112,6 @@
       22% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
     }
 
-    /* Step-Wise Features Sub-Header inside Architecture Section */
     .features-stepwise-header {
       text-align: center;
       max-width: 700px;
@@ -1152,7 +1131,6 @@
       line-height: 1.55;
     }
 
-    /* Detailed Step-by-Step Features Stack */
     .arch-stack {
       display: flex;
       flex-direction: column;
@@ -1222,7 +1200,6 @@
       line-height: 1.55;
     }
 
-    /* Vertical Flow Connector Arrow */
     .arch-connector-wrap {
       display: flex;
       justify-content: center;
@@ -1275,7 +1252,6 @@
       color: #fff;
     }
 
-    /* Multi-Model Grid */
     .models-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1309,7 +1285,6 @@
       line-height: 1.45;
     }
 
-    /* Supabase Specific Breakdown Grid */
     .supabase-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1412,7 +1387,6 @@
       line-height: 1.6;
     }
 
-    /* Studio Pillars Layout */
     .studio-category-title {
       display: flex;
       align-items: center;
@@ -1501,7 +1475,6 @@
       color: var(--neon-cyan);
     }
 
-    /* Output Deliverable Banner */
     .studio-output-banner {
       background: linear-gradient(135deg, rgba(56, 189, 248, 0.09) 0%, rgba(232, 121, 249, 0.09) 100%);
       border: 1px dashed rgba(56, 189, 248, 0.4);
@@ -1723,13 +1696,11 @@
         gap: 6px;
       }
 
-      /* Rotate right-pointing arrows down on mobile */
       .flow-arrow-h.dir-right {
         transform: rotate(90deg);
         padding: 2px 0;
       }
 
-      /* Rotate left-pointing arrows down on mobile so 4 -> 5 -> 6 flows downward */
       .flow-arrow-h.dir-left {
         transform: rotate(-90deg);
         padding: 2px 0;
@@ -2085,7 +2056,7 @@
         EchoMate is your judgment-free conversational flight simulator. Practice real-world scenarios on any topic you care about with zero mid-thought interruptions, natural speech recasting, and instant executive polish.
       </p>
       <div class="cta-group">
-        <a href="#live-demo" class="btn btn-primary">Preview Voice Arena ↓</a>
+        <button type="button" data-launch-demo class="btn btn-primary">🎙️ Launch Live Voice Demo</button>
         <a href="https://sandeepsingh-tech.github.io/showcase.html" class="btn btn-showcase">
           Explore Systems & Showcase ↗
         </a>
@@ -2105,7 +2076,7 @@
           </div>
           <div class="vc-session-pill">
             <span class="vc-live-indicator"></span>
-            <span>Interactive Voice Arena • Sandbox Mode</span>
+            <span>Interactive Voice Arena • Live Sandbox</span>
           </div>
         </div>
 
@@ -2135,7 +2106,7 @@
             </div>
           </div>
 
-          <!-- Right Voice Transcript & Coming Soon Overlay -->
+          <!-- Right Voice Transcript & Launch Overlay -->
           <div class="vc-chat-area">
             <div class="vc-messages" aria-hidden="true">
               <div class="vc-msg user">
@@ -2153,13 +2124,13 @@
               <div class="vc-mic-pill">🎙️</div>
             </div>
 
-            <!-- Prominent Coming Soon Glass Overlay with Logo & Written Project EchoMate -->
+            <!-- Interactive Launch Glass Overlay -->
             <div class="vc-coming-soon-overlay">
               <img src="Echomate_Transparent_1024.png" alt="Project EchoMate Logo" class="vc-overlay-logo">
               <div class="vc-overlay-brand">Project EchoMate</div>
-              <div class="vc-coming-badge">✨ Interactive Demo Coming Soon</div>
+              <button type="button" data-launch-demo class="btn btn-primary" style="margin-bottom: 12px;">🎙️ Launch Live Voice Demo</button>
               <p class="vc-overlay-desc">
-                We are putting the final polish on our sub-second conversational voice arena. Soon you will be able to test live, judgment-free English sessions right here.
+                Try 3 free voice turns instantly as a guest, or sign in with Google to unlock all core practice modes and post-session Speech Modeling reports.
               </p>
             </div>
           </div>
@@ -2815,6 +2786,28 @@
         });
       });
     });
+  </script>
+
+  <!-- Lightweight Private Demo Modal Shell -->
+  <div id="demoModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(4,6,12,0.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:12px;">
+    <div style="position:relative;width:100%;max-width:860px;height:88vh;border-radius:24px;overflow:hidden;border:1px solid rgba(56,189,248,0.4);box-shadow:0 24px 60px rgba(0,0,0,0.75);">
+      <button id="closeDemoModal" style="position:absolute;top:12px;right:14px;z-index:30;background:rgba(239,68,68,0.2);color:#FCA5A5;border:1px solid rgba(239,68,68,0.45);border-radius:99px;padding:4px 11px;font-weight:700;cursor:pointer;">✕ Close</button>
+      <iframe id="demoFrame" allow="microphone" style="width:100%;height:100%;border:none;background:#080B11;"></iframe>
+    </div>
+  </div>
+  <script>
+    const openDemo = async () => {
+      const m = document.getElementById('demoModal'), f = document.getElementById('demoFrame');
+      m.style.display = 'flex';
+      if (!f.srcdoc) {
+        const html = await (await fetch('https://llsiiwroonvepwsplbrz.supabase.co/functions/v1/web-demo-ui')).text();
+        f.srcdoc = html.replace('<script>', `<script>window.__PARENT_HASH__=${JSON.stringify(window.location.hash)};`);
+        if (window.location.hash.includes('access_token')) history.replaceState(null, '', window.location.pathname);
+      }
+    };
+    document.querySelectorAll('[data-launch-demo]').forEach(btn => btn.addEventListener('click', openDemo));
+    document.getElementById('closeDemoModal')?.addEventListener('click', () => document.getElementById('demoModal').style.display = 'none');
+    if (window.location.hash.includes('access_token')) openDemo();
   </script>
 
 </body>
