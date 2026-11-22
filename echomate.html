@@ -1,2813 +1,948 @@
-<!DOCTYPE html>
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "https://llsiiwroonvepwsplbrz.supabase.co";
+const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY") || "";
+
+const ALLOWED_ORIGINS = [
+  "https://sandeepsingh-tech.github.io",
+  "http://localhost:5173",
+];
+
+serve((req) => {
+  const origin = req.headers.get("origin") || "";
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin)
+    ? origin
+    : "https://sandeepsingh-tech.github.io";
+
+  if (req.method === "OPTIONS") {
+    return new Response("ok", {
+      headers: {
+        "Access-Control-Allow-Origin": allowOrigin,
+        "Access-Control-Allow-Headers": "content-type",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      },
+    });
+  }
+
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project EchoMate — AI Spoken English Fluency & Confidence Coach</title>
-
-  <!-- Favicon / Tab Icon -->
-  <link rel="icon" type="image/png" href="https://sandeepsingh-tech.github.io/Echomate_Transparent_1024.png">
-
-  <!-- Primary Meta Tags for Google Search -->
-  <meta name="title" content="Project EchoMate — AI Spoken English Fluency & Confidence Coach">
-  <meta name="description" content="A judgment-free AI voice companion designed to build spoken English confidence. Practice real-world scenarios with zero mid-sentence interruptions, speech modeling, and interactive post-session reports.">
-  <meta name="keywords" content="EchoMate, Project EchoMate, Spoken English AI, English Fluency Coach, Indian English Practice, Spoken English App, AI Voice Companion, Sandeep Singh">
-  <meta name="author" content="Sandeep Singh">
-  <link rel="canonical" href="https://sandeepsingh-tech.github.io/echomate.html">
-
-  <!-- Schema.org tags (Crucial for WhatsApp on Android and iOS) -->
-  <meta itemprop="name" content="EchoMate — Speak English with Natural Confidence">
-  <meta itemprop="description" content="Talk naturally with an AI coach that never interrupts mid-sentence. Practice real-world scenarios, speech modeling, and interactive fluency tracking.">
-  <meta itemprop="image" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
-
-  <!-- Open Graph / Meta / WhatsApp / LinkedIn / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sandeepsingh-tech.github.io/echomate.html">
-  <meta property="og:title" content="EchoMate — Speak English with Natural Confidence">
-  <meta property="og:description" content="Talk naturally with an AI coach that never interrupts mid-sentence. Practice real-world scenarios, speech modeling, and interactive fluency tracking.">
-  <meta property="og:image" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
-  <meta property="og:image:secure_url" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="EchoMate">
-
-  <!-- Twitter / X Card Preview -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://sandeepsingh-tech.github.io/echomate.html">
-  <meta name="twitter:title" content="EchoMate — Speak English with Natural Confidence">
-  <meta name="twitter:description" content="Practice spoken English without judgment. Context-driven talk modes, instant speech modeling, and persistent learner memory.">
-  <meta name="twitter:image" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-deep: #06050C;
-      --card-bg: rgba(22, 17, 43, 0.62);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --card-hover-border: rgba(56, 189, 248, 0.45);
-      --header-bg: rgba(14, 10, 28, 0.92);
-      --neon-cyan: #38BDF8;
-      --neon-magenta: #E879F9;
-      --peach-accent: #FB923C;
-      --text: #F8FAFC;
-      --text-muted: #CBD5E1;
-      --text-dim: #94A3B8;
-      --success: #34D399;
-      --danger: #F87171;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 84px;
-    }
-
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      background-color: var(--bg-deep);
-      background-image: 
-        linear-gradient(to bottom, rgba(6, 5, 12, 0.6) 0%, rgba(6, 5, 12, 0.9) 50%, var(--bg-deep) 100%),
-        url('Echomate_backgorund.png');
-      background-size: cover;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      line-height: 1.6;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    /* Fixed Glass Header */
-    header {
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: var(--header-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(232, 121, 249, 0.18);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
-    }
-
-    .header-spacer {
-      display: block;
-      width: 100%;
-      height: 66px;
-    }
-
-    .nav-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text);
-      min-width: 0;
-      flex-shrink: 0;
-    }
-
-    .brand-logo-wrap {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3px;
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
-      flex-shrink: 0;
-    }
-
-    .brand-logo {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .brand-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-    }
-
-    .brand-name {
-      font-weight: 800;
-      font-size: 1.2rem;
-      font-family: 'Space Grotesk', sans-serif;
-      letter-spacing: -0.02em;
-      white-space: nowrap;
-      color: #fff;
-    }
-
-    .brand-badge {
-      font-size: 0.65rem;
-      background: rgba(232, 121, 249, 0.18);
-      color: var(--neon-magenta);
-      padding: 2px 7px;
-      border-radius: 99px;
-      border: 1px solid rgba(232, 121, 249, 0.4);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    nav {
-      min-width: 0;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-item-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 7px 14px;
-      border-radius: 10px;
-      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
-    .nav-item-link:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.18);
-    }
-
-    .nav-item-link.active {
-      color: #fff;
-      background: rgba(56, 189, 248, 0.2);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
-    }
-
-    .nav-item-link.future-tag {
-      background: rgba(232, 121, 249, 0.12);
-      border: 1px solid rgba(232, 121, 249, 0.35);
-      color: var(--neon-magenta);
-    }
-
-    .nav-item-link.future-tag:hover {
-      background: rgba(232, 121, 249, 0.22);
-      border-color: var(--neon-magenta);
-      color: #fff;
-    }
-
-    .nav-item-link.future-tag.active {
-      background: rgba(232, 121, 249, 0.28);
-      border-color: var(--neon-magenta);
-      color: #fff;
-      box-shadow: 0 0 16px rgba(232, 121, 249, 0.45);
-    }
-
-    .nav-links {
-      flex-shrink: 0;
-    }
-
-    .nav-creator-btn {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.84rem;
-      transition: all 0.25s ease;
-      white-space: nowrap;
-      padding: 8px 14px;
-      border-radius: 11px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      backdrop-filter: blur(8px);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .nav-creator-btn:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--neon-cyan);
-      color: var(--neon-cyan);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
-      transform: translateY(-1px);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 55px 0 35px;
-      text-align: center;
-    }
-
-    .hero-logo-box {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .hero-glow-logo {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.6)) drop-shadow(0 0 50px rgba(232, 121, 249, 0.4));
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-7px); }
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--card-border);
-      font-size: 0.84rem;
-      color: var(--neon-cyan);
-      margin-bottom: 20px;
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.1rem, 5.5vw, 4rem);
-      line-height: 1.18;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 18px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, #FFFFFF 10%, #38BDF8 55%, #E879F9 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      max-width: 720px;
-      margin: 0 auto 32px;
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      font-weight: 400;
-      padding: 0 8px;
-    }
-
-    /* Buttons */
-    .cta-group {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 13px 26px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 0.94rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #0284C7 0%, #6366F1 50%, #A855F7 100%);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(168, 85, 247, 0.5), 0 0 20px rgba(56, 189, 248, 0.5);
-    }
-
-    .btn-showcase {
-      background: linear-gradient(135deg, rgba(30, 24, 56, 0.8) 0%, rgba(18, 14, 36, 0.9) 100%);
-      color: var(--text);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      backdrop-filter: blur(14px);
-    }
-
-    .btn-showcase:hover {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(232, 121, 249, 0.15) 100%);
-      border-color: var(--neon-cyan);
-      color: #FFF;
-      transform: translateY(-2px);
-    }
-
-    /* ==========================================================
-       MODERN VOICE CHAT DEMO LAYOUT
-       ========================================================== */
-    .voice-demo-section {
-      margin: 42px auto 60px;
-      max-width: 980px;
-    }
-
-    .voice-chat-shell {
-      position: relative;
-      background: linear-gradient(145deg, rgba(20, 15, 42, 0.82) 0%, rgba(10, 8, 22, 0.94) 100%);
-      border: 1px solid rgba(56, 189, 248, 0.32);
-      border-radius: 28px;
-      overflow: hidden;
-      backdrop-filter: blur(26px);
-      -webkit-backdrop-filter: blur(26px);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(56, 189, 248, 0.12);
-    }
-
-    /* Window Top Bar */
-    .vc-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 20px;
-      background: rgba(255, 255, 255, 0.03);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .vc-window-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .vc-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .vc-dot.red { background: #F87171; opacity: 0.75; }
-    .vc-dot.yellow { background: #FBBF24; opacity: 0.75; }
-    .vc-dot.green { background: #34D399; opacity: 0.75; }
-
-    .vc-session-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.76rem;
-      color: var(--neon-cyan);
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 4px 12px;
-      border-radius: 99px;
-    }
-
-    .vc-live-indicator {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--neon-magenta);
-      box-shadow: 0 0 8px var(--neon-magenta);
-      animation: pulseDot 1.8s infinite;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.8); }
-    }
-
-    /* Main Split Body: Voice Aura + Conversation Stream */
-    .vc-workspace {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      min-height: 410px;
-      position: relative;
-    }
-
-    /* Left Panel: Voice Visualizer Stage */
-    .vc-aura-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 20px;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.08) 0%, transparent 72%);
-      text-align: center;
-      gap: 18px;
-    }
-
-    .vc-orb-wrap {
-      position: relative;
-      width: 146px;
-      height: 146px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .vc-orb-ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #38BDF8, #818CF8, #E879F9, #38BDF8);
-      filter: blur(14px);
-      opacity: 0.65;
-      animation: spinAura 6s linear infinite;
-    }
-
-    .vc-orb-core {
-      position: relative;
-      z-index: 2;
-      width: 112px;
-      height: 112px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(30, 27, 65, 0.95), #090714);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 24px rgba(56, 189, 248, 0.35);
-      padding: 18px;
-    }
-
-    .vc-orb-core img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.65));
-    }
-
-    @keyframes spinAura {
-      0% { transform: rotate(0deg) scale(0.96); }
-      50% { transform: rotate(180deg) scale(1.04); }
-      100% { transform: rotate(360deg) scale(0.96); }
-    }
-
-    .vc-waveform {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      height: 26px;
-    }
-
-    .vc-bar {
-      width: 4px;
-      height: 8px;
-      border-radius: 99px;
-      background: linear-gradient(180deg, var(--neon-cyan), var(--neon-magenta));
-      animation: waveBounce 1.2s ease-in-out infinite;
-    }
-
-    .vc-bar:nth-child(2) { animation-delay: 0.15s; }
-    .vc-bar:nth-child(3) { animation-delay: 0.3s; }
-    .vc-bar:nth-child(4) { animation-delay: 0.45s; }
-    .vc-bar:nth-child(5) { animation-delay: 0.6s; }
-    .vc-bar:nth-child(6) { animation-delay: 0.35s; }
-    .vc-bar:nth-child(7) { animation-delay: 0.2s; }
-
-    @keyframes waveBounce {
-      0%, 100% { height: 7px; opacity: 0.45; }
-      50% { height: 24px; opacity: 1; }
-    }
-
-    .vc-stage-label {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .vc-stage-sub {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      max-width: 220px;
-    }
-
-    /* Right Panel: Chat Stream + Demo Launch Overlay */
-    .vc-chat-area {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 22px;
-      gap: 16px;
-    }
-
-    .vc-messages {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      filter: blur(1.5px);
-      opacity: 0.55;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .vc-msg {
-      max-width: 85%;
-      padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-
-    .vc-msg.user {
-      align-self: flex-end;
-      background: rgba(56, 189, 248, 0.14);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: #E0F2FE;
-      border-bottom-right-radius: 4px;
-    }
-
-    .vc-msg.ai {
-      align-self: flex-start;
-      background: rgba(232, 121, 249, 0.12);
-      border: 1px solid rgba(232, 121, 249, 0.28);
-      color: #F8FAFC;
-      border-bottom-left-radius: 4px;
-    }
-
-    .vc-msg-tag {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-      opacity: 0.8;
-    }
-
-    /* Mock Bottom Dock */
-    .vc-dock {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 10px 14px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      filter: blur(1px);
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
-    .vc-dock-placeholder {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-    }
-
-    .vc-mic-pill {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    /* Demo Launch Glass Overlay Card */
-    .vc-coming-soon-overlay {
-      position: absolute;
-      inset: 16px;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px 20px;
-      border-radius: 22px;
-      background: rgba(11, 8, 24, 0.78);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(232, 121, 249, 0.35);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
-    }
-
-    .vc-overlay-logo {
-      width: 68px;
-      height: 68px;
-      object-fit: contain;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.6)) drop-shadow(0 0 32px rgba(232, 121, 249, 0.45));
-      animation: float 3.6s ease-in-out infinite;
-    }
-
-    .vc-overlay-brand {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #fff;
-      margin-bottom: 12px;
-    }
-
-    .vc-overlay-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      max-width: 410px;
-      line-height: 1.5;
-    }
-
-    /* Metrics Strip */
-    .metrics-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin: 40px auto 60px;
-      max-width: 900px;
-    }
-
-    .metric-pill {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 18px 14px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-    }
-
-    .metric-val {
-      font-size: 1.8rem;
-      font-weight: 800;
-      font-family: 'Space Grotesk', sans-serif;
-      line-height: 1.15;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .metric-lbl {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-top: 6px;
-      font-weight: 600;
-      line-height: 1.25;
-    }
-
-    /* Section Headings */
-    .section-title {
-      text-align: center;
-      margin: 60px 0 32px;
-      padding: 0 10px;
-    }
-
-    .section-title h2 {
-      font-size: 2.1rem;
-      font-family: 'Space Grotesk', sans-serif;
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-
-    /* Centered Feature Cards */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 20px;
-      margin-bottom: 55px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 22px;
-      padding: 30px 22px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--card-hover-border);
-    }
-
-    .card-icon {
-      font-size: 2.3rem;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .card h3 {
-      font-size: 1.24rem;
-      margin-bottom: 12px;
-      color: #fff;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    /* Philosophy / Flight Simulator Section */
-    .flight-sim-section {
-      background: linear-gradient(135deg, rgba(30, 24, 56, 0.65) 0%, rgba(14, 11, 28, 0.75) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 36px 24px;
-      margin: 45px 0 65px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-    }
-
-    .sim-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-top: 26px;
-    }
-
-    .sim-box {
-      border-radius: 18px;
-      padding: 22px;
-      backdrop-filter: blur(12px);
-    }
-
-    .sim-box.traditional {
-      background: rgba(248, 113, 113, 0.06);
-      border: 1px solid rgba(248, 113, 113, 0.22);
-    }
-
-    .sim-box.echomate {
-      background: rgba(56, 189, 248, 0.07);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.08);
-    }
-
-    .sim-box h4 {
-      font-size: 1.15rem;
-      font-family: 'Space Grotesk', sans-serif;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .sim-box ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .sim-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .sim-item-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .sim-box.traditional .sim-item-title { color: #FECACA; }
-    .sim-box.echomate .sim-item-title { color: #BAE6FD; }
-
-    .sim-bullet {
-      font-size: 1.1rem;
-      line-height: 1;
-    }
-
-    .sim-box.traditional .sim-bullet { color: var(--danger); }
-    .sim-box.echomate .sim-bullet { color: var(--neon-cyan); }
-
-    .sim-item-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-      padding-left: 18px;
-      margin: 0;
-    }
-
-    /* Architecture Section Styles */
-    .arch-section {
-      background: linear-gradient(135deg, rgba(25, 20, 48, 0.7) 0%, rgba(10, 8, 22, 0.85) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 40px 24px;
-      margin: 45px 0 70px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-    }
-
-    /* ==========================================================
-       DYNAMIC S-CURVE ARCHITECTURE FLOWCHART (1->2->3->4->5->6->7->8)
-       ========================================================== */
-    .flow-diagram-wrap {
-      margin: 34px auto 46px;
-      max-width: 960px;
-      padding-bottom: 38px;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.14);
-    }
-
-    .flow-row {
-      display: grid;
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .flow-row-3 { grid-template-columns: 1fr auto 1fr auto 1fr; }
-    .flow-row-2 { grid-template-columns: 1fr auto 1fr; }
-
-    @media (min-width: 821px) {
-      .snake-row-2 .step-6 { order: 1; }
-      .snake-row-2 .arr-5  { order: 2; }
-      .snake-row-2 .step-5 { order: 3; }
-      .snake-row-2 .arr-4  { order: 4; }
-      .snake-row-2 .step-4 { order: 5; }
-    }
-
-    .flow-node {
-      background: rgba(16, 12, 34, 0.88);
-      border: 1px solid rgba(56, 189, 248, 0.28);
-      border-radius: 16px;
-      padding: 16px 14px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      position: relative;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      animation: nodePulse 8s infinite;
-    }
-
-    .flow-node.magenta {
-      border-color: rgba(232, 121, 249, 0.35);
-    }
-
-    .flow-node:hover {
-      transform: translateY(-3px);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
-    }
-
-    .flow-node-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #fff;
-      background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(232, 121, 249, 0.18));
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 5px 11px;
-      border-radius: 99px;
-      margin-bottom: 12px;
-      width: 100%;
-    }
-
-    .flow-node-icon {
-      font-size: 1.7rem;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
-    }
-
-    .flow-node p, .flow-node ul {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-      width: 100%;
-    }
-
-    .flow-node p {
-      text-align: center;
-    }
-
-    .flow-node ul {
-      list-style: none;
-      padding-left: 4px;
-      margin-top: 6px;
-      text-align: left;
-    }
-
-    .flow-node ul li {
-      margin-bottom: 3px;
-    }
-
-    .flow-node ul li::before {
-      content: "• ";
-      color: var(--neon-cyan);
-      font-weight: bold;
-    }
-
-    .provider-pills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 5px;
-      margin: 4px 0 8px;
-    }
-
-    .provider-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      padding: 3px 7px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #fff;
-    }
-
-    .flow-arrow-h {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.45rem;
-      font-weight: 800;
-      color: rgba(56, 189, 248, 0.32);
-      animation: arrowGlow 8s infinite;
-      user-select: none;
-    }
-
-    .flow-drop-row {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      gap: 12px;
-      margin: 6px 0;
-      font-size: 1.45rem;
-      font-weight: 800;
-      user-select: none;
-    }
-
-    .drop-slot-right {
-      grid-column: 5;
-      text-align: center;
-    }
-
-    .drop-slot-left {
-      grid-column: 1;
-      text-align: center;
-    }
-
-    .flow-arrow-v {
-      display: inline-block;
-      color: rgba(232, 121, 249, 0.32);
-      animation: arrowGlowMagenta 8s infinite;
-    }
-
-    .step-1 { animation-delay: 0.0s; }
-    .arr-1  { animation-delay: 0.5s; }
-    .step-2 { animation-delay: 1.0s; }
-    .arr-2  { animation-delay: 1.5s; }
-    .step-3 { animation-delay: 2.0s; }
-    .arr-3  { animation-delay: 2.5s; }
-    .step-4 { animation-delay: 3.0s; }
-    .arr-4  { animation-delay: 3.5s; }
-    .step-5 { animation-delay: 4.0s; }
-    .arr-5  { animation-delay: 4.5s; }
-    .step-6 { animation-delay: 5.0s; }
-    .arr-6  { animation-delay: 5.5s; }
-    .step-7 { animation-delay: 6.0s; }
-    .arr-7  { animation-delay: 6.5s; }
-    .step-8 { animation-delay: 7.0s; }
-
-    @keyframes arrowGlow {
-      0%, 100% { color: rgba(56, 189, 248, 0.28); text-shadow: none; transform: scale(1); }
-      10% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: scale(1.26); }
-      22% { color: rgba(56, 189, 248, 0.28); text-shadow: none; transform: scale(1); }
-    }
-
-    @keyframes arrowGlowMagenta {
-      0%, 100% { color: rgba(232, 121, 249, 0.28); text-shadow: none; transform: translateY(0) scale(1); }
-      10% { color: #E879F9; text-shadow: 0 0 12px #E879F9, 0 0 24px #38BDF8; transform: translateY(3px) scale(1.26); }
-      22% { color: rgba(232, 121, 249, 0.28); text-shadow: none; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes nodePulse {
-      0%, 100% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
-      10% { box-shadow: 0 0 24px rgba(56, 189, 248, 0.4), inset 0 0 12px rgba(232, 121, 249, 0.18); border-color: rgba(56, 189, 248, 0.8); }
-      22% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
-    }
-
-    .features-stepwise-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 28px;
-    }
-
-    .features-stepwise-header h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.75rem;
-      color: #fff;
-      margin: 10px 0 8px;
-    }
-
-    .features-stepwise-header p {
-      font-size: 0.94rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    .arch-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 880px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .arch-card {
-      background: rgba(18, 14, 36, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-      transition: all 0.25s ease;
-      position: relative;
-    }
-
-    .arch-card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      transform: translateY(-2px);
-    }
-
-    .arch-badge-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .arch-tier-tag {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.76rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--neon-cyan);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-    }
-
-    .arch-tier-tech {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--neon-magenta);
-      background: rgba(232, 121, 249, 0.12);
-      padding: 3px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(232, 121, 249, 0.25);
-    }
-
-    .arch-card h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-
-    .arch-card p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    .arch-connector-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 2px 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .arch-connector-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 7px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(30, 24, 58, 0.92) 0%, rgba(14, 11, 30, 0.95) 100%);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      color: var(--neon-cyan);
-      font-size: 0.82rem;
-      font-weight: 700;
-      font-family: 'Space Grotesk', sans-serif;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      text-decoration: none;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-      user-select: none;
-    }
-
-    .arch-connector-btn:hover {
-      border-color: var(--neon-cyan);
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18) 0%, rgba(30, 24, 58, 0.95) 100%);
-      color: #fff;
-      transform: translateY(1px);
-      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
-    }
-
-    .arch-connector-btn .dropdown-caret {
-      font-size: 0.68rem;
-      color: var(--neon-cyan);
-      transition: transform 0.2s ease;
-      display: inline-block;
-    }
-
-    .arch-connector-btn:hover .dropdown-caret {
-      transform: translateY(2px);
-      color: #fff;
-    }
-
-    .models-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .model-box {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: left;
-    }
-
-    .model-name {
-      font-size: 0.94rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .model-role {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    .supabase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-      text-align: left;
-    }
-
-    .sub-box {
-      background: rgba(52, 211, 153, 0.05);
-      border: 1px solid rgba(52, 211, 153, 0.2);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .sub-box h5 {
-      font-size: 0.94rem;
-      color: var(--success);
-      margin-bottom: 6px;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .sub-box p {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    /* Voice Studio & Story Mode Styles */
-    .studio-future-section {
-      background: linear-gradient(135deg, rgba(28, 18, 52, 0.75) 0%, rgba(12, 9, 26, 0.9) 100%);
-      border: 1px solid rgba(232, 121, 249, 0.3);
-      border-radius: 26px;
-      padding: 44px 26px;
-      margin: 50px 0 75px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 32px rgba(232, 121, 249, 0.12);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .studio-future-section::before {
-      content: "";
-      position: absolute;
-      top: -120px;
-      right: -80px;
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(232, 121, 249, 0.18) 0%, rgba(56, 189, 248, 0) 70%);
-      pointer-events: none;
-    }
-
-    .studio-future-section::after {
-      content: "";
-      position: absolute;
-      bottom: -100px;
-      left: -80px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(232, 121, 249, 0) 70%);
-      pointer-events: none;
-    }
-
-    .studio-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 5px 14px;
-      border-radius: 999px;
-      background: rgba(232, 121, 249, 0.15);
-      color: var(--neon-magenta);
-      border: 1px solid rgba(232, 121, 249, 0.45);
-      margin-bottom: 14px;
-    }
-
-    .studio-intro-wrap {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 36px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .studio-intro-wrap h2 {
-      font-size: clamp(1.9rem, 4.5vw, 2.5rem);
-      font-family: 'Space Grotesk', sans-serif;
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-
-    .studio-intro-wrap p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .studio-category-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.28rem;
-      color: #fff;
-      margin: 32px 0 16px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      position: relative;
-      z-index: 2;
-    }
-
-    .studio-category-title .cat-badge {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 3px 9px;
-      border-radius: 6px;
-      font-weight: 700;
-    }
-
-    .studio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .studio-card {
-      background: rgba(18, 14, 38, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
-      padding: 20px;
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      text-align: left;
-    }
-
-    .studio-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(232, 121, 249, 0.45);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .studio-card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .studio-card-icon {
-      font-size: 1.6rem;
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .studio-card h4 {
-      font-size: 1.05rem;
-      font-family: 'Space Grotesk', sans-serif;
-      color: #fff;
-    }
-
-    .studio-card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .studio-card-meta {
-      margin-top: auto;
-      padding-top: 10px;
-      font-size: 0.76rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--neon-cyan);
-    }
-
-    .studio-output-banner {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.09) 0%, rgba(232, 121, 249, 0.09) 100%);
-      border: 1px dashed rgba(56, 189, 248, 0.4);
-      border-radius: 20px;
-      padding: 24px;
-      margin-top: 36px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .output-box {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .output-box h5 {
-      font-size: 1rem;
-      font-family: 'Space Grotesk', sans-serif;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .output-box p {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* Speech Modeling Demo Section */
-    .demo-section {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 38px 24px;
-      margin: 35px 0 70px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
-    }
-
-    .example-block {
-      margin-top: 28px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 22px;
-    }
-
-    .example-block:first-of-type {
-      margin-top: 22px;
-      border-top: none;
-      padding-top: 0;
-    }
-
-    .example-header {
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--neon-cyan);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .speech-box {
-      border-radius: 18px;
-      padding: 18px;
-      text-align: left;
-    }
-
-    .speech-box.original {
-      background: rgba(248, 113, 113, 0.08);
-      border: 1px solid rgba(248, 113, 113, 0.25);
-    }
-
-    .speech-box.polish {
-      background: rgba(52, 211, 153, 0.08);
-      border: 1px solid rgba(52, 211, 153, 0.28);
-    }
-
-    .box-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      display: inline-block;
-      margin-bottom: 8px;
-    }
-
-    .box-badge.red { color: var(--danger); }
-    .box-badge.green { color: var(--success); }
-
-    .speech-box p {
-      font-size: 0.96rem;
-      color: #F8FAFC;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .demo-footer-note {
-      margin-top: 32px;
-      text-align: center;
-      padding: 0 10px;
-      font-size: 0.86rem;
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
-
-    /* Floating Glass Back-to-Top Button */
-    .back-to-top-btn {
-      position: fixed;
-      bottom: 26px;
-      right: 24px;
-      z-index: 999;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(22, 17, 43, 0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(12px) scale(0.9);
-      user-select: none;
-      text-decoration: none;
-    }
-
-    .back-to-top-btn.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-
-    .back-to-top-btn:hover {
-      background: rgba(30, 24, 58, 0.95);
-      border-color: var(--neon-cyan);
-      color: var(--neon-cyan);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-      transform: translateY(-3px) scale(1.05);
-    }
-
-    .back-to-top-btn .arrow-icon {
-      font-size: 0.95rem;
-      line-height: 1;
-      transition: transform 0.2s ease;
-    }
-
-    .back-to-top-btn:hover .arrow-icon {
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--card-border);
-      padding: 32px 16px;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      background: rgba(14, 10, 28, 0.85);
-      backdrop-filter: blur(14px);
-    }
-
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    footer a {
-      color: var(--neon-cyan);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    /* ==========================================================
-       RESPONSIVE FLOWCHART (LINEAR TOP-TO-BOTTOM ON MOBILE)
-       ========================================================== */
-    @media (max-width: 820px) {
-      .vc-workspace {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .vc-aura-stage {
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 24px 16px;
-      }
-
-      .vc-chat-area {
-        min-height: 330px;
-      }
-
-      .flow-row-3,
-      .flow-row-2 {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-
-      .flow-arrow-h.dir-right {
-        transform: rotate(90deg);
-        padding: 2px 0;
-      }
-
-      .flow-arrow-h.dir-left {
-        transform: rotate(-90deg);
-        padding: 2px 0;
-      }
-
-      .flow-drop-row {
-        grid-template-columns: 1fr;
-        margin: 4px 0;
-      }
-
-      .drop-slot-right,
-      .drop-slot-left {
-        grid-column: 1;
-      }
-
-      .flow-node ul {
-        text-align: center;
-        padding-left: 0;
-      }
-
-      @keyframes arrowGlowRight {
-        0%, 100% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(90deg) scale(1); }
-        10% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: rotate(90deg) scale(1.22); }
-        22% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(90deg) scale(1); }
-      }
-
-      @keyframes arrowGlowLeft {
-        0%, 100% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(-90deg) scale(1); }
-        10% { color: #38BDF8; text-shadow: 0 0 12px #38BDF8, 0 0 24px #E879F9; transform: rotate(-90deg) scale(1.22); }
-        22% { color: rgba(56, 189, 248, 0.3); text-shadow: none; transform: rotate(-90deg) scale(1); }
-      }
-
-      .flow-arrow-h.dir-right { animation-name: arrowGlowRight; }
-      .flow-arrow-h.dir-left  { animation-name: arrowGlowLeft; }
-    }
-
-    @media (max-width: 768px) {
-      html {
-        scroll-padding-top: 64px;
-      }
-
-      .header-spacer {
-        height: 104px;
-      }
-
-      header {
-        padding: 0;
-      }
-
-      .nav-wrap {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px 10px;
-        padding: 8px 0 9px;
-      }
-
-      .brand {
-        order: 1;
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        max-width: calc(100% - 125px);
-        min-width: 0;
-      }
-
-      .brand-logo-wrap {
-        width: 32px;
-        height: 32px;
-        border-radius: 9px;
-      }
-
-      .brand-meta {
-        gap: 5px;
-      }
-
-      .brand-name {
-        font-size: 0.88rem;
-      }
-
-      .brand-badge {
-        font-size: 0.52rem;
-        padding: 1px 5px;
-      }
-
-      .nav-links {
-        order: 2;
-        display: block;
-        flex-shrink: 0;
-      }
-
-      .nav-creator-btn {
-        font-size: 0.7rem;
-        padding: 6px 8px;
-        border-radius: 9px;
-      }
-
-      nav {
-        order: 3;
-        flex: 0 0 100%;
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-        mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
-      }
-
-      .nav-menu {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        width: 100%;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding: 2px 14px;
-      }
-
-      .nav-menu::-webkit-scrollbar {
-        display: none;
-      }
-
-      .nav-item-link {
-        font-size: 0.80rem;
-        padding: 6px 14px;
-        border-radius: 999px;
-        flex-shrink: 0;
-      }
-
-      header.is-scrolled .brand,
-      header.is-scrolled .nav-links {
-        display: none !important;
-      }
-
-      header.is-scrolled .nav-wrap {
-        padding-top: 6px;
-        padding-bottom: 6px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: 0 16px;
-      }
-
-      .hero {
-        padding: 30px 0 20px;
-      }
-
-      .hero-logo-box {
-        width: 110px;
-        height: 110px;
-        margin-bottom: 14px;
-      }
-
-      h1 {
-        font-size: 1.95rem;
-      }
-
-      .subtitle {
-        font-size: 0.95rem;
-      }
-
-      .vc-orb-wrap {
-        width: 116px;
-        height: 116px;
-      }
-
-      .vc-orb-core {
-        width: 90px;
-        height: 90px;
-        padding: 14px;
-      }
-
-      .vc-coming-soon-overlay {
-        inset: 12px;
-        padding: 20px 14px;
-      }
-
-      .vc-overlay-logo {
-        width: 54px;
-        height: 54px;
-      }
-
-      .vc-overlay-brand {
-        font-size: 1.25rem;
-      }
-
-      .metrics-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        max-width: 360px;
-      }
-
-      .metric-pill {
-        min-height: 92px;
-        padding: 14px 8px;
-      }
-
-      .metric-val {
-        font-size: 1.55rem;
-      }
-
-      .metric-lbl {
-        font-size: 0.68rem;
-      }
-
-      .sim-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-
-      .flight-sim-section,
-      .arch-section,
-      .studio-future-section,
-      .demo-section {
-        padding: 26px 16px;
-      }
-
-      .studio-output-banner {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 18px;
-      }
-
-      .demo-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .speech-box {
-        padding: 15px;
-      }
-
-      .speech-box p {
-        font-size: 0.9rem;
-      }
-
-      .back-to-top-btn {
-        bottom: 20px;
-        right: 18px;
-        width: 40px;
-        height: 40px;
-      }
-
-      .arch-badge-header {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 8px;
-        width: 100%;
-      }
-
-      .arch-tier-tag,
-      .arch-tier-tech {
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .arch-card {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .arch-card h4,
-      .arch-card p {
-        text-align: center;
-        width: 100%;
-      }
-
-      .model-box {
-        text-align: center;
-        align-items: center;
-      }
-
-      .model-name {
-        justify-content: center;
-      }
-
-      .supabase-grid,
-      .sub-box {
-        text-align: center;
-      }
-
-      .arch-connector-wrap {
-        margin: 0;
-      }
-      .arch-connector-btn {
-        font-size: clamp(0.68rem, 2.7vw, 0.80rem);
-        padding: 5px 11px;
-        gap: 5px;
-        letter-spacing: 0.01em;
-      }
-      .arch-connector-btn .dropdown-caret {
-        font-size: 0.62rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project EchoMate — Live Voice Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --bg: #080B11;
+    --surface: rgba(15, 23, 42, 0.72);
+    --purple-glass: rgba(168, 85, 247, 0.22);
+    --cyan: #22D3EE;
+    --violet: #A855F7;
+    --amber: #F59E0B;
+    --emerald: #10B981;
+    --danger: #EF4444;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: radial-gradient(circle at 20% 0%, rgba(168,85,247,0.22), transparent 45%),
+                radial-gradient(circle at 85% 100%, rgba(34,211,238,0.16), transparent 50%),
+                var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* SINGLE-LINE SLIDING TOPBAR */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(8,11,17,0.92); backdrop-filter: blur(14px);
+    position: sticky; top: 0; z-index: 20; gap: 10px;
+    flex-wrap: nowrap;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .brand img { width: 28px; height: 28px; border-radius: 8px; object-fit: contain; }
+  .brand-title { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1rem; white-space: nowrap; }
+
+  .topbar-actions {
+    display: flex; align-items: center; gap: 7px;
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; min-width: 0; padding: 2px 0;
+  }
+  .topbar-actions::-webkit-scrollbar { display: none; }
+
+  .pill {
+    font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid rgba(34,211,238,0.35); background: rgba(34,211,238,0.12); color: var(--cyan);
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .pill.amber { border-color: rgba(245,158,11,0.45); background: rgba(245,158,11,0.14); color: var(--amber); }
+  .btn {
+    border: none; cursor: pointer; font-family: inherit; font-weight: 700;
+    border-radius: 11px; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 5px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .btn-google {
+    background: #fff; color: #0F172A; padding: 5px 11px; font-size: 0.74rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
+  .btn-google:hover { transform: translateY(-1px); background: #F1F5F9; }
+  .btn-ghost {
+    background: rgba(255,255,255,0.06); color: #CBD5E1; border: 1px solid rgba(255,255,255,0.14);
+    padding: 5px 10px; font-size: 0.73rem;
+  }
+  .btn-ghost:hover { color: #fff; border-color: var(--cyan); }
+  .btn-close {
+    background: rgba(239,68,68,0.18); color: #FCA5A5; border: 1px solid rgba(239,68,68,0.42);
+    padding: 5px 10px; font-size: 0.73rem; border-radius: 999px;
+  }
+  .btn-close:hover { background: rgba(239,68,68,0.32); color: #fff; }
+  .btn-cyan {
+    background: linear-gradient(135deg, #06B6D4, #3B82F6); color: #fff;
+    padding: 12px 20px; font-size: 0.9rem; box-shadow: 0 8px 24px rgba(6,182,212,0.35);
+  }
+  .btn-cyan:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(6,182,212,0.5); }
+
+  .view { display: none; flex: 1; flex-direction: column; max-width: 800px; width: 100%; margin: 0 auto; padding: 14px 14px 18px; }
+  .view.active { display: flex; }
+
+  /* MODE PICKER VIEW */
+  .hero-drill {
+    background: var(--purple-glass); border: 1px solid rgba(34,211,238,0.35);
+    border-radius: 22px; padding: 20px; text-align: center; margin-bottom: 18px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  }
+  .hero-drill .eyebrow { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; color: var(--cyan); text-transform: uppercase; }
+  .hero-drill h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin: 6px 0 8px; }
+  .hero-drill p { font-size: 0.86rem; color: #E2E8F0; max-width: 540px; margin: 0 auto 14px; }
+  .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .section-head h3 { font-size: 0.98rem; font-weight: 700; }
+  .modes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+  .mode-card {
+    background: rgba(15,23,42,0.75); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px; padding: 15px; cursor: pointer; transition: all 0.2s ease;
+    display: flex; flex-direction: column; gap: 6px; position: relative;
+  }
+  .mode-card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+  .mode-card.locked { opacity: 0.68; border-style: dashed; }
+  .mode-card-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+  .mode-badge { font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: rgba(168,85,247,0.22); color: #E9D5FF; }
+  .mode-title { font-weight: 700; font-size: 0.95rem; color: #fff; }
+  .mode-focus { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+
+  /* PRACTICE HISTORY VIEW */
+  .history-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+  .history-back {
+    width: 36px; height: 36px; border-radius: 50%; background: rgba(20,25,38,0.85);
+    border: 1px solid #2E384D; color: #fff; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem; flex-shrink: 0;
+  }
+  .history-back:hover { border-color: var(--cyan); color: var(--cyan); }
+  .history-summary-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;
+  }
+  .h-stat-card {
+    background: rgba(20,25,38,0.78); border: 1px solid rgba(34,211,238,0.22);
+    border-radius: 14px; padding: 12px 8px; text-align: center;
+  }
+  .h-stat-card.violet { border-color: rgba(168,85,247,0.3); }
+  .h-stat-card.amber { border-color: rgba(245,158,11,0.3); }
+  .h-stat-lbl { font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+  .h-stat-val { font-size: 0.98rem; font-weight: 800; color: #fff; }
+  .history-list { display: flex; flex-direction: column; gap: 10px; }
+  .session-card {
+    background: rgba(20,25,38,0.72); border: 1px solid #2E384D; border-radius: 16px;
+    padding: 14px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; gap: 8px;
+  }
+  .session-card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+  .sc-row1 { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .sc-mode-pill {
+    font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 99px;
+    background: rgba(168,85,247,0.2); color: #E9D5FF; border: 1px solid rgba(168,85,247,0.35);
+  }
+  .sc-time { font-size: 0.72rem; color: var(--muted); }
+  .sc-preview {
+    font-size: 0.84rem; color: #F1F5F9; line-height: 1.45;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .sc-row3 { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .sc-badges { display: flex; gap: 5px; flex-wrap: wrap; }
+  .sc-pill { font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
+  .sc-pill.cyan { background: rgba(34,211,238,0.14); color: var(--cyan); }
+  .sc-pill.purple { background: rgba(168,85,247,0.16); color: #D8B4FE; }
+  .sc-pill.amber { background: rgba(245,158,11,0.16); color: #FCD34D; }
+
+  /* ACTIVE CHAT VIEW */
+  .chat-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 8px;
+  }
+  .orb-stage {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 8px 6px; gap: 6px;
+  }
+  .orb {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #22D3EE, #7C3AED 70%, #0F172A);
+    box-shadow: 0 0 24px rgba(34,211,238,0.45), 0 0 42px rgba(168,85,247,0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .orb.listening {
+    background: radial-gradient(circle at 30% 30%, #F87171, #DC2626 75%);
+    box-shadow: 0 0 32px rgba(239,68,68,0.75);
+    animation: pulseOrb 1s infinite;
+  }
+  .orb.thinking {
+    background: radial-gradient(circle at 30% 30%, #FBBF24, #A855F7 75%);
+    animation: spinOrb 1.2s linear infinite;
+  }
+  .orb.speaking {
+    box-shadow: 0 0 36px rgba(34,211,238,0.85), 0 0 56px rgba(168,85,247,0.6);
+    animation: pulseOrb 0.7s infinite;
+  }
+  @keyframes pulseOrb { 0%,100% { transform: scale(1); } 50% { transform: scale(1.09); } }
+  @keyframes spinOrb { 0% { transform: rotate(0deg) scale(1.04); } 100% { transform: rotate(360deg) scale(1.04); } }
+  .status-text { font-size: 0.78rem; color: var(--cyan); font-weight: 600; text-align: center; }
+
+  .messages-box {
+    flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+    padding: 8px 2px; min-height: 180px;
+  }
+  .msg { max-width: 86%; padding: 10px 13px; border-radius: 16px; font-size: 0.86rem; line-height: 1.48; }
+  .msg.user { align-self: flex-end; background: rgba(34,211,238,0.16); border: 1px solid rgba(34,211,238,0.35); border-bottom-right-radius: 4px; }
+  .msg.ai { align-self: flex-start; background: rgba(168,85,247,0.16); border: 1px solid rgba(168,85,247,0.32); border-bottom-left-radius: 4px; }
+
+  /* FIXED RESPONSIVE BOTTOM DOCK (No Send Button Clipping on Mobile) */
+  .dock {
+    margin-top: 10px; background: rgba(15,23,42,0.92); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 999px; padding: 6px 8px; display: flex; align-items: center; gap: 6px;
+    width: 100%; max-width: 100%;
+  }
+  .dock input {
+    flex: 1; min-width: 0; width: 100%; background: transparent; border: none; color: #fff;
+    font-size: 0.86rem; outline: none; padding: 6px 4px;
+  }
+  .char-count { font-size: 0.66rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+  }
+  .mic-btn { background: linear-gradient(135deg, #06B6D4, #8B5CF6); color: #fff; }
+  .mic-btn.active { background: var(--danger); }
+  .send-btn { background: rgba(255,255,255,0.12); color: #fff; }
+  .end-btn {
+    background: rgba(239,68,68,0.18); border: 1px solid rgba(239,68,68,0.4); color: #FCA5A5;
+    font-size: 0.72rem; padding: 6px 10px; border-radius: 10px; cursor: pointer; font-weight: 700;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* DEBRIEF & UPGRADE MODAL */
+  .overlay-modal {
+    position: fixed; inset: 0; background: rgba(4,6,12,0.86); backdrop-filter: blur(10px);
+    display: none; align-items: center; justify-content: center; padding: 14px; z-index: 50;
+  }
+  .overlay-modal.open { display: flex; }
+  .modal-card {
+    background: #0F172A; border: 1px solid rgba(245,158,11,0.45); border-radius: 24px;
+    max-width: 480px; width: 100%; padding: 22px; text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.65); max-height: 90vh; overflow-y: auto;
+  }
+  .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
+  .m-card { background: rgba(168,85,247,0.16); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 10px 6px; }
+  .m-val { font-size: 1.05rem; font-weight: 800; color: var(--cyan); }
+  .m-lbl { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; }
+  .polish-box { text-align: left; border-radius: 14px; padding: 12px; margin-bottom: 10px; font-size: 0.84rem; }
+  .polish-box.bad { background: rgba(220,38,38,0.14); border: 1px solid rgba(220,38,38,0.35); }
+  .polish-box.good { background: rgba(5,150,105,0.14); border: 1px solid rgba(5,150,105,0.35); }
+
+  @media (max-width: 480px) {
+    .brand-title { display: none; }
+    .char-count { display: none; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <header>
-    <div class="container nav-wrap">
-      <a href="#" class="brand">
-        <div class="brand-logo-wrap">
-          <img src="Echomate_Transparent_1024.png" alt="Project EchoMate Logo" class="brand-logo">
-        </div>
-        <div class="brand-meta">
-          <span class="brand-name">Project EchoMate</span>
-          <span class="brand-badge">Voice AI</span>
-        </div>
-      </a>
-
-      <!-- Smooth Anchor Navigation Links -->
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="#live-demo" class="nav-item-link">Voice Preview</a></li>
-          <li><a href="#philosophy" class="nav-item-link">Philosophy</a></li>
-          <li><a href="#how-it-works" class="nav-item-link">Architecture</a></li>
-          <li><a href="#near-future" class="nav-item-link future-tag">✨ Voice Studio</a></li>
-          <li><a href="#demo" class="nav-item-link">Speech Modeling</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-links">
-        <a href="https://sandeepsingh-tech.github.io/" class="nav-creator-btn">
-          Creator Profile ↗
-        </a>
-      </div>
+  <div class="topbar">
+    <div class="brand">
+      <img src="https://sandeepsingh-tech.github.io/Echomate_Transparent_1024.png" alt="EchoMate">
+      <div class="brand-title">EchoMate</div>
     </div>
-  </header>
-  <div class="header-spacer" aria-hidden="true"></div>
-
-  <main class="container">
-
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-logo-box">
-        <img src="Echomate_Transparent_1024.png" alt="Project EchoMate Glowing Infinity Audio Logo" class="hero-glow-logo">
-      </div>
-      <div class="pill">✨ Stop studying grammar rules. Start speaking out loud.</div>
-      <h1>
-        Speak English with <br>
-        <span class="gradient-text">Effortless Natural Confidence.</span>
-      </h1>
-      <p class="subtitle">
-        EchoMate is your judgment-free conversational flight simulator. Practice real-world scenarios on any topic you care about with zero mid-thought interruptions, natural speech recasting, and instant executive polish.
-      </p>
-      <div class="cta-group">
-        <button type="button" data-launch-demo class="btn btn-primary">🎙️ Launch Live Voice Demo</button>
-        <a href="https://sandeepsingh-tech.github.io/showcase.html" class="btn btn-showcase">
-          Explore Systems & Showcase ↗
-        </a>
-      </div>
-    </section>
-
-    <!-- Modern Voice Chat Demo Preview Section (Desktop & Mobile Friendly) -->
-    <section id="live-demo" class="voice-demo-section" aria-label="Project EchoMate Interactive Voice Chat Preview">
-      <div class="voice-chat-shell">
-        
-        <!-- Top Window Bar -->
-        <div class="vc-topbar">
-          <div class="vc-window-controls" aria-hidden="true">
-            <span class="vc-dot red"></span>
-            <span class="vc-dot yellow"></span>
-            <span class="vc-dot green"></span>
-          </div>
-          <div class="vc-session-pill">
-            <span class="vc-live-indicator"></span>
-            <span>Interactive Voice Arena • Live Sandbox</span>
-          </div>
-        </div>
-
-        <!-- Split Workspace: Left Aura Orb + Right Voice Chat Stream -->
-        <div class="vc-workspace">
-          
-          <!-- Left Voice Aura Visualizer -->
-          <div class="vc-aura-stage">
-            <div class="vc-orb-wrap">
-              <div class="vc-orb-ring"></div>
-              <div class="vc-orb-core">
-                <img src="Echomate_Transparent_1024.png" alt="Project EchoMate Aura Logo">
-              </div>
-            </div>
-            <div class="vc-waveform" aria-hidden="true">
-              <span class="vc-bar"></span>
-              <span class="vc-bar"></span>
-              <span class="vc-bar"></span>
-              <span class="vc-bar"></span>
-              <span class="vc-bar"></span>
-              <span class="vc-bar"></span>
-              <span class="vc-bar"></span>
-            </div>
-            <div>
-              <div class="vc-stage-label">Project EchoMate</div>
-              <p class="vc-stage-sub">Full-thought listening • Zero mid-sentence interruptions</p>
-            </div>
-          </div>
-
-          <!-- Right Voice Transcript & Launch Overlay -->
-          <div class="vc-chat-area">
-            <div class="vc-messages" aria-hidden="true">
-              <div class="vc-msg user">
-                <span class="vc-msg-tag">You • Spoken Input</span>
-                "Yesterday I was explaining our new system architecture to the client, and I think I got stuck finding the right words..."
-              </div>
-              <div class="vc-msg ai">
-                <span class="vc-msg-tag">EchoMate • Natural Recast</span>
-                "You walked them through the new architecture clearly! When you want to sound even sharper, you can say: 'Here is how our updated pipeline scales under peak load.' Want to try pitching that part again?"
-              </div>
-            </div>
-
-            <div class="vc-dock" aria-hidden="true">
-              <span class="vc-dock-placeholder">Tap mic to speak naturally...</span>
-              <div class="vc-mic-pill">🎙️</div>
-            </div>
-
-            <!-- Interactive Launch Glass Overlay -->
-            <div class="vc-coming-soon-overlay">
-              <img src="Echomate_Transparent_1024.png" alt="Project EchoMate Logo" class="vc-overlay-logo">
-              <div class="vc-overlay-brand">Project EchoMate</div>
-              <button type="button" data-launch-demo class="btn btn-primary" style="margin-bottom: 12px;">🎙️ Launch Live Voice Demo</button>
-              <p class="vc-overlay-desc">
-                Try 3 free voice turns instantly as a guest, or sign in with Google to unlock all core practice modes and post-session Speech Modeling reports.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Metrics Strip -->
-    <div class="metrics-row">
-      <div class="metric-pill">
-        <div class="metric-val">10+</div>
-        <div class="metric-lbl">Session Modes + Custom</div>
-      </div>
-      <div class="metric-pill">
-        <div class="metric-val">0</div>
-        <div class="metric-lbl">Mid-Sentence Interrupts</div>
-      </div>
-      <div class="metric-pill">
-        <div class="metric-val">100%</div>
-        <div class="metric-lbl">Zero Judgment Flow</div>
-      </div>
-      <div class="metric-pill">
-        <div class="metric-val">&lt;800ms</div>
-        <div class="metric-lbl">Voice Turnaround</div>
-      </div>
-    </div>
-
-    <!-- Core Pillars -->
-    <section>
-      <div class="section-title">
-        <h2>Why Project EchoMate Feels Completely Different</h2>
-        <p>Built as a conversational arena, not an academic testing ground.</p>
-      </div>
-
-      <div class="grid-3">
-        <div class="card">
-          <div class="card-icon">🎙️</div>
-          <h3>Zero Mid-Thought Interruptions</h3>
-          <p>Being interrupted destroys flow. EchoMate never buzzes you for misplaced prepositions. It listens to your full thought and mirrors natural phrasing organically inside its reply.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🎭</div>
-          <h3>10+ Modes & Custom Sandboxes</h3>
-          <p>Fluency is contextual. Jump into technical architecture defense, salary negotiations, or casual banter—or build your own custom sandbox for tomorrow's exact client meeting.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🧠</div>
-          <h3>Episodic Diagnostic Memory</h3>
-          <p>A coach that actually remembers you. Tracks your recurring phrasing habits, phonetic slips, and crutch words across sessions to build genuine long-term articulation muscle.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Category Disruption / The Flight Simulator Concept (id="philosophy") -->
-    <section id="philosophy" class="flight-sim-section">
-      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
-        <span class="box-badge green" style="background: rgba(52, 211, 153, 0.15); padding: 4px 12px; border-radius: 99px;">The Flight Simulator Philosophy</span>
-        <h2 style="font-size: 2rem; margin: 12px 0 10px; font-family: 'Space Grotesk', sans-serif;">
-          A Conversation Simulator, Not a Grammar Quiz
-        </h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-          Pilots don't learn to fly by reading textbooks about aerodynamics; they log hours in a flight simulator. EchoMate lets you log speaking hours on topics you actually care about—cricket, distributed systems, or startup ideas—so English becomes an automatic muscle response.
-        </p>
-      </div>
-
-      <div class="sim-grid">
-        <!-- Traditional Card -->
-        <div class="sim-box traditional">
-          <h4 style="color: var(--danger); margin-bottom: 18px;">❌ Traditional Language Apps</h4>
-          <ul>
-            <li class="sim-item">
-              <div class="sim-item-title">
-                <span class="sim-bullet">•</span> Study First, Speak Later:
-              </div>
-              <p class="sim-item-desc">Forces users through repetitive flashcards, spelling tests, and grammar drills.</p>
-            </li>
-
-            <li class="sim-item">
-              <div class="sim-item-title">
-                <span class="sim-bullet">•</span> Penalty & Fear:
-              </div>
-              <p class="sim-item-desc">Red X marks and buzzer sounds trigger performance anxiety and speaking hesitation.</p>
-            </li>
-
-            <li class="sim-item">
-              <div class="sim-item-title">
-                <span class="sim-bullet">•</span> Rigid Pre-Made Scripts:
-              </div>
-              <p class="sim-item-desc">Locked to uninspired textbook scenarios ("Order coffee in London").</p>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Project EchoMate Approach Card -->
-        <div class="sim-box echomate">
-          <h4 style="color: var(--neon-cyan); margin-bottom: 18px;">⚡ Project EchoMate Approach</h4>
-          <ul>
-            <li class="sim-item">
-              <div class="sim-item-title">
-                <span class="sim-bullet">•</span> Speak Freely First:
-              </div>
-              <p class="sim-item-desc">Pure conversational immersion on whatever topics interest you. No grammar placement tests.</p>
-            </li>
-
-            <li class="sim-item">
-              <div class="sim-item-title">
-                <span class="sim-bullet">•</span> Zero-Judgment Flow State:
-              </div>
-              <p class="sim-item-desc">Express complete thoughts without fear of sudden corrections or public embarrassment.</p>
-            </li>
-
-            <li class="sim-item">
-              <div class="sim-item-title">
-                <span class="sim-bullet">•</span> Total Scenario Freedom:
-              </div>
-              <p class="sim-item-desc">Rehearse real workplace conversations, standups, or debate custom ideas out loud.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Behind The Scenes Architecture Section (id="how-it-works") -->
-    <section id="how-it-works" class="arch-section">
-      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
-        <span class="box-badge green" style="background: rgba(56, 189, 248, 0.15); color: var(--neon-cyan); padding: 4px 14px; border-radius: 99px;">System Architecture</span>
-        <h2 style="font-size: 2.1rem; margin: 12px 0 10px; font-family: 'Space Grotesk', sans-serif;">
-          How EchoMate Works Behind the Mic
-        </h2>
-        <p style="color: var(--text-muted); font-size: 0.96rem; line-height: 1.6;">
-          Follow the live S-curve pipeline of a single spoken turn—from your voice entering the app to sub-second AI response generation and background memory distillation.
-        </p>
-      </div>
-
-      <!-- Dynamic 8-Step S-Curve Architecture Pipeline -->
-      <div class="flow-diagram-wrap">
-
-        <!-- Row 1: 1 ➔ 2 ➔ 3 (Left to Right) -->
-        <div class="flow-row flow-row-3">
-          <div class="flow-node magenta step-1">
-            <div class="flow-node-title">1. User Audio / Voice</div>
-            <div class="flow-node-icon">🗣️🎙️</div>
-            <p>User speaks naturally in English through the app.</p>
-          </div>
-
-          <div class="flow-arrow-h dir-right arr-1">➔</div>
-
-          <div class="flow-node step-2">
-            <div class="flow-node-title">2. FlutterFlow Client</div>
-            <div class="flow-node-icon">📱〰️</div>
-            <p>Streams encrypted voice request from the mobile app.</p>
-          </div>
-
-          <div class="flow-arrow-h dir-right arr-2">➔</div>
-
-          <div class="flow-node magenta step-3">
-            <div class="flow-node-title">3. Supabase Edge Functions</div>
-            <div class="flow-node-icon">⚡💻</div>
-            <p><strong>Deno / TypeScript</strong><br>Handles requests, manages context &amp; orchestrates AI.</p>
-          </div>
-        </div>
-
-        <!-- Drop Connector: 3 ⬇ 4 (Directly under Step 3 on Desktop) -->
-        <div class="flow-drop-row">
-          <div class="drop-slot-right">
-            <span class="flow-arrow-v arr-3">⬇</span>
-          </div>
-        </div>
-
-        <!-- Row 2: 6 ⬅ 5 ⬅ 4 (Right to Left Snake on Desktop, 4 -> 5 -> 6 on Mobile) -->
-        <div class="flow-row flow-row-3 snake-row-2">
-          <div class="flow-node step-4">
-            <div class="flow-node-title">4. Query Vector &amp; State Store</div>
-            <div class="flow-node-icon">🗄️🧠</div>
-            <p><strong>PostgreSQL + Vector Search</strong></p>
-            <ul>
-              <li>Fetch user memory profile</li>
-              <li>Get skill trajectory &amp; fluency history</li>
-            </ul>
-          </div>
-
-          <div class="flow-arrow-h dir-left arr-4">⬅</div>
-
-          <div class="flow-node magenta step-5">
-            <div class="flow-node-title">5. Dynamic Prompt Synthesizer</div>
-            <div class="flow-node-icon">📝⚙️</div>
-            <ul>
-              <li>Generate turn-specific system prompt</li>
-              <li>Keep context lightweight &amp; relevant</li>
-            </ul>
-          </div>
-
-          <div class="flow-arrow-h dir-left arr-5">⬅</div>
-
-          <div class="flow-node step-6">
-            <div class="flow-node-title">6. Cascading LLM Router</div>
-            <div class="provider-pills">
-              <span class="provider-pill">🟣 Gemini</span>
-              <span class="provider-pill">⚡ Groq</span>
-              <span class="provider-pill">🟠 Mistral</span>
-              <span class="provider-pill">✖️ xAI</span>
-            </div>
-            <ul>
-              <li>Route to best available model</li>
-              <li>Sub-second response generation</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Drop Connector: 6 ⬇ 7 (Directly under Step 6 on Desktop) -->
-        <div class="flow-drop-row">
-          <div class="drop-slot-left">
-            <span class="flow-arrow-v arr-6">⬇</span>
-          </div>
-        </div>
-
-        <!-- Row 3: 7 ➔ 8 (Left to Right) -->
-        <div class="flow-row flow-row-2">
-          <div class="flow-node magenta step-7">
-            <div class="flow-node-title">7. Return Streamed Audio / Text</div>
-            <div class="flow-node-icon">💬🔊</div>
-            <p>Streamed audio &amp; text delivered back to the client with &lt;800ms turnaround.</p>
-          </div>
-
-          <div class="flow-arrow-h dir-right arr-7">➔</div>
-
-          <div class="flow-node step-8">
-            <div class="flow-node-title">8. Async Memory Distillation Worker</div>
-            <div class="flow-node-icon">🔄📈</div>
-            <ul>
-              <li>Runs after each turn (zero user wait time)</li>
-              <li>Extracts grammar habits &amp; fluency metrics</li>
-              <li>Updates Supabase user coaching profile</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Step-Wise Core Features Header -->
-      <div class="features-stepwise-header">
-        <span class="box-badge green" style="background: rgba(232, 121, 249, 0.15); color: var(--neon-magenta); padding: 4px 14px; border-radius: 99px;">Step-by-Step Experience</span>
-        <h3>EchoMate Features: Step-Wise</h3>
-        <p>How each stage of the pipeline translates into a smoother, smarter, and stress-free English speaking session for you.</p>
-      </div>
-
-      <!-- Step-by-Step Features Stack -->
-      <div class="arch-stack">
-
-        <!-- Feature Step 1 -->
-        <div class="arch-card">
-          <div class="arch-badge-header">
-            <span class="arch-tier-tag">Step 1: Natural Voice Capture</span>
-            <span class="arch-tier-tech">Zero Interruption Mic • Full-Thought Listening</span>
-          </div>
-          <h4>🎙️ Speak at Your Own Pace Without Being Cut Off</h4>
-          <p>Pause to think, search for a word, or self-correct mid-sentence—EchoMate waits patiently until you finish your complete thought. Your audio is captured cleanly on mobile and streamed securely without awkward timers or sudden buzzers.</p>
-        </div>
-
-        <!-- Dropdown Connector 1 -->
-        <div class="arch-connector-wrap">
-          <div class="arch-connector-btn">
-            <span>Personalizes Every Turn Automatically</span>
-            <span class="dropdown-caret">▼</span>
-          </div>
-        </div>
-
-        <!-- Feature Step 2 -->
-        <div class="arch-card" style="border-color: rgba(129, 140, 248, 0.45);">
-          <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(129, 140, 248, 0.15); color: #A5B4FC; border-color: rgba(129, 140, 248, 0.4);">Step 2: Context-Aware Coaching</span>
-            <span class="arch-tier-tech">Dynamic Scenario Framing • Goal Alignment</span>
-          </div>
-          <h4>🧠 Tailored to Your Role, Scenario &amp; Speaking Level</h4>
-          <p>Before replying, EchoMate combines your chosen mode (e.g., job interview, client negotiation, or casual debate) with your personal learning history—adjusting vocabulary complexity, tone, and follow-up questions in real time.</p>
-        </div>
-
-        <!-- Dropdown Connector 2 -->
-        <div class="arch-connector-wrap">
-          <div class="arch-connector-btn">
-            <span>Sub-Second Conversational Reply</span>
-            <span class="dropdown-caret">▼</span>
-          </div>
-        </div>
-
-        <!-- Feature Step 3 -->
-        <div class="arch-card" style="border-color: rgba(96, 165, 250, 0.45);">
-          <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(96, 165, 250, 0.15); color: #93C5FD; border-color: rgba(96, 165, 250, 0.4);">Step 3: Multi-Engine Voice &amp; Reliability</span>
-            <span class="arch-tier-tech">Gemini Core • Smart Availability Mesh</span>
-          </div>
-          <h4>⚡ Natural Speech Recasting with Zero Downtime</h4>
-          <p>
-            <strong>🟣 Google Gemini</strong> powers EchoMate's core voice—mirroring the natural, native version of what you just said organically inside its reply so you absorb better phrasing effortlessly.
-          </p>
-          <p style="margin-top: 10px;">
-            To guarantee uninterrupted practice sessions at any hour, our smart availability mesh automatically balances traffic across specialized AI engines:
-          </p>
-
-          <div class="models-grid" style="margin-top: 14px;">
-            <div class="model-box" style="border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.07);">
-              <span class="model-name">🟣 Google Gemini (Primary Coach)</span>
-              <span class="model-role">Natural conversational cadence, empathetic tone, and organic speech recasting.</span>
-            </div>
-            <div class="model-box">
-              <span class="model-name">⚡ Groq Cloud (Rapid Banter)</span>
-              <span class="model-role">Ultra-fast response fallback for snappy back-and-forth casual discussions.</span>
-            </div>
-            <div class="model-box">
-              <span class="model-name">🧠 Mistral AI &amp; ✖️ Grok (Deep Scenarios)</span>
-              <span class="model-role">High-resilience engines for structured debates, roleplay twists, and complex topics.</span>
-            </div>
-            <div class="model-box">
-              <span class="model-name">☁️ Cloudflare Workers AI (Edge Shield)</span>
-              <span class="model-role">Instant edge routing that prevents timeouts and keeps your conversation flowing smoothly.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dropdown Connector 3 -->
-        <div class="arch-connector-wrap">
-          <div class="arch-connector-btn">
-            <span>Builds Long-Term Fluency Muscle</span>
-            <span class="dropdown-caret">▼</span>
-          </div>
-        </div>
-
-        <!-- Feature Step 4 -->
-        <div class="arch-card" style="border-color: rgba(52, 211, 153, 0.45);">
-          <div class="arch-badge-header">
-            <span class="arch-tier-tag" style="background: rgba(52, 211, 153, 0.15); color: #6EE7B7; border-color: rgba(52, 211, 153, 0.4);">Step 4: Post-Session Growth &amp; Memory</span>
-            <span class="arch-tier-tech">Async Distillation • Actionable Reports</span>
-          </div>
-          <h4>📈 Executive Polish &amp; Persistent Learner Memory</h4>
-          <p>After every conversation, EchoMate distills your session in the background—turning raw spoken moments into clear takeaways without slowing down your chat:</p>
-
-          <div class="supabase-grid">
-            <div class="sub-box">
-              <h5>🎯 Evolving Learner Profile</h5>
-              <p>Remembers your career goals, favorite discussion topics, and target fluency milestones across weeks.</p>
-            </div>
-            <div class="sub-box">
-              <h5>🔁 Crutch-Word &amp; Habit Tracker</h5>
-              <p>Identifies recurring tense slips, filler words, or awkward phrasing so future sessions gently reinforce better habits.</p>
-            </div>
-            <div class="sub-box">
-              <h5>✨ Sentence Upgrade Cards</h5>
-              <p>Shows side-by-side comparisons of your exact spoken sentences alongside confident, executive-ready alternatives.</p>
-            </div>
-            <div class="sub-box">
-              <h5>🔒 Private Judgment-Free Space</h5>
-              <p>Your voice transcripts and diagnostic insights stay private to your account—practice freely without social pressure.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- IN THE NEAR FUTURE: ECHOMATE VOICE STUDIO & STORY MODE (id="near-future") -->
-    <section id="near-future" class="studio-future-section">
-      <div class="studio-intro-wrap">
-        <span class="studio-badge">✨ In the Near Future • Advanced &amp; Paid Tier</span>
-        <h2>
-          EchoMate Voice Studio: <br>
-          <span class="gradient-text">Real Conversations. Tangible Creations.</span>
-        </h2>
-        <p>
-          Move beyond endless grammar drills. In Voice Studio, you test your spoken English by producing real, shareable audio assets. Just talk naturally—EchoMate structures your ideas step by step, challenges your arguments in character, and masters your session into a broadcast-quality English audio production.
-        </p>
-      </div>
-
-      <!-- Pillar 1: Entertainment & Drama Tracks -->
-      <div class="studio-category-title">
-        <span>🎭 Entertainment &amp; Interactive Roleplay</span>
-        <span class="cat-badge" style="background: rgba(232, 121, 249, 0.2); color: var(--neon-magenta);">High Immersion</span>
-      </div>
-
-      <div class="studio-grid">
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">🕵️</div>
-            <h4>Detective Murder Mystery</h4>
-          </div>
-          <p>Step into the shoes of the lead investigator. Interrogate suspects who push back, notice inconsistencies in their alibis, and deliver your grand final deduction.</p>
-          <div class="studio-card-meta">• Deductive phrasing &amp; suspense</div>
-        </div>
-
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">🔥</div>
-            <h4>The Unpopular Opinion &amp; Roasting Show</h4>
-          </div>
-          <p>Defend your boldest hot takes—from movies to everyday pet peeves—against an argumentative, witty AI co-host who demands fast verbal rebuttals.</p>
-          <div class="studio-card-meta">• Spontaneous counterarguments &amp; wit</div>
-        </div>
-
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">⏳</div>
-            <h4>"What If" Alternate History</h4>
-          </div>
-          <p>Alter a major turning point in history or pop culture. Talk through how society and technology shift in a collaborative world-building sandbox.</p>
-          <div class="studio-card-meta">• Conditional reasoning &amp; storytelling</div>
-        </div>
-
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">🕯️</div>
-            <h4>Campfire Ghost Stories</h4>
-          </div>
-          <p>Co-create spine-chilling urban legends. Master descriptive atmosphere, sudden twists, and dramatic pauses under the guidance of a dark narrative host.</p>
-          <div class="studio-card-meta">• Sensory adjectives &amp; dramatic pacing</div>
-        </div>
-
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">🦈</div>
-            <h4>The Ridiculous Shark Tank Pitch</h4>
-          </div>
-          <p>Pitch absurd inventions with straight-faced corporate seriousness. Defend unit economics and handle tough investor grilling with executive flair.</p>
-          <div class="studio-card-meta">• Persuasive rhetoric &amp; business confidence</div>
-        </div>
-      </div>
-
-      <!-- Pillar 2: Productive Creator Tracks -->
-      <div class="studio-category-title" style="margin-top: 40px;">
-        <span>🎙️ Productive Creator &amp; Story Crafting</span>
-        <span class="cat-badge" style="background: rgba(56, 189, 248, 0.2); color: var(--neon-cyan);">Portfolio Ready</span>
-      </div>
-
-      <div class="studio-grid">
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">✍️</div>
-            <h4>Story Maker &amp; Narrative Refiner</h4>
-          </div>
-          <p>Speak your raw book, script, or episode concepts aloud. EchoMate organizes your spoken thoughts into structured plot beats and scene outlines without interrupting your flow.</p>
-          <div class="studio-card-meta">• Narrative architecture &amp; character arcs</div>
-        </div>
-
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">💼</div>
-            <h4>"Industry Insider" Explainer</h4>
-          </div>
-          <p>Turn your professional field expertise into an engaging 3-minute audio explainer. Practice framing complex technical topics with clear real-world analogies.</p>
-          <div class="studio-card-meta">• Executive communication &amp; clarity</div>
-        </div>
-
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">🎬</div>
-            <h4>Critical Review &amp; Deep-Dive Essay</h4>
-          </div>
-          <p>Analyze a recent film, book, product design, or tech tool. Move beyond simple descriptors like "good" into nuanced, intellectual cultural critique.</p>
-          <div class="studio-card-meta">• Evaluative vocabulary &amp; thesis flow</div>
-        </div>
-
-        <div class="studio-card">
-          <div class="studio-card-header">
-            <div class="studio-card-icon">🗺️</div>
-            <h4>"Local Insider" Cultural &amp; Travel Guide</h4>
-          </div>
-          <p>Narrate insider travel recommendations and culinary traditions from your home region, crafting a voiceover script suitable for global audiences.</p>
-          <div class="studio-card-meta">• Evocative descriptions &amp; cultural voice</div>
-        </div>
-      </div>
-
-      <!-- The Studio Deliverable Banner -->
-      <div class="studio-output-banner">
-        <div class="output-box">
-          <h5>📄 Clean Formatted Script</h5>
-          <p>Receive your completed, step-by-step spoken transcript refined with natural sentence cadence—ready to publish as a Substack article, LinkedIn post, or YouTube script.</p>
-        </div>
-        <div class="output-box">
-          <h5>🎧 Studio-Grade Audio Master</h5>
-          <p>Render your finished piece using on-device mobile voice synthesis for fast proof-listening, or upgrade to neural cinematic voices (via ElevenLabs API) for a broadcast-ready MP3 export.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Interactive Speech Modeling Demo Section (id="demo") -->
-    <section id="demo" class="demo-section">
-      <div style="text-align: center; max-width: 660px; margin: 0 auto 10px;">
-        <span class="box-badge green">Concrete Over Abstract</span>
-        <h2 style="font-size: 2.1rem; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif;">
-          The Post-Session Speech Modeling
-        </h2>
-        <p style="color: var(--text-muted); font-size: 0.96rem;">
-          Instead of unhelpful generic grades like "Grammar: 72%," EchoMate isolates key sentences from your conversation and demonstrates how a native speaker or senior leader would express that exact thought with executive polish.
-        </p>
-      </div>
-
-      <!-- Example 1 -->
-      <div class="example-block">
-        <div class="example-header">
-          <span>📦 Example 1: Technical & E-Commerce Operations</span>
-        </div>
-        <div class="demo-grid">
-          <div class="speech-box original">
-            <span class="box-badge red">🔴 Raw Spoken Input</span>
-            <p>"first day change the handle so our soup if I inventory didn't update properly"</p>
-          </div>
-          <div class="speech-box polish">
-            <span class="box-badge green">🟢 Executive Polish</span>
-            <p>"On the first day, they changed the handle, so our Shopify inventory didn't update properly."</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Example 2 -->
-      <div class="example-block">
-        <div class="example-header">
-          <span>💼 Example 2: Workplace Standup & Timeline Adjustment</span>
-        </div>
-        <div class="demo-grid">
-          <div class="speech-box original">
-            <span class="box-badge red">🔴 Raw Spoken Input</span>
-            <p>"Uh, I think we should, like, maybe move the deadline to next Tuesday?"</p>
-          </div>
-          <div class="speech-box polish">
-            <span class="box-badge green">🟢 Executive Polish</span>
-            <p>"I propose we adjust the project timeline to next Tuesday to ensure quality."</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Example 3 -->
-      <div class="example-block">
-        <div class="example-header">
-          <span>🏛️ Example 3: Narrative Explanation & Architecture</span>
-        </div>
-        <div class="demo-grid">
-          <div class="speech-box original">
-            <span class="box-badge red">🔴 Raw Spoken Input</span>
-            <p>"in starting they are start using stones"</p>
-          </div>
-          <div class="speech-box polish">
-            <span class="box-badge green">🟢 Executive Polish</span>
-            <p>"Initially, they began using heavy stones to construct them."</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="demo-footer-note">
-        ⚡ Powered by Google Gemini with smart fallback orchestration via Supabase and Cloudflare.
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Floating Glass Back-to-Top Button -->
-  <button id="backToTop" class="back-to-top-btn" aria-label="Scroll Back to Top" title="Back to Top">
-    <span class="arrow-icon">▲</span>
-  </button>
-
-  <!-- Clean Aligned Footer -->
-  <footer>
-    <div class="container footer-content">
-      <p>EchoMate • Designed & Developed by <a href="https://sandeepsingh-tech.github.io/" target="_blank">Sandeep Singh</a></p>
-      <p style="font-size: 0.8rem; color: #64748B;">Hosted on GitHub Pages</p>
-    </div>
-  </footer>
-
-  <!-- Controller Script: Fixed Header, Back-to-Top & Active Section Navigation -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const header = document.querySelector('header');
-      const headerSpacer = document.querySelector('.header-spacer');
-      const backToTopBtn = document.getElementById('backToTop');
-      const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item-link'));
-      const navMenuContainer = document.querySelector('.nav-menu');
-      const navTargets = navLinks
-        .map((link) => ({ link, section: document.querySelector(link.getAttribute('href')) }))
-        .filter((item) => item.section);
-
-      let lastActiveId = null;
-
-      function syncHeaderSpacer() {
-        const shouldBeCollapsed = window.scrollY > 35;
-        header.classList.remove('is-scrolled');
-        const initialHeight = header.offsetHeight;
-        headerSpacer.style.height = `${initialHeight}px`;
-        if (shouldBeCollapsed) header.classList.add('is-scrolled');
-      }
-
-      function centerActiveMobileLink(link) {
-        if (!navMenuContainer || window.innerWidth > 768) return;
-        const linkRect = link.getBoundingClientRect();
-        const containerRect = navMenuContainer.getBoundingClientRect();
-        const targetScrollLeft = navMenuContainer.scrollLeft
-          + (linkRect.left - containerRect.left)
-          - (containerRect.width / 2)
-          + (linkRect.width / 2);
-
-        navMenuContainer.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
-      }
-
-      function updateActiveSection() {
-        const activationLine = window.scrollY + header.offsetHeight + 24;
-        let activeItem = null;
-
-        for (const item of navTargets) {
-          const sectionTop = item.section.getBoundingClientRect().top + window.scrollY;
-          if (sectionTop <= activationLine) activeItem = item;
-        }
-
-        navLinks.forEach((link) => link.classList.remove('active'));
-        if (activeItem) {
-          activeItem.link.classList.add('active');
-          const activeId = activeItem.section.id;
-          if (activeId !== lastActiveId) {
-            centerActiveMobileLink(activeItem.link);
-            lastActiveId = activeId;
-          }
-        } else {
-          lastActiveId = null;
-        }
-      }
-
-      function handleScroll() {
-        const shouldCollapse = window.innerWidth <= 768 && window.scrollY > 35;
-        header.classList.toggle('is-scrolled', shouldCollapse);
-
-        if (window.scrollY > 350) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
-
-        updateActiveSection();
-      }
-
-      backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      syncHeaderSpacer();
-      handleScroll();
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      window.addEventListener('resize', () => {
-        syncHeaderSpacer();
-        handleScroll();
-      });
-
-      navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          window.setTimeout(updateActiveSection, 250);
-        });
-      });
-    });
-  </script>
-
- <!-- Lightweight Private Demo Modal Shell -->
-  <div id="demoModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(4,6,12,0.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:12px;">
-    <div style="position:relative;width:100%;max-width:860px;height:88vh;border-radius:24px;overflow:hidden;border:1px solid rgba(56,189,248,0.4);box-shadow:0 24px 60px rgba(0,0,0,0.75);">
-      <iframe id="demoFrame" allow="microphone" style="width:100%;height:100%;border:none;background:#080B11;"></iframe>
+    <div class="topbar-actions">
+      <span id="quotaPill" class="pill">Loading...</span>
+      <span id="userPill" class="pill amber">Guest</span>
+      <button id="historyNavBtn" class="btn btn-ghost">📊 History</button>
+      <button id="googleSignInBtn" class="btn btn-google">Sign in</button>
+      <button id="signOutBtn" class="btn btn-ghost" style="display:none;">Sign Out</button>
+      <button id="closePopupBtn" class="btn btn-close" title="Close Demo">✕ Close</button>
     </div>
   </div>
-  <script>
-    const openDemo = async () => {
-      const m = document.getElementById('demoModal'), f = document.getElementById('demoFrame');
-      m.style.display = 'flex';
-      if (!f.srcdoc) {
-        const html = await (await fetch('https://llsiiwroonvepwsplbrz.supabase.co/functions/v1/web-demo-ui')).text();
-        f.srcdoc = html.replace('<script>', `<script>window.__PARENT_HASH__=${JSON.stringify(window.location.hash)};`);
-        if (window.location.hash.includes('access_token')) history.replaceState(null, '', window.location.pathname);
+
+  <!-- VIEW 1: MODE PICKER -->
+  <div id="modesView" class="view active">
+    <div class="hero-drill">
+      <div class="eyebrow">Today's Recommended Drill</div>
+      <h2 id="heroModeTitle">General Fluency &amp; Everyday English</h2>
+      <p id="heroModeFocus">Practice open-ended conversational flow with zero mid-sentence interruptions.</p>
+      <button id="startRecommendedBtn" class="btn btn-cyan">🎙️ Start Voice Drill</button>
+    </div>
+
+    <div class="section-head">
+      <h3>Practice Modes</h3>
+      <span style="font-size:0.76rem;color:var(--muted);" id="tierHintText">Guest unlocks demo modes</span>
+    </div>
+    <div id="modesGrid" class="modes-grid"></div>
+  </div>
+
+  <!-- VIEW 2: PRACTICE HISTORY -->
+  <div id="historyView" class="view">
+    <div class="history-header">
+      <button id="historyBackBtn" class="history-back" title="Back to Modes">←</button>
+      <div>
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:800;">Practice History</h2>
+        <p style="font-size:0.76rem;color:var(--muted);">Your spoken English journey &amp; milestones</p>
+      </div>
+    </div>
+
+    <div class="history-summary-grid">
+      <div class="h-stat-card">
+        <div class="h-stat-lbl">Sessions</div>
+        <div id="hTotalSessions" class="h-stat-val">0</div>
+      </div>
+      <div class="h-stat-card violet">
+        <div class="h-stat-lbl">Avg Fluency</div>
+        <div id="hAvgFluency" class="h-stat-val">--/100</div>
+      </div>
+      <div class="h-stat-card amber">
+        <div class="h-stat-lbl">Latest Mood</div>
+        <div id="hLatestMood" class="h-stat-val">Engaged</div>
+      </div>
+    </div>
+
+    <div id="historyList" class="history-list"></div>
+  </div>
+
+  <!-- VIEW 3: ACTIVE VOICE SESSION -->
+  <div id="chatView" class="view">
+    <div class="chat-header">
+      <button id="backToModesBtn" class="btn btn-ghost">← Modes</button>
+      <div id="activeModeName" style="font-weight:700;font-size:0.88rem;color:var(--cyan);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">General Fluency</div>
+      <button id="endSessionBtn" class="end-btn">End &amp; Analyze</button>
+    </div>
+
+    <div class="orb-stage">
+      <div id="voiceOrb" class="orb"></div>
+      <div id="voiceStatus" class="status-text">Tap mic or type below to speak</div>
+    </div>
+
+    <div id="messagesBox" class="messages-box"></div>
+
+    <div class="dock">
+      <button id="micBtn" class="icon-btn mic-btn" title="Tap to Speak">🎙️</button>
+      <input id="textInput" type="text" maxlength="300" placeholder="Speak or type..." />
+      <span id="charCounter" class="char-count">0/300</span>
+      <button id="sendBtn" class="icon-btn send-btn" title="Send">➤</button>
+    </div>
+  </div>
+
+  <!-- UPGRADE / LIMIT MODAL -->
+  <div id="upgradeModal" class="overlay-modal">
+    <div class="modal-card">
+      <div style="font-size:2rem;margin-bottom:8px;">🚀</div>
+      <h3 id="upgradeTitle" style="font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin-bottom:8px;">
+        Unlock Full Basic Suite
+      </h3>
+      <p id="upgradeDesc" style="font-size:0.86rem;color:var(--muted);margin-bottom:18px;line-height:1.5;">
+        You've experienced the guest preview. Sign in with Google to unlock all core practice modes, 15 conversation turns, post-session Speech Modeling reports, and Day-1 mobile app access.
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button id="modalGoogleBtn" class="btn btn-cyan">Continue with Google</button>
+        <button id="closeUpgradeBtn" class="btn btn-ghost">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST-SESSION DEBRIEF MODAL -->
+  <div id="debriefModal" class="overlay-modal">
+    <div class="modal-card" style="border-color:rgba(34,211,238,0.45);max-width:540px;">
+      <div id="debriefEyebrow" style="font-size:0.74rem;font-weight:800;color:var(--amber);letter-spacing:0.08em;">SESSION COMPLETE</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin:4px 0 10px;">Diagnostic Debrief</h3>
+      <div class="metrics-grid">
+        <div class="m-card"><div id="dFluency" class="m-val">82/100</div><div class="m-lbl">Fluency</div></div>
+        <div class="m-card"><div id="dGrammar" class="m-val">86%</div><div class="m-lbl">Grammar</div></div>
+        <div class="m-card"><div id="dPacing" class="m-val">130 WPM</div><div class="m-lbl">Pacing</div></div>
+      </div>
+      <div class="polish-box bad">
+        <strong style="color:#FCA5A5;font-size:0.72rem;display:block;margin-bottom:3px;">WHAT YOU SAID</strong>
+        <span id="dWhatSaid"></span>
+      </div>
+      <div class="polish-box good">
+        <strong style="color:#6EE7B7;font-size:0.72rem;display:block;margin-bottom:3px;">EXECUTIVE POLISH</strong>
+        <span id="dExecPolish"></span>
+      </div>
+      <ul id="dTakeaways" style="text-align:left;font-size:0.82rem;color:#CBD5E1;padding-left:18px;margin:10px 0 16px;"></ul>
+      <button id="closeDebriefBtn" class="btn btn-cyan">Done</button>
+    </div>
+  </div>
+
+<script>
+(async function() {
+  const SUPABASE_URL = ${JSON.stringify(SUPABASE_URL)};
+  const SUPABASE_ANON_KEY = ${JSON.stringify(SUPABASE_ANON_KEY)};
+  const CHAT_FN_URL = SUPABASE_URL + "/functions/v1/chat-turn";
+  const DISTILL_FN_URL = SUPABASE_URL + "/functions/v1/distill-memory";
+  const REDIRECT_URL = "https://sandeepsingh-tech.github.io/echomate.html";
+
+  if (window.__PARENT_HASH__ && window.__PARENT_HASH__.includes("access_token")) {
+    window.location.hash = window.__PARENT_HASH__;
+  }
+
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let state = {
+    tier: "anon",
+    accessToken: null,
+    user: null,
+    quota: { turnsUsed: 0, turnLimit: 3, turnsRemaining: 3, maxChars: 300 },
+    modes: [],
+    profileStats: null,
+    recentMemories: [],
+    activeMode: null,
+    sessionId: "web_" + Date.now(),
+    guestHistory: [],
+    isListening: false,
+    isProcessing: false
+  };
+
+  const els = {
+    quotaPill: document.getElementById("quotaPill"),
+    userPill: document.getElementById("userPill"),
+    historyNavBtn: document.getElementById("historyNavBtn"),
+    googleSignInBtn: document.getElementById("googleSignInBtn"),
+    signOutBtn: document.getElementById("signOutBtn"),
+    closePopupBtn: document.getElementById("closePopupBtn"),
+    modesView: document.getElementById("modesView"),
+    historyView: document.getElementById("historyView"),
+    chatView: document.getElementById("chatView"),
+    heroModeTitle: document.getElementById("heroModeTitle"),
+    heroModeFocus: document.getElementById("heroModeFocus"),
+    startRecommendedBtn: document.getElementById("startRecommendedBtn"),
+    tierHintText: document.getElementById("tierHintText"),
+    modesGrid: document.getElementById("modesGrid"),
+    historyBackBtn: document.getElementById("historyBackBtn"),
+    hTotalSessions: document.getElementById("hTotalSessions"),
+    hAvgFluency: document.getElementById("hAvgFluency"),
+    hLatestMood: document.getElementById("hLatestMood"),
+    historyList: document.getElementById("historyList"),
+    backToModesBtn: document.getElementById("backToModesBtn"),
+    activeModeName: document.getElementById("activeModeName"),
+    endSessionBtn: document.getElementById("endSessionBtn"),
+    voiceOrb: document.getElementById("voiceOrb"),
+    voiceStatus: document.getElementById("voiceStatus"),
+    messagesBox: document.getElementById("messagesBox"),
+    micBtn: document.getElementById("micBtn"),
+    textInput: document.getElementById("textInput"),
+    charCounter: document.getElementById("charCounter"),
+    sendBtn: document.getElementById("sendBtn"),
+    upgradeModal: document.getElementById("upgradeModal"),
+    upgradeTitle: document.getElementById("upgradeTitle"),
+    upgradeDesc: document.getElementById("upgradeDesc"),
+    modalGoogleBtn: document.getElementById("modalGoogleBtn"),
+    closeUpgradeBtn: document.getElementById("closeUpgradeBtn"),
+    debriefModal: document.getElementById("debriefModal"),
+    debriefEyebrow: document.getElementById("debriefEyebrow"),
+    closeDebriefBtn: document.getElementById("closeDebriefBtn")
+  };
+
+  els.closePopupBtn.onclick = () => {
+    window.speechSynthesis?.cancel();
+    window.parent.postMessage("close-demo", "*");
+  };
+
+  async function triggerGoogleOAuth() {
+    const { data, error } = await sb.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: REDIRECT_URL, skipBrowserRedirect: true }
+    });
+    if (error) {
+      alert("Google Sign-In error: " + error.message);
+      return;
+    }
+    if (data?.url) {
+      window.top.location.href = data.url;
+    }
+  }
+
+  els.googleSignInBtn.onclick = triggerGoogleOAuth;
+  els.modalGoogleBtn.onclick = triggerGoogleOAuth;
+  els.closeUpgradeBtn.onclick = () => els.upgradeModal.classList.remove("open");
+  els.closeDebriefBtn.onclick = () => {
+    els.debriefModal.classList.remove("open");
+  };
+
+  els.signOutBtn.onclick = async () => {
+    await sb.auth.signOut();
+    state.accessToken = null;
+    state.user = null;
+    state.recentMemories = [];
+    state.profileStats = null;
+    switchView("modes");
+    await initDemo();
+  };
+
+  function switchView(name) {
+    els.modesView.classList.toggle("active", name === "modes");
+    els.historyView.classList.toggle("active", name === "history");
+    els.chatView.classList.toggle("active", name === "chat");
+  }
+
+  els.historyNavBtn.onclick = async () => {
+    if (state.tier !== "authenticated") {
+      els.upgradeTitle.textContent = "Unlock Practice History";
+      els.upgradeDesc.textContent = "Sign in with Google to track your completed sessions, average fluency score, and past Speech Modeling reports across web and mobile.";
+      els.upgradeModal.classList.add("open");
+      return;
+    }
+    await initDemo();
+    renderHistory();
+    switchView("history");
+  };
+
+  els.historyBackBtn.onclick = () => switchView("modes");
+
+  function formatRelativeDate(isoStr) {
+    if (!isoStr) return "Recent";
+    const d = new Date(isoStr);
+    const diffMs = Date.now() - d.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    if (diffMins < 60) return Math.max(1, diffMins) + "m ago";
+    const diffHrs = Math.floor(diffMins / 60);
+    if (diffHrs < 24) return diffHrs + "h ago";
+    return d.toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  function showReportModal(report, eyebrowLabel) {
+    els.debriefEyebrow.textContent = eyebrowLabel || "SESSION COMPLETE";
+    document.getElementById("dFluency").textContent = (report.fluency_score ?? 75) + "/100";
+    document.getElementById("dGrammar").textContent = (report.grammar_score ?? 75) + "%";
+    document.getElementById("dPacing").textContent = (report.pacing_wpm ?? 125) + " WPM";
+    document.getElementById("dWhatSaid").textContent = report.speech_modeling?.what_you_said || "Good effort today.";
+    document.getElementById("dExecPolish").textContent = report.speech_modeling?.executive_polish || "Keep practicing consistently.";
+    const ul = document.getElementById("dTakeaways");
+    ul.innerHTML = "";
+    const takeaways = Array.isArray(report.key_takeaways) ? report.key_takeaways : [];
+    takeaways.forEach(t => {
+      const li = document.createElement("li");
+      li.textContent = t;
+      ul.appendChild(li);
+    });
+    els.debriefModal.classList.add("open");
+  }
+
+  function renderHistory() {
+    const stats = state.profileStats || {};
+    const total = stats.total_sessions_completed ?? state.recentMemories.length;
+    const avgFl = stats.avg_fluency
+      ? Math.round(Number(stats.avg_fluency)) + "/100"
+      : (state.recentMemories.length
+          ? Math.round(state.recentMemories.reduce((a, b) => a + Number(b.fluency_score || 75), 0) / state.recentMemories.length) + "/100"
+          : "--/100");
+    const mood = stats.latest_mood || state.recentMemories[0]?.user_mood || "Engaged";
+
+    els.hTotalSessions.textContent = total + " Done";
+    els.hAvgFluency.textContent = avgFl;
+    els.hLatestMood.textContent = mood;
+
+    els.historyList.innerHTML = "";
+    if (!state.recentMemories || state.recentMemories.length === 0) {
+      els.historyList.innerHTML = \`
+        <div style="text-align:center;padding:32px 16px;background:rgba(20,25,38,0.6);border:1px dashed #2E384D;border-radius:18px;">
+          <div style="font-size:2rem;margin-bottom:8px;">🎧</div>
+          <div style="font-weight:700;margin-bottom:6px;">No completed sessions yet</div>
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:14px;">Start a voice drill and tap "End &amp; Analyze" to generate your first diagnostic report.</p>
+          <button id="emptyStartBtn" class="btn btn-cyan">Start your first chat</button>
+        </div>
+      \`;
+      document.getElementById("emptyStartBtn").onclick = () => switchView("modes");
+      return;
+    }
+
+    state.recentMemories.forEach(mem => {
+      const modeObj = state.modes.find(m => m.slug === mem.session_mode);
+      const modeTitle = modeObj ? modeObj.name : (mem.session_mode || "General Practice");
+      const card = document.createElement("div");
+      card.className = "session-card";
+      card.innerHTML = \`
+        <div class="sc-row1">
+          <span class="sc-mode-pill">\${modeTitle}</span>
+          <span class="sc-time">\${formatRelativeDate(mem.created_at)}</span>
+        </div>
+        <div class="sc-preview">\${mem.summary_takeaway || "Completed spoken English practice session."}</div>
+        <div class="sc-row3">
+          <div class="sc-badges">
+            <span class="sc-pill cyan">Fluency: \${mem.fluency_score ?? 75}</span>
+            <span class="sc-pill purple">Grammar: \${mem.grammar_score ?? 75}%</span>
+            <span class="sc-pill amber">Mood: \${mem.user_mood || "Engaged"}</span>
+          </div>
+          <span style="color:var(--muted);font-size:0.8rem;">Report →</span>
+        </div>
+      \`;
+      card.onclick = () => showReportModal(mem, modeTitle.toUpperCase());
+      els.historyList.appendChild(card);
+    });
+  }
+
+  function updateHeaderUI() {
+    const rem = state.quota.turnsRemaining;
+    const lim = state.quota.turnLimit;
+    els.quotaPill.textContent = rem + "/" + lim + " Turns";
+
+    if (state.tier === "authenticated" && state.user) {
+      els.userPill.textContent = "✓ " + state.user.name;
+      els.userPill.classList.remove("amber");
+      els.googleSignInBtn.style.display = "none";
+      els.signOutBtn.style.display = "inline-flex";
+      els.tierHintText.textContent = "All core modes unlocked";
+    } else {
+      els.userPill.textContent = "Guest";
+      els.userPill.classList.add("amber");
+      els.googleSignInBtn.style.display = "inline-flex";
+      els.signOutBtn.style.display = "none";
+      els.tierHintText.textContent = "Sign in to unlock all modes";
+    }
+  }
+
+  function renderModes() {
+    els.modesGrid.innerHTML = "";
+    const rec = state.modes.find(m => m.is_default || m.display_order === 1) || state.modes[0];
+    if (rec) {
+      els.heroModeTitle.textContent = rec.name;
+      els.heroModeFocus.textContent = rec.focus;
+      els.startRecommendedBtn.onclick = () => openMode(rec);
+    }
+
+    state.modes.forEach(mode => {
+      const isLocked = state.tier === "anon" && !mode.is_demo;
+      const card = document.createElement("div");
+      card.className = "mode-card" + (isLocked ? " locked" : "");
+      card.innerHTML = \`
+        <div class="mode-card-top">
+          <span class="mode-badge">\${mode.badge_text || "Practice"}</span>
+          <span style="font-size:0.75rem;color:\${isLocked ? '#F59E0B' : '#22D3EE'};">
+            \${isLocked ? "🔒 Google Sign-In" : "● Ready"}
+          </span>
+        </div>
+        <div class="mode-title">\${mode.name}</div>
+        <div class="mode-focus">\${mode.focus}</div>
+      \`;
+      card.onclick = () => {
+        if (isLocked) {
+          els.upgradeTitle.textContent = "Unlock " + mode.name;
+          els.upgradeDesc.textContent = "Sign in with Google to access all practice modes, 15 conversation turns, and post-session Speech Modeling reports.";
+          els.upgradeModal.classList.add("open");
+        } else {
+          openMode(mode);
+        }
+      };
+      els.modesGrid.appendChild(card);
+    });
+  }
+
+  function openMode(mode) {
+    state.activeMode = mode;
+    state.sessionId = "web_" + Date.now();
+    state.guestHistory = [];
+    els.activeModeName.textContent = mode.name;
+    els.messagesBox.innerHTML = \`
+      <div class="msg ai">Welcome to <strong>\${mode.name}</strong>! Tap the mic or type a sentence below to start speaking naturally.</div>
+    \`;
+    switchView("chat");
+  }
+
+  els.backToModesBtn.onclick = () => {
+    window.speechSynthesis?.cancel();
+    switchView("modes");
+  };
+
+  function appendMessage(role, text) {
+    const div = document.createElement("div");
+    div.className = "msg " + (role === "user" ? "user" : "ai");
+    div.textContent = text;
+    els.messagesBox.appendChild(div);
+    els.messagesBox.scrollTop = els.messagesBox.scrollHeight;
+  }
+
+  let cachedBestVoice = null;
+
+  function selectBestVoice() {
+    if (!("speechSynthesis" in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return null;
+
+    const preferredPatterns = [
+      /Microsoft Neerja Online.*Natural/i,
+      /Microsoft Prabhat Online.*Natural/i,
+      /Google UK English Female/i,
+      /Google US English/i,
+      /Microsoft Aria Online.*Natural/i,
+      /Microsoft Jenny Online.*Natural/i,
+      /Rishi/i,
+      /Veena/i,
+      /Samantha/i
+    ];
+
+    for (const pattern of preferredPatterns) {
+      const match = voices.find((v) => pattern.test(v.name));
+      if (match) return match;
+    }
+
+    return (
+      voices.find((v) => v.lang === "en-IN") ||
+      voices.find((v) => v.lang.startsWith("en-GB")) ||
+      voices.find((v) => v.lang.startsWith("en-US")) ||
+      voices.find((v) => v.lang.startsWith("en")) ||
+      null
+    );
+  }
+
+  if ("speechSynthesis" in window) {
+    cachedBestVoice = selectBestVoice();
+    window.speechSynthesis.onvoiceschanged = () => {
+      cachedBestVoice = selectBestVoice();
+    };
+  }
+
+  function speakReply(text) {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+
+    const utter = new SpeechSynthesisUtterance(text);
+    const chosenVoice = cachedBestVoice || selectBestVoice();
+
+    if (chosenVoice) {
+      utter.voice = chosenVoice;
+      utter.lang = chosenVoice.lang;
+    } else {
+      utter.lang = "en-IN";
+    }
+
+    utter.rate = 0.98;
+    utter.pitch = 1.0;
+
+    utter.onstart = () => {
+      els.voiceOrb.className = "orb speaking";
+      els.voiceStatus.textContent = "EchoMate is speaking...";
+    };
+    utter.onend = () => {
+      els.voiceOrb.className = "orb";
+      els.voiceStatus.textContent = "Your turn — tap mic or type";
+    };
+    utter.onerror = () => {
+      els.voiceOrb.className = "orb";
+      els.voiceStatus.textContent = "Your turn — tap mic or type";
+    };
+
+    window.speechSynthesis.speak(utter);
+  }
+
+  async function sendTurn(rawText) {
+    const text = (rawText || "").trim();
+    if (!text || state.isProcessing) return;
+
+    if (state.quota.turnsRemaining <= 0) {
+      els.upgradeTitle.textContent = state.tier === "anon" ? "Guest Preview Complete!" : "Preview Quota Reached";
+      els.upgradeDesc.textContent = state.tier === "anon"
+        ? "You used all 3 free guest turns. Sign in with Google now to unlock 15 turns, all modes, and Day-1 mobile app access!"
+        : "You've completed your 15 web preview turns. Click 'End & Analyze' to view your Speech Modeling debrief!";
+      els.upgradeModal.classList.add("open");
+      return;
+    }
+
+    state.isProcessing = true;
+    els.voiceOrb.className = "orb thinking";
+    els.voiceStatus.textContent = "Thinking...";
+    appendMessage("user", text);
+    els.textInput.value = "";
+    els.charCounter.textContent = "0/300";
+
+    try {
+      const headers = { "Content-Type": "application/json" };
+      if (state.accessToken) headers["Authorization"] = "Bearer " + state.accessToken;
+
+      const res = await fetch(CHAT_FN_URL, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          source: "web_demo",
+          action: "chat",
+          message: text,
+          sessionMode: state.activeMode?.slug || "general",
+          sessionId: state.sessionId,
+          guestHistory: state.guestHistory
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        if (data.code === "TURN_LIMIT_REACHED" || data.code === "MODE_LOCKED") {
+          els.upgradeModal.classList.add("open");
+        } else {
+          appendMessage("ai", data.error || "Something went wrong. Please try again.");
+        }
+        els.voiceOrb.className = "orb";
+        els.voiceStatus.textContent = "Ready";
+        state.isProcessing = false;
+        return;
+      }
+
+      if (data.quota) {
+        state.quota = { ...state.quota, ...data.quota };
+        updateHeaderUI();
+      }
+
+      state.guestHistory.push({ role: "user", content: text });
+      state.guestHistory.push({ role: "assistant", content: data.reply });
+
+      appendMessage("ai", data.reply);
+      speakReply(data.reply);
+    } catch (err) {
+      appendMessage("ai", "Network error. Please check your connection and try again.");
+      els.voiceOrb.className = "orb";
+      els.voiceStatus.textContent = "Ready";
+    } finally {
+      state.isProcessing = false;
+    }
+  }
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      state.isListening = true;
+      els.micBtn.classList.add("active");
+      els.voiceOrb.className = "orb listening";
+      els.voiceStatus.textContent = "Listening... speak naturally";
+    };
+    recognition.onresult = (e) => {
+      const transcript = e.results[0][0].transcript;
+      sendTurn(transcript);
+    };
+    recognition.onerror = () => {
+      els.voiceOrb.className = "orb";
+      els.voiceStatus.textContent = "Could not hear audio — try again or type below";
+    };
+    recognition.onend = () => {
+      state.isListening = false;
+      els.micBtn.classList.remove("active");
+      if (!state.isProcessing) {
+        els.voiceOrb.className = "orb";
       }
     };
-    window.addEventListener('message', (e) => { if (e.data === 'close-demo') document.getElementById('demoModal').style.display = 'none'; });
-    document.querySelectorAll('[data-launch-demo]').forEach(btn => btn.addEventListener('click', openDemo));
-    if (window.location.hash.includes('access_token')) openDemo();
-  </script>
 
+    els.micBtn.onclick = () => {
+      if (state.isProcessing) return;
+      if (state.isListening) recognition.stop();
+      else {
+        window.speechSynthesis?.cancel();
+        recognition.start();
+      }
+    };
+  } else {
+    els.micBtn.style.display = "none";
+    els.voiceStatus.textContent = "Type your response below (Voice STT supported in Chrome/Edge)";
+  }
+
+  els.textInput.oninput = () => {
+    els.charCounter.textContent = els.textInput.value.length + "/300";
+  };
+  els.textInput.onkeydown = (e) => {
+    if (e.key === "Enter") sendTurn(els.textInput.value);
+  };
+  els.sendBtn.onclick = () => sendTurn(els.textInput.value);
+
+  els.endSessionBtn.onclick = async () => {
+    if (state.tier !== "authenticated") {
+      els.upgradeTitle.textContent = "Unlock Post-Session Speech Modeling";
+      els.upgradeDesc.textContent = "Sign in with Google to generate personalized Fluency, Grammar, and Executive Polish reports after every practice session.";
+      els.upgradeModal.classList.add("open");
+      return;
+    }
+
+    els.endSessionBtn.textContent = "Analyzing...";
+    els.endSessionBtn.disabled = true;
+    try {
+      const res = await fetch(DISTILL_FN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + state.accessToken
+        },
+        body: JSON.stringify({
+          source: "web_demo",
+          sessionId: state.sessionId,
+          sessionMode: state.activeMode?.slug || "general"
+        })
+      });
+      const report = await res.json();
+      showReportModal(report, "SESSION COMPLETE");
+      await initDemo();
+      switchView("modes");
+    } finally {
+      els.endSessionBtn.textContent = "End & Analyze";
+      els.endSessionBtn.disabled = false;
+    }
+  };
+
+  async function initDemo() {
+    const { data: sessionData } = await sb.auth.getSession();
+    state.accessToken = sessionData?.session?.access_token || null;
+
+    const headers = { "Content-Type": "application/json" };
+    if (state.accessToken) headers["Authorization"] = "Bearer " + state.accessToken;
+
+    const res = await fetch(CHAT_FN_URL, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ source: "web_demo", action: "init" })
+    });
+    const initData = await res.json();
+    if (initData.success) {
+      state.tier = initData.tier;
+      state.user = initData.user;
+      state.quota = initData.quota;
+      state.modes = initData.modes || [];
+      state.profileStats = initData.profileStats || null;
+      state.recentMemories = initData.recentMemories || [];
+      updateHeaderUI();
+      renderModes();
+    }
+  }
+
+  await initDemo();
+})();
+</script>
 </body>
-</html>
+</html>`;
+
+  return new Response(html, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Access-Control-Allow-Origin": allowOrigin,
+      "Cache-Control": "no-store",
+    },
+  });
+});
