@@ -2788,10 +2788,9 @@
     });
   </script>
 
-  <!-- Lightweight Private Demo Modal Shell -->
+ <!-- Lightweight Private Demo Modal Shell -->
   <div id="demoModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(4,6,12,0.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:12px;">
     <div style="position:relative;width:100%;max-width:860px;height:88vh;border-radius:24px;overflow:hidden;border:1px solid rgba(56,189,248,0.4);box-shadow:0 24px 60px rgba(0,0,0,0.75);">
-      <button id="closeDemoModal" style="position:absolute;top:12px;right:14px;z-index:30;background:rgba(239,68,68,0.2);color:#FCA5A5;border:1px solid rgba(239,68,68,0.45);border-radius:99px;padding:4px 11px;font-weight:700;cursor:pointer;">✕ Close</button>
       <iframe id="demoFrame" allow="microphone" style="width:100%;height:100%;border:none;background:#080B11;"></iframe>
     </div>
   </div>
@@ -2805,8 +2804,8 @@
         if (window.location.hash.includes('access_token')) history.replaceState(null, '', window.location.pathname);
       }
     };
+    window.addEventListener('message', (e) => { if (e.data === 'close-demo') document.getElementById('demoModal').style.display = 'none'; });
     document.querySelectorAll('[data-launch-demo]').forEach(btn => btn.addEventListener('click', openDemo));
-    document.getElementById('closeDemoModal')?.addEventListener('click', () => document.getElementById('demoModal').style.display = 'none');
     if (window.location.hash.includes('access_token')) openDemo();
   </script>
 
