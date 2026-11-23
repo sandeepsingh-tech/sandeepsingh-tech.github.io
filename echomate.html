@@ -773,6 +773,10 @@
       display: block;
     }
 
+    .video-expand-btn {
+      display: none;
+    }
+
     /* Section Headings */
     .section-title {
       text-align: center;
@@ -1931,8 +1935,50 @@
         font-size: 0.68rem;
       }
 
+      /* Edge-to-Edge Full-Bleed Breakout for Video on Mobile */
+      .media-showcase-section {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        margin-bottom: 44px;
+      }
+
       .media-frame {
-        border-radius: 16px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+
+      .video-expand-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        z-index: 5;
+        padding: 5px 11px;
+        border-radius: 999px;
+        background: rgba(10, 8, 22, 0.84);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(56, 189, 248, 0.45);
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        font-family: 'Space Grotesk', sans-serif;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+      }
+
+      /* Balanced Mobile Section Heading Scale */
+      .section-title {
+        margin: 42px 0 24px;
+      }
+
+      .section-title h2 {
+        font-size: 1.55rem;
+        line-height: 1.25;
       }
 
       .sim-grid {
@@ -2197,6 +2243,14 @@
         >
           <source src="https://sandeepsingh-tech.github.io/echomate.mp4" type="video/mp4">
         </video>
+        <button
+          type="button"
+          class="video-expand-btn"
+          aria-label="Expand Video Fullscreen"
+          onclick="const v=document.getElementById('echomateDemoVideo'); if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();}else if(v.requestFullscreen){v.requestFullscreen();}"
+        >
+          ⛶ Fullscreen
+        </button>
       </div>
     </section>
 
