@@ -2534,21 +2534,48 @@
     </div>
   </footer>
 
-  <!-- Controller Script: Inline Demo Loader, Fixed Header, Back-to-Top & Active Section Navigation -->
+ <!-- Controller Script: Inline Demo Loader, Fixed Header, Back-to-Top & Active Section Navigation -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Load Live Voice Demo Directly Inline
       const demoFrame = document.getElementById('demoFrame');
       const demoLoading = document.getElementById('demoLoading');
 
+      // Fallback handler in case close-demo message still fires
+      window.addEventListener('message', (e) => {
+        if (e.data === 'close-demo') {
+          document.querySelector('.metrics-row')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
       (async () => {
         try {
           const res = await fetch('https://llsiiwroonvepwsplbrz.supabase.co/functions/v1/web-demo-ui');
           const html = await res.text();
-          demoFrame.srcdoc = html.replace(
-            '<script>',
-            `<script>window.__PARENT_HASH__=${JSON.stringify(window.location.hash)};`
-          );
+
+          const inlinePatch = `<style>
+            button[aria-label*="close" i],
+            button[title*="close" i],
+            button[onclick*="close-demo"],
+            .close-btn,
+            #closeBtn {
+              display: none !important;
+            }
+          </style>
+          <script>
+            window.__PARENT_HASH__=${JSON.stringify(window.location.hash)};
+            document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('button').forEach((btn) => {
+                const txt = btn.textContent.trim();
+                if (txt === '×' || txt === '✕' || txt === '✖' || txt.toLowerCase() === 'close') {
+                  btn.style.display = 'none';
+                }
+              });
+            });
+          <\/script>`;
+
+          demoFrame.srcdoc = html.replace('<script>', `${inlinePatch}<script>`);
+
           if (window.location.hash.includes('access_token')) {
             history.replaceState(null, '', window.location.pathname);
           }
