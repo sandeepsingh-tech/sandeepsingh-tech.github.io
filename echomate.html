@@ -2578,16 +2578,52 @@
             button[title*="close" i],
             button[onclick*="close-demo"],
             .close-btn,
-            #closeBtn {
+            #closeBtn,
+            #closePopupBtn {
               display: none !important;
             }
-            @media (max-width: 480px) {
-              header, nav, .top-bar, [class*="header"], [class*="topbar"] {
-                flex-wrap: wrap !important;
-                gap: 6px !important;
-                padding-left: 10px !important;
-                padding-right: 10px !important;
-              }
+            .topbar {
+              display: flex !important;
+              flex-direction: row !important;
+              flex-wrap: nowrap !important;
+              align-items: center !important;
+              justify-content: space-between !important;
+              gap: 10px !important;
+              padding: 9px 12px !important;
+              width: 100% !important;
+              overflow: hidden !important;
+            }
+            .topbar .brand {
+              flex-shrink: 0 !important;
+            }
+            .topbar-actions {
+              display: flex !important;
+              flex-direction: row !important;
+              flex-wrap: nowrap !important;
+              align-items: center !important;
+              gap: 7px !important;
+              flex: 1 1 auto !important;
+              min-width: 0 !important;
+              overflow-x: auto !important;
+              overflow-y: hidden !important;
+              -webkit-overflow-scrolling: touch !important;
+              padding: 2px 14px 4px 2px !important;
+              scrollbar-width: thin !important;
+              scrollbar-color: rgba(34, 211, 238, 0.5) rgba(255, 255, 255, 0.06) !important;
+              mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent 100%) !important;
+              -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent 100%) !important;
+            }
+            .topbar-actions::-webkit-scrollbar {
+              height: 3px !important;
+              display: block !important;
+            }
+            .topbar-actions::-webkit-scrollbar-track {
+              background: rgba(255, 255, 255, 0.06) !important;
+              border-radius: 99px !important;
+            }
+            .topbar-actions::-webkit-scrollbar-thumb {
+              background: linear-gradient(90deg, rgba(34, 211, 238, 0.6), rgba(168, 85, 247, 0.6)) !important;
+              border-radius: 99px !important;
             }
           </style>
           <script>
