@@ -61,7 +61,7 @@
       --danger: #F87171;
     }
 
-* {
+- {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -2010,30 +2010,6 @@
       </div>
     </section>
 
-    <!-- Lightweight Animated Chat Scenarios Video -->
-    <section class="media-showcase-section" aria-label="Project EchoMate Chat Scenarios Overview">
-      <div class="media-frame">
-        <video
-          id="echomateChatScenarioVideo"
-          autoplay
-          loop
-          muted
-          playsinline
-          preload="metadata"
-        >
-          <source src="https://sandeepsingh-tech.github.io/Chatsenario.mp4" type="video/mp4">
-        </video>
-        <button
-          type="button"
-          class="video-expand-btn"
-          aria-label="Expand Video Fullscreen"
-          onclick="const v=document.getElementById('echomateChatScenarioVideo'); if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();}else if(v.requestFullscreen){v.requestFullscreen();}"
-        >
-          ⛶ Fullscreen
-        </button>
-      </div>
-    </section>
-
     <!-- Core Pillars -->
     <section>
       <div class="section-title">
@@ -2368,8 +2344,32 @@
       </div>
     </section>
 
+    <!-- Lightweight Animated Chat Scenarios Video (Positioned Above Voice Studio) -->
+    <section class="media-showcase-section" style="margin-bottom: 32px;" aria-label="Project EchoMate Chat Scenarios Overview">
+      <div class="media-frame" style="border-color: rgba(232, 121, 249, 0.38); box-shadow: 0 22px 54px rgba(0, 0, 0, 0.6), 0 0 32px rgba(232, 121, 249, 0.16);">
+        <video
+          id="echomateChatScenarioVideo"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+        >
+          <source src="https://sandeepsingh-tech.github.io/Chatsenario.mp4" type="video/mp4">
+        </video>
+        <button
+          type="button"
+          class="video-expand-btn"
+          aria-label="Expand Video Fullscreen"
+          onclick="const v=document.getElementById('echomateChatScenarioVideo'); if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();}else if(v.requestFullscreen){v.requestFullscreen();}"
+        >
+          ⛶ Fullscreen
+        </button>
+      </div>
+    </section>
+
     <!-- IN THE NEAR FUTURE: ECHOMATE VOICE STUDIO & STORY MODE (id="near-future") -->
-    <section id="near-future" class="studio-future-section">
+    <section id="near-future" class="studio-future-section" style="margin-top: 24px;">
       <div class="studio-intro-wrap">
         <span class="studio-badge">✨ In the Near Future • Advanced &amp; Paid Tier</span>
         <h2>
