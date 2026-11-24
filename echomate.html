@@ -61,7 +61,7 @@
       --danger: #F87171;
     }
 
-    * {
+* {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -2010,6 +2010,30 @@
       </div>
     </section>
 
+    <!-- Lightweight Animated Chat Scenarios Video -->
+    <section class="media-showcase-section" aria-label="Project EchoMate Chat Scenarios Overview">
+      <div class="media-frame">
+        <video
+          id="echomateChatScenarioVideo"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+        >
+          <source src="https://sandeepsingh-tech.github.io/Chatsenario.mp4" type="video/mp4">
+        </video>
+        <button
+          type="button"
+          class="video-expand-btn"
+          aria-label="Expand Video Fullscreen"
+          onclick="const v=document.getElementById('echomateChatScenarioVideo'); if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();}else if(v.requestFullscreen){v.requestFullscreen();}"
+        >
+          ⛶ Fullscreen
+        </button>
+      </div>
+    </section>
+
     <!-- Core Pillars -->
     <section>
       <div class="section-title">
@@ -2679,7 +2703,7 @@
         const containerRect = navMenuContainer.getBoundingClientRect();
         const targetScrollLeft = navMenuContainer.scrollLeft
           + (linkRect.left - containerRect.left)
-          - (containerRect.width / 2)
+- (containerRect.width / 2)
           + (linkRect.width / 2);
 
         navMenuContainer.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
