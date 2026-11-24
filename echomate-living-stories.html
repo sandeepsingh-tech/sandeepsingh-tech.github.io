@@ -61,7 +61,7 @@
       --danger: #F87171;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -95,9 +95,9 @@
 
     .container {
       width: 100%;
-      max-width: 1060px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 0 16px;
+      padding: 0 18px;
     }
 
     /* Fixed Glass Header */
@@ -126,7 +126,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 12px 0;
-      gap: 16px;
+      gap: 14px;
       width: 100%;
     }
 
@@ -141,9 +141,9 @@
     }
 
     .brand-logo-wrap {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.14);
       display: flex;
@@ -169,7 +169,7 @@
 
     .brand-name {
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.12rem;
       font-family: 'Space Grotesk', sans-serif;
       letter-spacing: -0.02em;
       white-space: nowrap;
@@ -177,7 +177,7 @@
     }
 
     .brand-badge {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       background: rgba(232, 121, 249, 0.18);
       color: var(--neon-magenta);
       padding: 2px 7px;
@@ -187,33 +187,48 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
+    /* Prevent Desktop Nav Overlap */
     nav {
+      flex: 1 1 auto;
       min-width: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
     }
 
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       list-style: none;
       margin: 0;
-      padding: 0;
+      padding: 2px 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      max-width: 100%;
+    }
+
+    .nav-menu::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-item-link {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.84rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      padding: 7px 13px;
+      padding: 6px 11px;
       border-radius: 10px;
       transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-flex;
       align-items: center;
       gap: 5px;
       white-space: nowrap;
+      flex-shrink: 0;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.07);
     }
@@ -236,16 +251,16 @@
     }
 
     .nav-creator-btn {
-      color: var(--text);
+      color: #fff;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.84rem;
+      font-weight: 700;
+      font-size: 0.82rem;
       transition: all 0.25s ease;
       white-space: nowrap;
       padding: 8px 14px;
       border-radius: 11px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.16) 0%, rgba(232, 121, 249, 0.16) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.38);
       backdrop-filter: blur(8px);
       display: inline-flex;
       align-items: center;
@@ -253,16 +268,20 @@
     }
 
     .nav-creator-btn:hover {
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(56, 189, 248, 0.24);
       border-color: var(--neon-cyan);
-      color: var(--neon-cyan);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
       transform: translateY(-1px);
+    }
+
+    .btn-label-short {
+      display: none;
     }
 
     /* Article Hero Section */
     .hero {
-      padding: 48px 0 28px;
+      padding: 46px 0 28px;
       text-align: center;
     }
 
@@ -274,8 +293,9 @@
       border-radius: 999px;
       background: rgba(232, 121, 249, 0.12);
       border: 1px solid rgba(232, 121, 249, 0.35);
-      font-size: 0.84rem;
-      font-weight: 600;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
       color: var(--neon-magenta);
       margin-bottom: 20px;
       backdrop-filter: blur(10px);
@@ -302,29 +322,58 @@
     .subtitle {
       max-width: 740px;
       margin: 0 auto 24px;
-      font-size: 1.14rem;
+      font-size: 1.12rem;
       color: var(--text-muted);
       font-weight: 400;
-      padding: 0 8px;
+      padding: 0 6px;
     }
 
+    /* Clean Responsive Author Metadata Pill/Card */
     .article-meta-bar {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px 16px;
+      gap: 12px;
       font-size: 0.84rem;
       color: var(--text-dim);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 8px 18px;
+      background: rgba(22, 17, 43, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 9px 20px;
       border-radius: 999px;
       backdrop-filter: blur(12px);
+      max-width: 100%;
     }
 
-    .article-meta-bar strong {
+    .meta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .meta-author {
+      color: var(--text-muted);
+    }
+
+    .meta-author strong {
       color: #fff;
+      font-weight: 700;
+    }
+
+    .meta-dot {
+      color: rgba(255, 255, 255, 0.28);
+    }
+
+    .meta-topic {
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+
+    .meta-read {
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
     }
 
     /* Main Attraction Video Showcase */
@@ -352,12 +401,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 11px 18px;
-      background: rgba(12, 9, 26, 0.92);
+      padding: 12px 18px;
+      background: rgba(12, 9, 26, 0.95);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.82rem;
       color: var(--text-muted);
-      gap: 12px;
+      gap: 8px 14px;
+      flex-wrap: wrap;
     }
 
     .video-live-badge {
@@ -376,6 +426,7 @@
       background: var(--neon-magenta);
       box-shadow: 0 0 8px var(--neon-magenta);
       animation: pulseDot 1.8s infinite;
+      flex-shrink: 0;
     }
 
     @keyframes pulseDot {
@@ -441,7 +492,7 @@
 
     .article-block h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+      font-size: clamp(1.55rem, 3.6vw, 2.2rem);
       line-height: 1.24;
       color: #fff;
       margin-bottom: 18px;
@@ -647,7 +698,7 @@
     /* Applications Grid */
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 18px;
       margin-top: 22px;
     }
@@ -687,7 +738,7 @@
     .focus-list {
       list-style: none;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px;
       margin: 18px 0 22px;
     }
@@ -769,6 +820,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
@@ -801,13 +853,13 @@
     /* Floating Glass Back-to-Top Button */
     .back-to-top-btn {
       position: fixed;
-      bottom: 26px;
-      right: 24px;
+      bottom: 24px;
+      right: 20px;
       z-index: 999;
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(22, 17, 43, 0.78);
+      background: rgba(22, 17, 43, 0.82);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, 0.16);
@@ -861,48 +913,68 @@
       font-weight: 600;
     }
 
+    /* Medium Desktop / Tablet Nav Edge Fade when horizontally scrollable */
+    @media (max-width: 1080px) {
+      nav {
+        justify-content: flex-start;
+        mask-image: linear-gradient(to right, transparent, black 10px, black calc(100% - 10px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10px, black calc(100% - 10px), transparent);
+      }
+    }
+
+    /* Tablet & Mobile Header Layout */
     @media (max-width: 768px) {
       html {
-        scroll-padding-top: 52px;
+        scroll-padding-top: 54px;
+      }
+
+      .container {
+        padding: 0 14px;
       }
 
       .header-spacer {
-        height: 104px;
+        height: 100px;
       }
 
       .nav-wrap {
         flex-wrap: wrap;
-        gap: 8px 10px;
-        padding: 8px 0 9px;
+        gap: 8px;
+        padding: 9px 0;
       }
 
       .brand {
         order: 1;
-        max-width: calc(100% - 125px);
+        flex: 1 1 auto;
+        min-width: 0;
       }
 
       .brand-logo-wrap {
-        width: 32px;
-        height: 32px;
-        border-radius: 9px;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+      }
+
+      .brand-meta {
+        gap: 6px;
       }
 
       .brand-name {
-        font-size: 0.88rem;
+        font-size: 0.92rem;
       }
 
       .brand-badge {
-        font-size: 0.52rem;
-        padding: 1px 5px;
+        font-size: 0.54rem;
+        padding: 2px 6px;
       }
 
       .nav-links {
         order: 2;
+        flex-shrink: 0;
       }
 
       .nav-creator-btn {
-        font-size: 0.7rem;
-        padding: 6px 8px;
+        font-size: 0.74rem;
+        padding: 6px 10px;
         border-radius: 9px;
       }
 
@@ -910,21 +982,13 @@
         order: 3;
         flex: 0 0 100%;
         width: 100%;
-        overflow: hidden;
-        mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+        justify-content: flex-start;
+        mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
       }
 
       .nav-menu {
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding: 2px 14px;
-      }
-
-      .nav-menu::-webkit-scrollbar {
-        display: none;
+        padding: 2px 8px;
       }
 
       header.is-scrolled .brand,
@@ -942,16 +1006,82 @@
       }
     }
 
+    /* Compact Mobile Phones (e.g., 320px - 420px) */
+    @media (max-width: 420px) {
+      .brand-badge {
+        display: none;
+      }
+
+      .btn-label-full {
+        display: none;
+      }
+
+      .btn-label-short {
+        display: inline;
+      }
+
+      .brand-name {
+        font-size: 0.95rem;
+      }
+
+      .nav-creator-btn {
+        font-size: 0.75rem;
+        padding: 6px 11px;
+      }
+    }
+
     @media (max-width: 640px) {
       .hero {
-        padding: 28px 0 18px;
+        padding: 24px 0 18px;
+      }
+
+      .pill {
+        font-size: 0.76rem;
+        padding: 6px 14px;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+      /* Structured Mobile Author Metadata Card */
+      .article-meta-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        border-radius: 18px;
+        padding: 12px 16px;
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        background: rgba(22, 17, 43, 0.78);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+      }
+
+      .meta-primary {
+        gap: 8px;
+        font-size: 0.84rem;
+      }
+
+      .meta-topic-sep {
+        display: none;
+      }
+
+      .meta-topic {
+        font-size: 0.8rem;
+        padding-top: 4px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        width: 100%;
+        text-align: center;
       }
 
       .media-showcase-section {
         width: 100vw;
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
-        margin-bottom: 36px;
+        margin-bottom: 34px;
       }
 
       .media-frame {
@@ -965,12 +1095,12 @@
         align-items: center;
         gap: 5px;
         position: absolute;
-        bottom: 46px;
+        top: 10px;
         right: 10px;
         z-index: 5;
         padding: 5px 11px;
         border-radius: 999px;
-        background: rgba(10, 8, 22, 0.84);
+        background: rgba(10, 8, 22, 0.82);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         border: 1px solid rgba(56, 189, 248, 0.45);
@@ -981,13 +1111,35 @@
         cursor: pointer;
       }
 
+      .video-caption-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 14px;
+        font-size: 0.76rem;
+        gap: 4px;
+      }
+
       .article-block {
-        padding: 26px 18px;
+        padding: 24px 18px;
         border-radius: 20px;
+        margin-bottom: 26px;
       }
 
       .principle-card {
         padding: 20px 16px;
+      }
+
+      .callout-quote {
+        padding: 16px 18px;
+        font-size: 1.04rem;
+      }
+
+      .discussion-box {
+        padding: 22px 16px;
+      }
+
+      .cta-group .btn {
+        width: 100%;
       }
     }
   </style>
@@ -1008,7 +1160,7 @@
       </a>
 
       <!-- Smooth Anchor Navigation Links -->
-      <nav>
+      <nav aria-label="Section Navigation">
         <ul class="nav-menu">
           <li><a href="#the-problem" class="nav-item-link">The Illusion</a></li>
           <li><a href="#human-problem" class="nav-item-link">1. Confidence</a></li>
@@ -1021,7 +1173,8 @@
 
       <div class="nav-links">
         <a href="https://sandeepsingh-tech.github.io/echomate.html" class="nav-creator-btn">
-          Try Live Demo ↗
+          <span class="btn-label-full">Try Live Demo ↗</span>
+          <span class="btn-label-short">Live Demo ↗</span>
         </a>
       </div>
     </div>
@@ -1032,7 +1185,7 @@
 
     <!-- Article Hero Section -->
     <section class="hero">
-      <div class="pill">🎭 Project EchoMate Architecture &amp; Vision Essay</div>
+      <div class="pill">✨ Future Vision • Stateful Voice AI</div>
       <h1>
         AI Can Hold a Conversation. <br>
         <span class="gradient-text">But Can It Stay Inside a Story?</span>
@@ -1041,11 +1194,13 @@
         We have taught AI to talk like humans. Now, we're working on teaching it to remember, react, and behave like the characters it plays.
       </p>
       <div class="article-meta-bar">
-        <span>By <strong>Sandeep Singh</strong></span>
-        <span>•</span>
-        <span>Voice AI &amp; Stateful Storytelling</span>
-        <span>•</span>
-        <span>6 Min Read</span>
+        <div class="meta-primary">
+          <span class="meta-author">By <strong>Sandeep Singh</strong></span>
+          <span class="meta-dot">•</span>
+          <span class="meta-read">6 Min Read</span>
+        </div>
+        <span class="meta-dot meta-topic-sep">•</span>
+        <span class="meta-topic">Voice AI &amp; Stateful Storytelling</span>
       </div>
     </section>
 
