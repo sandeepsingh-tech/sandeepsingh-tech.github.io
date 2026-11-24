@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Can Hold a Conversation. But Can It Stay Inside a Story? — Project EchoMate</title>
+
+  <!-- Favicon / Tab Icon -->
+  <link rel="icon" type="image/png" href="https://sandeepsingh-tech.github.io/Echomate_Transparent_1024.png">
+
+  <!-- Primary Meta Tags for Google Search -->
+  <meta name="title" content="AI Can Hold a Conversation. But Can It Stay Inside a Story? — Project EchoMate">
+  <meta name="description" content="We have taught AI to talk like humans. Now, we're working on teaching it to remember, react, and behave like the characters it plays through a Low-Latency Stateful Progression Layer.">
+  <meta name="keywords" content="Project EchoMate, Voice AI, AI Storytelling, Interactive Fiction, Conversational AI, Stateful Progression Layer, Living Stories, Sandeep Singh">
+  <meta name="author" content="Sandeep Singh">
+  <link rel="canonical" href="https://sandeepsingh-tech.github.io/living-stories.html">
+
+  <!-- Schema.org tags (Crucial for WhatsApp on Android and iOS) -->
+  <meta itemprop="name" content="AI Can Hold a Conversation. But Can It Stay Inside a Story?">
+  <meta itemprop="description" content="From AI chatbots to living, stateful conversations: how Project EchoMate builds consistent characters, controlled knowledge, persistent memory, and real-world speaking confidence.">
+  <meta itemprop="image" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
+
+  <!-- Open Graph / Meta / WhatsApp / LinkedIn / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sandeepsingh-tech.github.io/living-stories.html">
+  <meta property="og:title" content="AI Can Hold a Conversation. But Can It Stay Inside a Story?">
+  <meta property="og:description" content="From AI chatbots to living, stateful conversations: how Project EchoMate builds consistent characters, controlled knowledge, persistent memory, and real-world speaking confidence.">
+  <meta property="og:image" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
+  <meta property="og:image:secure_url" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Project EchoMate">
+
+  <!-- Twitter / X Card Preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://sandeepsingh-tech.github.io/living-stories.html">
+  <meta name="twitter:title" content="AI Can Hold a Conversation. But Can It Stay Inside a Story?">
+  <meta name="twitter:description" content="We have taught AI to talk like humans. Now, we're working on teaching it to remember, react, and behave like the characters it plays.">
+  <meta name="twitter:image" content="https://sandeepsingh-tech.github.io/whatsapp-preview.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #06050C;
+      --card-bg: rgba(22, 17, 43, 0.65);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-hover-border: rgba(56, 189, 248, 0.45);
+      --header-bg: rgba(14, 10, 28, 0.92);
+      --neon-cyan: #38BDF8;
+      --neon-magenta: #E879F9;
+      --peach-accent: #FB923C;
+      --text: #F8FAFC;
+      --text-muted: #CBD5E1;
+      --text-dim: #94A3B8;
+      --success: #34D399;
+      --danger: #F87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 76px;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      background-image: 
+        linear-gradient(to bottom, rgba(6, 5, 12, 0.62) 0%, rgba(6, 5, 12, 0.92) 45%, var(--bg-deep) 100%),
+        url('Echomate_backgorund.png');
+      background-size: cover;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.65;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Fixed Glass Header */
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--header-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(232, 121, 249, 0.18);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .header-spacer {
+      display: block;
+      width: 100%;
+      height: 66px;
+    }
+
+    .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      min-width: 0;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 1.2rem;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      color: #fff;
+    }
+
+    .brand-badge {
+      font-size: 0.65rem;
+      background: rgba(232, 121, 249, 0.18);
+      color: var(--neon-magenta);
+      padding: 2px 7px;
+      border-radius: 99px;
+      border: 1px solid rgba(232, 121, 249, 0.4);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    nav {
+      min-width: 0;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-item-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 7px 13px;
+      border-radius: 10px;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-item-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .nav-item-link.active {
+      color: #fff;
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+    }
+
+    .nav-links {
+      flex-shrink: 0;
+    }
+
+    .nav-creator-btn {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.84rem;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      padding: 8px 14px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-creator-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* Article Hero Section */
+    .hero {
+      padding: 48px 0 28px;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(232, 121, 249, 0.12);
+      border: 1px solid rgba(232, 121, 249, 0.35);
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--neon-magenta);
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5.2vw, 3.65rem);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 10%, #38BDF8 55%, #E879F9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      max-width: 740px;
+      margin: 0 auto 24px;
+      font-size: 1.14rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      padding: 0 8px;
+    }
+
+    .article-meta-bar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      font-size: 0.84rem;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 18px;
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+    }
+
+    .article-meta-bar strong {
+      color: #fff;
+    }
+
+    /* Main Attraction Video Showcase */
+    .media-showcase-section {
+      max-width: 980px;
+      margin: 18px auto 52px;
+    }
+
+    .media-frame {
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.42);
+      background: rgba(14, 11, 28, 0.92);
+      box-shadow: 0 26px 64px rgba(0, 0, 0, 0.7), 0 0 44px rgba(232, 121, 249, 0.2), 0 0 24px rgba(56, 189, 248, 0.2);
+      position: relative;
+    }
+
+    .media-frame video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .video-caption-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 18px;
+      background: rgba(12, 9, 26, 0.92);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      gap: 12px;
+    }
+
+    .video-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: var(--neon-cyan);
+    }
+
+    .video-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--neon-magenta);
+      box-shadow: 0 0 8px var(--neon-magenta);
+      animation: pulseDot 1.8s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.8); }
+    }
+
+    .video-expand-btn {
+      display: none;
+    }
+
+    /* Essay & Narrative Sections */
+    .article-block {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      padding: 40px 34px;
+      margin-bottom: 36px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.42);
+      position: relative;
+    }
+
+    .article-block.highlight-border {
+      border-color: rgba(56, 189, 248, 0.35);
+      background: linear-gradient(145deg, rgba(24, 19, 48, 0.78) 0%, rgba(12, 10, 26, 0.88) 100%);
+    }
+
+    .article-block.magenta-border {
+      border-color: rgba(232, 121, 249, 0.35);
+      background: linear-gradient(145deg, rgba(30, 18, 52, 0.78) 0%, rgba(12, 9, 26, 0.9) 100%);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--neon-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      margin-bottom: 14px;
+    }
+
+    .section-tag.magenta {
+      background: rgba(232, 121, 249, 0.14);
+      color: var(--neon-magenta);
+      border-color: rgba(232, 121, 249, 0.38);
+    }
+
+    .section-tag.green {
+      background: rgba(52, 211, 153, 0.14);
+      color: var(--success);
+      border-color: rgba(52, 211, 153, 0.38);
+    }
+
+    .article-block h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+      line-height: 1.24;
+      color: #fff;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .prose p {
+      font-size: 1.03rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.72;
+    }
+
+    .prose p:last-child {
+      margin-bottom: 0;
+    }
+
+    .prose strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Callout Quote Box */
+    .callout-quote {
+      margin: 24px 0;
+      padding: 20px 24px;
+      border-left: 4px solid var(--neon-cyan);
+      background: rgba(56, 189, 248, 0.07);
+      border-radius: 0 16px 16px 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .callout-quote.magenta {
+      border-left-color: var(--neon-magenta);
+      background: rgba(232, 121, 249, 0.08);
+    }
+
+    /* Illusion Breakers Grid */
+    .breakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .breaker-card {
+      background: rgba(248, 113, 113, 0.07);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .breaker-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.98rem;
+      color: #FECACA;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breaker-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Everyday Scenarios Pills Grid */
+    .scenario-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .scenario-pill-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .scenario-emoji {
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: rgba(56, 189, 248, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .scenario-pill-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.96rem;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .scenario-pill-card p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Architecture Principles Sub-Cards */
+    .principle-card {
+      background: rgba(14, 11, 28, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 26px 24px;
+      margin-top: 22px;
+    }
+
+    .principle-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.32rem;
+      color: #fff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .spec-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    .spec-item strong {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--neon-cyan);
+      font-size: 0.94rem;
+      margin-bottom: 4px;
+    }
+
+    .spec-item span {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      display: block;
+    }
+
+    /* Dual Loop Split Boxes */
+    .dual-loop-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .loop-box {
+      border-radius: 16px;
+      padding: 18px 20px;
+    }
+
+    .loop-box.fast {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.32);
+    }
+
+    .loop-box.async {
+      background: rgba(232, 121, 249, 0.08);
+      border: 1px solid rgba(232, 121, 249, 0.32);
+    }
+
+    .loop-box h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.04rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .loop-box p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Applications Grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .app-card {
+      background: rgba(16, 12, 34, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 22px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--neon-cyan);
+    }
+
+    .app-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .app-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .app-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Checklist Pills */
+    .focus-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+
+    .focus-list li {
+      background: rgba(52, 211, 153, 0.06);
+      border: 1px solid rgba(52, 211, 153, 0.24);
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 0.92rem;
+      color: #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .focus-list li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* Discussion & Hashtags Footer Card */
+    .discussion-box {
+      margin-top: 26px;
+      padding: 26px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(232, 121, 249, 0.12) 100%);
+      border: 1px solid rgba(232, 121, 249, 0.35);
+      text-align: center;
+    }
+
+    .discussion-box h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .discussion-box p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 720px;
+      margin: 0 auto 18px;
+    }
+
+    .hashtag-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .hashtag-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--neon-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 4px 11px;
+      border-radius: 99px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 26px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284C7 0%, #6366F1 50%, #A855F7 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(168, 85, 247, 0.5), 0 0 20px rgba(56, 189, 248, 0.5);
+    }
+
+    .btn-showcase {
+      background: linear-gradient(135deg, rgba(30, 24, 56, 0.85) 0%, rgba(18, 14, 36, 0.95) 100%);
+      color: var(--text);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .btn-showcase:hover {
+      border-color: var(--neon-cyan);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Floating Glass Back-to-Top Button */
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 26px;
+      right: 24px;
+      z-index: 999;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(22, 17, 43, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px) scale(0.9);
+    }
+
+    .back-to-top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .back-to-top-btn:hover {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 32px 16px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      background: rgba(14, 10, 28, 0.85);
+      backdrop-filter: blur(14px);
+      margin-top: 56px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    footer a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      html {
+        scroll-padding-top: 52px;
+      }
+
+      .header-spacer {
+        height: 104px;
+      }
+
+      .nav-wrap {
+        flex-wrap: wrap;
+        gap: 8px 10px;
+        padding: 8px 0 9px;
+      }
+
+      .brand {
+        order: 1;
+        max-width: calc(100% - 125px);
+      }
+
+      .brand-logo-wrap {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+      }
+
+      .brand-name {
+        font-size: 0.88rem;
+      }
+
+      .brand-badge {
+        font-size: 0.52rem;
+        padding: 1px 5px;
+      }
+
+      .nav-links {
+        order: 2;
+      }
+
+      .nav-creator-btn {
+        font-size: 0.7rem;
+        padding: 6px 8px;
+        border-radius: 9px;
+      }
+
+      nav {
+        order: 3;
+        flex: 0 0 100%;
+        width: 100%;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+      }
+
+      .nav-menu {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 2px 14px;
+      }
+
+      .nav-menu::-webkit-scrollbar {
+        display: none;
+      }
+
+      header.is-scrolled .brand,
+      header.is-scrolled .nav-links {
+        display: none !important;
+      }
+
+      header.is-scrolled .nav-wrap {
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+
+      .dual-loop-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 28px 0 18px;
+      }
+
+      .media-showcase-section {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        margin-bottom: 36px;
+      }
+
+      .media-frame {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+
+      .video-expand-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        position: absolute;
+        bottom: 46px;
+        right: 10px;
+        z-index: 5;
+        padding: 5px 11px;
+        border-radius: 999px;
+        background: rgba(10, 8, 22, 0.84);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(56, 189, 248, 0.45);
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        font-family: 'Space Grotesk', sans-serif;
+        cursor: pointer;
+      }
+
+      .article-block {
+        padding: 26px 18px;
+        border-radius: 20px;
+      }
+
+      .principle-card {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="https://sandeepsingh-tech.github.io/echomate.html" class="brand">
+        <div class="brand-logo-wrap">
+          <img src="Echomate_Transparent_1024.png" alt="Project EchoMate Logo" class="brand-logo">
+        </div>
+        <div class="brand-meta">
+          <span class="brand-name">Project EchoMate</span>
+          <span class="brand-badge">Deep Dive</span>
+        </div>
+      </a>
+
+      <!-- Smooth Anchor Navigation Links -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#the-problem" class="nav-item-link">The Illusion</a></li>
+          <li><a href="#human-problem" class="nav-item-link">1. Confidence</a></li>
+          <li><a href="#living-stories" class="nav-item-link">2. Living Stories</a></li>
+          <li><a href="#stateful-layer" class="nav-item-link">3. Stateful Layer</a></li>
+          <li><a href="#beyond-entertainment" class="nav-item-link">4. Impact</a></li>
+          <li><a href="#foundation" class="nav-item-link">5. Roadmap</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-links">
+        <a href="https://sandeepsingh-tech.github.io/echomate.html" class="nav-creator-btn">
+          Try Live Demo ↗
+        </a>
+      </div>
+    </div>
+  </header>
+  <div class="header-spacer" aria-hidden="true"></div>
+
+  <main class="container">
+
+    <!-- Article Hero Section -->
+    <section class="hero">
+      <div class="pill">🎭 Project EchoMate Architecture &amp; Vision Essay</div>
+      <h1>
+        AI Can Hold a Conversation. <br>
+        <span class="gradient-text">But Can It Stay Inside a Story?</span>
+      </h1>
+      <p class="subtitle">
+        We have taught AI to talk like humans. Now, we're working on teaching it to remember, react, and behave like the characters it plays.
+      </p>
+      <div class="article-meta-bar">
+        <span>By <strong>Sandeep Singh</strong></span>
+        <span>•</span>
+        <span>Voice AI &amp; Stateful Storytelling</span>
+        <span>•</span>
+        <span>6 Min Read</span>
+      </div>
+    </section>
+
+    <!-- Main Attraction Looping Video Showcase -->
+    <section class="media-showcase-section" aria-label="Living Stories and Real-World Scenarios Showcase">
+      <div class="media-frame">
+        <video
+          id="chatScenarioHeroVideo"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+        >
+          <source src="https://sandeepsingh-tech.github.io/Chatsenario.mp4" type="video/mp4">
+        </video>
+        <button
+          type="button"
+          class="video-expand-btn"
+          aria-label="Expand Video Fullscreen"
+          onclick="const v=document.getElementById('chatScenarioHeroVideo'); if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();}else if(v.requestFullscreen){v.requestFullscreen();}"
+        >
+          ⛶ Fullscreen
+        </button>
+        <div class="video-caption-bar">
+          <span class="video-live-badge">
+            <span class="video-live-dot"></span>
+            <span>FROM AI CHATBOTS TO LIVING, STATEFUL CONVERSATIONS</span>
+          </span>
+          <span>Characters that Remember • Stories that Evolve • Real-World Speaking Practice</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction: The Illusion Breaker -->
+    <article id="the-problem" class="article-block highlight-border">
+      <span class="section-tag magenta">The Core Challenge</span>
+      <h2>When the Illusion Breaks Inside an AI Story</h2>
+      <div class="prose">
+        <p>Imagine talking to an AI character inside a mystery story.</p>
+        <p>At first, everything feels incredible. The character responds naturally, remembers your name, follows the conversation, and makes you feel like you're actually part of its world.</p>
+        <p><strong>But then something breaks.</strong></p>
+
+        <div class="breakers-grid">
+          <div class="breaker-card">
+            <h4>⏳ Future Spoilers</h4>
+            <p>You ask a question about an event that hasn't happened yet, and the character casually reveals the future.</p>
+          </div>
+          <div class="breaker-card">
+            <h4>🧠 Amnesia on Promises</h4>
+            <p>You remind it of a promise you made earlier, but it has completely forgotten.</p>
+          </div>
+          <div class="breaker-card">
+            <h4>🤝 Instant Capitulation</h4>
+            <p>You challenge its decision, and instead of defending its position, it agrees with you just to keep the conversation friendly.</p>
+          </div>
+          <div class="breaker-card">
+            <h4>🤖 Assistant Reset</h4>
+            <p>You say something slightly unexpected, and the character suddenly stops behaving like a character—turning into a polite AI assistant.</p>
+          </div>
+        </div>
+
+        <div class="callout-quote">
+          "The problem isn't that AI cannot talk. The problem is that it doesn't always know when, where, or why it should say something."
+        </div>
+
+        <p>Most AI chatbots are designed to be helpful conversational partners. They generate responses based on prompts and available context. But believable storytelling requires something more: <strong>consistent personalities, controlled knowledge, persistent memory, and consequences that carry forward.</strong></p>
+        <p>That is the problem we started exploring with <strong>Project EchoMate</strong>. And our approach isn't to build another chatbot with a fictional personality pasted on top—we want to rethink how people interact with AI-powered experiences.</p>
+      </div>
+    </article>
+
+    <!-- Section 1: Speaking With Confidence -->
+    <article id="human-problem" class="article-block">
+      <span class="section-tag">Section 01 • The Foundation</span>
+      <h2>🗣️ 1. We Started With a Human Problem: Speaking With Confidence</h2>
+      <div class="prose">
+        <p>Before thinking about interactive story worlds, we started with something much more practical: <strong>helping people develop real-world spoken English fluency and confidence.</strong></p>
+        <p>Millions of people can understand English reasonably well. They can read articles, write messages, and follow conversations. But when it's their turn to speak, they hesitate. They know what they want to say, but struggle to find the words quickly—worrying about making mistakes, being judged, or sounding unnatural.</p>
+        <p>Practicing with another person can feel intimidating, while traditional learning apps often rely on repetitive exercises, fixed sentences, and predictable responses. We wanted to create something different.</p>
+        <p><strong>EchoMate</strong> is being developed as a voice-first AI companion where users can practice speaking through everyday situations:</p>
+
+        <div class="scenario-strip">
+          <div class="scenario-pill-card">
+            <div class="scenario-emoji">☕</div>
+            <div>
+              <h4>Ordering Coffee</h4>
+              <p>Natural, everyday casual interactions without textbook stiffness.</p>
+            </div>
+          </div>
+          <div class="scenario-pill-card">
+            <div class="scenario-emoji">💼</div>
+            <div>
+              <h4>Workplace Conversations</h4>
+              <p>Handling difficult team discussions, standups, and manager updates.</p>
+            </div>
+          </div>
+          <div class="scenario-pill-card">
+            <div class="scenario-emoji">✈️</div>
+            <div>
+              <h4>Travel Situations</h4>
+              <p>Navigating airports, hotels, and unfamiliar real-world environments.</p>
+            </div>
+          </div>
+          <div class="scenario-pill-card">
+            <div class="scenario-emoji">🤝</div>
+            <div>
+              <h4>Active Negotiation</h4>
+              <p>Persuading someone who doesn't immediately agree with you.</p>
+            </div>
+          </div>
+        </div>
+
+        <p>Instead of simply memorizing sentences, users speak naturally, listen to the response, think, and continue the conversation. The goal is not just to teach someone <em>what</em> to say—it is to help them become more comfortable deciding <em>how</em> to say it in real situations.</p>
+        <p>While building these practice experiences, we noticed something interesting: <strong>a real-life scenario is essentially a small story with a goal, a challenge, and an outcome.</strong> A customer doesn't always agree with you. A colleague may misunderstand your point. A stranger may not immediately trust you. The conversation has direction, and your decisions influence what happens next.</p>
+
+        <div class="callout-quote magenta">
+          "What if an AI could participate in a story without constantly changing the rules of that story?"
+        </div>
+      </div>
+    </article>
+
+    <!-- Section 2: From Chatbots to Living Stories -->
+    <article id="living-stories" class="article-block highlight-border">
+      <span class="section-tag magenta">Section 02 • The Next Evolution</span>
+      <h2>🚀 2. The Next Evolution: From Chatbots to Living Stories</h2>
+      <div class="prose">
+        <p>We are now exploring how EchoMate can evolve beyond individual practice scenarios into <strong>interactive, voice-driven story worlds</strong>.</p>
+        <p>Think about experiencing a book where you don't just listen to the characters or read their dialogue—<strong>you can actually talk to them.</strong></p>
+        <p>Imagine entering a detective story. You meet a witness who is hiding something. You ask questions, challenge their statements, and try to earn their trust. The witness remembers your previous conversations. They have their own motives. They might refuse to answer, or even become suspicious if you ask the wrong questions. Your choices influence how the story develops.</p>
+        <p>And here's the interesting part: <strong>you don't need a controller, a gaming PC, or a traditional video game interface. You simply speak.</strong></p>
+        <p>The experience is closer to having a phone conversation with someone who exists inside a carefully designed fictional world. But making this feel believable requires more than connecting a voice interface to an LLM—it requires a system that manages the world behind the conversation.</p>
+      </div>
+    </article>
+
+    <!-- Section 3: The Missing Layer -->
+    <article id="stateful-layer" class="article-block">
+      <span class="section-tag green">Section 03 • System Architecture</span>
+      <h2>🧠 3. The Missing Layer: Making AI Respect Character, Time, and Consequences</h2>
+      <div class="prose">
+        <p>To move toward this experience, we are building around what we call a <strong>Low-Latency Stateful Progression Layer</strong>.</p>
+        <p>The technical name sounds complicated, but the idea is straightforward: <strong>the AI should be free to make conversations feel natural, while the underlying system ensures that the story remains consistent.</strong> We are focusing on three fundamental principles:</p>
+
+        <!-- Principle A -->
+        <div class="principle-card">
+          <h3>🔒 A. Characters Need Boundaries, Personalities, and Memory</h3>
+          <p>In ordinary chatbot conversations, an AI can often be pushed into changing its position simply because the user insists. Believable characters shouldn't work that way: a suspicious detective shouldn't suddenly trust you because you asked nicely, a rival shouldn't forget an argument you had five minutes ago, and a character with a personal secret shouldn't reveal it before the story gives them a reason to do so.</p>
+          <p>Every character needs more than a name and a personality description—they need a defined identity, motivations, knowledge boundaries, relationships, and a history of interactions:</p>
+
+          <div class="spec-grid">
+            <div class="spec-item">
+              <strong>Personality</strong>
+              <span>Is the character friendly, defensive, suspicious, or manipulative?</span>
+            </div>
+            <div class="spec-item">
+              <strong>Motivation</strong>
+              <span>What do they actually want out of the situation?</span>
+            </div>
+            <div class="spec-item">
+              <strong>Trust Level</strong>
+              <span>How much do they trust the player, and what actions shift that trust?</span>
+            </div>
+            <div class="spec-item">
+              <strong>Persistent Memory</strong>
+              <span>What important things have happened between them so far?</span>
+            </div>
+            <div class="spec-item">
+              <strong>Strict Boundaries</strong>
+              <span>What information will they refuse to reveal, and under what circumstances?</span>
+            </div>
+          </div>
+
+          <p><strong>A character shouldn't simply remember what you said. They should behave differently because of what you said.</strong></p>
+        </div>
+
+        <!-- Principle B -->
+        <div class="principle-card">
+          <h3>⏳ B. Time Must Move Forward — And Knowledge Must Have Limits</h3>
+          <p>One of the biggest problems with AI-driven storytelling is uncontrolled knowledge. An AI model may have information about the entire story available in its context, but that doesn't mean every character should know everything. A witness in Chapter 1 cannot know who the murderer is if that information hasn't been revealed to them, and a character shouldn't casually discuss events from three chapters later.</p>
+          <p>To enforce narrative integrity, the system separates four distinct layers of state:</p>
+
+          <div class="spec-grid">
+            <div class="spec-item">
+              <strong>1. World Knowledge</strong>
+              <span>What has actually happened across the complete story universe.</span>
+            </div>
+            <div class="spec-item">
+              <strong>2. Character Knowledge</strong>
+              <span>What a particular character is permitted to know at this exact moment.</span>
+            </div>
+            <div class="spec-item">
+              <strong>3. Story Progression</strong>
+              <span>Which events, clues, and narrative milestones have been unlocked.</span>
+            </div>
+            <div class="spec-item">
+              <strong>4. Interaction History</strong>
+              <span>What the character and player have directly experienced together.</span>
+            </div>
+          </div>
+
+          <p>The system must understand the difference between <em>something being true in the story</em> and <em>a character being allowed to know that truth</em>—revealing information only when the character has a valid reason to know it.</p>
+        </div>
+
+        <!-- Principle C -->
+        <div class="principle-card">
+          <h3>⚡ C. Natural Conversation Without Making the Story Engine Feel Slow</h3>
+          <p>When you speak to someone in real life, you don't expect them to pause for several seconds while an invisible system calculates the consequences of your previous sentence. Voice experiences need to feel fluid, yet storytelling systems must evaluate what happened, update the world state, track decisions, and unlock milestones.</p>
+          <p>Trying to do everything synchronously in one response creates unnatural delays. Our approach separates two responsibilities:</p>
+
+          <div class="dual-loop-grid">
+            <div class="loop-box fast">
+              <h4>1. Conversation Experience (Real-Time)</h4>
+              <p>The AI focuses exclusively on understanding the user's speech and producing a natural, immediate, context-aware character response.</p>
+            </div>
+            <div class="loop-box async">
+              <h4>2. Story Progression (Background State)</h4>
+              <p>The underlying engine tracks key events, evaluates outcomes, updates memory and relationship states, and prepares the next narrative stage.</p>
+            </div>
+          </div>
+
+          <p>While avoiding unnecessary waits on background progression tasks, the system still guards critical story dependencies carefully—ensuring major narrative decisions are never ignored or applied out of order. <strong>We want conversations to feel spontaneous, while the story remains controlled.</strong></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Section 4: Beyond Entertainment -->
+    <article id="beyond-entertainment" class="article-block highlight-border">
+      <span class="section-tag">Section 04 • Real-World Applications</span>
+      <h2>🌍 4. Why This Could Change More Than Entertainment</h2>
+      <div class="prose">
+        <p>Once AI can maintain character consistency, respect knowledge boundaries, remember meaningful interactions, and track progression, the possibilities extend far beyond fictional storytelling.</p>
+
+        <div class="apps-grid">
+          <div class="app-card">
+            <h3>🎓 Immersive Language &amp; Cultural Learning</h3>
+            <p>Learn English through a multi-chapter story instead of memorizing disconnected sentences. Enter a workplace simulation where your manager assigns a task, a colleague disagrees with your approach, and you later explain a decision to a client.</p>
+            <p>The characters don't simply agree with everything you say—turning vocabulary drills into practice in real communication.</p>
+          </div>
+
+          <div class="app-card">
+            <h3>📚 Living Books &amp; Creator Worlds</h3>
+            <p>Authors can allow readers to step inside their fictional universe—speaking with characters and exploring conversations never written in the original book.</p>
+            <p>Because characters remain faithful to established personalities, universe rules, and plot timelines, this creates a new interactive layer around books, podcasts, and creator worlds.</p>
+          </div>
+
+          <div class="app-card">
+            <h3>💼 Real-World Confidence &amp; Communication Training</h3>
+            <p>Simulate high-stakes professional conversations: a skeptical client challenging your proposal, a job interviewer asking tough follow-up questions, an unhappy customer, or a business negotiation where trust must be earned.</p>
+            <p>The objective isn't to make the AI agree with you—it's to help you master situations where agreement isn't guaranteed.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Section 5 & 6: Building Step by Step & The Bigger Idea -->
+    <article id="foundation" class="article-block magenta-border">
+      <span class="section-tag magenta">Sections 05 &amp; 06 • Discipline &amp; Vision</span>
+      <h2>🛠️ 5. Building Step by Step: Why We Aren't Trying to Build Everything at Once</h2>
+      <div class="prose">
+        <p>There is always a temptation when working with AI to jump directly into the biggest possible vision. But we believe the foundation matters more than the number of features. Right now, our focus remains disciplined:</p>
+
+        <ul class="focus-list">
+          <li>Perfecting the core voice interaction experience</li>
+          <li>Making everyday speaking scenarios feel natural and useful</li>
+          <li>Improving how meaningful conversational context is retained</li>
+          <li>Testing how characters respond when users behave unexpectedly</li>
+          <li>Exploring how story progression happens without interrupting conversation</li>
+        </ul>
+
+        <p>We are not trying to turn EchoMate into a traditional video game with complex graphics, huge maps, and expensive production pipelines. We are exploring a different interaction model: <strong>one where voice is the controller, conversation is the gameplay, and the story engine provides the rules of the world.</strong></p>
+        <p>Great storytelling has never depended entirely on flashy graphics—it depends on believable characters, meaningful tension, consistent worlds, and consequences that make people care about what happens next.</p>
+
+        <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 32px 0;">
+
+        <h2>🎯 6. The Bigger Idea: AI Shouldn't Just Generate Dialogue. It Should Respect the World Behind It.</h2>
+        <p>We have become very good at making AI talk. But believable interaction requires more than fluent sentences—<strong>it requires continuity.</strong></p>
+        <p>A character needs to remember what happened. The world needs to know what has changed. Time needs to move forward. Decisions need to carry consequences. And none of that should come at the cost of a natural conversation.</p>
+        <p>That's the direction we're exploring with <strong>Project EchoMate</strong>: moving from AI that simply responds to AI experiences that remember, react, and evolve.</p>
+
+        <div class="discussion-box">
+          <h3>Let's Discuss 👇</h3>
+          <p>
+            If you're working in Voice AI, conversational systems, game development, or interactive storytelling, I'd genuinely love to hear your perspective: <strong>What do you think is the biggest missing piece in today's AI experiences—reliable memory, character consistency, or meaningful progression?</strong>
+          </p>
+          <div class="hashtag-row">
+            <span class="hashtag-pill">#ProjectEchoMate</span>
+            <span class="hashtag-pill">#VoiceAI</span>
+            <span class="hashtag-pill">#AIStorytelling</span>
+            <span class="hashtag-pill">#InteractiveFiction</span>
+            <span class="hashtag-pill">#ConversationalAI</span>
+            <span class="hashtag-pill">#LanguageLearning</span>
+            <span class="hashtag-pill">#BuildInPublic</span>
+            <span class="hashtag-pill">#ProductDevelopment</span>
+          </div>
+          <div class="cta-group">
+            <a href="https://sandeepsingh-tech.github.io/echomate.html" class="btn btn-primary">🎙️ Experience EchoMate Live</a>
+            <a href="https://sandeepsingh-tech.github.io/" class="btn btn-showcase">Connect with Sandeep Singh ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Floating Glass Back-to-Top Button -->
+  <button id="backToTop" class="back-to-top-btn" aria-label="Scroll Back to Top" title="Back to Top">
+    <span style="font-size: 0.95rem; line-height: 1;">▲</span>
+  </button>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>Project EchoMate • Written &amp; Architected by <a href="https://sandeepsingh-tech.github.io/" target="_blank">Sandeep Singh</a></p>
+      <p style="font-size: 0.8rem; color: #64748B;">Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+  <!-- Controller Script: Fixed Header, Scroll Spy & Back-to-Top -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.querySelector('header');
+      const headerSpacer = document.querySelector('.header-spacer');
+      const backToTopBtn = document.getElementById('backToTop');
+      const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item-link'));
+      const navMenuContainer = document.querySelector('.nav-menu');
+      const navTargets = navLinks
+        .map((link) => ({ link, section: document.querySelector(link.getAttribute('href')) }))
+        .filter((item) => item.section);
+
+      let lastActiveId = null;
+
+      function syncHeaderSpacer() {
+        const shouldBeCollapsed = window.scrollY > 35;
+        header.classList.remove('is-scrolled');
+        const initialHeight = header.offsetHeight;
+        headerSpacer.style.height = `${initialHeight}px`;
+        if (shouldBeCollapsed) header.classList.add('is-scrolled');
+      }
+
+      function centerActiveMobileLink(link) {
+        if (!navMenuContainer || window.innerWidth > 768) return;
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = navMenuContainer.getBoundingClientRect();
+        const targetScrollLeft = navMenuContainer.scrollLeft
+          + (linkRect.left - containerRect.left)
+          - (containerRect.width / 2)
+          + (linkRect.width / 2);
+
+        navMenuContainer.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+      }
+
+      function updateActiveSection() {
+        const activationLine = window.scrollY + header.offsetHeight + 28;
+        let activeItem = null;
+
+        for (const item of navTargets) {
+          const sectionTop = item.section.getBoundingClientRect().top + window.scrollY;
+          if (sectionTop <= activationLine) activeItem = item;
+        }
+
+        navLinks.forEach((link) => link.classList.remove('active'));
+        if (activeItem) {
+          activeItem.link.classList.add('active');
+          const activeId = activeItem.section.id;
+          if (activeId !== lastActiveId) {
+            centerActiveMobileLink(activeItem.link);
+            lastActiveId = activeId;
+          }
+        } else {
+          lastActiveId = null;
+        }
+      }
+
+      function handleScroll() {
+        const shouldCollapse = window.innerWidth <= 768 && window.scrollY > 35;
+        header.classList.toggle('is-scrolled', shouldCollapse);
+
+        if (window.scrollY > 350) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+
+        updateActiveSection();
+      }
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      syncHeaderSpacer();
+      handleScroll();
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('resize', () => {
+        syncHeaderSpacer();
+        handleScroll();
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          window.setTimeout(updateActiveSection, 250);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
