@@ -850,3 +850,175 @@
           </div>
           <div class="pt-3 border-t border-[#e8e2d2] flex items-center justify-between">
             <span class="text-[11px] text-stone-400 font-medium">PostgreSQL RLS & RPC</span>
+            <span class="text-xs font-semibold text-stone-400">Release Pending</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-6 border-t border-[#ded8c9] flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-3">
+      <div>© 2026 Sandeep Singh • Surat, India</div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-stone-800 transition">Profile Home</a>
+        <span>•</span>
+        <a href="https://github.com/sandeepsingh-tech" target="_blank" class="hover:text-stone-800 flex items-center gap-1.5 transition">
+          <i data-lucide="github" class="w-4 h-4"></i> github.com/sandeepsingh-tech
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Safely initialize Lucide icons without blocking interactive scripts
+    try {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    } catch (err) {
+      console.warn('Lucide icons failed to load:', err);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('repo-search');
+      const clearSearchBtn = document.getElementById('clear-search');
+      const filterPillsContainer = document.getElementById('filter-pills');
+      const filterPills = document.querySelectorAll('.filter-pill');
+      const sections = document.querySelectorAll('.repo-section');
+      const visibleCountEl = document.getElementById('visible-count');
+      const emptyStateEl = document.getElementById('empty-state');
+      const resetFiltersBtn = document.getElementById('reset-filters');
+
+      let activeCategory = 'all';
+      let searchQuery = '';
+
+      // Populate initial category counts on filter pills
+      function updatePillCounts() {
+        const totalCards = document.querySelectorAll('.repo-card').length;
+        filterPills.forEach(pill => {
+          const filter = pill.dataset.filter;
+          const countSpan = pill.querySelector('.pill-count');
+          if (!countSpan) return;
+
+          if (filter === 'all') {
+            countSpan.textContent = `(${totalCards})`;
+          } else {
+            const sec = document.querySelector(`.repo-section[data-category="${filter}"]`);
+            const count = sec ? sec.querySelectorAll('.repo-card').length : 0;
+            countSpan.textContent = `(${count})`;
+          }
+        });
+      }
+
+      function applyFilters() {
+        let totalVisible = 0;
+        const query = searchQuery.trim().toLowerCase();
+
+        sections.forEach(section => {
+          const category = section.dataset.category;
+          const categoryMatches = activeCategory === 'all' || activeCategory === category;
+          const cards = section.querySelectorAll('.repo-card');
+          let sectionVisibleCards = 0;
+
+          cards.forEach(card => {
+            const textContent = card.textContent.toLowerCase();
+            const textMatches = !query || textContent.includes(query);
+
+            if (categoryMatches && textMatches) {
+              card.classList.remove('hidden');
+              card.style.display = '';
+              sectionVisibleCards++;
+              totalVisible++;
+            } else {
+              card.classList.add('hidden');
+              card.style.display = 'none';
+            }
+          });
+
+          if (sectionVisibleCards > 0) {
+            section.classList.remove('hidden');
+            section.style.display = '';
+          } else {
+            section.classList.add('hidden');
+            section.style.display = 'none';
+          }
+        });
+
+        if (visibleCountEl) visibleCountEl.textContent = totalVisible;
+
+        if (emptyStateEl) {
+          emptyStateEl.classList.toggle('hidden', totalVisible > 0);
+          emptyStateEl.style.display = totalVisible > 0 ? 'none' : 'block';
+        }
+
+        if (clearSearchBtn) {
+          const hasText = searchQuery.length > 0;
+          clearSearchBtn.classList.toggle('hidden', !hasText);
+          clearSearchBtn.style.display = hasText ? 'block' : 'none';
+        }
+      }
+
+      function setActivePill(selectedPill) {
+        activeCategory = selectedPill.dataset.filter;
+
+        filterPills.forEach(btn => {
+          const isSelected = btn === selectedPill;
+          btn.classList.toggle('bg-stone-900', isSelected);
+          btn.classList.toggle('text-[#fcfbf7]', isSelected);
+          btn.classList.toggle('border-stone-900', isSelected);
+
+          btn.classList.toggle('bg-white', !isSelected);
+          btn.classList.toggle('hover:bg-stone-50', !isSelected);
+          btn.classList.toggle('text-stone-700', !isSelected);
+          btn.classList.toggle('border-[#ded8c9]', !isSelected);
+
+          const countSpan = btn.querySelector('.pill-count');
+          if (countSpan) {
+            countSpan.classList.toggle('opacity-75', isSelected);
+            countSpan.classList.toggle('text-stone-400', !isSelected);
+          }
+        });
+
+        applyFilters();
+      }
+
+      if (filterPillsContainer) {
+        filterPillsContainer.addEventListener('click', (e) => {
+          const pill = e.target.closest('.filter-pill');
+          if (pill) {
+            setActivePill(pill);
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value;
+          applyFilters();
+        });
+      }
+
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          searchQuery = '';
+          searchInput.focus();
+          applyFilters();
+        });
+      }
+
+      if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          searchQuery = '';
+          if (filterPills[0]) setActivePill(filterPills[0]);
+        });
+      }
+
+      updatePillCounts();
+      applyFilters();
+    });
+  </script>
+</body>
+</html>
