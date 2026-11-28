@@ -125,25 +125,45 @@
         </section>
 
         <p>That shift in thinking has shaped my work across three projects. Hivemart and EchoMate are the two product-building journeys at the centre of my current engineering focus; IRON TRAIN is a separate game-development project that helped strengthen the same systems-thinking approach:</p>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="soft-card group rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
-            <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🛒</span><span class="tag">E-commerce infrastructure</span></div>
-            <h2 class="heading-font text-xl font-bold text-stone-950">Hivemart</h2>
-            <p class="mt-2 text-sm leading-relaxed text-stone-600">Connecting Shopify, lightweight supplier workflows, Google Sheets, and automation to simplify multi-vendor inventory operations.</p>
-            <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-900">Explore Hivemart <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
-          </a>
-          <a href="echomate.html" class="soft-card group rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
-            <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🎙️</span><span class="tag">Conversational AI</span></div>
-            <h2 class="heading-font text-xl font-bold text-stone-950">EchoMate</h2>
-            <p class="mt-2 text-sm leading-relaxed text-stone-600">Connecting a voice-first mobile experience with backend orchestration, language models, and contextual memory.</p>
-            <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-900">Explore EchoMate <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
-          </a>
-          <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="soft-card group rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
-            <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🚂</span><span class="tag">Unity game development</span></div>
-            <h2 class="heading-font text-xl font-bold text-stone-950">IRON TRAIN: THE LAST DEFENCE</h2>
-            <p class="mt-2 text-sm leading-relaxed text-stone-600">A 2D action shooter built around a moving armored train, interconnected gameplay systems, and distance-based progression.</p>
-            <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold text-amber-900">View the game <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
-          </a>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <!-- Hivemart Overview Card -->
+          <div class="soft-card flex flex-col justify-between rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
+            <div>
+              <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🛒</span><span class="tag">E-commerce infrastructure</span></div>
+              <h2 class="heading-font text-xl font-bold text-stone-950">Hivemart</h2>
+              <p class="mt-2 text-sm leading-relaxed text-stone-600">Connecting Shopify, lightweight supplier workflows, Google Sheets, and a FlutterFlow mobile app to simplify multi-vendor commerce.</p>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center gap-3 pt-2 border-t border-[#eee9dc]">
+              <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-amber-900 hover:underline">Web Store <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+              <a href="https://play.google.com/store/apps/details?id=com.hivemart.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-800 hover:underline">Android App <i data-lucide="smartphone" class="h-3.5 w-3.5"></i></a>
+            </div>
+          </div>
+
+          <!-- EchoMate Overview Card -->
+          <div class="soft-card flex flex-col justify-between rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
+            <div>
+              <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🎙️</span><span class="tag">Conversational AI</span></div>
+              <h2 class="heading-font text-xl font-bold text-stone-950">EchoMate</h2>
+              <p class="mt-2 text-sm leading-relaxed text-stone-600">Connecting a voice-first mobile experience with backend orchestration, language models, and contextual memory.</p>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center gap-3 pt-2 border-t border-[#eee9dc]">
+              <a href="echomate.html" class="inline-flex items-center gap-1 text-xs font-bold text-amber-900 hover:underline">Architecture <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+              <a href="https://sandeepsingh-tech.github.io/echomate.html#live-demo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-stone-800 hover:underline">Live Demo <i data-lucide="mic" class="h-3.5 w-3.5"></i></a>
+            </div>
+          </div>
+
+          <!-- IRON TRAIN Overview Card -->
+          <div class="soft-card flex flex-col justify-between rounded-2xl p-5 transition hover:border-amber-500/70 hover:shadow-md">
+            <div>
+              <div class="mb-3 flex items-center justify-between"><span class="text-2xl">🚂</span><span class="tag">Unity game development</span></div>
+              <h2 class="heading-font text-xl font-bold text-stone-950">IRON TRAIN: THE LAST DEFENCE</h2>
+              <p class="mt-2 text-sm leading-relaxed text-stone-600">A 2D action shooter built around a moving armored train, interconnected gameplay systems, and distance-based progression.</p>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center gap-3 pt-2 border-t border-[#eee9dc]">
+              <a href="https://sandeepsingh-tech.github.io/iron-train-devlog.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-amber-900 hover:underline">Devlog <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+              <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-stone-800 hover:underline">Play on itch.io <i data-lucide="gamepad-2" class="h-3.5 w-3.5"></i></a>
+            </div>
+          </div>
         </div>
         <p class="font-medium text-stone-800">Different products. Different requirements. One engineering principle: <span class="rounded bg-amber-100/70 px-1 font-bold text-amber-950">the quality of an application depends on how well its systems work together.</span></p>
 
@@ -151,12 +171,15 @@
         <section id="hivemart" class="section-rule space-y-5 pt-8">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div><p class="eyebrow text-[10px] font-bold uppercase text-amber-800">01 / E-commerce systems</p><h2 class="heading-font mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">Hivemart: E-Commerce Beyond Traditional Apps</h2></div>
-            <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Visit Hivemart <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+            <div class="flex flex-wrap items-center gap-2">
+              <a href="https://play.google.com/store/apps/details?id=com.hivemart.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-lg border border-[#ded8c9] bg-white px-3 py-2 text-xs font-semibold text-stone-800 hover:bg-[#f8f6f0] transition"><i data-lucide="smartphone" class="h-3.5 w-3.5 text-emerald-700"></i> Android App</a>
+              <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Visit Hivemart <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+            </div>
           </div>
           <p>Hivemart started with a practical operational problem: managing products and supplier inventory without forcing vendors to navigate another complicated dashboard or pay for another layer of software they barely use.</p>
           <blockquote class="rounded-r-xl border-l-2 border-amber-600 bg-amber-50/70 p-4 text-base font-semibold italic text-stone-900">“If a supplier only needs to change inventory from 12 units to 10, why should they need an entire vendor management platform to do it?”</blockquote>
           <p>The product direction is deliberately lightweight: give suppliers a simple way to update what they actually need to update, while keeping the store’s product and inventory data connected to the systems that already run the business.</p>
-          <p>Hivemart also includes a mobile application built with <strong>FlutterFlow</strong>. The app is connected to Shopify through APIs and fetches the relevant store data—such as the product catalogue and associated commerce information—from Shopify. <strong>Shopify remains the primary source of truth</strong> for the store’s product and commerce records; the mobile app is the customer-facing experience, not a separate catalogue that can drift away from the store.</p>
+          <p>Hivemart also includes a live <a class="anchor-link" href="https://play.google.com/store/apps/details?id=com.hivemart.app" target="_blank" rel="noopener noreferrer">Android mobile application</a> built with <strong>FlutterFlow</strong>. The app is connected to Shopify through APIs and fetches the relevant store data—such as the product catalogue and associated commerce information—from Shopify. <strong>Shopify remains the primary source of truth</strong> for the store’s product and commerce records; the mobile app is the customer-facing experience, not a separate catalogue that can drift away from the store.</p>
 
           <div class="space-y-3">
             <h3 class="heading-font text-lg font-bold text-stone-950">The architecture at a glance</h3>
@@ -176,7 +199,7 @@
             <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">01. Shopify as the commerce core</h3><p class="text-sm">Shopify is the primary source of truth for the commerce domain—products, SKUs, inventory, and store operations. The FlutterFlow mobile app fetches the relevant store data through API integrations, while backend and automation workflows communicate with Shopify through Admin GraphQL and REST APIs where appropriate.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Shopify Admin API</span><span class="tag">GraphQL</span><span class="tag">REST</span></div></div>
             <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">02. Custom storefront engineering</h3><p class="text-sm">Reusable Shopify Liquid sections and focused HTML, CSS, and JavaScript keep storefront experiences tailored without making every requirement dependent on a third-party app.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Liquid</span><span class="tag">HTML / CSS</span><span class="tag">JavaScript</span></div></div>
             <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">03. Supplier-first update workflow</h3><p class="text-sm">The supplier experience is intentionally narrow: access a branded link, find the relevant product, and submit an inventory change through a simple workflow. The goal is to reduce training and login friction.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Secure supplier links</span><span class="tag">Simple controls</span><span class="tag">Forms</span></div></div>
-            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">04. FlutterFlow mobile application</h3><p class="text-sm">The Hivemart mobile app is built with FlutterFlow. It fetches store data from Shopify through API integrations, so the app presents the live commerce catalogue from the platform that owns the underlying records rather than maintaining an unrelated product database.</p><div class="flex flex-wrap gap-1.5"><span class="tag">FlutterFlow</span><span class="tag">REST API</span><span class="tag">GraphQL API</span></div></div>
+            <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">04. FlutterFlow mobile application</h3><p class="text-sm">The Hivemart mobile app (<a class="anchor-link" href="https://play.google.com/store/apps/details?id=com.hivemart.app" target="_blank" rel="noopener noreferrer">live on Google Play</a>) is built with FlutterFlow. It fetches store data from Shopify through API integrations, so the app presents the live commerce catalogue from the platform that owns the underlying records rather than maintaining an unrelated product database.</p><div class="flex flex-wrap gap-1.5"><span class="tag">FlutterFlow</span><span class="tag">REST API</span><span class="tag">GraphQL API</span></div></div>
             <div class="soft-card rounded-xl p-4 space-y-2"><h3 class="font-bold text-stone-900">05. Automation and reconciliation</h3><p class="text-sm">Google Sheets acts as an operational data layer. Python workflows help reconcile SKUs and handles, process catalog data, prepare bulk updates, and communicate with Shopify APIs.</p><div class="flex flex-wrap gap-1.5"><span class="tag">Google Sheets</span><span class="tag">Python</span><span class="tag">CSV</span></div></div>
           </div>
 
@@ -206,9 +229,12 @@
         <section id="echomate" class="section-rule space-y-5 pt-8">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div><p class="eyebrow text-[10px] font-bold uppercase text-amber-800">02 / Conversational AI systems</p><h2 class="heading-font mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">EchoMate: Building a Voice-First AI Companion</h2></div>
-            <a href="echomate.html" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Explore architecture <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+            <div class="flex flex-wrap items-center gap-2">
+              <a href="https://sandeepsingh-tech.github.io/echomate.html#live-demo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-lg border border-[#ded8c9] bg-white px-3 py-2 text-xs font-semibold text-stone-800 hover:bg-[#f8f6f0] transition"><i data-lucide="mic" class="h-3.5 w-3.5 text-amber-800"></i> Live Demo</a>
+              <a href="echomate.html" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Explore architecture <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+            </div>
           </div>
-          <p>EchoMate explores a different kind of system: a voice-first AI experience where users can practise conversations, speak naturally, receive responses, and build continuity across sessions. Its first application is focused on spoken English fluency and confidence—not simply translating a sentence or returning a generic chatbot response.</p>
+          <p>EchoMate explores a different kind of system: a voice-first AI experience where users can practise conversations, speak naturally, receive responses, and build continuity across sessions. Its first application is focused on spoken English fluency and confidence—not simply translating a sentence or returning a generic chatbot response. You can try the <a class="anchor-link" href="https://sandeepsingh-tech.github.io/echomate.html#live-demo" target="_blank" rel="noopener noreferrer">interactive browser voice demo</a> directly on the project page.</p>
           <p>The challenge is not just connecting a microphone to a language model. The product needs to manage the conversation lifecycle: capture input, process it, retrieve relevant context, orchestrate an AI response, return it to the client, and preserve useful memory for later interactions.</p>
 
           <h3 class="heading-font text-lg font-bold text-stone-950">The request and response pipeline</h3>
@@ -291,9 +317,12 @@
         <section id="iron-train" class="section-rule space-y-5 pt-8">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div><p class="eyebrow text-[10px] font-bold uppercase text-amber-800">06 / Game development · Unity</p><h2 class="heading-font mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">🚂 IRON TRAIN: THE LAST DEFENCE — From AI-Assisted Assets to a Playable Unity Game</h2></div>
-            <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Play on itch.io <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+            <div class="flex flex-wrap items-center gap-2">
+              <a href="https://sandeepsingh-tech.github.io/iron-train-devlog.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-lg border border-[#ded8c9] bg-white px-3 py-2 text-xs font-semibold text-stone-800 hover:bg-[#f8f6f0] transition"><i data-lucide="book-open" class="h-3.5 w-3.5 text-amber-800"></i> Read Devlog</a>
+              <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-900 transition">Play on itch.io <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+            </div>
           </div>
-          <p>Alongside my work on e-commerce infrastructure and conversational AI, I also brought the same systems-thinking approach into game development. <strong>IRON TRAIN: THE LAST DEFENCE</strong> is my Unity-based 2D action shooter built around a moving, armored train.</p>
+          <p>Alongside my work on e-commerce infrastructure and conversational AI, I also brought the same systems-thinking approach into game development. <strong>IRON TRAIN: THE LAST DEFENCE</strong> is my Unity-based 2D action shooter built around a moving, armored train (documented in full in the <a class="anchor-link" href="https://sandeepsingh-tech.github.io/iron-train-devlog.html" target="_blank" rel="noopener noreferrer">IRON TRAIN game devlog</a>).</p>
           <p>The player's mission is straightforward: defend the engine against waves of enemies while the train advances through a hostile world. But underneath that simple gameplay loop is a collection of interconnected systems.</p>
 
           <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -311,7 +340,7 @@
           <div class="space-y-2">
             <h3 class="heading-font text-lg font-bold text-stone-950">🚀 The journey continues: Part 2 is coming soon</h3>
             <p class="text-sm">The first version of IRON TRAIN: THE LAST DEFENCE is available on itch.io, where players can try the browser build or download the Windows version.</p>
-            <p class="text-sm"><strong>Play the game:</strong> <a class="anchor-link" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer">makegames4funyt.itch.io/iron-train-the-last-defence</a></p>
+            <p class="text-sm"><strong>Play the game:</strong> <a class="anchor-link" href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer">makegames4funyt.itch.io/iron-train-the-last-defence</a> · <strong>Read the devlog:</strong> <a class="anchor-link" href="https://sandeepsingh-tech.github.io/iron-train-devlog.html" target="_blank" rel="noopener noreferrer">iron-train-devlog.html</a></p>
             <p class="text-sm">I'm continuing to develop Part 2. Most of its core components are ready, and I'm working toward expanding the experience further. The plan is to make the next part available on Android and iOS, with distribution through itch.io as well.</p>
             <p class="text-sm">For me, this project is more than a game. It is another opportunity to understand how a complete interactive system behaves—from input and animation to progression, state management, and performance.</p>
           </div>
@@ -322,11 +351,14 @@
           <p class="eyebrow text-[10px] font-bold uppercase text-amber-800">07 / Explore the work</p>
           <h2 class="heading-font text-2xl font-bold text-stone-950">See the Systems in Context</h2>
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Hivemart</div><div class="text-xs text-stone-500">E-commerce infrastructure</div></div><i data-lucide="external-link" class="h-4 w-4 text-amber-800"></i></a>
-            <a href="echomate.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">EchoMate</div><div class="text-xs text-stone-500">Voice-first AI architecture</div></div><i data-lucide="arrow-up-right" class="h-4 w-4 text-amber-800"></i></a>
-            <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">IRON TRAIN: THE LAST DEFENCE</div><div class="text-xs text-stone-500">Unity 2D action shooter</div></div><i data-lucide="external-link" class="h-4 w-4 text-amber-800"></i></a>
-            <a href="showcase.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">GitHub Project Showcase</div><div class="text-xs text-stone-500">Repositories and experiments</div></div><i data-lucide="github" class="h-4 w-4 text-amber-800"></i></a>
-            <a href="https://sandeepsingh-tech.github.io/" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Personal Portfolio</div><div class="text-xs text-stone-500">Projects and profile</div></div><i data-lucide="user-round" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://hivemart.in/" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Hivemart Web Store</div><div class="text-xs text-stone-500">Shopify D2C storefront & commerce core</div></div><i data-lucide="external-link" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://play.google.com/store/apps/details?id=com.hivemart.app" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Hivemart Android App</div><div class="text-xs text-stone-500">FlutterFlow mobile app on Google Play</div></div><i data-lucide="smartphone" class="h-4 w-4 text-emerald-700"></i></a>
+            <a href="echomate.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">EchoMate Architecture</div><div class="text-xs text-stone-500">Voice-first AI coach & memory pipeline</div></div><i data-lucide="arrow-up-right" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://sandeepsingh-tech.github.io/echomate.html#live-demo" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">EchoMate Live Voice Demo</div><div class="text-xs text-stone-500">Try the browser voice sandbox</div></div><i data-lucide="mic" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://sandeepsingh-tech.github.io/iron-train-devlog.html" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">IRON TRAIN Devlog</div><div class="text-xs text-stone-500">Unity 2D systems & game dev journey</div></div><i data-lucide="book-open" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://makegames4funyt.itch.io/iron-train-the-last-defence" target="_blank" rel="noopener noreferrer" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">IRON TRAIN: THE LAST DEFENCE</div><div class="text-xs text-stone-500">Play the Unity 2D action shooter on itch.io</div></div><i data-lucide="gamepad-2" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="showcase.html" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">GitHub Project Showcase</div><div class="text-xs text-stone-500">Open-source repositories and experiments</div></div><i data-lucide="github" class="h-4 w-4 text-amber-800"></i></a>
+            <a href="https://sandeepsingh-tech.github.io/" class="soft-card flex items-center justify-between rounded-xl p-4 hover:border-amber-500 transition"><div><div class="font-bold text-stone-900">Personal Portfolio</div><div class="text-xs text-stone-500">Projects, leadership, and profile</div></div><i data-lucide="user-round" class="h-4 w-4 text-amber-800"></i></a>
           </div>
         </section>
 
